@@ -1,22 +1,22 @@
 {
   "name": "tadpoles",
   "version": "0.0.1",
-  "description": "myTest",
+  "description": "",
   "main": "server.js",
-  
-  "author": "Me",
-  "license": "MIT",
-  "dependencies": {
-    
-  }
-  
   "scripts": {
-    "start": "node server.js",
-    "test": "echo \"Error: no test specified\" && exit 1",
-	},
-  
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
   "repository": {
     "type": "git",
-    "url": "http://github.com/43p3n0k/tadpoles.git"
+    "url": "git+ssh://git@github.com/43p3n0k/tadpoles.git"
   },
+  "keywords": [
+    "tadpoles"
+  ],
+  "author": "author",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/43p3n0k/tadpoles/issues"
+  },
+  "homepage": "https://github.com/43p3n0k/tadpoles#readme"
 }
