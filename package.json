@@ -4,10 +4,16 @@
   "description": "myTest",
   "main": "server.js",
   
-  "engine": {
-    "node": "*",
-    "npm": "*"
-  },
+  "author": "Me",
+  "license": "MIT",
+  "dependencies": {
+    
+  }
+  
+  "scripts": {
+    "start": "node server.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+	},
   
   "repository": {
     "type": "git",
