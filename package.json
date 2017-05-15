@@ -1,0 +1,19 @@
+{
+  "name": "tadpoles",
+  "version": "0.0.1",
+  "description": "myTest",
+  "main": "server.js",
+  
+  "engine": {
+    "node": "*",
+    "npm": "*"
+  },
+  "scripts": {
+    "start": "node server.js",
+    "test": "IP=0.0.0.0 PORT=3030 mocha --timeout 5000 tests/*_test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/43p3n0k/tadpoles.git"
+  },
+}
