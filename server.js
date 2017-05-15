@@ -3,7 +3,7 @@ var fs = require('fs');
 var server = new http.Server();
 var url = require('url');
 
-server.listen(80, '0.0.0.0');
+server.listen(8080, '0.0.0.0');
 server.on('request', function(req,res){
     if(req.url!="/"){
         fs.readFile("."+req.url,function(err, html){
