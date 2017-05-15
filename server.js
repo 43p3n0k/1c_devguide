@@ -3,7 +3,10 @@ var fs = require('fs');
 var server = new http.Server();
 var url = require('url');
 
-server.listen(8080, '0.0.0.0');
+
+var port = process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || 8080,
+    ip   = process.env.IP   || process.env.OPENSHIFT_NODEJS_IP || '0.0.0.0';
+server.listen(port, ip);
 server.on('request', function(req,res){
     if(req.url!="/"){
         fs.readFile("."+req.url,function(err, html){
