@@ -1,0 +1,22 @@
+.msocomtxt
+{display:none}
+
+* a:not([href]),
+* a:not([href]):hover
+{color:inherit;text-decoration:inherit}
+
+* a:not([href]):focus,
+a.bookmark:focus
+{outline:0}
+
+pre
+{font-family:Courier New, Courier, monospace}
+
+mark
+{background-color:yellow;color:inherit}
+
+html.loading
+{background:#fff url('/img/loading.gif') no-repeat!important;background-position:17px 17px!important;margin:0!important;padding:0!important;cursor:progress!important;background-color:#fff!important}
+
+html.loading > *
+{visibility:hidden!important}

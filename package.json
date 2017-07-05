@@ -1,19 +1,21 @@
 {
   "name": "tadpoles",
-  "version": "0.0.1",
-  "description": "",
+  "version": "1.0.0",
+  "description": "1c developer guide",
   "main": "server.js",
+  "dependencies": {
+    "jsdom": "^11.1.0"
+  },
+  "devDependencies": {},
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",
     "url": "git+ssh://git@github.com/43p3n0k/tadpoles.git"
   },
-  "keywords": [
-    "tadpoles"
-  ],
-  "author": "author",
+  "author": "",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/43p3n0k/tadpoles/issues"
