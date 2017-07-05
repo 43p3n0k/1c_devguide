@@ -1,0 +1,558 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=Windows-1251">
+		<title>&#1043;&#1083;&#1072;&#1074;&#1072; 22. &#1052;&#1077;&#1093;&#1072;&#1085;&#1080;&#1079;&#1084; &#1082;&#1088;&#1080;&#1087;&#1090;&#1086;&#1075;&#1088;&#1072;&#1092;&#1080;&#1080;</title>
+		<LINK REL="stylesheet" href="/db/content/v8310doc/src/руководство разработчика/style.css?_=1496848987">
+		<script charset="windows-1251" src="/db/content/v8310doc/src/руководство разработчика/script.js?_=1496848987" TYPE="text/javascript"></script>		<!--[if !IE]>--><script charset="windows-1251" src="/db/content/v8310doc/src/руководство разработчика/zeroclipboard.js?_=1496848987" TYPE="text/javascript"></script><!--<![endif]-->
+	<meta name="robots" content="noarchive">
+<meta name="googlebot" content="noarchive">
+<link href="/db/content/v8310doc/src/руководство разработчика/глава 22. механизм криптографии.htm" rel="canonical">
+<link href="/static/its.content.css?_=1490872753" type="text/css" rel="stylesheet">
+<script charset="windows-1251" type="text/javascript" src="/static/its.content.js?_=1489758009"></script>
+<!--[if lt IE 9]><script charset="windows-1251" type="text/javascript" src="/static/html5shiv.js?_=1484636606"></script><![endif]-->
+
+</head>
+	<body class="v8310doc">
+<a name="_ref404183495"></a><a id="TI000000831" class="bookmark"><h1>Глава 22.  Механизм криптографии</h1></a>
+
+<a name="_ref423708609"></a><a name="_ref423708608"></a><a id="TI000000832" class="bookmark" name="issogl1_22.1_общая_информация"><h2>22.1. Общая информация</h2></a>
+
+<p class="MsoNormalCxSpFirst">При
+использовании системы «1С:Предприятие» в системах автоматизации может быть необходимо
+обеспечить проверку, что тот или иной документ, хранящийся в системе, не был
+изменен (например, к объекту базы данных <span class="Term">Договор</span> прикладывается документ, содержащий
+текст самого договора). Также может возникать необходимость обеспечить передачу
+какой-либо подписанной информации или организовать утверждение какого-либо
+документа в рамках системы. Возможны ситуации, когда требуется обеспечить
+передачу информации по открытым каналам так, чтобы с ней было невозможно
+ознакомиться, перехватив передачу (зашифровать данные).</p>
+
+<p class="MsoNormalCxSpLast">Для
+подобных ситуаций в системе «1С:Предприятие» реализован механизм криптографии,
+базирующийся на асимметричном шифровании (используется пара ключей – <span class="Bold">открытый</span> и <span class="Bold">закрытый</span>).</p>
+
+<p class="Note"><span class="Note">Внимание!</span> Механизм криптографии «1С:Предприятия» не
+содержит реализации собственно алгоритмов криптографии. Он обеспечивает набор
+объектов, позволяющих взаимодействовать с внешними модулями криптографии
+сторонних производителей.</p>
+
+<p class="MsoNormalCxSpFirst"><span class="Bold">Открытый ключ</span> предназначен для передачи по открытым каналам. <span class="Bold">Закрытый ключ</span> для распространения не предназначен и
+должен быть максимально защищен.</p>
+
+<p class="MsoNormalCxSpMiddle">Чтобы
+зашифровать данные, необходимо знать открытые ключи получателей. Для
+расшифровки нужно иметь закрытый ключ, являющийся парой для открытого,
+указанного при осуществлении шифрования. Для генерации цифровой подписи нужен
+закрытый ключ, а для проверки подписи – открытый ключ подписавшего (чаще
+всего открытый ключ включен в саму подпись).</p>
+
+<p class="MsoNormalCxSpMiddle">При
+шифровании данных, кроме асимметричного шифрования, используется симметричное
+шифрование. Симметричное шифрование – это способ шифрования, когда для
+шифрования и расшифровки используется один и тот же ключ. Особенности применения
+симметричного шифрования будут описаны далее в разделе.</p>
+
+<p class="MsoNormalCxSpMiddle">Для
+того чтобы подтвердить, что конкретный открытый ключ действительно принадлежит
+некоторому субъекту, служит <span class="Bold">удостоверяющий центр</span>,
+который предоставляет такую гарантию посредством подписи.</p>
+
+<p class="MsoNormalCxSpMiddle"><span class="Bold">Сертификат</span> – это открытый ключ, подписанный
+удостоверяющим центром. Ввиду необходимости защиты закрытый ключ существует в
+контейнере. <span class="Bold">Контейнер ключей</span> может включать помимо
+закрытого ключа открытый ключ (например, в виде сертификата).</p>
+
+<p class="MsoNormalCxSpMiddle">При
+работе с механизмом криптографии следует учитывать, где выполняется эта работа.
+Причина заключается в том, что схемы работы с криптографией на стороне
+клиентского приложения и на стороне сервера существенно отличаются. На стороне
+сервера используются так называемые синхронные методы работы с криптографией, в
+то время как на стороне клиентского приложения используются асинхронные методы
+работы.</p>
+
+<p class="MsoNormalCxSpLast">Для
+работы в веб-клиенте должно быть установлено расширение работы с криптографией.
+Особенностью веб-клиента является выполнение запроса разрешения пользователя на
+выполнение некоторых операций: доступ к файловой системе и к закрытому ключу.</p>
+
+<a id="TI000000833" class="bookmark" name="issogl1_22.2_основные_понятия"><h2>22.2. Основные понятия</h2></a>
+
+<p class="MsoNormalCxSpFirst">При
+описании механизмов будут использоваться некоторые термины.</p>
+
+<p class="MsoNormalCxSpMiddle"><span class="Bold">Электронная цифровая подпись</span> (далее – <span class="Bold">ЭЦП</span>) –
+последовательность данных, полученная в результате криптографического
+преобразования исходной информации с использованием закрытого ключа ЭЦП. Позволяет
+подтверждать целостность и неизменность этой информации, а также ее авторство
+при условии использования открытого ключа ЭЦП и его сертификата.</p>
+
+<p class="MsoNormalCxSpMiddle"><span class="Bold">Центр по удостоверению подлинности электронной цифровой подписи</span>
+(далее – <span class="Bold">Удостоверяющий центр</span>) – юридическое
+лицо или выделенное подразделение юридического лица, обладающее правомочиями на
+удостоверение принадлежности конкретного открытого ключа ЭЦП определенному
+пользователю.</p>
+
+<p class="MsoNormalCxSpMiddle"><span class="Bold">Владелец сертификата ключа</span> – физическое лицо, на имя
+которого удостоверяющим центром изготовлен сертификат открытого ключа и которое
+владеет соответствующим закрытым (секретным) ключом.</p>
+
+<p class="MsoNormalCxSpMiddle"><span class="Bold">Сертификат</span> – электронный документ, включающий открытый
+ключ и информацию о владельце данного ключа, заверенную с помощью ЭЦП
+удостоверяющим центром.</p>
+
+<p class="MsoNormalCxSpLast"><span class="Bold">Модуль криптографии</span> – библиотека функций, в которой
+реализованы непосредственно криптографические алгоритмы или через которую
+осуществляется доступ к механизмам шифрования.</p>
+
+<a name="_ref392762494"></a><a name="_ref392762493"></a><a id="TI000000834" class="bookmark" name="issogl1_22.3_общая_схема_использования_механизмов_криптографии"><h2>22.3. Общая схема использования механизмов криптографии</h2></a>
+
+<p class="MsoNormal">При
+работе с криптографическими механизмами можно выделить два основных варианта
+использования:</p>
+
+<p class="MsoListBulletCxSpFirst">&#9679; 
+шифрование/расшифровка данных;</p>
+
+<p class="MsoListBulletCxSpLast">&#9679; 
+подпись/проверка подписи данных.</p>
+
+<p class="MsoNormal">Общая
+схема работы при шифровании/расшифровке выглядит следующим образом:</p>
+
+<p class="MsoListNumberCxSpFirst">1.  Создается
+необходимый объект доступа к криптографической функциональности (объект <span class="Term">МенеджерКриптографии</span>).</p>
+
+<p class="MsoListNumberCxSpMiddle">2.  Выбирается
+необходимый сертификат, который является <span class="Bold">открытым</span>
+ключом принимающей стороны (объект <span class="Term">СертификатКриптографии</span>). С помощью этого
+сертификата будет выполняться <span class="Bold">шифрование</span> данных.</p>
+
+<p class="MsoListNumberCxSpLast">3.  Выполняется
+шифрование необходимого файла или двоичных данных с помощью методов <span class="Term">Зашифровать()</span> созданного объекта типа <span class="Term">МенеджерКриптографии</span>.</p>
+
+<p class="Indentlist">В
+процессе шифрования используется комбинация симметричного и асимметричного
+шифрования. Вначале система формирует ключ для симметричного шифрования, затем
+этим ключом выполняется шифрование требуемых данных. Затем ключ симметричного
+шифрования шифруется асимметричным ключом. Пакет данных (по спецификации
+PKCS#7), пригодный для передачи по открытым каналам, формируется из трех
+составляющих: зашифрованные данные, зашифрованный ключ для симметричного
+шифрования и список получателей.</p>
+
+<p class="MsoListNumberCxSpFirst">4.  Зашифрованные
+данные готовы для передачи по открытым каналам.</p>
+
+<p class="MsoListNumberCxSpMiddle">5.  При
+получении зашифрованных данных выполняется обратная операция.</p>
+
+<p class="MsoListNumberCxSpMiddle">6. 
+Создается необходимый объект доступа к
+криптографической функциональности. Модуль криптографии, связанный с объектом,
+должен поддерживает работу с алгоритмами, которые использованы для шифрования
+данных.</p>
+
+<p class="MsoListNumberCxSpLast">7.  Выполняется
+расшифровка полученных данных с помощью метода <span class="Term">Расшифровать()</span> созданного объекта доступа к
+криптографической функциональности.</p>
+
+<p class="Indentlist">При
+расшифровке из пришедшего пакета извлекается зашифрованный ключ для
+симметричного шифрования и расшифровывается с использованием закрытого ключа
+(парный к открытому ключу, который использовался для шифрования). Затем полученный
+ключ используется в симметричном алгоритме для расшифровки массива полученных
+данных. Таким образом, если принимающая сторона («из» асимметричного
+шифрования) не имеет закрытого ключа, будет невозможно расшифровать данные
+симметричным алгоритмом.</p>
+
+<p class="MsoNormal">Общая схема работы при подписи/проверке подписи выглядит
+следующим образом:</p>
+
+<p class="MsoListNumberCxSpFirst">1. 
+Создается необходимый объект доступа к
+криптографической функциональности (объект <span class="Term">МенеджерКриптографии)</span>.</p>
+
+<p class="MsoListNumberCxSpMiddle">2. 
+Выбирается необходимый сертификат, связанный с <span class="Bold">закрытым</span> ключом подписывающей стороны (объект <span class="Term">СертификатКриптографии</span>).
+С помощью этого сертификата будет выполняться <span class="Bold">формирование</span>
+ЭЦП.</p>
+
+<p class="MsoListNumberCxSpLast">3. 
+Выполняется формирование ЭЦП необходимого файла
+или двоичных данных с помощью методов <span class="Term">Подписать()</span>
+созданного объекта типа МенеджерКриптографии.</p>
+
+<p class="IndentlistCxSpFirst">При формировании подписи следует учитывать
+следующие особенности: вначале формируется хеш-сумма подписываемых данных и
+затем выполняется подпись полученной хеш-суммы. Это сделано для того, чтобы
+уменьшить время, необходимое для выполнения операции подписи данных.</p>
+
+<p class="IndentlistCxSpMiddle">В силу этого рекомендуется явным образом
+указывать алгоритмы, которые будут использоваться как для вычисления хеш-суммы
+(свойство <span class="Term">АлгоритмХеширования</span>),
+так и для выполнения подписи (свойство <span class="Term">АлгоритмПодписи</span>).
+Если принимающая сторона не будет поддерживать используемые алгоритмы
+(хеширования и подписи), то проверить подпись будет невозможно.</p>
+
+<p class="IndentlistCxSpMiddle">Для того чтобы явным образом указать
+используемые алгоритмы, следует воспользоваться методом <span class="Term">ПолучитьИнформацияМодуляКриптографии()</span>
+менеджера криптографии. В результате использования метода будет получен объект <span class="Term">ИнформацияМодуляКриптографии</span>,
+в котором свойства <span class="Term">АлгоритмыПодписи</span>
+и <span class="Term">АлгоритмыХеширования</span> будут содержать список
+алгоритмов, которые поддерживает используемый модуль криптографии. В свойства
+менеджера криптографии следует указывать те данные, которые содержатся в
+свойствах объекта <span class="Term">ИнформацияМодуляКриптографии</span>.</p>
+
+<p class="IndentlistCxSpLast">Информация об используемых алгоритмах будет
+содержаться в подписи, поэтому нет необходимости дополнительно передавать ее
+вместе с подписанными данными.</p>
+
+<p class="MsoListNumberCxSpFirst">4. 
+Подписываемые данные с электронной цифровой
+подписью передаются принимаемой стороне.</p>
+
+<p class="MsoListNumberCxSpMiddle">5. 
+После получения подписанных данных и ЭЦП
+выполняется обратная операция.</p>
+
+<p class="MsoListNumberCxSpMiddle">6. 
+Создается необходимый объект доступа к
+криптографической функциональности. Модуль криптографии, связанный с объектом,
+должен поддерживает работу с алгоритмами, которые использованы для формирования
+ЭЦП.</p>
+
+<p class="MsoListNumberCxSpLast">7. 
+Выполняется проверка электронной подписи с
+помощью метода <span class="Term">ПроверитьПодпись()</span>
+созданного объекта доступа к криптографическому функционалу. Если модуль
+криптографии, используемый для проверки подписи, не поддерживает алгоритм,
+используемые для вычисления хеш-суммы и подписи данных, то проверить подпись
+будет невозможно и будет выдана ошибка.</p>
+
+<p class="MsoNormalCxSpFirst">Сертификаты,
+необходимые для выполнения криптографических операций, получают у
+соответствующего удостоверяющего центра.</p>
+
+<p class="MsoNormalCxSpLast">При
+работе с объектом <span class="Term">МенеджерКриптографии</span>
+не рекомендуется получать несколько хранилищ сертификатов с одинаковыми
+характеристиками, поскольку модификация одного хранилища может привести к
+разному поведению другого, в зависимости от используемых модулей криптографии.</p>
+
+<a id="TI000000835" class="bookmark" name="issogl1_22.4_работа_с_модулями_криптографии"><h2>22.4. Работа с модулями криптографии</h2></a>
+
+<p class="MsoNormalCxSpFirst">Для
+взаимодействия с модулями криптографии в ОС Windows используется Microsoft CryptoAPI.</p>
+
+<p class="MsoNormalCxSpMiddle">Для
+взаимодействия с модулями криптографии в ОС Linux используется непосредственное взаимодействие с
+установленными компонентами.</p>
+
+<p class="MsoNormalCxSpLast">Список
+поддерживаемых компонент:</p>
+
+<p class="MsoListBullet">&#9679; 
+Средство криптографической защиты информации
+КриптоПро. Для использования данного средства следует в качестве параметра <span class="Term">ТипМодуляКриптографии</span> конструктора объекта <span class="Term">МенеджерКриптографии</span> указать значение <span class="Term">75</span>.</p>
+
+<a name="_ref400551097"></a><a id="TI000000836" class="bookmark" name="issogl1_22.5_примеры_использования"><h2>22.5. Примеры использования</h2></a>
+
+<p class="MsoNormal">В данном разделе приводятся примеры
+реализация некоторых типовых задач при использовании механизма криптографии.</p>
+
+<p class="Lang">Создание объекта доступа к
+криптографическому функционалу</p>
+
+<p class="MsoNormal">Создание объекта доступа к
+криптографическому функционалу является базовой операцией, без выполнения которой
+невозможны дальнейшие операции с механизмом криптографии.</p>
+
+<a class="copy_source" href="#_top" onClick="return false">Копировать в буфер обмена</a>
+<pre class="src_dev">МенеджерКриптографии <span class="operator">=</span> <span class="keyword">Новый</span> МенеджерКриптографии<span class="operator">(</span><span class="string">&quot;&quot;</span><span class="operator">,</span> <span class="string">&quot;&quot;</span><span class="operator">,</span> <span class="number">75</span><span class="operator">)</span><span class="operator">;</span></pre>
+
+<p class="MsoNormal">В данном примере создается модуль для работы
+с российскими модулями криптографии (значение параметра <span class="Term">ТипМодуляКриптографии</span>
+равен 75).</p>
+
+<p class="Lang">Получение списка сертификатов</p>
+
+<p class="MsoNormal">Формируется список сертификатов из выбранных
+хранилищ сертификатов для дальнейшей работы с этим списком.</p>
+
+<a class="copy_source" href="#_top" onClick="return false">Копировать в буфер обмена</a>
+<pre class="src_dev"><span class="preprocessor">&amp;НаКлиенте</span>
+<span class="keyword">Функция</span> ПолучитьСписокСертификатов<span class="operator">(</span>ТипМенеджераКриптографии<span class="operator">,</span> МассивТипов<span class="operator">,</span> ПроверятьДатуОкончания<span class="operator">)</span>
+    <span class="comment">// Список сертификатов</span>
+    СписокСертификатов <span class="operator">=</span> <span class="keyword">Новый</span> Массив<span class="operator">;</span>
+    МенеджерКриптографии <span class="operator">=</span> <span class="keyword">Новый</span> МенеджерКриптографии<span class="operator">(</span><span class="string">&quot;&quot;</span><span class="operator">,</span> <span class="string">&quot;&quot;</span><span class="operator">,</span> ТипМенеджераКриптографии<span class="operator">)</span><span class="operator">;</span>
+    <span class="keyword">Для</span> <span class="keyword">Каждого</span> ТипХранилища <span class="keyword">Из</span> МассивТипов <span class="keyword">Цикл</span>
+        <span class="comment">// Получаем сертификаты для каждого типа хранилища сертификатов</span>
+        Хранилище <span class="operator">=</span> МенеджерКриптографии<span class="operator">.</span>ПолучитьХранилищеСертификатов<span class="operator">(</span>ТипХранилища<span class="operator">)</span><span class="operator">;</span>
+        <span class="comment">// Выбираем все сертификаты</span>
+        СертификатыХранилища <span class="operator">=</span> Хранилище<span class="operator">.</span>ПолучитьВсе<span class="operator">(</span><span class="operator">)</span><span class="operator">;</span>
+        ТекущаяДата <span class="operator">=</span> ТекущаяДата<span class="operator">(</span><span class="operator">)</span><span class="operator">;</span>
+        <span class="keyword">Для</span> <span class="keyword">Каждого</span> Сертификат <span class="keyword">Из</span> СертификатыХранилища <span class="keyword">Цикл</span>
+            <span class="keyword">Если</span> ПроверятьДатуОкончания <span class="keyword">И</span> Сертификат<span class="operator">.</span>ДатаОкончания <span class="operator">&lt;</span> ТекущаяДата <span class="keyword">Тогда</span> 
+                <span class="comment">// Пропускаем истекшие сертификаты, если нужно</span>
+                <span class="keyword">Продолжить</span><span class="operator">;</span>
+            <span class="keyword">КонецЕсли</span><span class="operator">;</span>
+            СписокСертификатов<span class="operator">.</span>Добавить<span class="operator">(</span>Сертификат<span class="operator">)</span><span class="operator">;</span>
+        <span class="keyword">КонецЦикла</span><span class="operator">;</span>
+    <span class="keyword">КонецЦикла</span><span class="operator">;</span>
+    <span class="keyword">Возврат</span> СписокСертификатов<span class="operator">;</span>
+<span class="keyword">КонецФункции</span>
+<span class="preprocessor">&amp;НаКлиенте</span>
+<span class="keyword">Процедура</span> ПолучениеСпискаСертификатов<span class="operator">(</span><span class="operator">)</span>
+    ТипыХранилищ <span class="operator">=</span> <span class="keyword">Новый</span> Массив<span class="operator">;</span>
+    ТипыХранилищ<span class="operator">.</span>Добавить<span class="operator">(</span>ТипХранилищаСертификатовКриптографии<span class="operator">.</span>ПерсональныеСертификаты<span class="operator">)</span><span class="operator">;</span>
+    ТипыХранилищ<span class="operator">.</span>Добавить<span class="operator">(</span>ТипХранилищаСертификатовКриптографии<span class="operator">.</span>СертификатыПолучателей<span class="operator">)</span><span class="operator">;</span>
+    Список <span class="operator">=</span> ПолучитьСписокСертификатов<span class="operator">(</span><span class="number">75</span><span class="operator">,</span> ТипыХранилищ<span class="operator">,</span> <span class="keyword">Истина</span><span class="operator">)</span><span class="operator">;</span>
+    <span class="comment">// ...</span>
+<span class="keyword">КонецПроцедуры</span></pre>
+
+<p class="Lang">Шифрование файла</p>
+
+<p class="MsoNormalCxSpFirst">Выполняется шифрование интерактивно
+выбранного файла и интерактивная запись зашифрованного файла на диск
+клиентского компьютера.</p>
+
+<p class="MsoNormalCxSpLast">В целях демонстрации для операции шифрования
+всегда используется первый по списку сертификат из всех сертификатов, установленных
+на компьютере.</p>
+
+<a class="copy_source" href="#_top" onClick="return false">Копировать в буфер обмена</a>
+<pre class="src_dev"><span class="preprocessor">&amp;НаСервере</span>
+<span class="keyword">Функция</span> ЗашифроватьНаСервере<span class="operator">(</span>АдресДанных<span class="operator">,</span> ДанныеСертификатов<span class="operator">)</span>
+    <span class="comment">// Создадим сертификаты на основании двоичных данных сертификатов с клиента </span>
+    Сертификаты <span class="operator">=</span> <span class="keyword">Новый</span> Массив<span class="operator">(</span><span class="operator">)</span><span class="operator">;</span>
+    <span class="keyword">Для</span> <span class="keyword">Каждого</span> ДанныеСертификата <span class="keyword">Из</span> ДанныеСертификатов <span class="keyword">Цикл</span>
+        Сертификаты<span class="operator">.</span>Добавить<span class="operator">(</span><span class="keyword">Новый</span> СертификатКриптографии<span class="operator">(</span>ДанныеСертификата<span class="operator">)</span><span class="operator">)</span><span class="operator">;</span>
+    <span class="keyword">КонецЦикла</span><span class="operator">;</span>
+    МенеджерКриптографии <span class="operator">=</span> <span class="keyword">Новый</span> МенеджерКриптографии<span class="operator">(</span><span class="string">&quot;&quot;</span><span class="operator">,</span> <span class="string">&quot;&quot;</span><span class="operator">,</span> <span class="number">75</span><span class="operator">)</span><span class="operator">;</span>
+    <span class="comment">// Получим файл для шифрования из временного хранилища</span>
+    Данные <span class="operator">=</span> ПолучитьИзВременногоХранилища<span class="operator">(</span>АдресДанных<span class="operator">)</span><span class="operator">;</span>
+    <span class="keyword">Если</span> ТипЗнч<span class="operator">(</span>Данные<span class="operator">)</span> <span class="operator">&lt;</span><span class="operator">&gt;</span> Тип<span class="operator">(</span><span class="string">&quot;ДвоичныеДанные&quot;</span><span class="operator">)</span> <span class="keyword">Тогда</span>
+        <span class="keyword">Возврат</span> <span class="keyword">Ложь</span><span class="operator">;</span>
+    <span class="keyword">КонецЕсли</span><span class="operator">;</span>
+    <span class="comment">// Шифруем двоичные данные</span>
+    ЗашифрованныеДвоичныеДанные <span class="operator">=</span> МенеджерКриптографии<span class="operator">.</span>Зашифровать<span class="operator">(</span>Данные<span class="operator">,</span> Сертификаты<span class="operator">)</span><span class="operator">;</span>
+    <span class="comment">// Сохраняем во временное хранилище</span>
+    АдресДанных <span class="operator">=</span> ПоместитьВоВременноеХранилище<span class="operator">(</span>ЗашифрованныеДвоичныеДанные<span class="operator">)</span><span class="operator">;</span>
+    <span class="keyword">Возврат</span> <span class="keyword">Истина</span><span class="operator">;</span>
+<span class="keyword">КонецФункции</span>
+<span class="preprocessor">&amp;НаКлиенте</span>
+<span class="keyword">Процедура</span> ШифрованиеФайла<span class="operator">(</span><span class="operator">)</span>
+    Адрес <span class="operator">=</span> <span class="string">&quot;&quot;</span><span class="operator">;</span>
+    Результат <span class="operator">=</span> ПоместитьФайл<span class="operator">(</span>Адрес<span class="operator">,</span> <span class="operator">,</span> <span class="operator">,</span> <span class="keyword">Истина</span><span class="operator">)</span><span class="operator">;</span>
+    <span class="keyword">Если</span> <span class="keyword">Не</span> Результат <span class="keyword">Тогда</span>
+        <span class="keyword">Возврат</span><span class="operator">;</span>
+    <span class="keyword">КонецЕсли</span><span class="operator">;</span>
+    ТипыСертификатов <span class="operator">=</span> <span class="keyword">Новый</span> Массив<span class="operator">;</span>
+    ТипыСертификатов<span class="operator">.</span>Добавить<span class="operator">(</span>ТипХранилищаСертификатовКриптографии<span class="operator">.</span>ПерсональныеСертификаты<span class="operator">)</span><span class="operator">;</span>
+    Список <span class="operator">=</span> ПолучитьСписокСертификатов<span class="operator">(</span><span class="number">75</span><span class="operator">,</span> ТипыСертификатов<span class="operator">,</span> <span class="keyword">Истина</span><span class="operator">)</span><span class="operator">;</span>
+    <span class="comment">// В примере всегда шифруем с помощью первого по порядку сертификата</span>
+    Сертификаты <span class="operator">=</span> <span class="keyword">Новый</span> Массив<span class="operator">;</span>
+    Сертификаты<span class="operator">.</span>Добавить<span class="operator">(</span>Список<span class="operator">[</span><span class="number">0</span><span class="operator">]</span><span class="operator">.</span>Выгрузить<span class="operator">(</span><span class="operator">)</span><span class="operator">)</span><span class="operator">;</span>
+    <span class="comment">// Шифруем файл</span>
+    Результат <span class="operator">=</span> ЗашифроватьНаСервере<span class="operator">(</span>Адрес<span class="operator">,</span> Сертификаты<span class="operator">)</span><span class="operator">;</span>
+    <span class="keyword">Если</span> <span class="keyword">Не</span> Результат <span class="keyword">Тогда</span>
+        <span class="keyword">Возврат</span><span class="operator">;</span>
+    <span class="keyword">КонецЕсли</span><span class="operator">;</span>
+    <span class="comment">// Интерактивно сохраняем зашифрованный файл на диск</span>
+    ПолучитьФайл<span class="operator">(</span>Адрес<span class="operator">,</span> <span class="operator">,</span> <span class="keyword">Истина</span><span class="operator">)</span><span class="operator">;</span>
+<span class="keyword">КонецПроцедуры</span></pre>
+
+<p class="Lang">Расшифровка файла</p>
+
+<p class="MsoNormal">Выполняется попытка расшифровки выбранного
+файла. Необходима реализация функции <span class="Term">ПолучитьПарольДоступа()</span>,
+которая возвращает значение пароля доступа к закрытому ключу.</p>
+
+<p class="Note"><span class="Note">Примечание.</span> При использовании
+метода <span class="Term">Расшифровать()</span>
+исключение будет вызвано только после того, как неудачно завершились попытки
+расшифровки с помощью всех доступных сертификатов, а не после первой ошибки.</p>
+
+<a class="copy_source" href="#_top" onClick="return false">Копировать в буфер обмена</a>
+<pre class="src_dev"><span class="preprocessor">&amp;НаКлиенте</span>
+<span class="keyword">Процедура</span> РасшифровкаФайла<span class="operator">(</span><span class="operator">)</span>
+    <span class="comment">// Выбрать зашифрованный файл</span>
+    Адрес <span class="operator">=</span> <span class="string">&quot;&quot;</span><span class="operator">;</span>
+    Результат <span class="operator">=</span> ПоместитьФайл<span class="operator">(</span>Адрес<span class="operator">,</span> <span class="operator">,</span> <span class="operator">,</span> <span class="keyword">Истина</span><span class="operator">)</span><span class="operator">;</span>
+    <span class="keyword">Если</span> <span class="keyword">Не</span> Результат <span class="keyword">Тогда</span>
+        <span class="keyword">Возврат</span><span class="operator">;</span>
+    <span class="keyword">КонецЕсли</span><span class="operator">;</span>
+    Данные <span class="operator">=</span> ПолучитьИзВременногоХранилища<span class="operator">(</span>Адрес<span class="operator">)</span><span class="operator">;</span>
+    <span class="comment">// Расшировать файл</span>
+    МенеджерКриптографии <span class="operator">=</span> <span class="keyword">Новый</span> МенеджерКриптографии<span class="operator">(</span><span class="string">&quot;&quot;</span><span class="operator">,</span> <span class="string">&quot;&quot;</span><span class="operator">,</span> <span class="number">75</span><span class="operator">)</span><span class="operator">;</span>
+    МенеджерКриптографии<span class="operator">.</span>ПарольДоступаКЗакрытомуКлючу <span class="operator">=</span> ПолучитьПарольДоступа<span class="operator">(</span><span class="operator">)</span><span class="operator">;</span>
+    РасшифрованныеДанные <span class="operator">=</span> МенеджерКриптографии<span class="operator">.</span>Расшифровать<span class="operator">(</span>Данные<span class="operator">)</span><span class="operator">;</span>
+    Адрес <span class="operator">=</span> ПоместитьВоВременноеХранилище<span class="operator">(</span>РасшифрованныеДанные<span class="operator">)</span><span class="operator">;</span>
+    ПолучитьФайл<span class="operator">(</span>Адрес<span class="operator">,</span> <span class="operator">,</span> <span class="keyword">Истина</span><span class="operator">)</span><span class="operator">;</span>
+<span class="keyword">КонецПроцедуры</span></pre>
+
+<p class="Lang">Формирование ЭЦП</p>
+
+<p class="MsoNormal">Выполняется формирование файла с электронной
+цифровой подписью. В данном примере ЭЦП всегда сохраняется в файл <span class="Interface">signature.sign</span>. Необходима реализация функции <span class="Term">ПолучитьПарольДоступа()</span>,
+которая возвращает значение пароля доступа к закрытому ключу.</p>
+
+<a class="copy_source" href="#_top" onClick="return false">Копировать в буфер обмена</a>
+<pre class="src_dev"><span class="preprocessor">&amp;НаКлиенте</span>
+<span class="keyword">Процедура</span> ПодписатьФайл<span class="operator">(</span><span class="operator">)</span>
+    Адрес <span class="operator">=</span> <span class="string">&quot;&quot;</span><span class="operator">;</span>
+    Результат <span class="operator">=</span> ПоместитьФайл<span class="operator">(</span>Адрес<span class="operator">,</span> <span class="operator">,</span> <span class="operator">,</span> <span class="keyword">Истина</span><span class="operator">)</span><span class="operator">;</span>
+    <span class="keyword">Если</span> <span class="keyword">Не</span> Результат <span class="keyword">Тогда</span>
+        <span class="keyword">Возврат</span><span class="operator">;</span>
+    <span class="keyword">КонецЕсли</span><span class="operator">;</span>
+    ТипыСертификатов <span class="operator">=</span> <span class="keyword">Новый</span> Массив<span class="operator">;</span>
+    ТипыСертификатов<span class="operator">.</span>Добавить<span class="operator">(</span>ТипХранилищаСертификатовКриптографии<span class="operator">.</span>ПерсональныеСертификаты<span class="operator">)</span><span class="operator">;</span>
+    Список <span class="operator">=</span> ПолучитьСписокСертификатов<span class="operator">(</span><span class="number">75</span><span class="operator">,</span> ТипыСертификатов<span class="operator">,</span> <span class="keyword">Истина</span><span class="operator">)</span><span class="operator">;</span>
+    Сертификат <span class="operator">=</span> Список<span class="operator">[</span><span class="number">0</span><span class="operator">]</span><span class="operator">;</span>
+    Данные <span class="operator">=</span> ПолучитьИзВременногоХранилища<span class="operator">(</span>Адрес<span class="operator">)</span><span class="operator">;</span>
+    МенеджерКриптографии <span class="operator">=</span> <span class="keyword">Новый</span> МенеджерКриптографии<span class="operator">(</span><span class="string">&quot;&quot;</span><span class="operator">,</span> <span class="string">&quot;&quot;</span><span class="operator">,</span> <span class="number">75</span><span class="operator">)</span><span class="operator">;</span>
+    МенеджерКриптографии<span class="operator">.</span>ПарольДоступаКЗакрытомуКлючу <span class="operator">=</span> ПолучитьПарольДоступа<span class="operator">(</span><span class="operator">)</span><span class="operator">;</span>
+    МенеджерКриптографии<span class="operator">.</span>Подписать<span class="operator">(</span>Данные<span class="operator">,</span> <span class="string">&quot;signature.sign&quot;</span><span class="operator">,</span> Сертификат<span class="operator">)</span><span class="operator">;</span>
+<span class="keyword">КонецПроцедуры</span></pre>
+
+<p class="Lang">Проверка ЭЦП</p>
+
+<p class="MsoNormal">Функция выполняет проверку действительности
+ЭЦП для пары<span class="Interface"> оригинальный
+файл – файл ЭЦП</span>.</p>
+
+<a class="copy_source" href="#_top" onClick="return false">Копировать в буфер обмена</a>
+<pre class="src_dev"><span class="preprocessor">&amp;НаКлиенте</span>
+<span class="keyword">Функция</span> ПроверитьПодписьФайла<span class="operator">(</span>ИмяПодписанногоФайла<span class="operator">,</span> ИмяФайлаПодписи<span class="operator">)</span>
+    Сертификат <span class="operator">=</span> <span class="keyword">Неопределено</span><span class="operator">;</span>
+    МенеджерКриптографии <span class="operator">=</span> <span class="keyword">Новый</span> МенеджерКриптографии<span class="operator">(</span><span class="string">&quot;&quot;</span><span class="operator">,</span> <span class="string">&quot;&quot;</span><span class="operator">,</span> <span class="number">75</span><span class="operator">)</span><span class="operator">;</span>
+    <span class="keyword">Попытка</span>
+        МенеджерКриптографии<span class="operator">.</span>ПроверитьПодпись<span class="operator">(</span>ИмяПодписанногоФайла<span class="operator">,</span> ИмяФайлаПодписи<span class="operator">,</span> Сертификат<span class="operator">)</span><span class="operator">;</span>
+    <span class="keyword">Исключение</span>
+        <span class="keyword">Возврат</span> <span class="keyword">Ложь</span><span class="operator">;</span>
+    <span class="keyword">КонецПопытки</span>
+    <span class="keyword">Возврат</span> <span class="keyword">Истина</span><span class="operator">;</span>
+<span class="keyword">КонецФункции</span></pre>
+
+<a name="_ref400962578"></a><a name="_ref405477378"></a><a name="_ref405477377"></a><a id="TI000001508" class="bookmark" name="issogl1_22.6_асинхронная_работа_с_механизмом_криптографии"><h2>22.6. Асинхронная работа с механизмом криптографии</h2></a>
+
+<p class="MsoNormal">Использование
+асинхронной схемы работы с криптографией имеет ряд особенностей:</p>
+
+<p class="MsoListNumberCxSpFirst">1.  Она
+доступна только на стороне клиентского приложения. На стороне сервера следует
+использовать синхронный способ работы.</p>
+
+<p class="MsoListNumberCxSpLast">2.  Инициализация
+объектов доступа к криптографической функциональности отличается от своих
+синхронных аналогов.</p>
+
+<p class="MsoNormal">Рассмотрим
+пример работы с криптографической функциональностью в асинхронном режиме. В
+качестве примера будет рассмотрен процесс получения списка сертификатов из
+определенного типа хранилища сертификатов.</p>
+
+<p class="Note"><span class="Note">Примечание.</span> Пример, приведенный ниже, не является
+законченным. Он предназначен для демонстрации асинхронной работы со средствами
+криптографии.</p>
+
+<a class="copy_source" href="#_top" onClick="return false">Копировать в буфер обмена</a>
+<pre class="src_dev"><span class="preprocessor">&amp;НаКлиенте</span>
+<span class="keyword">Процедура</span> ПолучитьСписокСертификатов<span class="operator">(</span><span class="operator">)</span>
+    ДополнительныеПараметры <span class="operator">=</span> <span class="keyword">Новый</span> Структура<span class="operator">;</span>
+    ДополнительныеПараметры<span class="operator">.</span>Вставить<span class="operator">(</span><span class="string">&quot;ТипХранилищаСертификатов&quot;</span><span class="operator">,</span> ТипХранилищаСертификатовКриптографии<span class="operator">.</span>ПерсональныеСертификаты<span class="operator">)</span><span class="operator">;</span>
+    ДополнительныеПараметры<span class="operator">.</span>Вставить<span class="operator">(</span><span class="string">&quot;ПроверятьДатуОкончания&quot;</span><span class="operator">,</span> <span class="keyword">Истина</span><span class="operator">)</span><span class="operator">;</span>
+    ОписаниеОповещения <span class="operator">=</span> <span class="keyword">Новый</span> ОписаниеОповещения<span class="operator">(</span><span class="string">&quot;ПолучитьСписокСертификатовЗавершение&quot;</span><span class="operator">,</span> ЭтотОбъект<span class="operator">,</span> ДополнительныеПараметры<span class="operator">)</span><span class="operator">;</span>
+    ДополнительныеПараметры<span class="operator">.</span>Вставить<span class="operator">(</span><span class="string">&quot;ОповещениеЗавершения&quot;</span><span class="operator">,</span> ОписаниеОповещения<span class="operator">)</span><span class="operator">;</span>
+    ОбратныйВызов <span class="operator">=</span> <span class="keyword">Новый</span> ОписаниеОповещения<span class="operator">(</span><span class="string">&quot;ИнициализацияЗавершение&quot;</span><span class="operator">,</span> ЭтотОбъект<span class="operator">,</span> ДополнительныеПараметры<span class="operator">)</span><span class="operator">;</span>
+    Криптография <span class="operator">=</span> <span class="keyword">Новый</span> МенеджерКриптографии<span class="operator">;</span>
+    Криптография<span class="operator">.</span>НачатьИнициализацию<span class="operator">(</span>ОбратныйВызов<span class="operator">,</span> <span class="string">&quot;&quot;</span><span class="operator">,</span> <span class="string">&quot;&quot;</span><span class="operator">,</span> <span class="number">75</span><span class="operator">)</span><span class="operator">;</span>
+<span class="keyword">КонецПроцедуры</span>
+<span class="preprocessor">&amp;НаКлиенте</span>
+<span class="keyword">Процедура</span> ПолучитьСписокСертификатовЗавершение<span class="operator">(</span>СписокСертификатов<span class="operator">,</span> ДополнительныеПараметры<span class="operator">)</span> <span class="keyword">Экспорт</span>
+    <span class="comment">// здесь используем полученные сертификаты</span>
+<span class="keyword">КонецПроцедуры</span>
+<span class="preprocessor">&amp;НаКлиенте</span>
+<span class="keyword">Процедура</span> ИнициализацияЗавершение<span class="operator">(</span>Менеджер<span class="operator">,</span> ДополнительныеПараметры<span class="operator">)</span> <span class="keyword">Экспорт</span>
+    Оповещение <span class="operator">=</span> <span class="keyword">Новый</span> ОписаниеОповещения<span class="operator">(</span><span class="string">&quot;ПолучениеХранилищаСертификатовЗавершение&quot;</span><span class="operator">,</span> ЭтотОбъект<span class="operator">,</span> ДополнительныеПараметры<span class="operator">)</span><span class="operator">;</span>
+    Менеджер<span class="operator">.</span>НачатьПолучениеХранилищаСертификатов<span class="operator">(</span>Оповещение<span class="operator">,</span> ДополнительныеПараметры<span class="operator">.</span>ТипХранилищаСертификатов<span class="operator">)</span><span class="operator">;</span>
+<span class="keyword">КонецПроцедуры</span>
+<span class="preprocessor">&amp;НаКлиенте</span>
+<span class="keyword">Процедура</span> ПолучениеХранилищаСертификатовЗавершение<span class="operator">(</span>Хранилище<span class="operator">,</span> ДополнительныеПараметры<span class="operator">)</span> <span class="keyword">Экспорт</span>
+    Оповещение <span class="operator">=</span> <span class="keyword">Новый</span> ОписаниеОповещения<span class="operator">(</span><span class="string">&quot;МассивСертификатовЗавершение&quot;</span><span class="operator">,</span> ЭтотОбъект<span class="operator">,</span> ДополнительныеПараметры<span class="operator">)</span><span class="operator">;</span>
+    Хранилище<span class="operator">.</span>НачатьПолучениеВсех<span class="operator">(</span>Оповещение<span class="operator">)</span><span class="operator">;</span>
+<span class="keyword">КонецПроцедуры</span>
+<span class="preprocessor">&amp;НаКлиенте</span>
+<span class="keyword">Процедура</span> МассивСертификатовЗавершение<span class="operator">(</span>Сертификаты<span class="operator">,</span> ДополнительныеПараметры<span class="operator">)</span> <span class="keyword">Экспорт</span>
+    Результат <span class="operator">=</span> <span class="keyword">Новый</span> Массив<span class="operator">;</span>
+    ТекущаяДата <span class="operator">=</span> ТекущаяДата<span class="operator">(</span><span class="operator">)</span><span class="operator">;</span>
+    <span class="keyword">Для</span> <span class="keyword">Каждого</span> Сертификат <span class="keyword">Из</span> Сертификаты <span class="keyword">Цикл</span>
+        <span class="keyword">Если</span> ДополнительныеПараметры<span class="operator">.</span>ПроверятьДатуОкончания <span class="keyword">И</span> Сертификат<span class="operator">.</span>ДатаОкончания <span class="operator">&lt;</span> ТекущаяДата <span class="keyword">Тогда</span> 
+            <span class="keyword">Продолжить</span><span class="operator">;</span>
+        <span class="keyword">КонецЕсли</span><span class="operator">;</span>
+        Результат<span class="operator">.</span>Добавить<span class="operator">(</span>Сертификат<span class="operator">)</span><span class="operator">;</span>
+    <span class="keyword">КонецЦикла</span><span class="operator">;</span>
+    ВыполнитьОбработкуОповещения<span class="operator">(</span>ДополнительныеПараметры<span class="operator">.</span>ОповещениеЗавершения<span class="operator">,</span> Результат<span class="operator">)</span><span class="operator">;</span>
+<span class="keyword">КонецПроцедуры</span></pre>
+
+<p class="MsoNormalCxSpFirst">Данный
+пример полностью иллюстрирует особенности работы с криптографией в асинхронном
+режиме. Получение списка сертификатов начинается с вызова метода <span class="Term">ПолучитьСписокСертификатов()</span> и заканчивается
+вызовом метода <span class="Term">ПолучитьСписокСертификатовЗавершение()</span>.
+Собственно получение состоит из инициализации модуля работы с криптографией и
+использования асинхронных аналогов следующих синхронных методов: <span class="Term">ПолучитьХранилищеСертификатов()</span> и <span class="Term">ПолучитьВсе()</span>. Также отдельным образом выполняется
+проверка на истекшие сертификаты. Оповещение <span class="Term">ИнициализацияЗавершение()</span> будет вызвано после
+того, как завершится инициализация менеджера криптографии. Затем работа
+строится аналогичным образом: в обработчике завершения предыдущего метода
+вызывается следующее действие, в обработчике завершения которого происходит
+очередное действие и т. д.</p>
+
+<p class="MsoNormalCxSpLast">Получается
+четкая последовательность действий:</p>
+
+<a class="copy_source" href="#_top" onClick="return false">Копировать в буфер обмена</a>
+<pre class="src_res">
+ПолучитьСписокСертификатов() -&gt;
+    ИнициализацияЗавершение() -&gt;
+        ПолучениеХранилищаСертификатовЗавершение() -&gt; 
+            МассивСертификатовЗавершение() -&gt;
+ПолучитьСписокСертификатовЗавершение()
+</pre>
+
+<p class="MsoNormalCxSpFirst">Особого
+внимания требует только последний переход. В обработчике оповещения <span class="Term">МассивСертификатовЗавершение()</span> не вызывается
+никакого асинхронного метода, который требует указания обработчика оповещения.
+Нужное описание оповещения поступает в самый последний (по цепочке вызовов)
+обработчик оповещения с помощью задания дополнительных параметров. Нужные
+действия выполняются в методе <span class="Term">ПолучитьСписокСертификатов()</span>, а в самом
+последнем обработчике (<span class="Term">ПолучитьСписокСертификатовЗавершение()</span>)
+происходит явный вызов обработчика, «указатель» на который последовательно
+передавался по цепочки обработчиков с помощью дополнительных параметров.
+Фактический возврат происходит в результате выполнения метода <span class="Term">ВыполнитьОбработкуОповещения()</span>.</p>
+
+<p class="MsoNormalCxSpMiddle">Пример
+разработан для использования в модуле формы, но переработка примера для работы
+из общих модулей не представляет существенной проблемы. В этом случае первые
+две процедуры примера будут в одном общем модуле, а остальные – в другом,
+с соответствующей корректировкой описания обработчиков оповещения и вызовов
+методов.</p>
+
+<p class="MsoNormalCxSpMiddle">Аналогичным
+образом будут выглядеть и другие<a name="_ref292445924"> типичные приемы работы
+с криптографией.</a></p>
+
+<p class="MsoNormalCxSpMiddle">Для работы с механизмом криптографии в
+веб-клиенте следует установить расширение работы с криптографией
+(см. <A href="/db/content/v8310doc/src/руководство разработчика/глава 4. встроенный язык.htm?_=1496848987#_ref404250037">здесь</a>), при этом следует помнить, что в веб-браузерах,
+кроме Google Chrome и Mozilla Firefox, можно использовать
+как синхронные, так и асинхронные методы работы с криптографией. При этом используемый
+набор методов определяется свойством конфигурации <span class="Interface">Режим использования синхронных вызовов расширений платформы и
+внешних компонент</span> (см. <A href="/db/content/v8310doc/src/руководство разработчика/глава 5. объекты конфигурации.htm?_=1496848987#_ref370288523">здесь</a>). При использовании веб-браузеров Google Chrome и Mozilla Firefox доступны
+только асинхронные методы работы с криптографией. Соответствие методов можно
+увидеть в Синтакс-помощнике, в описании синхронных методов.</p>
+
+<p class="MsoNormalCxSpMiddle"> </p>
+
+<br>		<script type="text/javascript">listenCopy('zeroclipboard.swf');</script>
+	</body>
+</html>

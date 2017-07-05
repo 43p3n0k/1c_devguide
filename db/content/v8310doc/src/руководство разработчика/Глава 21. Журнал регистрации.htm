@@ -1,0 +1,1087 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=Windows-1251">
+		<title>&#1043;&#1083;&#1072;&#1074;&#1072; 21. &#1046;&#1091;&#1088;&#1085;&#1072;&#1083; &#1088;&#1077;&#1075;&#1080;&#1089;&#1090;&#1088;&#1072;&#1094;&#1080;&#1080;</title>
+		<LINK REL="stylesheet" href="/db/content/v8310doc/src/руководство разработчика/style.css?_=1496848987">
+		<script charset="windows-1251" src="/db/content/v8310doc/src/руководство разработчика/script.js?_=1496848987" TYPE="text/javascript"></script>		<!--[if !IE]>--><script charset="windows-1251" src="/db/content/v8310doc/src/руководство разработчика/zeroclipboard.js?_=1496848987" TYPE="text/javascript"></script><!--<![endif]-->
+	<meta name="robots" content="noarchive">
+<meta name="googlebot" content="noarchive">
+<link href="/db/content/v8310doc/src/руководство разработчика/глава 21. журнал регистрации.htm" rel="canonical">
+<link href="/static/its.content.css?_=1490872753" type="text/css" rel="stylesheet">
+<script charset="windows-1251" type="text/javascript" src="/static/its.content.js?_=1489758009"></script>
+<!--[if lt IE 9]><script charset="windows-1251" type="text/javascript" src="/static/html5shiv.js?_=1484636606"></script><![endif]-->
+
+</head>
+	<body class="v8310doc">
+<a name="_ref248042713"></a><a id="TI000000823" class="bookmark"><h1>Глава 21.  Журнал регистрации</h1></a>
+
+<p class="MsoNormalCxSpFirst">Для
+выполнения административных задач часто требуется выяснить, какие события
+происходили в определенный момент времени или какие действия выполнял тот или иной
+пользователь.</p>
+
+<p class="MsoNormalCxSpMiddle">Для
+этих целей предназначен журнал регистрации. В этом журнале могут фиксироваться
+различные события. С его помощью администратор может получить историю работы
+пользователей с системой.</p>
+
+<p class="MsoNormalCxSpMiddle">Журнал
+регистрации не хранится в базе данных и не сохраняется при операциях
+загрузки/выгрузки информационной базы.</p>
+
+<p class="MsoNormalCxSpMiddle">При
+работе пользователей система «1С:Предприятие» фиксирует в журнале основные
+действия, выполняемые пользователем по модификации данных информационной базы,
+доступу и отказу доступа к данным, выполнению регламентных операций, подключению
+и отключению от системы и т. д.</p>
+
+<p class="MsoNormalCxSpMiddle">Кроме
+средств интерактивной работы с журналом, которые предоставляются в
+конфигураторе, доступна также и программная работа с журналом.</p>
+
+<p class="MsoNormalCxSpLast">В
+данной главе описываются средства программной работы с журналом регистрации.</p>
+
+<a id="TI000000824" class="bookmark" name="issogl1_21.1_управление_детализацией"><h2>21.1. Управление детализацией</h2></a>
+
+<p class="MsoNormal">Имеется
+возможность управления уровнем детализации сообщений, которые попадают в журнал
+регистрации. Для этого существуют методы <span class="Term">ПолучитьИспользованиеЖурналаРегистрации()</span> и <span class="Term">УстановитьИспользованиеЖурналаРегистрации()</span>.</p>
+
+<a class="copy_source" href="#_top" onClick="return false">Копировать в буфер обмена</a>
+<pre class="src_dev"><span class="comment">// установим регистрацию всех событий журнала</span>
+Уровни <span class="operator">=</span> <span class="keyword">Новый</span> Массив<span class="operator">;</span>
+Уровни<span class="operator">.</span>Добавить<span class="operator">(</span>УровеньЖурналаРегистрации<span class="operator">.</span>Ошибка<span class="operator">)</span><span class="operator">;</span>
+Уровни<span class="operator">.</span>Добавить<span class="operator">(</span>УровеньЖурналаРегистрации<span class="operator">.</span>Информация<span class="operator">)</span><span class="operator">;</span>
+Уровни<span class="operator">.</span>Добавить<span class="operator">(</span>УровеньЖурналаРегистрации<span class="operator">.</span>Предупреждение<span class="operator">)</span><span class="operator">;</span>
+Уровни<span class="operator">.</span>Добавить<span class="operator">(</span>УровеньЖурналаРегистрации<span class="operator">.</span>Примечание<span class="operator">)</span><span class="operator">;</span>
+УстановитьИспользованиеЖурналаРегистрации<span class="operator">(</span>Уровни<span class="operator">)</span><span class="operator">;</span></pre>
+
+<a id="TI000000825" class="bookmark" name="issogl1_21.2_запись_событий"><h2>21.2. Запись событий</h2></a>
+
+<p class="MsoNormal">При
+выполнении различных операций возникает необходимость фиксировать выполняемые
+действия для последующего анализа. Для такой фиксации можно использовать журнал
+регистрации. Запись событий в него осуществляется с помощью метода глобального
+контекста <span class="Term">ЗаписьЖурналаРегистрации()</span>.</p>
+
+<p class="Note"><span class="Note">Примечание.</span> С помощью данного метода невозможно
+записать в журнал регистрации системные события.</p>
+
+<p class="MsoNormal">Имена
+пользовательских событий могут содержать точку в своих названиях, тем самым
+образуя группы пользовательских событий.</p>
+
+<a name="_ref337488577"></a><a name="_ref337488576"></a><a id="TI000000826" class="bookmark" name="issogl1_21.3_управление_регистрацией_событий"><h2>21.3. Управление регистрацией событий</h2></a>
+
+<a id="TI000001913" class="bookmark" name="issogl2_21.3.1_общая_информация"><h3>21.3.1. Общая информация</h3></a>
+
+<p class="MsoNormal">Регистрацию
+любого события журнала регистрации можно включить или выключить. Для этого
+служат методы глобального контекста <span class="Term">ПолучитьИспользованиеСобытияЖурналаРегистрации()</span>
+и <span class="Term">УстановитьИспользованиеСобытияЖурналаРегистрации()</span>
+и объект <span class="Term">ИспользованиеСобытияЖурналаРегистрации</span>.
+Следующий пример показывает, как можно выключить регистрацию события <span class="Interface">Ошибка выполнения</span>
+(<span class="Term">_$PerformError$_</span>):</p>
+
+<a class="copy_source" href="#_top" onClick="return false">Копировать в буфер обмена</a>
+<pre class="src_dev">ИспользованиеСобытия <span class="operator">=</span>                    <span class="keyword">Новый</span> ИспользованиеСобытияЖурналаРегистрации<span class="operator">(</span><span class="operator">)</span><span class="operator">;</span>
+ИспользованиеСобытия<span class="operator">.</span>Использование <span class="operator">=</span> <span class="keyword">Ложь</span><span class="operator">;</span>
+УстановитьИспользованиеСобытияЖурналаРегистрации<span class="operator">(</span><span class="string">&quot;_$PerformError$_&quot;</span><span class="operator">,</span> ИспользованиеСобытия<span class="operator">)</span><span class="operator">;</span></pre>
+
+<p class="MsoNormal">Следует
+отметить, что существует два события, настройка регистрации которых имеет
+дополнительные возможности. Это события <span class="Interface">Доступ</span> (<span class="Term">_$Access$_.Access</span>) и <span class="Interface">Отказ в доступе</span>
+(<span class="Term">_$Access$_.AccessDenied</span>).
+Работа с этими событиями будет описана более подробно.</p>
+
+<p class="Note">Примечание. События, связанные с транзакциями (_$Transaction$_<span class="Term">.Begin</span>, <span class="Term">_$Transaction$_.Commit</span>,
+<span class="Term">_$Transaction$_.Rollback</span>), не могут быть
+отключены с помощью метода <span class="Term">УстановитьИспользованиеСобытияЖурналаРегистрации().</span></p>
+
+<a name="_ref427590311"></a><a name="_ref427590310"></a><a id="TI000000827" class="bookmark" name="issogl2_21.3.2_настройка_параметров_события_доступ"><h3>21.3.2. Настройка параметров события «Доступ»</h3></a>
+
+<p class="MsoNormal">Событие
+<span class="Interface">Доступ</span> предназначено для регистрации фактов доступа
+пользователей системы к тем или иным данным. Для настройки регистрации события <span class="Interface">Доступ</span> следует
+задать:</p>
+
+<p class="MsoListBulletCxSpFirst">&#9679; 
+необходимость регистрации события;</p>
+
+<p class="MsoListBulletCxSpMiddle">&#9679; 
+перечень объектов метаданных, доступ к которым
+необходимо регистрировать;</p>
+
+<p class="MsoListBulletCxSpMiddle">&#9679; 
+перечень полей объекта метаданных, чтение
+которых следует регистрировать (<span class="Bold">поля доступа</span>);</p>
+
+<p class="MsoListBulletCxSpLast">&#9679; 
+перечень полей объекта метаданных, значения
+которых необходимо зарегистрировать (<span class="Bold">поля регистрации</span>).</p>
+
+<p class="MsoNormal">Общая
+схема работы при этом выглядит следующим образом (при условии, что событие
+регистрируется). Если в процессе работы с данными (выбранного объекта
+метаданных) произошло чтение одного из заданных полей доступа, происходит фиксация
+в журнале регистрации полей регистрации по заданным правилам. При этом фиксация
+факта доступа происходит при любом доступе к данным, совершенным из сеанса
+пользователя, включая доступ из кода на встроенном языке, совершенного на
+стороне сервера «1С:Предприятия».</p>
+
+<p class="Regularbeforetable">Объем
+данных, которые будут записаны в журнал регистрации, зависит от того, как
+настроена регистрация события:</p>
+
+<table class="MsoNormalTable" border="0" cellspacing="0" cellpadding="0">
+ <thead>
+  <tr>
+   <td>
+   <p class="MsoNormalCxSpFirst"><span class="Bold">Использование</span></p>
+   </td>
+   
+   <td>
+   <p class="MsoNormalCxSpMiddle"><span class="Bold">Поля доступа</span></p>
+   </td>
+   
+   <td>
+   <p class="MsoNormalCxSpMiddle"><span class="Bold">Поля<br>
+   регистрации</span></p>
+   </td>
+   
+   <td>
+   <p class="MsoNormalCxSpMiddle"><span class="Bold">Результат</span></p>
+   </td>
+   
+  </tr>
+ </thead>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Не
+  задано</p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"> </p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"> </p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Событие
+  не регистрируется</p>
+  </td>
+  
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Задано</p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Не
+  заданы</p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Не
+  заданы</p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Событие
+  не регистрируется</p>
+  </td>
+  
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Задано</p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Заданы</p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Не
+  заданы</p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Событие
+  регистрируется без детализации</p>
+  </td>
+  
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Задано</p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Заданы</p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Заданы</p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Событие
+  регистрируется с указанием полей регистрации</p>
+  </td>
+  
+ </tr>
+</table>
+
+<p class="MsoNormalCxSpMiddle">Событие
+формируется только в случае успешного чтения данных.</p>
+
+<p class="MsoNormalCxSpLast">Рассмотрим
+настройки параметров на конкретном примере:</p>
+
+<a class="copy_source" href="#_top" onClick="return false">Копировать в буфер обмена</a>
+<pre class="src_dev">НастройкаСправочника <span class="operator">=</span> <span class="keyword">Новый</span> ОписаниеИспользованияСобытияДоступЖурналаРегистрации<span class="operator">(</span><span class="operator">)</span><span class="operator">;</span>
+<span class="comment">// Укажем объект, доступ к которому будет регистрироваться</span>
+НастройкаСправочника<span class="operator">.</span>Объект <span class="operator">=</span> <span class="string">&quot;Справочник.ФизическиеЛица&quot;</span><span class="operator">;</span>
+<span class="comment">// Укажем поля доступа</span>
+НастройкаСправочника<span class="operator">.</span>ПоляДоступа<span class="operator">.</span>Добавить<span class="operator">(</span><span class="string">&quot;ПаспортныеДанные&quot;</span><span class="operator">)</span><span class="operator">;</span>
+НастройкаСправочника<span class="operator">.</span>ПоляДоступа<span class="operator">.</span>Добавить<span class="operator">(</span><span class="string">&quot;Дети.СвидетельствоОРождении&quot;</span><span class="operator">)</span><span class="operator">;</span>
+<span class="comment">// Укажем поля регистрации</span>
+НастройкаСправочника<span class="operator">.</span>ПоляРегистрации<span class="operator">.</span>Добавить<span class="operator">(</span><span class="string">&quot;ПаспортныеДанные&quot;</span><span class="operator">)</span><span class="operator">;</span>
+НастройкаСправочника<span class="operator">.</span>ПоляРегистрации<span class="operator">.</span>Добавить<span class="operator">(</span><span class="string">&quot;Дети.ИмяРебенка&quot;</span><span class="operator">)</span><span class="operator">;</span>
+АльтернативыПолей <span class="operator">=</span> <span class="keyword">Новый</span> Массив<span class="operator">(</span><span class="operator">)</span><span class="operator">;</span>
+АльтернативыПолей<span class="operator">.</span>Добавить<span class="operator">(</span><span class="string">&quot;Фамилия&quot;</span><span class="operator">)</span><span class="operator">;</span>
+АльтернативыПолей<span class="operator">.</span>Добавить<span class="operator">(</span><span class="string">&quot;Имя&quot;</span><span class="operator">)</span><span class="operator">;</span>
+НастройкаСправочника<span class="operator">.</span>ПоляРегистрации<span class="operator">.</span>Добавить<span class="operator">(</span>АльтернативыПолей<span class="operator">)</span><span class="operator">;</span>
+НастройкаОбъектовМетаданных <span class="operator">=</span> <span class="keyword">Новый</span> Массив<span class="operator">(</span><span class="operator">)</span><span class="operator">;</span>
+НастройкаОбъектовМетаданных<span class="operator">.</span>Добавить<span class="operator">(</span>НастройкаСправочника<span class="operator">)</span><span class="operator">;</span></pre>
+
+<p class="MsoNormalCxSpFirst">В
+данном примере будет выполняться регистрация доступа к элементам справочника <span class="Term">ФизическиеЛица</span>.</p>
+
+<p class="MsoNormalCxSpLast">При
+этом события журнала регистрации будут формироваться в том случае, если в
+запросе к данным справочника <span class="Term">ФизическиеЛица</span> будут участвовать:</p>
+
+<p class="MsoListBulletCxSpFirst">&#9679; 
+поле <span class="Term">ПаспортныеДанные</span>;</p>
+
+<p class="MsoListBulletCxSpLast">&#9679; 
+поле <span class="Term">СвидетельствоОРождении</span> табличной части <span class="Term">Дети</span>.</p>
+
+<p class="MsoNormalCxSpFirst">Если
+в запросе к данным описанные поля не присутствуют, событие доступа к данным не
+будет записано в журнал регистрации.</p>
+
+<p class="MsoNormalCxSpLast">После
+того как система определит доступ к контролируемым полям, в журнал регистрации
+будут записаны данные о следующих полях справочника <span class="Term">ФизическиеЛица</span>:</p>
+
+<p class="MsoListBulletCxSpFirst">&#9679; 
+Поле <span class="Term">ПаспортныеДанные</span>.</p>
+
+<p class="MsoListBulletCxSpMiddle">&#9679; 
+Поле <span class="Term">ИмяРебенка</span> из табличной части <span class="Term">Дети</span>.</p>
+
+<p class="MsoListBulletCxSpLast">&#9679; 
+Какое-либо из полей <span class="Term">Фамилия</span> или <span class="Term">Имя</span>. Какое из полей будет записано в журнал
+регистрации, определяется наличием этих данных в запросе к данным. Причем если
+используются все перечисленные поля, то в журнал регистрации попадет поле, заданное
+с меньшим индексом (в примере – <span class="Term">Фамилия</span>). Если из указанной пары в запросе
+используется какое-либо одно поле, в журнал регистрации попадет именно оно.</p>
+
+<p class="MsoNormal">Рассмотрим
+еще один пример настройки события <span class="Interface">Доступ</span>:</p>
+
+<a class="copy_source" href="#_top" onClick="return false">Копировать в буфер обмена</a>
+<pre class="src_dev">НастройкаРегистраСведений <span class="operator">=</span> <span class="keyword">Новый</span> ОписаниеИспользованияСобытияДоступЖурналаРегистрации<span class="operator">(</span><span class="operator">)</span><span class="operator">;</span>
+<span class="comment">// Укажем объект, доступ к которому будет регистрироваться</span>
+НастройкаРегистраСведений<span class="operator">.</span>Объект <span class="operator">=</span> <span class="string">&quot;РегистрСведений.ОкладыСотрудников&quot;</span><span class="operator">;</span>
+<span class="comment">// Укажем поля доступа</span>
+НастройкаРегистраСведений<span class="operator">.</span>ПоляДоступа<span class="operator">.</span>Добавить<span class="operator">(</span><span class="string">&quot;Оклад&quot;</span><span class="operator">)</span><span class="operator">;</span>
+<span class="comment">// Укажем поля регистрации</span>
+НастройкаРегистраСведений<span class="operator">.</span>ПоляРегистрации<span class="operator">.</span>Добавить<span class="operator">(</span><span class="string">&quot;Сотрудник&quot;</span><span class="operator">)</span><span class="operator">;</span>
+ НастройкаОбъектовМетаданных<span class="operator">.</span>Добавить<span class="operator">(</span>НастройкаРегистраСведений<span class="operator">)</span><span class="operator">;</span></pre>
+
+<p class="MsoNormal">В
+данном примере при обращении к полю <span class="Term">РегистрСведений.ОкладыСотрудников.Оклад</span> будет
+происходить регистрация события <span class="Interface">Доступ</span> со
+следующим составом поля <span class="Term">Данные.Данные</span>:</p>
+
+<p class="MsoListBullet">&#9679; 
+если в результате запроса будет поле <span class="Term">РегистрСведений.ОкладыСотрудников.Сотрудник</span> (и
+поле <span class="Term">Ссылка</span>
+задано в настройке полей регистрации справочника <span class="Term">ФизическиеЛица</span>, на который ссылается поле <span class="Term">Сотрудник</span>), то в событие журнала регистрации
+будет записано:</p>
+
+<p class="MsoListBullet2CxSpFirst">&#9679; 
+в поле <span class="Term">Данные</span> будет записана таблица значений,
+содержащая колонку <span class="Term">СправочникФизическиеЛицаСсылка</span>,
+в которой будут значения ссылок на объекты справочника <span class="Term">ФизическиеЛица</span>;</p>
+
+<p class="MsoListBullet2CxSpMiddle">&#9679; 
+в поле <span class="Term">Метаданные</span> будет записан массив, содержащий
+строку <span class="Term">РегистрСведений.ОкладыСотрудников</span>, т. е.
+имя объекта, который послужил поводом регистрации события доступа;</p>
+
+<p class="MsoListBullet2CxSpLast">&#9679; 
+в поле <span class="Term">ПредставлениеМетаданных</span> будет записан массив,
+содержащий строку <span class="Interface">РегистрСведений. Оклады сотрудников</span> –
+представление объекта метаданных;</p>
+
+<p class="MsoListBulletCxSpFirst">&#9679; 
+если поле <span class="Term">Ссылка</span> не участвует в полях регистрации
+справочника <span class="Term">ФизическиеЛица</span>,
+то она не будет зафиксирована в запросе к регистру сведений;</p>
+
+<p class="MsoListBulletCxSpLast">&#9679; 
+если в запросе будет использовано получение
+данных по ссылке типа <span class="Term">Справочник.ФизическиеЛица</span>, хранящейся в регистре
+сведений, то регистрация будет применяться к полям, которые получены через
+ссылку, хранящуюся в поле регистра <span class="Term">Сотрудник</span>:</p>
+
+<p class="MsoListBullet2">&#9679; 
+<span class="Term">Имя</span>, <span class="Term">Фамилия</span> и <span class="Term">ПаспортныеДанные</span> (все – полученные через
+ссылку, хранящуюся в поле регистра <span class="Term">Сотрудник</span>), то в журнал регистрации попадут
+поля <span class="Term">ПаспортныеДанные</span>
+и <span class="Term">Фамилия</span>
+(описание регистрации для справочника <span class="Term">Сотрудники</span> можно посмотреть в предыдущем
+примере).</p>
+
+<a id="TI000000828" class="bookmark" name="issogl2_21.3.3_настройка_параметров_события_отказ_в_доступе"><h3>21.3.3. Настройка параметров события «Отказ в доступе»</h3></a>
+
+<p class="MsoNormal">Событие
+<span class="Interface">Отказ в доступе</span> предназначено для регистрации фактов
+отказа в доступе к тем или иным данным пользователям системы. Для настройки
+регистрации события <span class="Interface">Отказ в доступе</span>, следует задать:</p>
+
+<p class="MsoListBulletCxSpFirst">&#9679; 
+необходимость регистрации события;</p>
+
+<p class="MsoListBulletCxSpMiddle">&#9679; 
+перечень объектов метаданных, для которых
+необходимо регистрировать поля регистрации при отказе в доступе (для остальных
+объектов отказы в доступе будут регистрироваться без детализации);</p>
+
+<p class="MsoListBulletCxSpLast">&#9679; 
+перечень полей объекта метаданных, значения
+которых необходимо зарегистрировать (<span class="Bold">поля регистрации</span>)
+при отказе в доступе.</p>
+
+<p class="MsoNormal">Общая
+схема работы при этом выглядит следующим образом (при условии, что событие
+регистрируется). Если в процессе работы с данными (выбранного объекта
+метаданных) произошел отказ в доступе, происходит фиксация в журнале
+регистрации полей регистрации по заданным правилам.</p>
+
+<p class="Regularbeforetable">Объем
+данных, которые будут записаны в журнал регистрации, зависит от того, как
+настроена регистрация события:</p>
+
+<table class="MsoNormalTable" border="0" cellspacing="0" cellpadding="0">
+ <thead>
+  <tr>
+   <td>
+   <p class="MsoNormalCxSpFirst"><span class="Bold">Использование</span></p>
+   </td>
+   
+   <td>
+   <p class="MsoNormalCxSpMiddle"><span class="Bold">Поля<br>
+   регистрации</span></p>
+   </td>
+   
+   <td>
+   <p class="MsoNormalCxSpMiddle"><span class="Bold">Результат</span></p>
+   </td>
+   
+  </tr>
+ </thead>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Не
+  задано</p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"> </p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Событие
+  не регистрируется</p>
+  </td>
+  
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Задано</p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Не
+  заданы</p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Событие
+  регистрируется без детализации (поле <span class="Term">Данные</span> не заполнено)</p>
+  </td>
+  
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Задано</p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Заданы</p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Событие
+  регистрируется с указанием полей регистрации в поле <span class="Term">Данные</span></p>
+  </td>
+  
+ </tr>
+</table>
+
+<p class="MsoNormalCxSpLast">Событие
+формируется в следующих случаях:</p>
+
+<p class="MsoListBullet">&#9679; 
+при проверке доступа к объекту данных целиком:</p>
+
+<p class="MsoListBullet2CxSpFirst">&#9679; 
+в случае нарушения прав при обращении к методам
+и свойствам прикладного объекта из встроенного языка или из стандартных
+интерфейсных функций (форм, команд);</p>
+
+<p class="MsoListBullet2CxSpMiddle">&#9679; 
+в случае отказов в доступе при проверке прав на
+конфигурацию;</p>
+
+<p class="MsoListBullet2CxSpLast">&#9679; 
+при возникновении события в поле <span class="Term">Данные</span> записи журнала будет помещена структура
+со свойством <span class="Term">Право</span>,
+содержащим действие, в выполнении которого было отказано;</p>
+
+<p class="MsoListBullet">&#9679; 
+при проверке ограничений доступа к данным:</p>
+
+<p class="MsoListBullet2CxSpFirst">&#9679; 
+в случае нарушения условий ограничения доступа к
+данным;</p>
+
+<p class="MsoListBullet2CxSpMiddle">&#9679; 
+при возникновении события в поле <span class="Term">Данные</span> записи журнала будет помещена
+структура, содержащая два свойства:</p>
+
+<p class="MsoListBullet2CxSpMiddle">&#9679; 
+<span class="Term">Действие</span> – указано действие, при попытке
+выполнения которого произошел отказ в доступе;</p>
+
+<p class="MsoListBullet2CxSpLast">&#9679; 
+<span class="Term">Данные</span> – содержит информацию о полях
+регистрации (если настроено).</p>
+
+<p class="Note"><span class="Note">Примечание.</span> При считывании данных во временную таблицу
+поле <span class="Term">Данные.Данные</span>
+события журнала регистрации не заполняется.</p>
+
+<p class="MsoNormal">Рассмотрим
+настройки параметров на конкретном примере:</p>
+
+<a class="copy_source" href="#_top" onClick="return false">Копировать в буфер обмена</a>
+<pre class="src_dev">НастройкаСправочника <span class="operator">=</span> <span class="keyword">Новый</span> ОписаниеИспользованияСобытияОтказВДоступеЖурналаРегистрации<span class="operator">(</span><span class="operator">)</span><span class="operator">;</span>
+<span class="comment">// Укажем объект, доступ к которому будет регистрироваться</span>
+НастройкаСправочника<span class="operator">.</span>Объект <span class="operator">=</span> <span class="string">&quot;Справочник.ФизическиеЛица&quot;</span><span class="operator">;</span>
+<span class="comment">// Укажем поля регистрации</span>
+НастройкаСправочника<span class="operator">.</span>ПоляРегистрации<span class="operator">.</span>Добавить<span class="operator">(</span><span class="string">&quot;ПаспортныеДанные&quot;</span><span class="operator">)</span><span class="operator">;</span>
+НастройкаСправочника<span class="operator">.</span>ПоляРегистрации<span class="operator">.</span>Добавить<span class="operator">(</span><span class="string">&quot;Дети.ИмяРебенка&quot;</span><span class="operator">)</span><span class="operator">;</span>
+АльтернативыПолей <span class="operator">=</span> <span class="keyword">Новый</span> Массив<span class="operator">(</span><span class="operator">)</span><span class="operator">;</span>
+АльтернативыПолей<span class="operator">.</span>Добавить<span class="operator">(</span><span class="string">&quot;Фамилия&quot;</span><span class="operator">)</span><span class="operator">;</span>
+АльтернативыПолей<span class="operator">.</span>Добавить<span class="operator">(</span><span class="string">&quot;Имя&quot;</span><span class="operator">)</span><span class="operator">;</span>
+НастройкаСправочника<span class="operator">.</span>ПоляРегистрации<span class="operator">.</span>Добавить<span class="operator">(</span>АльтернативыПолей<span class="operator">)</span><span class="operator">;</span></pre>
+
+<p class="MsoNormal">При
+нарушении доступа к данным в операции <span class="Term">Чтение</span> будет происходить регистрация события <span class="Interface">Отказ в доступе</span>
+и выполняться запись поля регистрации по правилам, описанным для полей
+регистрации события <span class="Interface">Доступ</span>. Для других действий (<span class="Term">Изменение</span>, <span class="Term">Удаление</span>, <span class="Term">Добавление</span>) событие регистрируется, но запись данных
+не происходит.</p>
+
+<a name="_ref310422601"></a><a name="_ref310422600"></a><a name="_ref473035457"></a><a name="_ref473035455"></a><a id="TI000000829" class="bookmark" name="issogl1_21.4_получение_записей_журнала_регистрации"><h2>21.4. Получение записей журнала регистрации</h2></a>
+
+<p class="MsoNormalCxSpFirst">В
+процессе эксплуатации прикладного решения могут возникать ситуации, которые
+требуют программного анализа журнала регистрации, в том числе и получение
+событий журнала регистрации по некоторым критериям (отбору). Для программного
+получения записей журнала регистрации необходимо воспользоваться методом
+глобального контекста <span class="Term">ВыгрузитьЖурналРегистрации()</span>. Программно
+получать можно как записи журнала регистрации информационной базы, где
+выполняется код на встроенном языке, так и другой информационной базы (даже
+если с этой базой работают другие экземпляры «1С:Предприятия»), если у метода <span class="Term">ВыгрузитьЖурналРегистрации()</span> указан параметр <span class="Term">ИмяВходногоФайла</span>. Следует помнить, что такое чтение
+рекомендуется выполнять только в том случае, если файлы журнала регистрации
+другой информационной базы доступны локально для экземпляра «1С:Предприятия»,
+выполняющего чтение журнала. Если такого доступа нет, то необходимо
+разрабатывать другие способы получения журнала регистрации.</p>
+
+<p class="MsoNormalCxSpLast">При
+работе с журналом регистрации, строка представления данных, записанная в журнал
+при регистрации события, показывается пользователю только в том случае, если
+можно точно определить, что у этого пользователя есть права на просмотр этого
+представления или право <span class="Term">Администрирование</span>. Если у пользователя нет
+права <span class="Term">Администрирование</span>
+и невозможно точно определить, что у пользователя есть права на просмотр
+представления то представление данных от него скрывается. Таким образом,
+колонка <span class="Term">ПредставлениеДанных</span>
+будет пустой в следующих случаях:</p>
+
+<p class="MsoListBulletCxSpFirst">&#9679; 
+В конфигураторе: при просмотре журнала
+регистрации, если у пользователя нет права <span class="Term">Администрирование</span>;</p>
+
+<p class="MsoListBulletCxSpLast">&#9679; 
+В режиме 1С:Предприятие, при просмотре и при
+использовании метода <span class="Term">ВыгрузитьЖурналРегистрации()</span>,
+при выполнении всех следующих условий:</p>
+
+<p class="MsoListBullet2CxSpFirst">&#9679; 
+у пользователя нет права <span class="Term">Администрирование</span>;</p>
+
+<p class="MsoListBullet2CxSpMiddle">&#9679; 
+не установлен привилегированный режим;</p>
+
+<p class="MsoListBullet2CxSpLast">&#9679; 
+актуальное представление данных для этой ссылки
+недоступно, по любой из причин:</p>
+
+<p class="MsoListBullet3CxSpFirst">&#9679; 
+объект данных удален:</p>
+
+<p class="MsoListBullet3CxSpMiddle">&#9679; 
+в сеансе используются не все независимые
+разделители, в состав которых входит объект данных;</p>
+
+<p class="MsoListBullet3CxSpLast">&#9679; 
+у пользователя недостаточно прав для получения
+представления объекта данных.</p>
+
+<p class="MsoListBullet2">&#9679; 
+для соответствующего объекта метаданных
+выполняется любое из условий:</p>
+
+<p class="MsoListBullet3CxSpFirst">&#9679; 
+у пользователя нет права <span class="Term">Просмотр</span></p>
+
+<p class="MsoListBullet3CxSpLast">&#9679; 
+имеется ограничение доступа к данным для полей
+представления.</p>
+
+<p class="MsoNormalCxSpFirst">Для
+задания условий отбора выборки необходимо воспользоваться параметром <span class="Term">Фильтр</span> метода <span class="Term">ВыгрузитьЖурналРегистрации()</span>. Данный параметр
+может содержать либо одиночное значение отбора, заданное с помощью объекта <span class="Term">Структура</span> особого формата (формат структуры
+подробно описан в синтакс-помощнике: <span class="Interface">Глобальный контекст –
+Процедуры и функции работы с журналом регистрации – ВыгрузитьЖурналРегистрации</span>),
+либо массив таких структур.</p>
+
+<p class="MsoNormalCxSpMiddle">При
+этом если отбор задан одним элементом типа <span class="Term">Структура</span>, то в результирующую выборку попадут
+все записи, которые удовлетворяют всем условиям, заданным в структуре (условие
+сочетаются «по И»). Если отбор задан массивом, то в результирующую выборку
+попадут записи, которые удовлетворяют хотя бы одному условию, перечисленному в
+элементах массива (условия сочетаются «по ИЛИ»).</p>
+
+<p class="MsoNormalCxSpMiddle">Обратим
+особое внимание на возможность задания отбора по полю <span class="Term">Данные</span> записи журнала регистрации. В качестве
+отбора по этому полю могут выступать значения типа <span class="Term">Строка</span>, <span class="Term">Число</span>, <span class="Term">Дата</span>, <span class="Term">Ссылка</span>, <span class="Term">Структура</span> (для событий <span class="Interface">Доступ</span>, <span class="Interface">Отказ в доступе</span>,
+<span class="Interface">Аутентификация</span>, <span class="Interface">Ошибка аутентификации</span>,
+<span class="Interface">Добавление пользователя</span>, <span class="Interface">Изменение пользователя</span>
+и <span class="Interface">Удаление пользователя</span>), а также массив структур.</p>
+
+<p class="MsoNormalCxSpLast">Значением
+элемента структуры, переданной в параметр <span class="Term">Фильтр</span>, может выступать конкретное значение, <span class="Term">Структура</span> или <span class="Term">Массив</span>. Проверка соответствия данных записи
+журнала на соответствие параметрам фильтра выполняется следующим образом:</p>
+
+<p class="MsoListBulletCxSpFirst">&#9679; 
+Если передано конкретное значение, то производится
+сравнение значений в данных записи и в значении фильтра.</p>
+
+<p class="MsoListBulletCxSpMiddle">&#9679; 
+Если передан массив значений, то выполняется
+сравнение значения из данных записи журнала регистрации и всех значений
+массива, переданного в качестве значения фильтра. Условие считается выполненным,
+если значение, указанное в записи журнала, совпадает хотя бы с одним значением
+переданного массива.</p>
+
+<p class="MsoListBulletCxSpLast">&#9679; 
+Если в качестве значения передана структура, то
+условие считается выполненным при условии, что для всех элементов структуры,
+переданной в качестве элемента фильтра, будет установлено соответствие с
+данными записи журнала регистрации.</p>
+
+<p class="MsoNormal">Рассмотрим
+это подробнее.</p>
+
+<p class="MsoListNumberCxSpFirst">1.  В
+поле <span class="Term">Данные</span>
+записи журнала регистрации находится структура, в поле <span class="Term">Данные</span> фильтра также указана структура. В этом
+случае запись будет удовлетворять условию, если в поле <span class="Term">Данные</span> записи журнала присутствуют все ключи
+из одноименного поля фильтра и значения для этих ключей соответствуют друг
+другу.</p>
+
+<p class="MsoListNumberCxSpMiddle">2. 
+В поле <span class="Term">Данные</span> записи журнала регистрации находится
+таблица значений, в поле <span class="Term">Данные</span> фильтра указана структура. В этом
+случае запись будет удовлетворять условию, если в таблице значений есть все
+колонки с именами, равными именам ключей структуры фильтра, и есть строки, в
+которых значения соответствующих колонок равны значениям структуры из фильтра.</p>
+
+<p class="MsoListNumberCxSpMiddle">3. 
+В поле <span class="Term">Данные</span> записи журнала регистрации находится
+значение типа <span class="Term">Структура</span>,
+<span class="Term">Массив</span>
+или <span class="Term">ТаблицаЗначений</span>,
+в поле <span class="Term">Данные</span>
+фильтра указан массив. В этом случае запись будет удовлетворять условию, если в
+данных записи журнала будет найдено хотя бы одно значение из массива,
+переданного в качестве значения фильтра.</p>
+
+<p class="MsoListNumberCxSpMiddle">4. 
+В поле <span class="Term">Данные</span> записи журнала регистрации находится
+какое-либо значение (не структура, не массив и не таблица значений), в поле <span class="Term">Данные</span> фильтра указан массив. В этом случае
+запись будет удовлетворять условию, если значение из записи журнала равно хотя
+бы одному значению из переданного массива.</p>
+
+<p class="MsoListNumberCxSpMiddle">5. 
+В поле <span class="Term">Данные</span> записи журнала находится элемент со
+значением типа <span class="Term">ТаблицаЗначений</span>,
+в поле <span class="Term">Данные</span>
+фильтра находится элемент со значением типом <span class="Term">Массив</span>, при этом ключи элементов совпадают. В
+этом случае запись журнала регистрации будет удовлетворять условию, если хотя
+бы одна ячейка таблицы значений равна хотя бы одному значению из переданного
+массива.</p>
+
+<p class="MsoListNumberCxSpLast">6. 
+В элементе поля <span class="Term">Данные</span> записи журнала находится значение типа <span class="Term">Структура</span>, <span class="Term">Массив</span> или <span class="Term">ТаблицаЗначений</span>, в поле <span class="Term">Данные</span> фильтра находится значение типа <span class="Term">Структура</span> или <span class="Term">Массив</span>. Запись журнала будет удовлетворять
+условию, если во вложенных данных будет обнаружена запись, удовлетворяющая
+условию по пунктам 1 и 5. Однако если в фильтре задана структура, то поиск элементов
+в структуре или колонках таблицы значений записи журнала регистрации, соответствующих
+элементам этой структуры, будет выполняться только на конкретном уровне
+вложенности, соответствующем уровню вложенности в фильтре. Таким образом,
+отдельные значения и значения из массивов в фильтре ищутся на всю глубину, а
+элементы структуры фильтра только на конкретном уровне.</p>
+
+<p class="MsoNormalCxSpFirst">Если
+при формировании таблицы значений, находящейся в поле <span class="Term">Данные</span> записи журнала регистрации,
+присутствуют колонки с одинаковым именем, то происходит объединение этих
+колонок в одну. При этом количество строк в этой таблице увеличивается таким
+образом, чтобы в результирующей колонке присутствовали все уникальные значения
+из одноименных колонок. Значения, указанные в остальных колонках, дублируются в
+создаваемых строках.</p>
+
+<p class="MsoNormalCxSpLast">Покажем
+это на примере. Допустим, прикладное решение содержит запрос, который
+возвращает таблицу со следующими колонками:</p>
+
+<p class="MsoListBulletCxSpFirst">&#9679; 
+<span class="Term">СправочникСсылка.Товары</span>,</p>
+
+<p class="MsoListBulletCxSpMiddle">&#9679; 
+<span class="Term">СправочникСсылка.Товары</span>,</p>
+
+<p class="MsoListBulletCxSpLast">&#9679; 
+<span class="Term">Строка</span>.</p>
+
+<p class="MsoNormal">При
+формировании записи журнала регистрации будет выполнено следующее
+преобразование:</p>
+
+<p class="MsoListBulletCxSpFirst">&#9679; 
+Первые две колонки будут объединены в одну.</p>
+
+<p class="MsoListBulletCxSpMiddle">&#9679; 
+Для каждой строки, в которой значения <span class="Term">Товары.Ссылка</span> и <span class="Term">Номенклатура.Ссылка</span> не равны, будет создана
+еще одна строка.</p>
+
+<p class="MsoListBulletCxSpLast">&#9679; 
+Строки будут отличаться значением объединенной
+колонки, где будут располагаться значения ссылок. Остальные значения колонок
+будут одинаковыми.</p>
+
+<p class="Lang-subheader">Исходная
+таблица</p>
+
+<table class="MsoNormalTable" border="0" cellspacing="0" cellpadding="0">
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpFirst"><b>Ссылка</b></p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><b>Ссылка</b></p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><b>Артикул</b></p>
+  </td>
+  
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Сосиски</p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Перец</p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">16-АВ-1675</p>
+  </td>
+  
+ </tr>
+</table>
+
+<p class="Lang-subheader">Результирующая
+таблица</p>
+
+<table class="MsoNormalTable" border="0" cellspacing="0" cellpadding="0">
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpFirst"><b>Ссылка</b></p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><b>Артикул</b></p>
+  </td>
+  
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Сосиски</p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">16-АВ-1675</p>
+  </td>
+  
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Перец</p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">16-АВ-1675</p>
+  </td>
+  
+ </tr>
+</table>
+
+<p class="MsoNormalCxSpMiddle"> </p>
+
+<p class="MsoNormalCxSpLast">Также
+приведем примеры, показывающие работу отборов при получении записей журнала
+регистрации:</p>
+
+<p class="Lang-subheader">Пример
+1:</p>
+
+<p class="MsoListBullet">&#9679; 
+значение поля <span class="Term">Данные</span> записи журнала регистрации для события <span class="Interface">Аутентификация</span>:</p>
+
+<p class="MsoListBullet2">&#9679; 
+тип: <span class="Term">Структура</span>:</p>
+
+<p class="MsoListBullet3">&#9679; 
+ключ: <span class="Term">ПользовательОС</span>, значение: <span class="Interface">Ivanov</span>;</p>
+
+<p class="MsoListBullet">&#9679; 
+значение поля <span class="Term">Данные</span> фильтра метода <span class="Term">ВыгрузитьЖурналРегистрации()</span>:</p>
+
+<p class="MsoListBullet2">&#9679; 
+тип: <span class="Term">Структура</span>:</p>
+
+<p class="MsoListBullet3">&#9679; 
+ключ: <span class="Term">ПользовательОС</span>, значение: <span class="Interface">Ivanov</span>;</p>
+
+<p class="MsoListBullet">&#9679; 
+результат: запись соответствует.</p>
+
+<p class="Lang-subheader">Пример
+2:</p>
+
+<p class="MsoListBullet">&#9679; 
+значение поля <span class="Term">Данные</span> записи журнала регистрации для события <span class="Interface">Доступ</span>:</p>
+
+<p class="MsoListBullet2">&#9679; 
+тип: <span class="Term">Структура</span>:</p>
+
+<p class="MsoListBullet3">&#9679; 
+ключ: <span class="Term">Данные</span>, значение: <span class="Interface">ТаблицаЗначений</span>:</p>
+
+<table class="MsoNormalTable" border="0" cellspacing="0" cellpadding="0">
+ <thead>
+  <tr>
+   <td>
+   <p class="MsoNormalCxSpFirst"><span class="Bold">Фамилия</span></p>
+   </td>
+   
+   <td>
+   <p class="MsoNormalCxSpMiddle"><span class="Bold">Город</span></p>
+   </td>
+   
+   <td>
+   <p class="MsoNormalCxSpMiddle"><span class="Bold">Телефон</span></p>
+   </td>
+   
+  </tr>
+ </thead>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Петров</p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Тула</p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">111-22-33</p>
+  </td>
+  
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Иванов</p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Москва</p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">222-33-44</p>
+  </td>
+  
+ </tr>
+</table>
+
+<p class="MsoListBullet">&#9679; 
+значение поля <span class="Term">Данные</span> фильтра метода <span class="Term">ВыгрузитьЖурналРегистрации()</span>:</p>
+
+<p class="MsoListBullet2">&#9679; 
+тип: Массив:</p>
+
+<p class="MsoListBullet3">&#9679; 
+элемент 1: тип <span class="Term">Структура</span>:</p>
+
+<p class="MsoListBullet4">&#9679; 
+ключ: <span class="Term">ПользовательОС</span>, значение: <span class="Interface">Ivanov</span>;</p>
+
+<p class="MsoListBullet3">&#9679; 
+элемент 2: тип <span class="Term">Структура</span>:</p>
+
+<p class="MsoListBullet4CxSpFirst">&#9679; 
+ключ: <span class="Term">Данные</span>, значение: <span class="Term">Структура</span>;</p>
+
+<p class="MsoListBullet4CxSpMiddle">&#9679; 
+ключ: <span class="Term">Фамилия</span>, значение: <span class="Interface">Иванов</span>;</p>
+
+<p class="MsoListBullet4CxSpLast">&#9679; 
+ключ: <span class="Term">Город</span>, значение: <span class="Interface">Москва</span>;</p>
+
+<p class="MsoListBullet">&#9679; 
+результат: запись соответствует отбору, т. к.
+при сравнении элемента 2 массива отбора найдено соответствие с данными записи
+(строка 2). В записи журнала регистрации есть таблица значений, у которой существуют
+колонки <span class="Term">Имя</span>
+и <span class="Term">Город</span>
+и оба значения в колонках равны соответствующим значениям в структуре отбора.</p>
+
+<p class="Lang-subheader">Пример
+3:</p>
+
+<p class="MsoListBullet">&#9679; 
+значение поля <span class="Term">Данные</span> записи журнала регистрации для события <span class="Interface">Добавление
+пользователя</span>:</p>
+
+<p class="MsoListBullet2">&#9679; 
+тип: <span class="Term">Структура</span>:</p>
+
+<p class="MsoListBullet3">&#9679; 
+ключ: <span class="Term">Роли</span>, значение: <span class="Term">Массив</span>:</p>
+
+<p class="MsoListBullet4CxSpFirst">&#9679; 
+значение 1: <span class="Interface">Роли.Администратор</span>;</p>
+
+<p class="MsoListBullet4CxSpMiddle">&#9679; 
+значение 2: <span class="Interface">Роли.Кладовщик</span>;</p>
+
+<p class="MsoListBullet4CxSpLast">&#9679; 
+значение 3: <span class="Interface">Роли.Продавец</span>;</p>
+
+<p class="MsoListBullet">&#9679; 
+значение поля <span class="Term">Данные</span> фильтра метода <span class="Term">ВыгрузитьЖурналРегистрации()</span>:</p>
+
+<p class="MsoListBullet2">&#9679; 
+тип: <span class="Term">Структура</span>:</p>
+
+<p class="MsoListBullet3">&#9679; 
+ключ: <span class="Term">Роли</span>, значение: <span class="Interface">Роли.Кладовщик</span>;</p>
+
+<p class="MsoListBullet">&#9679; 
+результат: запись соответствует отбору, т. к.
+в поле <span class="Term">Данные</span>
+существует элемент <span class="Term">Роли</span>,
+а среди значений элемента есть значение <span class="Interface">Роли.Кладовщик</span>.</p>
+
+<p class="Lang-subheader">Пример
+4:</p>
+
+<p class="MsoListBullet">&#9679; 
+значение поля <span class="Term">Данные</span> записи журнала регистрации для события <span class="Interface">Добавление
+пользователя</span>:</p>
+
+<p class="MsoListBullet2">&#9679; 
+тип: <span class="Term">Структура</span>:</p>
+
+<p class="MsoListBullet3">&#9679; 
+ключ: <span class="Term">Роли</span>, значение: <span class="Term">Массив</span>:</p>
+
+<p class="MsoListBullet4CxSpFirst">&#9679; 
+значение 1: <span class="Interface">Роли.Администратор</span>;</p>
+
+<p class="MsoListBullet4CxSpMiddle">&#9679; 
+значение 2: <span class="Interface">Роли.Кладовщик</span>;</p>
+
+<p class="MsoListBullet4CxSpLast">&#9679; 
+значение 3: <span class="Interface">Роли.Продавец</span>;</p>
+
+<p class="MsoListBullet">&#9679; 
+значение поля <span class="Term">Данные</span> фильтра метода <span class="Term">ВыгрузитьЖурналРегистрации()</span>:</p>
+
+<p class="MsoListBullet2">&#9679; 
+тип: <span class="Term">Структура</span>:</p>
+
+<p class="MsoListBullet3">&#9679; 
+ключ: <span class="Term">Роли</span>, значение: <span class="Term">Массив</span>:</p>
+
+<p class="MsoListBullet4CxSpFirst">&#9679; 
+значение 1: <span class="Interface">Роли.Менеджер</span>;</p>
+
+<p class="MsoListBullet4CxSpLast">&#9679; 
+значение 2: <span class="Interface">Роли.Продавец</span>;</p>
+
+<p class="MsoListBullet">&#9679; 
+результат: запись соответствует отбору, т. к.
+в поле <span class="Term">Данные</span>
+существует элемент <span class="Term">Роли</span>,
+а среди значений элемента есть значение, перечисленное в массиве отбора (значение
+<span class="Interface">Роли.Продавец</span>).</p>
+
+<p class="Lang-subheader">Пример
+5:</p>
+
+<p class="MsoListBullet">&#9679; 
+значение поля <span class="Term">Данные</span> записи журнала регистрации для события <span class="Interface">Доступ</span>:</p>
+
+<p class="MsoListBullet2">&#9679; 
+тип: <span class="Term">Структура</span>:</p>
+
+<p class="MsoListBullet3">&#9679; 
+ключ: <span class="Term">Данные</span>, значение: <span class="Interface">ТаблицаЗначений</span>:</p>
+
+<table class="MsoNormalTable" border="0" cellspacing="0" cellpadding="0">
+ <thead>
+  <tr>
+   <td>
+   <p class="MsoNormalCxSpFirst"><span class="Bold">Фамилия</span></p>
+   </td>
+   
+   <td>
+   <p class="MsoNormalCxSpMiddle"><span class="Bold">Город</span></p>
+   </td>
+   
+  </tr>
+ </thead>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Петров</p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Тула</p>
+  </td>
+  
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Иванов</p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Москва</p>
+  </td>
+  
+ </tr>
+</table>
+
+<p class="MsoListBullet">&#9679; 
+значение поля <span class="Term">Данные</span> фильтра метода <span class="Term">ВыгрузитьЖурналРегистрации()</span>:</p>
+
+<p class="MsoListBullet2">&#9679; 
+тип: Массив:</p>
+
+<p class="MsoListBullet3">&#9679; 
+тип <span class="Term">Структура</span>:</p>
+
+<p class="MsoListBullet4">&#9679; 
+ключ: <span class="Term">Данные</span>, значение: <span class="Interface">Тула</span>;</p>
+
+<p class="MsoListBullet">&#9679; 
+результат: запись соответствует отбору, т. к.
+искомое значение (<span class="Interface">Тула</span>) найдено в одной из ячеек
+таблицы значений, находящейся в свойстве <span class="Term">Данные</span> поля <span class="Term">Данные</span> записи журнала регистрации.</p>
+
+<p class="MsoNormal">Для
+поля <span class="Term">Метаданные</span>
+записи журнала регистрации, у которого в событии хранится массив метаданных, запись
+соответствует отбору, если хотя бы один элемент массива из поля <span class="Term">Метаданные</span> отбора равен хотя бы одному
+элементу массива записи журнала.</p>
+
+<a name="_ref373419723"></a><a name="_ref373419722"></a><a id="TI000000830" class="bookmark" name="issogl1_21.5_дополнительные_методы"><h2>21.5. Дополнительные методы</h2></a>
+
+<p class="MsoNormalCxSpFirst">Для
+облегчения интерактивного формирования отборов журнала регистрации полезно
+использовать метод <span class="Term">ПолучитьЗначенияОтбораЖурналаРегистрации()</span>.
+С помощью данного метода можно получать доступные значения отборов для
+следующих параметров отбора: <span class="Term">Пользователь</span>, <span class="Term">Компьютер</span>, <span class="Term">ИмяПриложения</span>, <span class="Term">Событие</span>, <span class="Term">Метаданные</span>, <span class="Term">РабочийСервер</span>, <span class="Term">ОсновнойIPПорт</span>, <span class="Term">ВспомогательныйIPПорт</span>. Так, при необходимости
+установить отбор по событию журнала регистрации можно вначале получить список
+событий, которые реально присутствуют в данном журнале, а затем выбрать из
+полученного списка.</p>
+
+<p class="MsoNormalCxSpMiddle">Для
+формирования представлений событий журнала регистрации на языке интерфейса
+платформы служит метод <span class="Term">ПредставлениеСобытияЖурналаРегистрации()</span>.</p>
+
+<p class="MsoNormalCxSpMiddle">В
+том случае, если необходимо выполнить копирование фрагмента журнала регистрации
+с определенным фильтром, следует использовать метод <span class="Term">СкопироватьЖурналРегистрации()</span>. При
+необходимости выполнить удаление некоторого набора записей, отвечающих
+заданному фильтру (включая полную очистку журнала регистрации), следует
+использовать метод <span class="Term">ОчиститьЖурналРегистрации()</span>.
+Следует помнить, что очистка журнала регистрации поддерживается только для
+журнала регистрации, который работает в формате <span class="Interface">.lgd</span>.</p>
+
+<p class="MsoNormalCxSpMiddle"> </p>
+
+<br>		<script type="text/javascript">listenCopy('zeroclipboard.swf');</script>
+	</body>
+</html>
