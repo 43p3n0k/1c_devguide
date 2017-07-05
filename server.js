@@ -32,7 +32,7 @@ server.on('request', function(req,res){
         fs.readFile("."+URI,function(err, html){
             if(err){
                 res.statusCode = 404;
-                res.end('Page not found');
+                res.end('Page not found' + URI);
                 return;
             }
             //res.writeHeader(200, {"Content-Type": "text/html"});
