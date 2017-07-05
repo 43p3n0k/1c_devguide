@@ -13,12 +13,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/43p3n0k/tadpoles.git"
+    "url": "git+ssh://git@github.com/43p3n0k/1c_devguide.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/43p3n0k/tadpoles/issues"
+    "url": "https://github.com/43p3n0k/1c_devguide/issues"
   },
-  "homepage": "https://github.com/43p3n0k/tadpoles#readme"
+  "homepage": "https://github.com/43p3n0k/1c_devguide#readme"
 }
