@@ -10,7 +10,6 @@ body {
 	font-size: 68.75%;
 	background: #fff;
 	color: #333;
-	TEXT-DECORATION: none;
 }
 
 h1, h2 { font-family: 'trebuchet ms', verdana, arial; padding: 10px; margin: 0 }
@@ -25,5 +24,4 @@ h1 { font-size: large }
 
 a img { border: none; }
 
-a { text-decoration: none; color: #333333; }
-  
+a { text-decoration: none; color: #222; }
