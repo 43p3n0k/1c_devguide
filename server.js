@@ -8,7 +8,7 @@ const JSDOM = jsdom['JSDOM'];
 fixHeader = function (dom) {
     var arr = [
         //'http://ajax.microsoft.com/ajax/jquery/jquery-1.4.3.min.js',
-        '/treeview_files/jquery-1.4.3.js',
+        '/treeview_files/jquery-1.4.3.min.js',
         'alter-navigation.js'
     ];
     for(var i=0; i<arr.length; i++) {

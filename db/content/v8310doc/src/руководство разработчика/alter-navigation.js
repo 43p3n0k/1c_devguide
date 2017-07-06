@@ -80,7 +80,7 @@
 	}
 	
 	var anchor;
-	//*
+	
 	if (~window.location.hash.indexOf('#')){
 		anchor = (window.location.hash).substr(1);
 		if(document.querySelector('[name='+anchor+']'))
@@ -88,14 +88,13 @@
 		if(document.querySelector('[id='+anchor+']'))
 			browseTree(document.querySelector('[id=' + anchor + ']'));
 	}
-	/**/
+	
 	window.onclick = function(event){
 		
 		if(!event) event = window.event;		
 		var target = event.target || event.srcElement;
 		
 		if(target.tagName.search(/a/i) === -1) return;
-		//check whether the 'copy_source' class link is clicked
 		if(target.href.match(/^javascript:$/))return;
 
 		var start = (target.href).lastIndexOf('/');
