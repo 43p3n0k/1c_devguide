@@ -1,0 +1,5493 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=Windows-1251">
+		<title>&#1055;&#1088;&#1080;&#1083;&#1086;&#1078;&#1077;&#1085;&#1080;&#1077; 12. &#1054;&#1087;&#1080;&#1089;&#1072;&#1085;&#1080;&#1077; &#1089;&#1091;&#1097;&#1085;&#1086;&#1089;&#1090;&#1077;&#1081;, &#1087;&#1088;&#1077;&#1076;&#1086;&#1089;&#1090;&#1072;&#1074;&#1083;&#1103;&#1077;&#1084;&#1099;&#1093; &#1095;&#1077;&#1088;&#1077;&#1079; &#1089;&#1090;&#1072;&#1085;&#1076;&#1072;&#1088;&#1090;&#1085;&#1099;&#1081; &#1080;&#1085;&#1090;&#1077;&#1088;&#1092;&#1077;&#1081;&#1089; OData</title>
+		<LINK REL="stylesheet" href="style.css?_=1496848987">
+		<SCRIPT src="script.js?_=1496848987" TYPE="text/javascript"></script>
+	<meta name="robots" content="noarchive">
+<meta name="googlebot" content="noarchive">
+<link href="/db/content/v8310doc/src/руководство разработчика/приложение 12. описание сущностей, предоставляемых через стандартный интерфейс odata.htm" rel="canonical">
+<link href="/static/its.content.css?_=1490872753" type="text/css" rel="stylesheet">
+<script type="text/javascript" src="/static/its.content.js?_=1489758009"></script>
+<!--[if lt IE 9]><script type="text/javascript" src="/static/html5shiv.js?_=1484636606"></script><![endif]-->
+
+</head>
+	<body class="v8310doc">
+<a name="_ref405396665"></a><a name="_ref405396664"></a><a name="_ref380403638"></a><a id="TI000001392" class="bookmark"><h1>Приложение 12.  Описание сущностей, предоставляемых через стандартный интерфейс OData</h1></a>
+
+<p class="MsoNormal">Подробное описание представления данных см. <A href="/db/content/v8310doc/src/руководство разработчика/глава 17. механизмы интернет-сервисов.htm?_=1496848987#_ref392761762">здесь</a>. При описании свойства описание представления
+дополнительно не приводится.</p>
+
+<a id="TI000001393" class="bookmark" name="issogl1_12.1_константы"><h2>12.1. Константы</h2></a>
+
+<table class="MsoNormalTable" border="0" cellspacing="0" cellpadding="0">
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpFirst">Имя сущности</p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">Constant_&lt;Имя&gt;</span></p>
+  </td>
+  
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Имя набора сущностей</p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">Constant_&lt;Имя&gt;</span></p>
+  </td>
+ </tr>
+</table>
+
+<p class="Lang-subheader">Состав свойств:</p>
+
+<table class="MsoNormalTable" border="0" cellspacing="0" cellpadding="0">
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpFirst"><b>Имя</b></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><b>Тип</b></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><b>Комментарий</b></p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">Value</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Соответствует
+  типу значения</p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Значение
+  константы.</p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">&lt;Общие реквизиты&gt;</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Соответствует
+  типу разделителя</p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Кроме
+  общих реквизитов являющихся независимыми разделителями.</p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">SurrogateKey</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Term">Edm.Int16</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Суррогатный
+  ключ в том случае, если отсутствуют разделители. Всегда равен 0.</p>
+  </td>
+ </tr>
+</table>
+
+<p class="Lang-subheader">Особенности поведения:</p>
+
+<p class="MsoListBulletCxSpFirst">&#9679; 
+Удаление не поддерживается (запрос DELETE);</p>
+
+<p class="MsoListBulletCxSpLast">&#9679; 
+Создание поддерживается (запрос POST) с особенностями.</p>
+
+<p class="Indentlist">Если значение константы в информационной
+базе имеет значение <span class="Term">Неопределено</span>,
+то выполняется установка значения константы. Если значение константы в
+информационной базе имеет значение, отличное от <span class="Term">Неопределено</span> –
+генерируется ошибка.</p>
+
+<p class="MsoListBullet">&#9679; 
+Не поддерживается обращение «через точку».</p>
+
+<a id="TI000001394" class="bookmark" name="issogl1_12.2_планы_обмена"><h2>12.2. Планы обмена</h2></a>
+
+<table class="MsoNormalTable" border="0" cellspacing="0" cellpadding="0">
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpFirst">Имя сущности</p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">ExchangePlan_&lt;Имя</span><span class="Interface">&gt;</span></p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Имя набора сущностей</p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">ExchangePlan_&lt;Имя</span><span class="Interface">&gt;</span></p>
+  </td>
+ </tr>
+</table>
+
+<p class="Lang-subheader">Состав свойств:</p>
+
+<table class="MsoNormalTable" border="0" cellspacing="0" cellpadding="0">
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpFirst"><b>Имя</b></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><b>Тип</b></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><b>Комментарий</b></p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">Code</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Term">Edm.String</span></p>
+  <p class="MsoNormalCxSpMiddle"><span class="Term">Edm.Int32</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Код.</p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">Description</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Term">Edm.String</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Наименование.</p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">Ref</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Ссылочный
+  тип</p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Ссылка.</p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">DeletionMark</span></p>
+  <p class="MsoNormalCxSpMiddle"> </p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Term">Edm.Boolean</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Пометка
+  удаления.</p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">Version</span></p>
+  <p class="MsoNormalCxSpMiddle"> </p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Term">Edm.String</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Версия
+  данных.</p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">ReceivedNo</span></p>
+  <p class="MsoNormalCxSpMiddle"> </p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Term">Edm.Int32</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Номер
+  последнего полученного сообщения.</p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">SentNo</span></p>
+  <p class="MsoNormalCxSpMiddle"> </p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Term">Edm.Int32</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Номер
+  последнего отправленного сообщения.</p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">&lt;Реквизиты&gt;</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Соответствует
+  типу реквизита</p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"> </p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">&lt;Общие реквизиты&gt;</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Соответствует
+  типу реквизита</p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Кроме общих реквизитов являющихся независимыми разделителями.</p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">&lt;Табличные части&gt;</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Term">Collection(СоставнойТип)</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Каждая
+  табличная часть выступает в виде отдельной сущности с именем <span class="Interface">ExchangePlan_&lt;ИмяОбъекта&gt;_&lt;ИмяТабличнойЧасти&gt;</span>.</p>
+  </td>
+ </tr>
+</table>
+
+<a id="TI000001395" class="bookmark" name="issogl2_12.2.1_табличная_часть_плана_обмена"><h3>12.2.1. Табличная часть плана обмена</h3></a>
+
+<table class="MsoNormalTable" border="0" cellspacing="0" cellpadding="0">
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpFirst">Имя
+  сущности</p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">ExchangePlan_&lt;Имя объекта&gt;_&lt;Имя табличной части&gt;_
+  RecordType</span></p>
+  </td>
+  
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Имя
+  набора сущностей</p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">ExchangePlan_&lt;Имя объекта&gt;_&lt;Имя табличной
+  части&gt;_RecordType</span></p>
+  </td>
+  
+ </tr>
+</table>
+
+<p class="Lang-subheader">Состав
+свойств:</p>
+
+<table class="MsoNormalTable" border="0" cellspacing="0" cellpadding="0">
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpFirst"><b>Имя</b></p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><b>Тип</b></p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><b>Комментарий</b></p>
+  </td>
+  
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Ref</p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Ссылочный
+  тип</p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Ссылка.</p>
+  </td>
+  
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">LineNumber</span></p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Term">Edm.Int64</span></p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Номер строки.</p>
+  </td>
+  
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">&lt;Реквизиты&gt;</span></p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Соответствует типу реквизита</p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"> </p>
+  </td>
+  
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">&lt;Общие
+  реквизиты&gt;</span></p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Соответствует типу реквизита</p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Кроме общих реквизитов являющихся
+  независимыми разделителями.</p>
+  </td>
+  
+ </tr>
+</table>
+
+<a id="TI000001396" class="bookmark" name="issogl2_12.2.2_строка_табличной_части"><h3>12.2.2. Строка табличной части</h3></a>
+
+<p class="MsoNormal">Имя составного типа:
+<span class="Interface">ExchangePlan_&lt;Имя
+объекта&gt;_&lt;Имя табличной части&gt;_RowType</span>.</p>
+
+<p class="Lang-subheader">Состав
+свойств:</p>
+
+<table class="MsoNormalTable" border="0" cellspacing="0" cellpadding="0">
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpFirst"><b>Имя</b></p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><b>Тип</b></p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><b>Комментарий</b></p>
+  </td>
+  
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">LineNumber</span></p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Term">Edm.Int64</span></p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Номер строки табличной части</p>
+  </td>
+  
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">&lt;Реквизиты&gt;</p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Соответствует
+  типу реквизита</p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"> </p>
+  </td>
+  
+ </tr>
+</table>
+
+<a name="_ref405394078"></a><a name="_ref405394077"></a><a id="TI000001397" class="bookmark" name="issogl1_12.3_справочники"><h2>12.3. Справочники</h2></a>
+
+<table class="MsoNormalTable" border="0" cellspacing="0" cellpadding="0">
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpFirst">Имя сущности</p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">Catalog_&lt;Имя</span><span class="Interface">&gt;</span></p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Имя набора сущностей</p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">Catalog_&lt;Имя&gt;</span></p>
+  </td>
+ </tr>
+</table>
+
+<p class="Lang-subheader">Состав свойств:</p>
+
+<table class="MsoNormalTable" border="0" cellspacing="0" cellpadding="0">
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpFirst"><b>Имя</b></p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><b>Тип</b></p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><b>Комментарий</b></p>
+  </td>
+  
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Ref</p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Ссылочный
+  тип</p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Ссылка.</p>
+  </td>
+  
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">Code</span></p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Term">Edm.String</span>,</p>
+  <p class="MsoNormalCxSpMiddle"><span class="Term">Edm.Int32</span></p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">При
+  наличии у справочника кода.</p>
+  </td>
+  
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">Description</span></p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Term">Edm.String</span></p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">При
+  наличии у справочника наименования.</p>
+  </td>
+  
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">IsFolder</span></p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Term">Edm.Boolean</span></p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Для
+  иерархического справочника.</p>
+  </td>
+  
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">Owner</span></p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Ссылочный
+  или составной тип</p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Владелец
+  для подчиненного справочника.</p>
+  </td>
+  
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">Parent</span></p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Ссылочный
+  тип</p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Родитель
+  для иерархического справочника.</p>
+  </td>
+  
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">Version</span></p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Term">Edm.String</span></p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Версия
+  данных.</p>
+  </td>
+  
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">Predefined</span></p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Term">Edm.Boolean</span></p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Признак
+  предопределенного элемента. Только для чтения.</p>
+  </td>
+  
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">PredefinedDataName</span></p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Term">Edm.String</span></p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Имя
+  предопределенного элемента.</p>
+  </td>
+  
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">&lt;Реквизиты&gt;</span></p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Соответствует
+  типу реквизита</p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"> </p>
+  </td>
+  
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">&lt;Общие реквизиты&gt;</span></p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Соответствует
+  типу реквизита</p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Кроме
+  общих реквизитов являющихся независимыми разделителями.</p>
+  </td>
+  
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">&lt;Табличные части&gt;</span></p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Term">Collection(СоставнойТип)</span></p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Каждая
+  табличная часть выступает в виде отдельной сущности с именем <span class="Interface">Catalog_&lt;ИмяОбъекта&gt;_&lt;ИмяТабличнойЧасти&gt;</span>.</p>
+  </td>
+  
+ </tr>
+</table>
+
+<a id="TI000001398" class="bookmark" name="issogl2_12.3.1_табличная_часть_справочника"><h3>12.3.1. Табличная часть справочника</h3></a>
+
+<table class="MsoNormalTable" border="0" cellspacing="0" cellpadding="0">
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpFirst">Имя
+  сущности</p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">Catalog_&lt;Имя объекта&gt;_&lt;Имя табличной части&gt;_
+  RecordType</span></p>
+  </td>
+  
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Имя
+  набора сущностей</p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">Catalog_&lt;Имя объекта&gt;_&lt;Имя табличной
+  части&gt;_RecordType</span></p>
+  </td>
+  
+ </tr>
+</table>
+
+<p class="Lang-subheader">Состав
+свойств:</p>
+
+<table class="MsoNormalTable" border="0" cellspacing="0" cellpadding="0">
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpFirst"><b>Имя</b></p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><b>Тип</b></p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><b>Комментарий</b></p>
+  </td>
+  
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">Ref</span></p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Ссылочный тип</p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Ссылка.</p>
+  </td>
+  
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">LineNumber</span></p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Term">Edm.Int64</span></p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Номер строки.</p>
+  </td>
+  
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">&lt;Реквизиты&gt;</span></p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Соответствует типу реквизита</p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"> </p>
+  </td>
+  
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">&lt;Общие реквизиты&gt;</span></p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Соответствует типу реквизита</p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Кроме общих реквизитов являющихся
+  независимыми разделителями.</p>
+  </td>
+  
+ </tr>
+</table>
+
+<a id="TI000001399" class="bookmark" name="issogl2_12.3.2_строка_табличной_части"><h3>12.3.2. Строка табличной части</h3></a>
+
+<p class="MsoNormal">Имя составного типа:
+<span class="Interface">Catalog_&lt;Имя
+объекта&gt;_&lt;Имя табличной части&gt;_RowType</span>.</p>
+
+<p class="Lang-subheader">Состав
+свойств:</p>
+
+<table class="MsoNormalTable" border="0" cellspacing="0" cellpadding="0">
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpFirst"><b>Имя</b></p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><b>Тип</b></p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><b>Комментарий</b></p>
+  </td>
+  
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">LineNumber</span></p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Term">Edm.Int64</span></p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Номер строки табличной части.</p>
+  </td>
+  
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">&lt;Реквизиты&gt;</span></p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Соответствует типу реквизита</p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"> </p>
+  </td>
+  
+ </tr>
+</table>
+
+<a id="TI000001400" class="bookmark" name="issogl1_12.4_документы"><h2>12.4. Документы</h2></a>
+
+<table class="MsoNormalTable" border="0" cellspacing="0" cellpadding="0">
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpFirst">Имя сущности</p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Document<span class="Interface">_&lt;Имя</span><span class="Interface">&gt;</span></p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Имя набора сущностей</p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">Document_&lt;Имя&gt;</span></p>
+  </td>
+ </tr>
+</table>
+
+<p class="Lang-subheader">Состав свойств:</p>
+
+<table class="MsoNormalTable" border="0" cellspacing="0" cellpadding="0">
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpFirst"><b>Имя</b></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><b>Тип</b></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><b>Комментарий</b></p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">Ref</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Ссылочный
+  тип</p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Ссылка.</p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">Number</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Term">Edm.String</span>,</p>
+  <p class="MsoNormalCxSpMiddle"><span class="Term">Edm.Int32</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Номер
+  документа, в зависимости от установленного типа номера.</p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">Date</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Term">Edm.Date</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Если
+  включено.</p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">DeletionMark</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Term">Edm.Boolean</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Пометка
+  удаления.</p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">Version</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Term">Edm.String</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Версия
+  данных.</p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">Posted</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Term">Edm.Boolean</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Признак
+  проведения документа.</p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">&lt;Реквизиты&gt;</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Соответствует
+  типу реквизита</p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"> </p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">&lt;Общие реквизиты&gt;</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Соответствует
+  типу реквизита</p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Кроме
+  общих реквизитов являющихся независимыми разделителями.</p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">&lt;Табличные части&gt;</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Term">Collection(СоставнойТип)</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Каждая
+  табличная часть выступает в виде отдельной сущности с именем <span class="Interface">Document_&lt;ИмяОбъекта&gt;_&lt;ИмяТабличнойЧасти&gt;</span>.</p>
+  </td>
+ </tr>
+</table>
+
+<a id="TI000001401" class="bookmark" name="issogl2_12.4.1_методы"><h3>12.4.1. Методы</h3></a>
+
+<p class="Lang">Post</p>
+
+<p class="Lang-subheader">Описание:</p>
+
+<p class="MsoNormal">Выполняет проведение документа.</p>
+
+<p class="Lang-subheader">Параметры:</p>
+
+<p class="Lang-parameter">PostingModeOperational    Edm.Boolean</p>
+
+<p class="MsoNormalCxSpFirst">Определяет необходимость проведения
+документа в оперативном режиме. При необходимости такого проведения значение
+свойства должно принимать значение <span class="Interface">true</span>.</p>
+
+<p class="MsoNormalCxSpLast">Значение по умолчанию: <span class="Interface">false</span>.</p>
+
+<p class="Lang">Unpost</p>
+
+<p class="Lang-subheader">Описание:</p>
+
+<p class="MsoNormal">Выполняет отмену проведения документа.</p>
+
+<p class="Lang-subheader">Параметры:</p>
+
+<p class="Lang-parameter">PostingModeOperational    Edm.Boolean</p>
+
+<p class="MsoNormalCxSpFirst">Определяет необходимость проведения документа в
+оперативном режиме. При необходимости такого проведения значение свойства
+должно принимать значение <span class="Interface">true</span>.</p>
+
+<p class="MsoNormalCxSpLast">Значение по умолчанию: <span class="Interface">false</span>.</p>
+
+<a id="TI000001402" class="bookmark" name="issogl2_12.4.2_табличная_часть_справочника"><h3>12.4.2. Табличная часть справочника</h3></a>
+
+<table class="MsoNormalTable" border="0" cellspacing="0" cellpadding="0">
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpFirst">Имя сущности</p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">Document_&lt;Имя объекта&gt;_&lt;Имя
+  табличной части&gt;_ RecordType</span></p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Имя набора сущностей</p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">Document_&lt;Имя объекта&gt;_&lt;Имя
+  табличной части&gt;_RecordType</span></p>
+  </td>
+ </tr>
+</table>
+
+<p class="Lang-subheader">Состав свойств:</p>
+
+<table class="MsoNormalTable" border="0" cellspacing="0" cellpadding="0">
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpFirst"><b>Имя</b></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><b>Тип</b></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><b>Комментарий</b></p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">Ref</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Ссылочный
+  тип</p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Ссылка.</p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">LineNumber</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Term">Edm.Int64</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Номер
+  строки.</p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">&lt;Реквизиты&gt;</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Соответствует
+  типу реквизита</p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"> </p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">&lt;Общие реквизиты&gt;</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Соответствует
+  типу реквизита</p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Кроме
+  общих реквизитов являющихся независимыми разделителями.</p>
+  </td>
+ </tr>
+</table>
+
+<a id="TI000001403" class="bookmark" name="issogl2_12.4.3_строка_табличной_части"><h3>12.4.3. Строка табличной части</h3></a>
+
+<p class="MsoNormal">Имя составного типа: <span class="Interface">Document_&lt;Имя объекта&gt;_&lt;Имя
+табличной части&gt;_RowType</span>.</p>
+
+<p class="Lang-subheader">Состав свойств:</p>
+
+<table class="MsoNormalTable" border="0" cellspacing="0" cellpadding="0">
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpFirst"><b>Имя</b></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><b>Тип</b></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><b>Комментарий</b></p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">LineNumber</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Term">Edm.Int64</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Номер
+  строки табличной части</p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">&lt;Реквизиты&gt;</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Соответствует
+  типу реквизита</p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"> </p>
+  </td>
+ </tr>
+</table>
+
+<a id="TI000001404" class="bookmark" name="issogl1_12.5_журналы_документов"><h2>12.5. Журналы документов</h2></a>
+
+<table class="MsoNormalTable" border="0" cellspacing="0" cellpadding="0">
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpFirst">Имя сущности</p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">DocumentJournal_&lt;Имя</span><span class="Interface">&gt;</span></p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Имя набора сущностей</p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">DocumentJournal_&lt;Имя</span><span class="Interface">&gt;</span></p>
+  </td>
+ </tr>
+</table>
+
+<p class="Lang-subheader">Состав свойств:</p>
+
+<table class="MsoNormalTable" border="0" cellspacing="0" cellpadding="0">
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpFirst"><b>Имя</b></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><b>Тип</b></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><b>Комментарий</b></p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">Ref</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Ссылочный
+  тип</p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"> </p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">Number</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Term">Edm.String</span>,</p>
+  <p class="MsoNormalCxSpMiddle"><span class="Term">Edm.Int32</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Номер
+  документа, в зависимости от установленного типа номера.</p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">Date</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Term">Edm.Date</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Если
+  включено.</p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">DeletionMark</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Term">Edm.Boolean</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Пометка
+  удаления.</p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">Type</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Term">Edm.String</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Представление
+  типа документа.</p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">Posted</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Term">Edm.Boolean</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Признак
+  проведения документа.</p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">&lt;Графы&gt;</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Соответствует
+  типу графы</p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"> </p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">&lt;Реквизиты&gt;</p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Соответствует типу реквизита</p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"> </p>
+  </td>
+  
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">&lt;Общие реквизиты&gt;</span></p>
+  <p class="MsoNormalCxSpMiddle"> </p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Соответствует
+  типу реквизита</p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Кроме
+  общих реквизитов являющихся независимыми разделителями.</p>
+  </td>
+ </tr>
+</table>
+
+<p class="Lang-subheader">Особенности поведения:</p>
+
+<p class="MsoListBulletCxSpFirst">&#9679; 
+Поддерживается только получение списка строк</p>
+
+<p class="MsoListBulletCxSpLast">&#9679; 
+Не поддерживаются:</p>
+
+<p class="MsoListBullet2CxSpFirst">&#9679; 
+Создание документа (запрос POST);</p>
+
+<p class="MsoListBullet2CxSpMiddle">&#9679; 
+Изменение документа (запрос PATCH);</p>
+
+<p class="MsoListBullet2CxSpMiddle">&#9679; 
+Удаление документа (запрос DELETE);</p>
+
+<p class="MsoListBullet2CxSpLast">&#9679; 
+Обращение «через точку».</p>
+
+<a name="_ref448317202"></a><a name="_ref448317201"></a><a id="TI000001405" class="bookmark" name="issogl1_12.6_планы_видов_характеристик"><h2>12.6. Планы видов характеристик</h2></a>
+
+<table class="MsoNormalTable" border="0" cellspacing="0" cellpadding="0">
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpFirst">Имя сущности</p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">ChartOfCharacteristicTypes<span class="Interface">_&lt;Имя&gt;</span></p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Имя набора сущностей</p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">ChartOfCharacteristicTypes_&lt;Имя&gt;</span></p>
+  </td>
+ </tr>
+</table>
+
+<p class="Lang-subheader">Состав свойств:</p>
+
+<table class="MsoNormalTable" border="0" cellspacing="0" cellpadding="0">
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpFirst"><b>Имя</b></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><b>Тип</b></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><b>Комментарий</b></p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">Ref</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Ссылочный
+  тип</p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Ссылка.</p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">Code</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Term">Edm.String</span>,</p>
+  <p class="MsoNormalCxSpMiddle"><span class="Term">Edm.Int32</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">При
+  наличии у плана видов характеристик кода.</p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">Description</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Term">Edm.String</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">При
+  наличии у плана видов характеристик наименования.</p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">IsFolder</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Term">Edm.Boolean</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Для
+  иерархического плана видов характеристик.</p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">Owner</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Ссылочный
+  или составной тип</p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Владелец
+  (для подчиненного плана видов характеристик).</p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">Parent</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Ссылочный
+  тип</p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Родитель
+  (для иерархических планов видов характеристик).</p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">DeletionMark</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Term">Edm.Boolean</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Пометка
+  удаления.</p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">Version</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Term">Edm.String</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Версия
+  данных.</p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">Predefined</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Term">Edm.Boolean</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Признак
+  предопределенного элемента. Только для чтения.</p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">PredefinedDataName</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Term">Edm.String</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Имя
+  предопределенного элемента.</p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">ValueType</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Term">EnterpriseV8.TypeDescription</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Тип
+  значения характеристики.</p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">&lt;Реквизиты&gt;</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Соответствует
+  типу реквизита</p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"> </p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">&lt;Общие реквизиты&gt;</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Соответствует
+  типу реквизита</p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Кроме
+  общих реквизитов являющихся независимыми разделителями.</p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">&lt;Табличные части&gt;</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Term">Collection(СоставнойТип)</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Каждая
+  табличная часть выступает в виде отдельной сущности с именем <span class="Interface">ChartOfCharacteristicTypes_&lt;ИмяОбъекта&gt;_&lt;ИмяТабличнойЧасти&gt;</span>.</p>
+  </td>
+ </tr>
+</table>
+
+<a id="TI000001406" class="bookmark" name="issogl2_12.6.1_табличная_часть_плана_видов_характеристик"><h3>12.6.1. Табличная часть плана видов характеристик</h3></a>
+
+<table class="MsoNormalTable" border="0" cellspacing="0" cellpadding="0">
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpFirst">Имя сущности</p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">ChartOfCharacteristicTypes<span class="Interface">_&lt;Имя объекта&gt;_&lt;Имя табличной части&gt;_ RecordType</span></p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Имя набора сущностей</p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">ChartOfCharacteristicTypes_&lt;Имя
+  объекта&gt;_&lt;Имя табличной части&gt;_RecordType</span></p>
+  </td>
+ </tr>
+</table>
+
+<p class="Lang-subheader">Состав свойств:</p>
+
+<table class="MsoNormalTable" border="0" cellspacing="0" cellpadding="0">
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpFirst"><b>Имя</b></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><b>Тип</b></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><b>Комментарий</b></p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">Ref</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Ссылочный
+  тип</p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Ссылка.</p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">LineNumber</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Term">Edm.Int64</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Номер
+  строки.</p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">&lt;Реквизиты&gt;</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Соответствует
+  типу реквизита</p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"> </p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">&lt;Общие реквизиты&gt;</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Соответствует
+  типу реквизита</p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Кроме
+  общих реквизитов являющихся независимыми разделителями.</p>
+  </td>
+ </tr>
+</table>
+
+<a id="TI000001407" class="bookmark" name="issogl2_12.6.2_строка_табличной_части"><h3>12.6.2. Строка табличной части</h3></a>
+
+<p class="MsoNormal">Имя составного типа: <span class="Interface">ChartOfCharacteristicTypes_&lt;Имя
+объекта&gt;_&lt;Имя табличной части&gt;_RowType</span>.</p>
+
+<p class="Lang-subheader">Состав свойств:</p>
+
+<table class="MsoNormalTable" border="0" cellspacing="0" cellpadding="0">
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpFirst"><b>Имя</b></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><b>Тип</b></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><b>Комментарий</b></p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">LineNumber</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Term">Edm.Int64</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Номер
+  строки табличной части.</p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">&lt;Реквизиты&gt;</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Соответствует
+  типу реквизита</p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"> </p>
+  </td>
+ </tr>
+</table>
+
+<a name="_ref448317220"></a><a name="_ref448317219"></a><a id="TI000001408" class="bookmark" name="issogl1_12.7_планы_счетов"><h2>12.7. Планы счетов</h2></a>
+
+<table class="MsoNormalTable" border="0" cellspacing="0" cellpadding="0">
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpFirst">Имя сущности</p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">ChartOfAccounts<span class="Interface">_&lt;Имя&gt;</span></p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Имя набора сущностей</p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">ChartOfAccounts _&lt;Имя&gt;</span></p>
+  </td>
+ </tr>
+</table>
+
+<p class="Lang-subheader">Состав свойств:</p>
+
+<table class="MsoNormalTable" border="0" cellspacing="0" cellpadding="0">
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpFirst"><b>Имя</b></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><b>Тип</b></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><b>Комментарий</b></p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">Ref</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Ссылочный
+  тип</p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Ссылка.</p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">Code</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Term">Edm.String</span>,</p>
+  <p class="MsoNormalCxSpMiddle"><span class="Term">Edm.Int32</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">При
+  наличии у плана счетов кода.</p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">Description</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Term">Edm.String</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">При
+  наличии у плана счетов наименования.</p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">OffBalance</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Term">Edm.Boolean</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Признак
+  забалансового счета.</p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">Order</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Term">Edm.String</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Порядок
+  сортировки.</p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">Type</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Term">Edm.String</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Тип
+  счета: активный, пассивный, активно/пассивный.</p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">Parent</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Ссылочный
+  тип</p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Родитель
+  (для иерархического плана счетов).</p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">DeletionMark</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Term">Edm.Boolean</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Пометка
+  удаления.</p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">Version</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Term">Edm.String</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Версия
+  данных.</p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">Predefined</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Term">Edm.Boolean</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Признак
+  предопределенного элемента. Только для чтения.</p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">PredefinedDataName</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Term">Edm.String</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Имя
+  предопределенного элемента.</p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">&lt;ПризнакиУчета&gt;</p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Term">Edm.Boolean</span></p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Признаки учета.</p>
+  </td>
+  
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">&lt;Реквизиты&gt;</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Соответствует
+  типу реквизита</p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"> </p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">&lt;Общие реквизиты&gt;</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Соответствует
+  типу реквизита</p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Кроме
+  общих реквизитов являющихся независимыми разделителями.</p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">&lt;Табличные части&gt;</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Term">Collection(СоставнойТип)</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Каждая
+  табличная часть выступает в виде отдельной сущности с именем <span class="Interface">ChartOfAccounts_&lt;ИмяОбъекта&gt;_&lt;ИмяТабличнойЧасти&gt;</span>.</p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">ExtDimensionTypes</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Term">Collection(СоставнойТип)</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Стандартная
+  табличная часть «Виды субконто».</p>
+  </td>
+ </tr>
+</table>
+
+<a id="TI000001409" class="bookmark" name="issogl2_12.7.1_табличная_часть_плана_счетов"><h3>12.7.1. Табличная часть плана счетов</h3></a>
+
+<table class="MsoNormalTable" border="0" cellspacing="0" cellpadding="0">
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpFirst">Имя сущности</p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">ChartOfAccounts_&lt;Имя
+  объекта&gt;_&lt;Имя табличной части&gt;_ RecordType</span></p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Имя набора сущностей</p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">ChartOfAccounts_&lt;Имя
+  объекта&gt;_&lt;Имя табличной части&gt;_RecordType</span></p>
+  </td>
+ </tr>
+</table>
+
+<p class="Lang-subheader">Состав свойств:</p>
+
+<table class="MsoNormalTable" border="0" cellspacing="0" cellpadding="0">
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpFirst"><b>Имя</b></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><b>Тип</b></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><b>Комментарий</b></p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">Ref</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Ссылочный
+  тип</p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Ссылка.</p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">LineNumber</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Term">Edm.Int64</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Номер
+  строки.</p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">&lt;Реквизиты&gt;</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Соответствует
+  типу реквизита</p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"> </p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">&lt;Общие реквизиты&gt;</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Соответствует
+  типу реквизита</p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Кроме
+  общих реквизитов являющихся независимыми разделителями.</p>
+  </td>
+ </tr>
+</table>
+
+<a id="TI000001410" class="bookmark" name="issogl2_12.7.2_строка_табличной_части"><h3>12.7.2. Строка табличной части</h3></a>
+
+<p class="MsoNormal">Имя составного типа: <span class="Interface">ChartOfAccounts_&lt;Имя
+объекта&gt;_&lt;Имя табличной части&gt;_RowType</span>.</p>
+
+<p class="Lang-subheader">Состав
+свойств:</p>
+
+<table class="MsoNormalTable" border="0" cellspacing="0" cellpadding="0">
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpFirst"><b>Имя</b></p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><b>Тип</b></p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><b>Комментарий</b></p>
+  </td>
+  
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">LineNumber</span></p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Term">Edm.Int64</span></p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Номер строки табличной части.</p>
+  </td>
+  
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">&lt;Реквизиты&gt;</span></p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Соответствует типу реквизита</p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"> </p>
+  </td>
+  
+ </tr>
+</table>
+
+<a id="TI000001411" class="bookmark" name="issogl2_12.7.3_строка_стандартной_табличной_части_виды_субконто"><h3>12.7.3. Строка стандартной табличной части «Виды субконто»</h3></a>
+
+<p class="MsoNormal">Имя составного типа: <span class="Interface">ChartOfAccounts_&lt;Имя
+объекта&gt;_ExtDimensions</span>.</p>
+
+<p class="Lang-subheader">Состав свойств:</p>
+
+<table class="MsoNormalTable" border="0" cellspacing="0" cellpadding="0">
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpFirst"><b>Имя</b></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><b>Тип</b></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><b>Комментарий</b></p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">LineNumber</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Term">Edm.Int64</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Номер
+  строки табличной части</p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">ExtDimensionType_Key</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Term">Edm.Guid</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Идентификатор
+  типа плана видов характеристик, хранящий виды субконто</p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">Predefined</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Term">Edm.Boolean</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Признак
+  предопределенного вида субконто</p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">&lt;Реквизиты&gt;</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Соответствует
+  типу реквизита</p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"> </p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">&lt;ПризнакиУчета&gt;</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Term">Edm.Boolean</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Признаки
+  учета.</p>
+  </td>
+ </tr>
+</table>
+
+<a name="_ref448317232"></a><a name="_ref448317231"></a><a id="TI000001412" class="bookmark" name="issogl1_12.8_планы_видов_расчета"><h2>12.8. Планы видов расчета</h2></a>
+
+<table class="MsoNormalTable" border="0" cellspacing="0" cellpadding="0">
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpFirst">Имя сущности</p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">ChartOfCalculationTypes<span class="Interface">_&lt;Имя&gt;</span></p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Имя набора сущностей</p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">ChartOfCalculationTypes_&lt;Имя&gt;</span></p>
+  </td>
+ </tr>
+</table>
+
+<p class="Lang-subheader">Состав свойств:</p>
+
+<table class="MsoNormalTable" border="0" cellspacing="0" cellpadding="0">
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpFirst"><b>Имя</b></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><b>Тип</b></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><b>Комментарий</b></p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">Ref</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Ссылочный
+  тип</p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Ссылка.</p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">Code</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Term">Edm.String</span>,</p>
+  <p class="MsoNormalCxSpMiddle"><span class="Term">Edm.Int32</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">При
+  наличии у плана видов расчета кода.</p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">Description</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Term">Edm.String</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">При
+  наличии у плана видов расчета наименования.</p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">ActionPeriodIsBasic</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Term">Edm.Boolean</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Признак
+  того, что базовым периодом является период действия (только для планов видов
+  расчета c поддержкой периода действия).</p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">DeletionMark</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Term">Edm.Boolean</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Пометка
+  удаления.</p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">Version</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Term">Edm.String</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Версия
+  данных.</p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">Predefined</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Term">Edm.Boolean</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Признак
+  предопределенного элемента. Только для чтения.</p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">PredefinedDataName</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Term">Edm.String</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Имя
+  предопределенного элемента.</p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">&lt;Реквизиты&gt;</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Соответствует
+  типу реквизита</p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"> </p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">&lt;Общие реквизиты&gt;</p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Соответствует типу реквизита</p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Кроме общих реквизитов являющихся
+  независимыми разделителями.</p>
+  </td>
+  
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">&lt;Табличные части&gt;</p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Term">Collection(СоставнойТип)</span></p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Каждая табличная часть выступает в виде
+  отдельной сущности с именем <span class="Interface">ChartOfCalculationTypes_&lt;ИмяОбъекта&gt;_&lt;ИмяТабличнойЧасти&gt;</span>.</p>
+  </td>
+  
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">LeadingCalculationTypes</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Term">Collection(СоставнойТип)</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Стандартная
+  табличная часть «Ведущие виды расчета».</p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">DisplacingCalculationTypes</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Term">Collection(СоставнойТип)</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Стандартная
+  табличная часть «Вытесняющие виды расчета» (только для планов видов расчета с
+  поддержкой периода действия).</p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">BaseCalculationTypes</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Term">Collection(СоставнойТип)</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Стандартная
+  табличная часть «Базовые виды расчета» (только для плана видов расчета с
+  поддержкой базового периода действия).</p>
+  </td>
+ </tr>
+</table>
+
+<a id="TI000001413" class="bookmark" name="issogl2_12.8.1_табличная_часть_плана_расчетов"><h3>12.8.1. Табличная часть плана расчетов</h3></a>
+
+<table class="MsoNormalTable" border="0" cellspacing="0" cellpadding="0">
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpFirst">Имя сущности</p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">ChartOfCalculationTypes_&lt;Имя
+  объекта&gt;_&lt;Имя табличной части&gt;_ RecordType</span></p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Имя набора сущностей</p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">ChartOfCalculationTypes_&lt;Имя
+  объекта&gt;_&lt;Имя табличной части&gt;_RecordType</span></p>
+  </td>
+ </tr>
+</table>
+
+<p class="Lang-subheader">Состав свойств:</p>
+
+<table class="MsoNormalTable" border="0" cellspacing="0" cellpadding="0">
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpFirst"><b>Имя</b></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><b>Тип</b></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><b>Комментарий</b></p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">Ref</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Ссылочный
+  тип</p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Ссылка.</p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">LineNumber</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Term">Edm.Int64</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Номер
+  строки.</p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">&lt;Реквизиты&gt;</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Соответствует
+  типу реквизита</p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"> </p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">&lt;Общие реквизиты&gt;</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Соответствует
+  типу реквизита</p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Кроме
+  общих реквизитов являющихся независимыми разделителями.</p>
+  </td>
+ </tr>
+</table>
+
+<a id="TI000001414" class="bookmark" name="issogl2_12.8.2_строка_табличной_части"><h3>12.8.2. Строка табличной части</h3></a>
+
+<p class="MsoNormal">Имя составного типа: <span class="Interface">ChartOfCalculationTypes_&lt;Имя
+объекта&gt;_&lt;Имя табличной части&gt;_RowType</span>.</p>
+
+<p class="Lang-subheader">Состав свойств:</p>
+
+<table class="MsoNormalTable" border="0" cellspacing="0" cellpadding="0">
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpFirst"><b>Имя</b></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><b>Тип</b></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><b>Комментарий</b></p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">LineNumber</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Term">Edm.Int64</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Номер
+  строки табличной части.</p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">&lt;Реквизиты&gt;</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Соответствует
+  типу реквизита</p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"> </p>
+  </td>
+ </tr>
+</table>
+
+<a id="TI000001415" class="bookmark" name="issogl2_12.8.3_строка_стандартной_табличной_части_ведущие_виды_расчета"><h3>12.8.3. Строка стандартной табличной части «Ведущие виды расчета»</h3></a>
+
+<p class="MsoNormal">Имя составного типа:
+<span class="Interface">ChartOfCalculationTypes_&lt;Имя
+объекта&gt;_LeadingCalculationTypes</span>.</p>
+
+<p class="Lang-subheader">Состав
+свойств:</p>
+
+<table class="MsoNormalTable" border="0" cellspacing="0" cellpadding="0">
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpFirst"><b>Имя</b></p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><b>Тип</b></p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><b>Комментарий</b></p>
+  </td>
+  
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">LineNumber</span></p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Term">Edm.Int64</span></p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Номер строки табличной части.</p>
+  </td>
+  
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">CalculationType</span></p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Term">Edm.Guid</span></p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Идентификатор типа плана видов расчета,
+  хранящий виды расчета.</p>
+  </td>
+  
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">Predefined</span></p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Term">Edm.Boolean</span></p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Признак предопределенного вида субконто.</p>
+  </td>
+  
+ </tr>
+</table>
+
+<a id="TI000001416" class="bookmark" name="issogl2_12.8.4_строка_стандартной_табличной_части_вытесняющие_виды_расчета"><h3>12.8.4. Строка стандартной табличной части «Вытесняющие виды расчета»</h3></a>
+
+<p class="MsoNormal">Имя составного типа: <span class="Interface">ChartOfCalculationTypes_&lt;Имя
+объекта&gt;_BaseCalculationTypes</span>.</p>
+
+<p class="Lang-subheader">Состав свойств:</p>
+
+<table class="MsoNormalTable" border="0" cellspacing="0" cellpadding="0">
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpFirst"><b>Имя</b></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><b>Тип</b></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><b>Комментарий</b></p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">LineNumber</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Term">Edm.Int64</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Номер
+  строки табличной части.</p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">CalculationType</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Term">Edm.Guid</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Идентификатор
+  типа плана видов расчета, хранящий виды расчета.</p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">Predefined</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Term">Edm.Boolean</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Признак
+  предопределенного вида субконто.</p>
+  </td>
+ </tr>
+</table>
+
+<a id="TI000001417" class="bookmark" name="issogl2_12.8.5_строка_стандартной_табличной_части_базовые_виды_расчета"><h3>12.8.5. Строка стандартной табличной части «Базовые виды расчета»</h3></a>
+
+<p class="MsoNormal">Имя составного типа: ChartOfCalculationTypes<span class="Interface">_&lt;Имя объекта&gt;_DisplacingCalculationTypes</span>.</p>
+
+<p class="Lang-subheader">Состав свойств:</p>
+
+<table class="MsoNormalTable" border="0" cellspacing="0" cellpadding="0">
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpFirst"><b>Имя</b></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><b>Тип</b></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><b>Комментарий</b></p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">LineNumber</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Term">Edm.Int64</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Номер
+  строки табличной части.</p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">CalculationType_Key</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Term">Edm.Guid</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Идентификатор
+  типа плана видов расчета, хранящий виды расчета.</p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">Predefined</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Term">Edm.Boolean</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Признак
+  предопределенного вида субконто.</p>
+  </td>
+ </tr>
+</table>
+
+<a id="TI000001418" class="bookmark" name="issogl1_12.9_регистры_сведений"><h2>12.9. Регистры сведений</h2></a>
+
+<a name="_ref422739366"></a><a name="_ref422739365"></a><a id="TI000001419" class="bookmark" name="issogl2_12.9.1_независимый"><h3>12.9.1. Независимый</h3></a>
+
+<table class="MsoNormalTable" border="0" cellspacing="0" cellpadding="0">
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpFirst">Имя сущности</p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">InformationRegister_&lt;Имя</span><span class="Interface">&gt;</span></p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Имя набора сущностей</p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">InformationRegister_&lt;Имя</span><span class="Interface">&gt;</span></p>
+  </td>
+ </tr>
+</table>
+
+<p class="Lang-subheader"> Состав свойств:</p>
+
+<table class="MsoNormalTable" border="0" cellspacing="0" cellpadding="0">
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpFirst"><b>Название в схеме</b></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><b>Тип</b></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><b>Комментарий</b></p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">Period</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Term">Edm.Date</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Период
+  записи.</p>
+  <p class="MsoNormalCxSpMiddle">Только
+  для периодического регистра сведений.</p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">SurrogateKey</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Term">Edm.Int16</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Суррогатный
+  ключ в том случае, если отсутствуют измерения и разделители. Всегда равен 0.</p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">&lt;Измерения&gt;</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Соответствует
+  типу измерения</p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Измерения
+  включаются в ключ сущности.</p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">&lt;Ресурсы&gt;</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Соответствует
+  типу ресурса</p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"> </p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">&lt;Реквизиты&gt;</p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Соответствует типу реквизита</p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"> </p>
+  </td>
+  
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">&lt;Общие реквизиты&gt;</p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Соответствует типу реквизита</p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Кроме общих реквизитов являющихся
+  независимыми разделителями.</p>
+  </td>
+  
+ </tr>
+</table>
+
+<p class="Lang-subheader">Особенности
+поведения:</p>
+
+<p class="MsoNormal">Измерения регистра сведений образуют ключ
+записи. При попытке изменить ключ записи будет генерироваться исключение с
+HTTP-статусом 404. Рекомендуется в таком случае вначале удалять существующую
+запись, а затем добавлять новую.</p>
+
+<a id="TI000001420" class="bookmark" name="issogl3_12.9.1.1_функции"><h4>12.9.1.1. Функции</h4></a>
+
+<p class="Lang">SliceLast</p>
+
+<p class="Lang-subheader">Описание:</p>
+
+<p class="MsoNormal">Набор сущностей – срез последних периодического
+регистра сведений.</p>
+
+<p class="Lang-subheader">Параметры:</p>
+
+<p class="Lang-parameter">Period                                    Edm.Date</p>
+
+<p class="MsoNormal">Период получения среза.</p>
+
+<p class="Lang-parameter">Condition    Edm.String</p>
+
+<p class="MsoNormal">Отбор записей в
+формате OData. Подробнее см. <A href="/db/content/v8310doc/src/руководство разработчика/глава 17. механизмы интернет-сервисов.htm?_=1496848987#_ref379554692">здесь</a>.</p>
+
+<p class="Lang">SliceFirst</p>
+
+<p class="Lang-subheader">Описание:</p>
+
+<p class="MsoNormal">Набор сущностей –
+срез первых периодического регистра сведений.</p>
+
+<p class="Lang-subheader">Параметры:</p>
+
+<p class="Lang-parameter">Period    Edm.Date</p>
+
+<p class="MsoNormal">Период получения
+среза.</p>
+
+<p class="Lang-parameter">Condition    Edm.String</p>
+
+<p class="MsoNormal">Отбор записей в
+формате OData. Подробнее см. <A href="/db/content/v8310doc/src/руководство разработчика/глава 17. механизмы интернет-сервисов.htm?_=1496848987#_ref379554692">здесь</a>.</p>
+
+<a id="TI000001421" class="bookmark" name="issogl2_12.9.2_подчиненный_регистратору"><h3>12.9.2. Подчиненный регистратору</h3></a>
+
+<table class="MsoNormalTable" border="0" cellspacing="0" cellpadding="0">
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpFirst">Имя сущности</p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">InformationRegister_&lt;RegisterName&gt;</span></p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Имя набора сущностей</p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">InformationRegister_&lt;RegisterName&gt;</span></p>
+  </td>
+ </tr>
+</table>
+
+<p class="Lang-subheader">Состав свойств:</p>
+
+<table class="MsoNormalTable" border="0" cellspacing="0" cellpadding="0">
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpFirst"><b>Имя</b></p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><b>Тип</b></p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><b>Комментарий</b></p>
+  </td>
+  
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">Recorder</span></p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Term">Edm.String</span></p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Регистратор.</p>
+  </td>
+  
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">Recorder_Type</span></p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Term">Edm.String</span></p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Ссылка на регистратор.</p>
+  </td>
+  
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">RecordSet</span></p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Term">Collection(СоставнойТип)</span></p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Набор записей.</p>
+  </td>
+  
+ </tr>
+</table>
+
+<p class="Lang-subheader">Особенности
+поведения:</p>
+
+<p class="MsoNormal">Измерения регистра сведений
+образуют ключ записи. При попытке изменить ключ записи будет генерироваться
+исключение с HTTP-статусом 404. Рекомендуется в таком случае вначале удалять
+существующую запись, а затем добавлять новую.</p>
+
+<a id="TI000001422" class="bookmark" name="issogl3_12.9.2.1_функции"><h4>12.9.2.1. Функции</h4></a>
+
+<p class="Lang">SliceLast</p>
+
+<p class="Lang-subheader">Описание:</p>
+
+<p class="MsoNormal">Набор сущностей – срез последних периодического
+регистра сведений.</p>
+
+<p class="Lang-subheader">Параметры:</p>
+
+<p class="Lang-parameter">Period    Edm.Date</p>
+
+<p class="MsoNormal">Период получения среза.</p>
+
+<p class="Lang-parameter">Condition    Edm.String</p>
+
+<p class="MsoNormal">Отбор записей в формате OData. Подробнее см. <A href="/db/content/v8310doc/src/руководство разработчика/глава 17. механизмы интернет-сервисов.htm?_=1496848987#_ref379554692">здесь</a>.</p>
+
+<p class="Lang">SliceFirst</p>
+
+<p class="Lang-subheader">Описание:</p>
+
+<p class="MsoNormal">Набор сущностей – срез первых периодического регистра сведений.</p>
+
+<p class="Lang-subheader">Параметры:</p>
+
+<p class="Lang-parameter">Period    Edm.Date</p>
+
+<p class="MsoNormal">Период получения среза.</p>
+
+<p class="Lang-parameter">Condition    Edm.String</p>
+
+<p class="MsoNormal">Отбор записей в формате OData. Подробнее см. <A href="/db/content/v8310doc/src/руководство разработчика/глава 17. механизмы интернет-сервисов.htm?_=1496848987#_ref379554692">здесь</a>.</p>
+
+<a name="_ref422739376"></a><a id="TI000001423" class="bookmark" name="issogl3_12.9.2.2_набор_записей_регистра"><h4>12.9.2.2. Набор записей регистра</h4></a>
+
+<p class="MsoNormal">Имя составного типа: <span class="Interface">InformationRegister_&lt;Имя</span><span class="Interface">&gt;_RowType</span></p>
+
+<p class="Lang-subheader">Состав свойств:</p>
+
+<table class="MsoNormalTable" border="0" cellspacing="0" cellpadding="0">
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpFirst"><b>Имя</b></p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><b>Тип</b></p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><b>Комментарий</b></p>
+  </td>
+  
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">LineNumber</span></p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Term">Edm.Int64</span></p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Номер строки в наборе записей</p>
+  </td>
+  
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">Active</span></p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Term">Edm.Boolean</span></p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Признак активности строки</p>
+  </td>
+  
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">SurrogateKey</span></p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Term">Edm.Int16</span></p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Суррогатный ключ в том случае, если
+  отсутствуют измерения, разделители и период регистрации отличен от <span class="Interface">Регистратор</span>.
+  Всегда равен 0.</p>
+  </td>
+  
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">&lt;Измерения&gt;</span></p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Соответствует типу измерения</p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"> </p>
+  </td>
+  
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">&lt;Ресурсы&gt;</span></p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Соответствует типу ресурса</p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"> </p>
+  </td>
+  
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">&lt;Реквизиты&gt;</span></p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Соответствует типу реквизита</p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"> </p>
+  </td>
+  
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">&lt;Общие
+  реквизиты&gt;</span></p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Соответствует типу реквизита</p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Кроме общих реквизитов являющихся
+  независимыми разделителями.</p>
+  </td>
+  
+ </tr>
+</table>
+
+<a name="_ref422739385"></a><a id="TI000001424" class="bookmark" name="issogl3_12.9.2.3_строка_набора_записей_регистра_сведений"><h4>12.9.2.3. Строка набора записей регистра сведений</h4></a>
+
+<table class="MsoNormalTable" border="0" cellspacing="0" cellpadding="0">
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpFirst">Имя
+  сущности</p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">InformationRegister_&lt;Имя&gt;_RecordType</span></p>
+  </td>
+  
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Имя
+  набора сущностей</p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">InformationRegister_&lt;Имя&gt;_RecordType</span></p>
+  </td>
+  
+ </tr>
+</table>
+
+<p class="Lang-subheader">Состав
+свойств:</p>
+
+<table class="MsoNormalTable" border="0" cellspacing="0" cellpadding="0">
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpFirst"><b>Имя</b></p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><b>Тип</b></p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><b>Комментарий</b></p>
+  </td>
+  
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">LineNumber</span></p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Term">Edm.Int64</span></p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Номер строки в наборе записей.</p>
+  </td>
+  
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">Active</span></p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Term">Edm.Boolean</span></p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Признак активности строки.</p>
+  </td>
+  
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">SurrogateKey</span></p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Term">Edm.Int16</span></p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Суррогатный ключ в том случае, если
+  отсутствуют измерения, разделители и период регистрации отличен от <span class="Interface">Регистратор</span>.
+  Всегда равен 0.</p>
+  </td>
+  
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">&lt;Измерения&gt;</span></p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Соответствует типу измерения</p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"> </p>
+  </td>
+  
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">&lt;Ресурсы&gt;</span></p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Соответствует типу ресурса</p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"> </p>
+  </td>
+  
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">&lt;Реквизиты&gt;</span></p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Соответствует типу реквизита</p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"> </p>
+  </td>
+  
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">&lt;Общие
+  реквизиты&gt;</span></p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Соответствует типу реквизита</p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Кроме общих реквизитов являющихся
+  независимыми разделителями.</p>
+  </td>
+  
+ </tr>
+</table>
+
+<p class="Lang-subheader">Особенности
+поведения:</p>
+
+<p class="MsoNormal">Сущность доступна
+только на чтение (запрос GET).</p>
+
+<a id="TI000001425" class="bookmark" name="issogl1_12.10_регистр_накопления"><h2>12.10. Регистр накопления</h2></a>
+
+<table class="MsoNormalTable" border="0" cellspacing="0" cellpadding="0">
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpFirst">Имя сущности</p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">AccumulationRegister_&lt;RegisterName&gt;</span></p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Имя набора сущностей</p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">AccumulationRegister_&lt;RegisterName&gt;</span></p>
+  </td>
+ </tr>
+</table>
+
+<p class="Lang-subheader">Состав свойств:</p>
+
+<table class="MsoNormalTable" border="0" cellspacing="0" cellpadding="0">
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpFirst"><b>Имя</b></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><b>Тип</b></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><b>Комментарий</b></p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">Recorder</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Term">Edm.String</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Регистратор.</p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">Recorder_Type</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Term">Edm.String</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Ссылка
+  на регистратор.</p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">RecordSet</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Term">Collection(СоставнойТип)</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Набор
+  записей.</p>
+  </td>
+ </tr>
+</table>
+
+<p class="Lang-subheader">Особенности поведения:</p>
+
+<p class="MsoNormal">Измерения регистра сведений образуют ключ записи. При
+попытке изменить ключ записи будет генерироваться исключение с HTTP-статусом
+404. Рекомендуется в таком случае вначале удалять существующую запись, а затем
+добавлять новую.</p>
+
+<a id="TI000001426" class="bookmark" name="issogl2_12.10.1_функции"><h3>12.10.1. Функции</h3></a>
+
+<p class="Lang">Balance</p>
+
+<p class="Lang-subheader">Описание:</p>
+
+<p class="MsoNormal">Обеспечивает доступ
+к виртуальной таблице остатков регистра накопления.</p>
+
+<p class="Lang-subheader">Параметры:</p>
+
+<p class="Lang-parameter">Period    Edm.Date</p>
+
+<p class="MsoNormal">Дата, на которую
+необходимо получить остатки регистра накопления.</p>
+
+<p class="Lang-parameter">Condition    Edm.String</p>
+
+<p class="MsoNormal">Отбор записей в
+формате OData. Подробнее см. <A href="/db/content/v8310doc/src/руководство разработчика/глава 17. механизмы интернет-сервисов.htm?_=1496848987#_ref379554692">здесь</a>.</p>
+
+<p class="Lang-parameter">Dimensions    Edm.String</p>
+
+<p class="MsoNormal">Список измерений
+через запятую.</p>
+
+<p class="Lang">Turnovers</p>
+
+<p class="Lang-subheader">Описание:</p>
+
+<p class="MsoNormal">Обеспечивает доступ
+к виртуальной таблице оборотов регистра накопления. Разворот итогов
+по периодам не поддерживается.</p>
+
+<p class="Lang-subheader">Параметры:</p>
+
+<p class="Lang-parameter">Condition    Edm.String</p>
+
+<p class="MsoNormal">Отбор записей в
+формате OData. Подробнее см. стр. 1308.</p>
+
+<p class="Lang-parameter">EndPeriod                                 Edm.Date</p>
+
+<p class="MsoNormal">Конец периода, за
+который требуется получить обороты.</p>
+
+<p class="Lang-parameter">StartPeriod    Edm.Date</p>
+
+<p class="MsoNormal">Начало периода, за
+который требуется получить обороты.</p>
+
+<p class="Lang">BalanceAndTurnovers</p>
+
+<p class="Lang-subheader">Описание:</p>
+
+<p class="MsoNormal">Обеспечивает доступ к виртуальной таблице остатков и
+оборотов регистра накопления. Разворот итогов по периодам не поддерживается.</p>
+
+<p class="Lang-subheader">Параметры:</p>
+
+<p class="Lang-parameter">Condition    Edm.String</p>
+
+<p class="MsoNormal">Отбор записей в формате OData. Подробнее см. <A href="/db/content/v8310doc/src/руководство разработчика/глава 17. механизмы интернет-сервисов.htm?_=1496848987#_ref379554692">здесь</a>.</p>
+
+<p class="Lang-parameter">EndPeriod    Edm.Date</p>
+
+<p class="MsoNormal">Конец периода, за который требуется получить обороты.</p>
+
+<p class="Lang-parameter">StartPeriod    Edm.Date</p>
+
+<p class="MsoNormal">Начало периода, за который требуется получить обороты.</p>
+
+<a id="TI000001427" class="bookmark" name="issogl2_12.10.2_набор_записей_регистра"><h3>12.10.2. Набор записей регистра</h3></a>
+
+<p class="MsoNormal">Имя составного типа: AccumulationRegister<span class="Interface">_&lt;RegisterName&gt;_RowType</span>.</p>
+
+<p class="Lang-subheader">Состав свойств:</p>
+
+<table class="MsoNormalTable" border="0" cellspacing="0" cellpadding="0">
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpFirst"><b>Имя</b></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><b>Тип</b></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><b>Комментарий</b></p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">LineNumber</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Term">Edm.Int64</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Номер
+  строки в наборе записей.</p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">Active</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Term">Edm.Boolean</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Признак
+  активности строки.</p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">&lt;Измерения&gt;</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Соответствует
+  типу измерения</p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"> </p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">&lt;Ресурсы&gt;</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Соответствует
+  типу ресурса</p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"> </p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">&lt;Реквизиты&gt;</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Соответствует
+  типу реквизита</p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"> </p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">&lt;Общие реквизиты&gt;</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Соответствует
+  типу реквизита</p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Кроме
+  общих реквизитов являющихся независимыми разделителями.</p>
+  </td>
+ </tr>
+</table>
+
+<p class="Lang-subheader">Особенности поведения:</p>
+
+<p class="MsoNormal">Измерения регистра сведений образуют ключ записи. При
+попытке изменить ключ записи будет выдаваться исключение, код HTTP 404.
+Правильный способ – удалить запись и создать новую.</p>
+
+<a id="TI000001428" class="bookmark" name="issogl2_12.10.3_строка_набора_записей_регистра_накопления"><h3>12.10.3. Строка набора записей регистра накопления</h3></a>
+
+<table class="MsoNormalTable" border="0" cellspacing="0" cellpadding="0">
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpFirst">Имя сущности</p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">AccumulationRegister_&lt;Имя&gt;_RecordType</span></p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Имя набора сущностей</p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">AccumulationRegister_&lt;Имя&gt;_RecordType</span></p>
+  </td>
+ </tr>
+</table>
+
+<p class="Lang-subheader">Состав свойств:</p>
+
+<table class="MsoNormalTable" border="0" cellspacing="0" cellpadding="0">
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpFirst"><b>Имя</b></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><b>Тип</b></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><b>Комментарий</b></p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">LineNumber</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Term">Edm.Int64</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Номер
+  строки в наборе записей.</p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">Active</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Term">Edm.Boolean</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Признак
+  активности строки.</p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">&lt;Измерения&gt;</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Соответствует
+  типу измерения</p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"> </p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">&lt;Ресурсы&gt;</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Соответствует
+  типу ресурса</p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"> </p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">&lt;Реквизиты&gt;</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Соответствует
+  типу реквизита</p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"> </p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">&lt;Общие реквизиты&gt;</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Соответствует
+  типу реквизита</p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Кроме
+  общих реквизитов являющихся независимыми разделителями.</p>
+  </td>
+ </tr>
+</table>
+
+<p class="Lang-subheader">Особенности поведения:</p>
+
+<p class="MsoNormal">Сущность доступна только на чтение (запрос GET).</p>
+
+<a id="TI000001429" class="bookmark" name="issogl1_12.11_регистры_бухгалтерии"><h2>12.11. Регистры бухгалтерии</h2></a>
+
+<table class="MsoNormalTable" border="0" cellspacing="0" cellpadding="0">
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpFirst">Имя сущности</p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">AccountingRegister_&lt;RegisterName&gt;</span></p>
+  </td>
+  
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Имя
+  набора сущностей</p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">AccountingRegister_&lt;RegisterName&gt;</span></p>
+  </td>
+  
+ </tr>
+</table>
+
+<p class="Lang-subheader">Состав
+свойств:</p>
+
+<table class="MsoNormalTable" border="0" cellspacing="0" cellpadding="0">
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpFirst"><b>Имя</b></p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><b>Тип</b></p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><b>Комментарий</b></p>
+  </td>
+  
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">Recorder</span></p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Term">Edm.String</span></p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Регистратор.</p>
+  </td>
+  
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">Recorder_Type</span></p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Term">Edm.String</span></p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Ссылка на регистратор.</p>
+  </td>
+  
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">RecordSet</span></p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Term">Collection(СоставнойТип)</span></p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Набор записей.</p>
+  </td>
+  
+ </tr>
+</table>
+
+<p class="Lang-subheader">Особенности
+поведения:</p>
+
+<p class="MsoNormal">Измерения регистра
+сведений образуют ключ записи. При попытке изменить ключ записи будет
+генерироваться исключение с HTTP-статусом 404. Рекомендуется в таком случае
+вначале удалять существующую запись, а затем добавлять новую.</p>
+
+<a id="TI000001430" class="bookmark" name="issogl2_12.11.1_функции"><h3>12.11.1. Функции</h3></a>
+
+<p class="Lang">Balance</p>
+
+<p class="Lang-subheader">Описание:</p>
+
+<p class="MsoNormal">Обеспечивает доступ
+к виртуальной таблице остатков регистра бухгалтерии.</p>
+
+<p class="Lang-subheader">Параметры:</p>
+
+<p class="Lang-parameter">Period    Edm.Date</p>
+
+<p class="MsoNormal">Дата, на которую
+необходимо получить остатки регистра бухгалтерии.</p>
+
+<p class="Lang-parameter">Condition    Edm.String</p>
+
+<p class="MsoNormal">Отбор записей в формате OData. Подробнее см. <A href="/db/content/v8310doc/src/руководство разработчика/глава 17. механизмы интернет-сервисов.htm?_=1496848987#_ref379554692">здесь</a>.</p>
+
+<p class="Lang-parameter">Dimensions                              Edm.String</p>
+
+<p class="MsoNormal">Список измерений через запятую.</p>
+
+<p class="Lang-parameter">AccountCondition    Edm.String</p>
+
+<p class="MsoNormal">Условие отбора по
+счетам в формате OData. Подробнее см. <A href="/db/content/v8310doc/src/руководство разработчика/глава 17. механизмы интернет-сервисов.htm?_=1496848987#_ref379554692">здесь</a>.</p>
+
+<p class="Lang-parameter">ExtraDimensions                         Edm.String</p>
+
+<p class="MsoNormal">Перечень уникальных
+идентификаторов видов субконто, по которым необходимо установить отбор.</p>
+
+<p class="Lang">Turnovers</p>
+
+<p class="Lang-subheader">Описание:</p>
+
+<p class="MsoNormal">Обеспечивает доступ
+к виртуальной таблице оборотов регистра бухгалтерии. Разворот
+итогов по периодам не поддерживается.</p>
+
+<p class="Lang-subheader">Параметры:</p>
+
+<p class="Lang-parameter">Condition                               Edm.String</p>
+
+<p class="MsoNormal">Отбор записей в формате OData. Подробнее см. <A href="/db/content/v8310doc/src/руководство разработчика/глава 17. механизмы интернет-сервисов.htm?_=1496848987#_ref379554692">здесь</a>.</p>
+
+<p class="Lang-parameter">EndPeriod    Edm.Date</p>
+
+<p class="MsoNormal">Конец периода, за который требуется получить
+обороты.</p>
+
+<p class="Lang-parameter">StartPeriod    Edm.Date</p>
+
+<p class="MsoNormal">Начало периода, за который требуется
+получить обороты.</p>
+
+<p class="Lang-parameter">AccountCondition    Edm.String</p>
+
+<p class="MsoNormal">Условие отбора по
+счетам в формате OData. Подробнее см. <A href="/db/content/v8310doc/src/руководство разработчика/глава 17. механизмы интернет-сервисов.htm?_=1496848987#_ref379554692">здесь</a>.</p>
+
+<p class="Lang-parameter">BalanceAccountCondition    Edm.String</p>
+
+<p class="MsoNormal">Условие отбора по корреспондирующим
+счетам в формате OData. Подробнее см. <A href="/db/content/v8310doc/src/руководство разработчика/глава 17. механизмы интернет-сервисов.htm?_=1496848987#_ref379554692">здесь</a>.</p>
+
+<p class="Lang-parameter">Dimensions    Edm.String</p>
+
+<p class="MsoNormal">Список измерений через запятую.</p>
+
+<p class="Lang-parameter">ExtraDimensions                         Edm.String</p>
+
+<p class="MsoNormal">Перечень
+уникальных идентификаторов видов субконто, по которым необходимо установить
+отбор.</p>
+
+<p class="Lang-parameter">BalancedExtraDimensions    Edm.String</p>
+
+<p class="MsoNormal">Перечень уникальных идентификаторов
+корреспондирующих видов субконто, по которым необходимо установить отбор.</p>
+
+<p class="Lang">BalanceAndTurnovers</p>
+
+<p class="Lang-subheader">Описание:</p>
+
+<p class="MsoNormal">Обеспечивает доступ
+к виртуальной таблице остатков и оборотов регистра бухгалтерии. Разворот итогов
+по периодам не поддерживается.</p>
+
+<p class="Lang-subheader">Параметры:</p>
+
+<p class="Lang-parameter">Condition                               Edm.String</p>
+
+<p class="MsoNormal">Отбор записей в формате OData. Подробнее см. <A href="/db/content/v8310doc/src/руководство разработчика/глава 17. механизмы интернет-сервисов.htm?_=1496848987#_ref379554692">здесь</a>.</p>
+
+<p class="Lang-parameter">EndPeriod    Edm.Date</p>
+
+<p class="MsoNormal">Конец периода, за который требуется получить
+обороты.</p>
+
+<p class="Lang-parameter">StartPeriod    Edm.Date</p>
+
+<p class="MsoNormal">Начало периода, за который требуется
+получить обороты.</p>
+
+<p class="Lang">ExtDimensions</p>
+
+<p class="Lang-subheader">Описание:</p>
+
+<p class="MsoNormal">Обеспечивает доступ к виртуальной таблице субконто
+регистра бухгалтерии.</p>
+
+<p class="Lang">RecordsWithExtDimensions</p>
+
+<p class="Lang-subheader">Описание:</p>
+
+<p class="MsoNormal">Обеспечивает доступ
+к виртуальной таблице движений с субконто регистра бухгалтерии.</p>
+
+<p class="Lang-subheader">Параметры:</p>
+
+<p class="Lang-parameter">Condition    Edm.String</p>
+
+<p class="MsoNormal">Отбор записей в
+формате OData. Подробнее см. <A href="/db/content/v8310doc/src/руководство разработчика/глава 17. механизмы интернет-сервисов.htm?_=1496848987#_ref379554692">здесь</a>.</p>
+
+<p class="Lang-parameter">EndPeriod    Edm.Date</p>
+
+<p class="MsoNormal">Конец периода, за
+который требуется получить обороты.</p>
+
+<p class="Lang-parameter">StartPeriod    Edm.Date</p>
+
+<p class="MsoNormal">Начало периода, за
+который требуется получить обороты.</p>
+
+<p class="Lang-parameter">Top    Edm.Int32</p>
+
+<p class="MsoNormal">Ограничение
+максимального количества записей.</p>
+
+<p class="Lang-parameter">OrderBy    Edm.String</p>
+
+<p class="MsoNormal">Строка, содержащую
+имена колонок (через запятую), по которым будет выполняться сортировка
+проводок.</p>
+
+<p class="Lang">DrCrTurnover</p>
+
+<p class="Lang-subheader">Описание:</p>
+
+<p class="MsoNormal">Обеспечивает доступ
+к виртуальной таблице получать обороты по регистру бухгалтерии за произвольный
+период с определенной агрегацией. Разворот итогов по периодам не
+поддерживается.</p>
+
+<p class="Lang-subheader">Параметры:</p>
+
+<p class="Lang-parameter">Condition    Edm.String</p>
+
+<p class="MsoNormal">Отбор записей в
+формате OData. Подробнее см. <A href="/db/content/v8310doc/src/руководство разработчика/глава 17. механизмы интернет-сервисов.htm?_=1496848987#_ref379554692">здесь</a>.</p>
+
+<p class="Lang-parameter">EndPeriod    Edm.Date</p>
+
+<p class="MsoNormal">Конец периода, за
+который требуется получить обороты.</p>
+
+<p class="Lang-parameter">StartPeriod    Edm.Date</p>
+
+<p class="MsoNormal">Начало периода, за
+который требуется получить обороты.</p>
+
+<p class="Lang-parameter">AccountCondition    Edm.String</p>
+
+<p class="MsoNormal">Условие отбора по
+счетам в формате OData. Подробнее см. <A href="/db/content/v8310doc/src/руководство разработчика/глава 17. механизмы интернет-сервисов.htm?_=1496848987#_ref379554692">здесь</a>.</p>
+
+<p class="Lang-parameter">BalanceAccountCondition    Edm.String</p>
+
+<p class="MsoNormal">Условие отбора по корреспондирующим
+счетам в формате OData. Подробнее см. <A href="/db/content/v8310doc/src/руководство разработчика/глава 17. механизмы интернет-сервисов.htm?_=1496848987#_ref379554692">здесь</a>.</p>
+
+<p class="Lang-parameter">Dimensions    Edm.String</p>
+
+<p class="MsoNormal">Список измерений через запятую.</p>
+
+<p class="Lang-parameter">ExtraDimensions    Edm.String</p>
+
+<p class="MsoNormal">Перечень уникальных
+идентификаторов видов субконто, по которым необходимо установить отбор.</p>
+
+<p class="Lang-parameter">BalancedExtraDimensions    Edm.String</p>
+
+<p class="MsoNormal">Перечень уникальных
+идентификаторов корреспондирующих видов субконто, по которым необходимо
+установить отбор.</p>
+
+<a id="TI000001431" class="bookmark" name="issogl2_12.11.2_набор_записей_регистра"><h3>12.11.2. Набор записей регистра</h3></a>
+
+<p class="MsoNormal">Имя составного типа: AccountingRegister<span class="Interface">_&lt;RegisterName&gt;_RowType</span>.</p>
+
+<p class="Lang-subheader">Состав
+свойств:</p>
+
+<table class="MsoNormalTable" border="0" cellspacing="0" cellpadding="0">
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpFirst"><b>Имя</b></p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><b>Тип</b></p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><b>Комментарий</b></p>
+  </td>
+  
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">LineNumber</span></p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Term">Edm.Int64</span></p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Номер строки в наборе записей.</p>
+  </td>
+  
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">Active</span></p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Term">Edm.Boolean</span></p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Признак активности строки.</p>
+  </td>
+  
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">Period</span></p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Term">Edm.Date</span></p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Момент времени, в который выполнена запись.</p>
+  </td>
+  
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">RecordType</p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Term">Edm.String</span></p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Вид движения записи регистра бухгалтерии: <span class="Interface">Debit</span> или <span class="Interface">Credit</span>.</p>
+  </td>
+  
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">AccountDr_Key</p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Term">Edm.Guid</span></p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Счет
+  дебета (только для регистра с коррекспонденцией).</p>
+  </td>
+  
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">AccountCr_Key</span></p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Term">Edm.Guid</span></p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Счет кредита (только для регистра с
+  коррекспонденцией).</p>
+  </td>
+  
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">Account_Key</span></p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Term">Edm.Guid</span></p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Счет (только для регистра без
+  коррекспонденции).</p>
+  </td>
+  
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">&lt;Измерения&gt;</p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Соответствует типу измерения</p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpLast">Для небалансовых измерений два свойства:</p>
+  <p class="MsoListBulletCxSpFirst">&#9679; 
+  <span class="Interface">&lt;ИмяИзмерения&gt;Dr</span></p>
+  <p class="MsoListBulletCxSpLast">&#9679; 
+  <span class="Interface">&lt;ИмяИзмерения&gt;Cr</span>.</p>
+  </td>
+  
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">&lt;Ресурсы&gt;</span></p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Соответствует типу ресурса</p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpLast">Для небалансовых измерений два свойства:</p>
+  <p class="MsoListBulletCxSpFirst">&#9679; 
+  <span class="Interface">&lt;ИмяРесурса&gt;Dr</span></p>
+  <p class="MsoListBulletCxSpLast">&#9679; 
+  <span class="Interface">&lt;ИмяРесурса&gt;Cr</span>.</p>
+  </td>
+  
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">&lt;Реквизиты&gt;</span></p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpLast">Соответствует типу реквизита</p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoListBullet">&#9679; 
+   </p>
+  </td>
+  
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">&lt;Общие
+  реквизиты&gt;</span></p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Соответствует типу реквизита</p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Кроме общих реквизитов являющихся
+  независимыми разделителями.</p>
+  </td>
+  
+ </tr>
+</table>
+
+<a id="TI000001432" class="bookmark" name="issogl2_12.11.3_строка_набора_записей_регистрав_сведений"><h3>12.11.3. Строка набора записей регистрав сведений</h3></a>
+
+<table class="MsoNormalTable" border="0" cellspacing="0" cellpadding="0">
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpFirst">Имя
+  сущности</p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">AccountingRegister_&lt;Имя&gt;_RecordType</span></p>
+  </td>
+  
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Имя
+  набора сущностей</p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">AccountingRegister_&lt;Имя&gt;_RecordType</span></p>
+  </td>
+  
+ </tr>
+</table>
+
+<p class="Lang-subheader">Состав
+свойств:</p>
+
+<table class="MsoNormalTable" border="0" cellspacing="0" cellpadding="0">
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpFirst"><b>Имя</b></p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><b>Тип</b></p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><b>Комментарий</b></p>
+  </td>
+  
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">LineNumber</span></p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Term">Edm.Int64</span></p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Номер строки в наборе записей.</p>
+  </td>
+  
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">Active</span></p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Term">Edm.Boolean</span></p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Признак активности строки.</p>
+  </td>
+  
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">Period</span></p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Term">Edm.Date</span></p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Момент времени, в который выполнена запись.</p>
+  </td>
+  
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">RecordType</span></p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Term">Edm.String</span></p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Вид движения записи регистра бухгалтерии: <span class="Interface">Debit</span> или <span class="Interface">Credit</span>.</p>
+  </td>
+  
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">AccountDr_Key</span></p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Term">Edm.Guid</span></p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Счет дебета (только для регистра с
+  коррекспонденцией).</p>
+  </td>
+  
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">AccountCr_Key</span></p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Term">Edm.Guid</span></p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Счет кредита (только для регистра с
+  коррекспонденцией).</p>
+  </td>
+  
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">Account_Key</span></p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Term">Edm.Guid</span></p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Счет (только для регистра без коррекспонденции).</p>
+  </td>
+  
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">&lt;Измерения&gt;</span></p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Соответствует типу измерения</p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpLast">Для небалансовых измерений два свойства:</p>
+  <p class="MsoListBulletCxSpFirst">&#9679; 
+  <span class="Interface">&lt;ИмяИзмерения&gt;Dr</span></p>
+  <p class="MsoListBulletCxSpLast">&#9679; 
+  <span class="Interface">&lt;ИмяИзмерения&gt;Cr</span>.</p>
+  </td>
+  
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">&lt;Ресурсы&gt;</span></p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Соответствует типу ресурса</p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpLast">Для небалансовых измерений два свойства:</p>
+  <p class="MsoListBulletCxSpFirst">&#9679; 
+  <span class="Interface">&lt;ИмяРесурса&gt;Dr</span></p>
+  <p class="MsoListBulletCxSpLast">&#9679; 
+  <span class="Interface">&lt;ИмяРесурса&gt;Cr</span>.</p>
+  </td>
+  
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">&lt;Реквизиты&gt;</span></p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpLast">Соответствует типу реквизита</p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoListBullet">&#9679; 
+   </p>
+  </td>
+  
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">&lt;Общие
+  реквизиты&gt;</span></p>
+  
+  <p class="MsoNormalCxSpMiddle"> </p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Соответствует типу реквизита</p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Кроме общих реквизитов являющихся
+  независимыми разделителями.</p>
+  </td>
+  
+ </tr>
+</table>
+
+<p class="Lang-subheader">Особенности
+поведения:</p>
+
+<p class="MsoNormal">Сущность доступна
+только на чтение (запрос GET).</p>
+
+<a id="TI000001433" class="bookmark" name="issogl1_12.12_регистры_расчета"><h2>12.12. Регистры расчета</h2></a>
+
+<table class="MsoNormalTable" border="0" cellspacing="0" cellpadding="0">
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpFirst">Имя сущности</p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">CalculationRegister<span class="Interface">_&lt;RegisterName&gt;</span></p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Имя набора сущностей</p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">CalculationRegister_&lt;RegisterName&gt;</span></p>
+  </td>
+ </tr>
+</table>
+
+<p class="Lang-subheader">Состав свойств:</p>
+
+<table class="MsoNormalTable" border="0" cellspacing="0" cellpadding="0">
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpFirst"><b>Имя</b></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><b>Тип</b></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><b>Комментарий</b></p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">Recorder</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Term">Edm.String</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Регистратор.</p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">Recorder_Type</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Term">Edm.String</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Ссылка
+  на регистратор.</p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">RecordSet</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Term">Collection(СоставнойТип)</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Набор
+  записей.</p>
+  </td>
+ </tr>
+</table>
+
+<p class="Lang-subheader">Особенности поведения:</p>
+
+<p class="MsoNormal">Измерения регистра сведений образуют ключ записи. При
+попытке изменить ключ записи будет генерироваться исключение с HTTP-статусом
+404. Рекомендуется в таком случае вначале удалять существующую запись, а затем
+добавлять новую.</p>
+
+<a id="TI000001434" class="bookmark" name="issogl2_12.12.1_функции"><h3>12.12.1. Функции</h3></a>
+
+<p class="Lang">ScheduledData</p>
+
+<p class="Lang-subheader">Описание:</p>
+
+<p class="MsoNormal">Обеспечивает доступ к виртуальной
+таблице данных графика регистра расчета. Только для регистра расчета с
+заданным графиком.</p>
+
+<p class="Lang-subheader">Параметры:</p>
+
+<p class="Lang-parameter">Condition                               Edm.String</p>
+
+<p class="MsoNormal">Отбор записей в
+формате OData. Подробнее см. стр. 1308.</p>
+
+<p class="Lang">ActualActionPeriod</p>
+
+<p class="Lang-subheader">Описание:</p>
+
+<p class="MsoNormal">Обеспечивает доступ к виртуальной
+таблице фактического периода действия. Только для регистра с поддержкой периода
+действия.</p>
+
+<p class="Lang-subheader">Параметры:</p>
+
+<p class="Lang-parameter">Condition                               Edm.String</p>
+
+<p class="MsoNormal">Отбор записей в формате
+OData. Подробнее см. стр. 1308.</p>
+
+<p class="Lang">&lt;ИмяПерерасчета&gt;</p>
+
+<p class="Lang-subheader">Описание:</p>
+
+<p class="MsoNormal">Обеспечивает доступ к виртуальной таблице записей
+перерасчета.</p>
+
+<p class="Lang">Base&lt;ИмяБазовогоРегистраРасчета&gt;</p>
+
+<p class="Lang-subheader">Описание:</p>
+
+<p class="MsoNormal">Обеспечивает доступ к виртуальной таблице базовых данных
+регистра расчета.</p>
+
+<p class="Lang-subheader">Параметры:</p>
+
+<p class="Lang-parameter">Condition    Edm.String</p>
+
+<p class="MsoNormal">Отбор записей в формате OData. Подробнее см. <A href="/db/content/v8310doc/src/руководство разработчика/глава 17. механизмы интернет-сервисов.htm?_=1496848987#_ref379554692">здесь</a>.</p>
+
+<p class="Lang-parameter">MainRegisterDimensions                  Edm.String</p>
+
+<p class="MsoNormal">Имена измерений
+основного регистра расчета, по которому строится таблица базовых данных, через
+запятую.</p>
+
+<p class="Lang-parameter">BaseRegisterDimensions    Edm.String</p>
+
+<p class="MsoNormal">Имена измерений базового регистра расчета, по которому
+строится таблица базовых данных, через запятую.</p>
+
+<p class="Lang-parameter">ViewPoints    Edm.String</p>
+
+<p class="MsoNormal">Имена полей
+базового регистра расчета, по которым производится суммирование базовых данных, через запятую</p>
+
+<a id="TI000001435" class="bookmark" name="issogl2_12.12.2_набор_записей_регистра"><h3>12.12.2. Набор записей регистра</h3></a>
+
+<p class="MsoNormal">Имя составного типа: <span class="Interface">CalculationRegister_&lt;RegisterName&gt;_RowType</span>.</p>
+
+<p class="Lang-subheader">Состав свойств:</p>
+
+<table class="MsoNormalTable" border="0" cellspacing="0" cellpadding="0">
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpFirst"><b>Имя</b></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><b>Тип</b></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><b>Комментарий</b></p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">LineNumber</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Term">Edm.Int64</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Номер
+  строки в наборе записей.</p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">Active</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Term">Edm.Boolean</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Признак
+  активности строки.</p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">Period</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Term">Edm.Date</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Момент
+  времени, в который выполнена запись.</p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">BegOfBasePeriod</p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Edm.Date</p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Дата начала базового периода учетной
+  записи. Только для регистров с базовым периодом.</p>
+  </td>
+  
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">EndOfBasePeriod</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Term">Edm.Date</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Дата
+  окончания базового периода учетной записи. Только для регистров расчета с
+  базовым периодом.</p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">BegOfActionPeriod</p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Term">Edm.Date</span></p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Дата начала периода действия. Только для
+  регистров расчета с периодом действия.</p>
+  </td>
+  
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">EndOfAcrionPeriod</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Term">Edm.Date</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Дата
+  окончания периода действия. Только для регистров расчета с периодом действия.</p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">CalculationType_Key</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Term">Edm.Guid</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Ссылка
+  на вид расчета учетной записи.</p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">ReversingEntry</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Term">Edm.Boolean</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Признак
+  сторно-записи.</p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">&lt;Измерения&gt;</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Соответствует
+  типу измерения</p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpLast">Для
+  небалансовых измерений два свойства:</p>
+  <p class="MsoListBulletCxSpFirst">&#9679; 
+  <span class="Interface">&lt;ИмяИзмерения&gt;Dr</span></p>
+  <p class="MsoListBulletCxSpLast">&#9679; 
+  <span class="Interface">&lt;ИмяИзмерения&gt;Cr</span>.</p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">&lt;Ресурсы&gt;</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Соответствует
+  типу ресурса</p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpLast">Для
+  небалансовых измерений два свойства:</p>
+  <p class="MsoListBulletCxSpFirst">&#9679; 
+  <span class="Interface">&lt;ИмяРесурса&gt;Dr</span></p>
+  <p class="MsoListBulletCxSpLast">&#9679; 
+  <span class="Interface">&lt;ИмяРесурса&gt;Cr</span>.</p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">&lt;Реквизиты&gt;</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Соответствует
+  типу реквизита</p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"> </p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">&lt;Общие реквизиты&gt;</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Соответствует
+  типу реквизита</p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Кроме
+  общих реквизитов являющихся независимыми разделителями.</p>
+  </td>
+ </tr>
+</table>
+
+<a id="TI000001436" class="bookmark" name="issogl2_12.12.3_строка_набора_записей_регистрав_сведений"><h3>12.12.3. Строка набора записей регистрав сведений</h3></a>
+
+<table class="MsoNormalTable" border="0" cellspacing="0" cellpadding="0">
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpFirst">Имя сущности</p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">CalculationRegister_&lt;Имя&gt;_RecordType</span></p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Имя набора сущностей</p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">CalculationRegister_&lt;Имя&gt;_RecordType</span></p>
+  </td>
+ </tr>
+</table>
+
+<p class="Lang-subheader">Состав свойств:</p>
+
+<table class="MsoNormalTable" border="0" cellspacing="0" cellpadding="0">
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpFirst"><b>Имя</b></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><b>Тип</b></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><b>Комментарий</b></p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">LineNumber</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Term">Edm.Int64</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Номер
+  строки в наборе записей.</p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">Active</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Term">Edm.Boolean</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Признак
+  активности строки.</p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">Period</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Term">Edm.Date</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Момент
+  времени, в который выполнена запись.</p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">BegOfBasePeriod</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Term">Edm.Date</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Дата
+  начала базового периода учетной записи. Только для регистров с базовым
+  периодом.</p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">EndOfBasePeriod</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Term">Edm.Date</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Дата
+  окончания базового периода учетной записи. Только для регистров расчета с
+  базовым периодом.</p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">BegOfActionPeriod</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Term">Edm.Date</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Дата
+  начала периода действия. Только для регистров расчета с периодом действия.</p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">EndOfAcrionPeriod</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Term">Edm.Date</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Дата
+  окончания периода действия. Только для регистров расчета с периодом действия.</p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">CalculationType_Key</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Term">Edm.Guid</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Ссылка
+  на вид расчета учетной записи.</p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">ReversingEntry</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Term">Edm.Boolean</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Признак
+  сторно-записи.</p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">&lt;Измерения&gt;</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Соответствует
+  типу измерения</p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpLast">Для
+  небалансовых измерений два свойства:</p>
+  <p class="MsoListBulletCxSpFirst">&#9679; 
+  <span class="Interface">&lt;ИмяИзмерения&gt;Dr</span></p>
+  <p class="MsoListBulletCxSpLast">&#9679; 
+  <span class="Interface">&lt;ИмяИзмерения&gt;Cr</span>.</p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">&lt;Ресурсы&gt;</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Соответствует
+  типу ресурса</p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpLast">Для
+  небалансовых измерений два свойства:</p>
+  <p class="MsoListBulletCxSpFirst">&#9679; 
+  <span class="Interface">&lt;ИмяРесурса&gt;Dr</span></p>
+  <p class="MsoListBulletCxSpLast">&#9679; 
+  <span class="Interface">&lt;ИмяРесурса&gt;Cr</span>.</p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">&lt;Реквизиты&gt;</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpLast">Соответствует
+  типу реквизита</p>
+  </td>
+  <td valign="top">
+  <p class="MsoListBullet">&#9679; 
+   </p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">&lt;Общие реквизиты&gt;</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Соответствует
+  типу реквизита</p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Кроме
+  общих реквизитов являющихся независимыми разделителями.</p>
+  </td>
+ </tr>
+</table>
+
+<p class="Lang-subheader">Особенности поведения:</p>
+
+<p class="MsoNormal">Сущность доступна только на чтение (запрос GET).</p>
+
+<a id="TI000001437" class="bookmark" name="issogl1_12.13_бизнес-процессы"><h2>12.13. Бизнес-процессы</h2></a>
+
+<table class="MsoNormalTable" border="0" cellspacing="0" cellpadding="0">
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpFirst">Имя сущности</p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">BusinessProcess<span class="Interface">_&lt;Имя&gt;</span></p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Имя набора сущностей</p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">BusinessProcess_&lt;Имя&gt;</span></p>
+  </td>
+ </tr>
+</table>
+
+<p class="Lang-subheader">Состав свойств:</p>
+
+<table class="MsoNormalTable" border="0" cellspacing="0" cellpadding="0">
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpFirst"><b>Имя</b></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><b>Тип</b></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><b>Комментарий</b></p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">Ref</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Ссылочный
+  тип</p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Ссылка.</p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">Code</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Term">Edm.String</span>,</p>
+  <p class="MsoNormalCxSpMiddle"><span class="Term">Edm.Int32</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">При
+  наличии у бизнес-процесса кода.</p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">Description</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Term">Edm.String</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">При
+  наличии у бизнес-процесса наименования.</p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">DeletionMark</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Term">Edm.Boolean</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Пометка
+  удаления.</p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">Version</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Term">Edm.String</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Версия
+  данных.</p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">Started</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Term">Edm.Boolean</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Бизнес-процесс
+  стартован.</p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">Competed</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Term">Edm.Boolean</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Бизнес-процесс
+  завершен.</p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">HeadTask</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Term"> </span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpLast">Два
+  поля:</p>
+  <p class="MsoListBulletCxSpFirst">&#9679; 
+  <span class="Interface">&lt;Имя реквизита&gt;</span> –
+  содержит значение сылки в виде строки;</p>
+  <p class="MsoListBulletCxSpLast">&#9679; 
+  &lt;Имя реквизита&gt;<span class="Interface">_Type</span> – ссылка на задачу, обслуживающую данный
+  бизнес-процесс.</p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">&lt;Реквизиты&gt;</p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Соответствует типу реквизита</p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"> </p>
+  </td>
+  
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">&lt;Общие реквизиты&gt;</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Соответствует
+  типу реквизита</p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Кроме
+  общих реквизитов являющихся независимыми разделителями.</p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">&lt;Табличные части&gt;</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Term">Collection(СоставнойТип)</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Каждая
+  табличная часть выступает в виде отдельной сущности с именем <span class="Interface">BusinessProcess_&lt;ИмяОбъекта&gt;_&lt;ИмяТабличнойЧасти&gt;</span>.</p>
+  </td>
+ </tr>
+</table>
+
+<a id="TI000001438" class="bookmark" name="issogl2_12.13.1_функции"><h3>12.13.1. Функции</h3></a>
+
+<p class="Lang">Start</p>
+
+<p class="Lang-subheader">Описание:</p>
+
+<p class="MsoNormal">Стартует бизнес-процесс.</p>
+
+<p class="Lang-subheader">Параметры:</p>
+
+<p class="Lang-parameter">RoutePoint</p>
+
+<p class="MsoNormal">Имя точки маршрута, с которой стартует бизнес-процесс.
+Необязательный параметр.</p>
+
+<a id="TI000001439" class="bookmark" name="issogl2_12.13.2_табличная_часть_бизнес-процесса"><h3>12.13.2. Табличная часть бизнес-процесса</h3></a>
+
+<table class="MsoNormalTable" border="0" cellspacing="0" cellpadding="0">
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpFirst">Имя сущности</p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">BusinessProcess_&lt;Имя
+  объекта&gt;_&lt;Имя табличной части&gt;_ RecordType</span></p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Имя набора сущностей</p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">BusinessProcess_&lt;Имя
+  объекта&gt;_&lt;Имя табличной части&gt;_RecordType</span></p>
+  </td>
+ </tr>
+</table>
+
+<p class="Lang-subheader">Состав свойств:</p>
+
+<table class="MsoNormalTable" border="0" cellspacing="0" cellpadding="0">
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpFirst"><b>Имя</b></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><b>Тип</b></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><b>Комментарий</b></p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">Ref</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Ссылочный
+  тип</p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Ссылка.</p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">LineNumber</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Term">Edm.Int64</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Номер
+  строки.</p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">&lt;Реквизиты&gt;</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpLast">Соответствует
+  типу реквизита</p>
+  </td>
+  <td valign="top">
+  <p class="MsoListBullet">&#9679; 
+   </p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">&lt;Общие реквизиты&gt;</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Соответствует
+  типу реквизита</p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Кроме
+  общих реквизитов являющихся независимыми разделителями.</p>
+  </td>
+ </tr>
+</table>
+
+<a id="TI000001440" class="bookmark" name="issogl2_12.13.3_строка_табличной_части"><h3>12.13.3. Строка табличной части</h3></a>
+
+<p class="MsoNormal">Имя составного типа: <span class="Interface">BusinessProcess_&lt;Имя
+объекта&gt;_&lt;Имя табличной части&gt;_RowType</span>.</p>
+
+<p class="Lang-subheader">Состав свойств:</p>
+
+<table class="MsoNormalTable" border="0" cellspacing="0" cellpadding="0">
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpFirst"><b>Имя</b></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><b>Тип</b></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><b>Комментарий</b></p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">LineNumber</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Term">Edm.Int64</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Номер
+  строки табличной части.</p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">&lt;Реквизиты&gt;</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Соответствует
+  типу реквизита</p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"> </p>
+  </td>
+ </tr>
+</table>
+
+<a id="TI000001441" class="bookmark" name="issogl1_12.14_задачи"><h2>12.14. Задачи</h2></a>
+
+<table class="MsoNormalTable" border="0" cellspacing="0" cellpadding="0">
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpFirst">Имя сущности</p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">Task_&lt;Имя&gt;</span></p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Имя набора сущностей</p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">Task_&lt;Имя&gt;</span></p>
+  </td>
+ </tr>
+</table>
+
+<p class="Lang-subheader">Состав свойств:</p>
+
+<table class="MsoNormalTable" border="0" cellspacing="0" cellpadding="0">
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpFirst"><b>Имя</b></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><b>Тип</b></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><b>Комментарий</b></p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">Ref</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Ссылочный
+  тип</p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Ссылка.</p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">Number</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Term">Edm.String</span>,</p>
+  <p class="MsoNormalCxSpMiddle"><span class="Term">Edm.Int32</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">При
+  наличии у задачи номера.</p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">Description</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Term">Edm.String</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">При
+  наличии у задачи наименования.</p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">DeletionMark</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Term">Edm.Boolean</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Пометка
+  удаления.</p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">Version</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Term">Edm.String</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Версия
+  данных.</p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">Executed</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Term">Edm.Boolean</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Задача
+  выполнена.</p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">BusinessProcess</p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Term"> </span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpLast">Описывает
+  составной тип, если задача связана с несколькими бизнес-процессами:</p>
+  <p class="MsoListBulletCxSpFirst">&#9679; 
+  <span class="Interface">&lt;Имя реквизита&gt;</span> –
+  содержит значение сылки в виде строки;</p>
+  <p class="MsoListBulletCxSpLast">&#9679; 
+  <span class="Interface">&lt;Имя
+  реквизита&gt;_Type</span> – ссылка на задачу, обслуживающую данный
+  бизнес-процесс.</p>
+  <p class="MsoNormal">Если
+  задача связана с одним бизнес-процессом, то реквизит описывается двумя
+  свойствами:</p>
+  <p class="MsoListBulletCxSpFirst">&#9679; 
+  Навигационная ссылка;</p>
+  <p class="MsoListBulletCxSpLast">&#9679; 
+  <span class="Interface">BusinessProcess_Key</span> –
+  значение ссылки.</p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">RoutePoint</p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Term">Edm.String</span></p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Имя точки маршрута, для исполнения которой
+  создана задача. Только для задачи, привязанной к бизнес-процессу.</p>
+  </td>
+  
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">&lt;Реквизиты&gt;</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Соответствует
+  типу реквизита</p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"> </p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">&lt;Общие реквизиты&gt;</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Соответствует
+  типу реквизита</p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Кроме
+  общих реквизитов являющихся независимыми разделителями.</p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">&lt;Табличные части&gt;</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Term">Collection(СоставнойТип)</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Каждая
+  табличная часть выступает в виде отдельной сущности с именем <span class="Interface">Task_&lt;ИмяОбъекта&gt;_&lt;ИмяТабличнойЧасти&gt;</span>.</p>
+  </td>
+ </tr>
+</table>
+
+<a id="TI000001442" class="bookmark" name="issogl2_12.14.1_функции"><h3>12.14.1. Функции</h3></a>
+
+<p class="Lang">ExecuteTask</p>
+
+<p class="Lang-subheader">Описание:</p>
+
+<p class="MsoNormal">Выполняет задачу.</p>
+
+<a id="TI000001443" class="bookmark" name="issogl2_12.14.2_табличная_часть_бизнес-процесса"><h3>12.14.2. Табличная часть бизнес-процесса</h3></a>
+
+<table class="MsoNormalTable" border="0" cellspacing="0" cellpadding="0">
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpFirst">Имя сущности</p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">Task_&lt;Имя
+  объекта&gt;_&lt;Имя табличной части&gt;_ RecordType</span></p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Имя набора сущностей</p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">Task_&lt;Имя
+  объекта&gt;_&lt;Имя табличной части&gt;_RecordType</span></p>
+  </td>
+ </tr>
+</table>
+
+<p class="Lang-subheader">Состав свойств:</p>
+
+<table class="MsoNormalTable" border="0" cellspacing="0" cellpadding="0">
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpFirst"><b>Имя</b></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><b>Тип</b></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><b>Комментарий</b></p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">Ref</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Ссылочный
+  тип</p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"> </p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">LineNumber</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Term">Edm.Int64</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Номер
+  строки.</p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">&lt;Реквизиты&gt;</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Соответствует
+  типу реквизита</p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"> </p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">&lt;Общие реквизиты&gt;</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Соответствует
+  типу реквизита</p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Кроме
+  общих реквизитов являющихся независимыми разделителями.</p>
+  </td>
+ </tr>
+</table>
+
+<a id="TI000001444" class="bookmark" name="issogl2_12.14.3_строка_табличной_части"><h3>12.14.3. Строка табличной части</h3></a>
+
+<p class="MsoNormal">Имя составного типа: <span class="Interface">Task_&lt;Имя
+объекта&gt;_&lt;Имя табличной части&gt;_RowType</span>.</p>
+
+<p class="Lang-subheader">Состав свойств:</p>
+
+<table class="MsoNormalTable" border="0" cellspacing="0" cellpadding="0">
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpFirst"><b>Имя</b></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><b>Тип</b></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><b>Комментарий</b></p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">LineNumber</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Term">Edm.Int64</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Номер
+  строки табличной части.</p>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Interface">&lt;Реквизиты&gt;</span></p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Соответствует
+  типу реквизита</p>
+  </td>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"> </p>
+  </td>
+ </tr>
+</table>
+
+<p class="MsoNormalCxSpMiddle"> </p>
+
+<br>
+	</body>
+</html>

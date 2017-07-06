@@ -1,0 +1,2748 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=Windows-1251">
+		<title>&#1043;&#1083;&#1072;&#1074;&#1072; 15. &#1052;&#1077;&#1093;&#1072;&#1085;&#1080;&#1079;&#1084;&#1099; &#1086;&#1073;&#1084;&#1077;&#1085;&#1072; &#1076;&#1072;&#1085;&#1085;&#1099;&#1084;&#1080;</title>
+		<LINK REL="stylesheet" href="style.css?_=1496848987">
+		<SCRIPT src="script.js?_=1496848987" TYPE="text/javascript"></script>		<!--[if !IE]>--><SCRIPT src="zeroclipboard.js?_=1496848987" TYPE="text/javascript"></script><!--<![endif]-->
+	<meta name="robots" content="noarchive">
+<meta name="googlebot" content="noarchive">
+<link href="/db/content/v8310doc/src/руководство разработчика/глава 15. механизмы обмена данными.htm" rel="canonical">
+<link href="/static/its.content.css?_=1490872753" type="text/css" rel="stylesheet">
+<script type="text/javascript" src="/static/its.content.js?_=1489758009"></script>
+<!--[if lt IE 9]><script type="text/javascript" src="/static/html5shiv.js?_=1484636606"></script><![endif]-->
+
+</head>
+	<body class="v8310doc">
+<a name="_ref220475853"></a><a name="_ref214882152"></a><a name="_ref214882148"></a><a name="_ref214442941"></a><a name="_ref213648074"></a><a name="_ref237783487"></a><a id="TI000000719" class="bookmark"><h1>Глава 15.  Механизмы обмена данными</h1></a>
+
+<a id="TI000000720" class="bookmark" name="issogl1_15.1_цели_и_задачи"><h2>15.1. Цели и задачи</h2></a>
+
+<p class="MsoNormal">Механизмы обмена данными – это набор средств системы «1С:Предприятие»,
+предназначенных для организации обмена данными между различными информационными
+базами, а также информационными базами и внешними программными системами.
+Механизмы обмена данными могут быть условно разделены на два уровня:</p>
+
+<p class="MsoListBulletCxSpFirst">&#9679; 
+универсальные механизмы обмена данными,</p>
+
+<p class="MsoListBulletCxSpLast">&#9679; 
+распределенные информационные базы.</p>
+
+<a id="TI000000721" class="bookmark" name="issogl2_15.1.1_универсальные_механизмы_обмена_данными"><h3>15.1.1. Универсальные механизмы обмена данными</h3></a>
+
+<p class="MsoNormalCxSpFirst">Универсальные механизмы обмена данными могут использоваться
+как вместе, так и по отдельности, в различных комбинациях, для организации
+обмена данными информационных баз системы «1С:Предприятие» с различными
+программными системами. В качестве программных систем, с которыми организуется
+обмен, могут выступать другие информационные базы системы «1С:Предприятие». При
+этом обменивающиеся между собой информационные базы могут в общем случае иметь
+разные конфигурации.</p>
+
+<p class="MsoNormalCxSpLast">Кроме того, универсальные механизмы обмена данными могут
+использоваться для организации обмена с программами, не основанными на системе «1С:Предприятие».
+Этому способствуют следующие факторы:</p>
+
+<p class="MsoListBulletCxSpFirst">&#9679; 
+формат обмена данными основан на языке XML, являющемся
+на сегодняшний день общепринятым средством представления данных;</p>
+
+<p class="MsoListBulletCxSpMiddle">&#9679; 
+средства обмена данными, благодаря своей модульной
+организации и высокой гибкости, могут быть использованы для организации
+разнообразных схем обмена данными;</p>
+
+<p class="MsoListBulletCxSpLast">&#9679; 
+протоколы, предлагаемые механизмами обмена данными,
+несложны и могут быть воспроизведены во внешних программных системах.</p>
+
+<a id="TI000000722" class="bookmark" name="issogl2_15.1.2_распределенные_информационные_базы"><h3>15.1.2. Распределенные информационные базы</h3></a>
+
+<p class="MsoNormalCxSpFirst">Распределенная информационная база представляет собой
+иерархическую структуру, состоящую из отдельных информационных баз системы «1С:Предприятие» –
+узлов распределенной информационной базы, между которыми организован обмен данными
+с целью синхронизации конфигурации и данных.</p>
+
+<p class="MsoNormalCxSpMiddle">Механизмы управления распределенными информационными
+базами базируются на универсальных механизмах обмена данными, но содержат
+некоторые дополнительные возможности, недоступные через универсальные механизмы.</p>
+
+<p class="MsoNormalCxSpLast">Главное отличие распределенных информационных баз от
+универсальных механизмов обмена данными заключается в том, что универсальные
+механизмы обмена данными позволяют выстраивать достаточно произвольные схемы
+обмена данными, в то время как распределенные информационные базы имеют более
+узкую специализацию, а также выполняют передачу изменений конфигурации в
+подчиненные узлы.</p>
+
+<a id="TI000000723" class="bookmark" name="issogl1_15.2_универсальные_механизмы_обмена_данными"><h2>15.2. Универсальные механизмы обмена данными</h2></a>
+
+<p class="MsoNormal">К универсальным механизмам обмена данными могут быть
+отнесены:</p>
+
+<p class="MsoListBulletCxSpFirst">&#9679; 
+средства чтения и записи документов XML,</p>
+
+<p class="MsoListBulletCxSpMiddle">&#9679; 
+XML-сериализация,</p>
+
+<p class="MsoListBulletCxSpLast">&#9679; 
+планы обмена.</p>
+
+<a id="TI000000724" class="bookmark" name="issogl2_15.2.1_средства_чтения_и_записи_документов_xml"><h3>15.2.1. Средства чтения и записи документов XML</h3></a>
+
+<p class="MsoNormalCxSpFirst">Предполагается, что участники обмена данными обмениваются
+сообщениями в формате XML. Таким образом, средства чтения и записи документов XML
+образуют базовый уровень обмена данными.</p>
+
+<p class="MsoNormalCxSpMiddle">Средства чтения и записи документов XML обеспечивают
+работу с документами XML в самом общем виде. Данный набор средств не определяет
+способов представления данных системы «1С:Предприятие» в формате XML.</p>
+
+<p class="MsoNormalCxSpLast">К средствам чтения и записи документов XML, предоставляемым
+системой «1С:Предприятие», относятся объекты: <span class="Term">ЧтениеXML</span>, <span class="Term">ЗаписьXML</span>
+и <span class="Term">ПреобразованиеXSL</span>.
+Также платформа предоставляет возможность работать с XML-данными в формате FastInfoset,
+для чего существуют объекты <span class="Term">ЧтениеFastInfoset</span> и <span class="Term">ЗаписьFastInfoset</span>.</p>
+
+<a id="TI000000725" class="bookmark" name="issogl2_15.2.2_xml-сериализация"><h3>15.2.2. XML-сериализация</h3></a>
+
+<p class="MsoNormalCxSpFirst">Основная задача XML-сериализации – поддержка
+чтения/записи объектов данных системы «1С:Предприятие» в/из XML.</p>
+
+<p class="MsoNormalCxSpLast">Базовые средства чтения и записи документов XML не
+предоставляют достаточной основы для решения данной задачи. Они не определяют
+форматов представления данных системы «1С:Предприятие» в XML и не предоставляют
+средств для чтения/записи объектов данных в/из XML в принятом формате как
+единого целого.</p>
+
+<a id="TI000000726" class="bookmark" name="issogl3_15.2.2.1_представление_данных_в_xml-сериализации"><h4>15.2.2.1. Представление данных в XML-сериализации</h4></a>
+
+<p class="MsoNormalCxSpFirst">В конечном счете каждый объект данных системы «1С:Предприятие»
+представляется как элемент XML, содержащий значение объекта данных.</p>
+
+<p class="MsoNormalCxSpMiddle">С точки зрения представления в XML типы значений делятся
+на простые и сложные.</p>
+
+<p class="MsoNormalCxSpMiddle">К простым типам данных относятся типы, значения которых
+представляются подсистемой XML-сериализации в виде элементов XML только с
+текстовым содержимым.</p>
+
+<p class="MsoNormalCxSpMiddle">Значения сложных типов представляются в виде элементов
+XML, содержащих вложенные элементы.</p>
+
+<p class="MsoNormalCxSpMiddle">Каждому из типов данных системы «1С:Предприятие»,
+значения которых могут быть представлены в XML, ставится в соответствие тип
+данных XML.</p>
+
+<p class="MsoNormalCxSpMiddle">Каждый тип данных XML характеризуется именем типа
+и пространством имен, к которому относится тип.</p>
+
+<p class="MsoNormalCxSpLast">Тип данных XML может быть следующим:</p>
+
+<p class="MsoListBulletCxSpFirst">&#9679; 
+одним из типов, определенных в документе XML Schema
+Part 2: Datatypes консорциума W3C (пространство имен – <span class="Interface">http://www.w3.org/2001/XMLSchema</span>);</p>
+
+<p class="MsoListBulletCxSpMiddle">&#9679; 
+предопределенным типом системы «1С:Предприятие» (пространство
+имен – <span class="Interface">http://v8.1c.ru/data</span>);</p>
+
+<p class="MsoListBulletCxSpLast">&#9679; 
+типом, производным от метаданных конфигурации системы
+«1С:Предприятие» (не относится ни к какому пространству имен).</p>
+
+<p class="MsoNormalCxSpFirst">В представлении объекта данных в XML тип данных XML
+может быть задан в явном виде. Для задания типа данных XML элемент XML,
+содержащий представление значения, должен содержать атрибут <span class="Term">type</span>, относящийся
+к пространству имен <span class="Interface">http://www.w3.org/2001/XMLSchema-instance</span>,
+значение которого содержит тип данных XML.</p>
+
+<p class="MsoNormalCxSpMiddle">Другим возможным способом задания типа данных XML
+является имя корневого элемента XML, содержащего представление значения. Имя
+корневого элемента, представляющего объект данных, жестко не специфицируется и
+может быть произвольным. Однако если при записи значения в XML имя корневого
+элемента не задано, то оно будет установлено в соответствии с типом записываемого
+значения. При чтении данных из XML тип значения, если он не задан в атрибуте <span class="Term">type</span>,
+может быть установлен по имени корневого элемента.</p>
+
+<p class="MsoNormalCxSpLast">При рассмотрении примеров представления различных значений
+в XML и при дальнейшем изложении будем исходить из предположения, что
+определены следующие соответствия пространств имен:</p>
+
+<a class="copy_source" href="#_top" onClick="return false">Копировать в буфер обмена</a>
+<pre class="src_res">
+xmlns:xsd=&quot;http://www.w3.org/2001/XMLSchema&quot;
+xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+xmlns:v8=&quot;http://v8.1c.ru/data&quot;
+</pre>
+
+<a id="TI000000727" class="bookmark" name="issogl4_15.2.2.1.1_представление_значений_простых_типов_в_xml"><h5>15.2.2.1.1. Представление значений простых типов в XML</h5></a>
+
+<p class="MsoNormal">К простым типам с точки зрения представления в XML относятся
+следующие типы системы «1С:Предприятие»:</p>
+
+<p class="MsoListBulletCxSpFirst">&#9679; 
+<span class="Term">Число</span>;</p>
+
+<p class="MsoListBulletCxSpMiddle">&#9679; 
+<span class="Term">Строка</span>;</p>
+
+<p class="MsoListBulletCxSpMiddle">&#9679; 
+<span class="Term">Дата</span>;</p>
+
+<p class="MsoListBulletCxSpMiddle">&#9679; 
+<span class="Term">Булево</span>;</p>
+
+<p class="MsoListBulletCxSpMiddle">&#9679; 
+<span class="Term">ДвоичныеДанные</span>;</p>
+
+<p class="MsoListBulletCxSpMiddle">&#9679; 
+<span class="Term">NULL</span>;</p>
+
+<p class="MsoListBulletCxSpMiddle">&#9679; 
+<span class="Term">УникальныйИдентификатор</span>;</p>
+
+<p class="MsoListBulletCxSpMiddle">&#9679; 
+<span class="Term">ХранилищеЗначения</span>;</p>
+
+<p class="MsoListBulletCxSpMiddle">&#9679; 
+все ссылки на объекты базы данных;</p>
+
+<p class="MsoListBulletCxSpLast">&#9679; 
+ссылки на перечисления, определяемые в метаданных.</p>
+
+<p class="Lang">Число</p>
+
+<p class="Lang-subheader">Описание:</p>
+
+<p class="MsoNormalCxSpFirst">Типу <span class="Term">Число</span> соответствует тип данных XML <span class="Term">decimal</span>
+из пространства имен <span class="Interface">http://www.w3.org/2001/XMLSchema</span>.</p>
+
+<p class="MsoNormalCxSpLast">Правила представления значений данного типа определены
+в документе XML Schema Part 2:
+Datatypes.</p>
+
+<p class="Lang-subheader">Пример:</p>
+
+<a class="copy_source" href="#_top" onClick="return false">Копировать в буфер обмена</a>
+<pre class="src_res">
+&lt;!-– Не задано явно имя корневого элемента --&gt;
+&lt;decimal&gt;45684.087&lt;/decimal&gt;
+&lt;!-– Явно задано имя корневого элемента XML --&gt;
+&lt;Amount&gt;523&lt;/Amount&gt;
+&lt;!-– Явно указан тип данных XML --&gt;
+&lt;Data xsi:type=&quot;xsd:decimal&quot;&gt;64793.01&lt;/Data&gt;
+</pre>
+
+<p class="Lang">Строка</p>
+
+<p class="Lang-subheader">Описание:</p>
+
+<p class="MsoNormal">Типу <span class="Term">Строка</span> соответствует тип данных <span class="Term">string</span>
+из пространства имен <span class="Interface">http://www.w3.org/2001/XMLSchema</span>.
+<span class="Term">Строка</span>
+записывается в XML как есть.</p>
+
+<p class="Lang-subheader">Пример:</p>
+
+<a class="copy_source" href="#_top" onClick="return false">Копировать в буфер обмена</a>
+<pre class="src_res">
+&lt;!-– Не задано явно имя корневого элемента --&gt;
+&lt;string&gt;Это такая строка&lt;/string&gt;
+&lt;!-– Явно задано имя корневого элемента XML --&gt;
+&lt;Name&gt;Иванов&lt;/Name&gt;
+&lt;!-– Явно указан тип данных XML --&gt;
+&lt;Data xsi:type=&quot;xsd:string&quot;&gt;Это такая строка&lt;/Data&gt;
+</pre>
+
+<p class="Lang">Дата</p>
+
+<p class="Lang-subheader">Описание:</p>
+
+<p class="MsoNormal">Значения типа <span class="Term">Дата</span> представляются в виде <span class="Term">YYYY-MM-DDTHH:MM:SS</span>,
+где:</p>
+
+<p class="MsoListBulletCxSpFirst">&#9679; 
+<span class="Term">YYYY</span> – год, представленный в виде четырех
+цифр;</p>
+
+<p class="MsoListBulletCxSpMiddle">&#9679; 
+<span class="Term">MM</span> – месяц, представленный двумя цифрами;</p>
+
+<p class="MsoListBulletCxSpMiddle">&#9679; 
+<span class="Term">DD</span> – день месяца двумя цифрами;</p>
+
+<p class="MsoListBulletCxSpMiddle">&#9679; 
+<span class="Term">T</span> – латинская буква <span class="Interface">T</span>;</p>
+
+<p class="MsoListBulletCxSpMiddle">&#9679; 
+<span class="Term">HH</span> – час суток;</p>
+
+<p class="MsoListBulletCxSpMiddle">&#9679; 
+<span class="Term">MM</span> – минута;</p>
+
+<p class="MsoListBulletCxSpLast">&#9679; 
+<span class="Term">SS</span> – секунда.</p>
+
+<p class="MsoNormal">Такой формат даты определен как допустимый в документе XML Schema
+Part 2: Datatypes.</p>
+
+<p class="Lang-subheader">Пример:</p>
+
+<a class="copy_source" href="#_top" onClick="return false">Копировать в буфер обмена</a>
+<pre class="src_res">
+&lt;!-– Не задано явно имя корневого элемента --&gt;
+&lt;dateTime&gt;2008-11-21T12:00:00&lt;/dateTime&gt;
+&lt;!-– Явно задано имя корневого элемента XML --&gt;
+&lt;Started&gt;2001-10-30T19:00:00&lt;/Started&gt;
+&lt;!-– Явно указан тип данных XML --&gt;
+&lt;Data xsi:type=&quot;xsd:dateTime&quot;&gt;1980-08-25T10:00:00&lt;/Data&gt;
+</pre>
+
+<p class="Lang">Булево</p>
+
+<p class="Lang-subheader">Описание:</p>
+
+<p class="MsoNormalCxSpFirst">Типу <span class="Term">Булево</span> соответствует тип данных <span class="Term">boolean</span>
+из пространства имен <span class="Interface">http://www.w3.org/2001/XMLSchema</span>.</p>
+
+<p class="MsoNormalCxSpLast">Значение <span class="Term">Ложь</span> представляется строкой <span class="Term">false</span>, а значение <span class="Term">Истина</span> –
+строкой <span class="Term">true</span>.
+Такой формат предусмотрен в документе XML Schema Part 2: Datatypes.</p>
+
+<p class="Lang-subheader">Пример:</p>
+
+<a class="copy_source" href="#_top" onClick="return false">Копировать в буфер обмена</a>
+<pre class="src_res">
+&lt;!-– Не задано явно имя корневого элемента --&gt;
+&lt;boolean&gt;false&lt;/boolean&gt;
+&lt;!-– Явно задано имя корневого элемента XML --&gt;
+&lt;Posted&gt;true&lt;/Posted&gt;
+&lt;!-– Явно указан тип данных XML --&gt;
+&lt;Data xsi:type=&quot;xsd:boolean&quot;&gt;true&lt;/Data&gt;
+</pre>
+
+<p class="Lang">ДвоичныеДанные</p>
+
+<p class="Lang-subheader">Описание:</p>
+
+<p class="MsoNormalCxSpFirst">Типу <span class="Term">ДвоичныеДанные</span> соответствует тип данных XML <span class="Term">base64Binary</span>
+из пространства имен <span class="Interface">http://www.w3.org/2001/XMLSchema</span>.</p>
+
+<p class="MsoNormalCxSpLast">Значения данного типа представляются как двоичные данные,
+закодированные с использованием алгоритма <span class="Term">Base64</span>, описанного
+в <span class="Interface">RFC 2045</span> (<a href="http://tools.ietf.org/html/rfc2045.html" target="_blank">http://tools.ietf.org/html/rfc2045.html</a>).</p>
+
+<p class="Lang-subheader">Пример:</p>
+
+<a class="copy_source" href="#_top" onClick="return false">Копировать в буфер обмена</a>
+<pre class="src_res">
+&lt;!-– Не задано явно имя корневого элемента --&gt;
+&lt;base64Binary&gt;YWJjZGVm&lt;/base64Binary&gt;
+&lt;!-– Явно задано имя корневого элемента XML --&gt;
+&lt;BinaryData&gt;YWJjZGVm&lt;/BinaryData&gt;
+&lt;!-– Явно указан тип данных XML --&gt;
+&lt;Data xsi:type=&quot;xsd:base64Binary&quot;&gt;YWJjZGVm&lt;/Data&gt;
+</pre>
+
+<p class="Lang">NULL</p>
+
+<p class="Lang-subheader">Описание:</p>
+
+<p class="MsoNormal">Типу <span class="Term">NULL</span> соответствует тип данных XML <span class="Term">Null</span>
+из пространства имен <span class="Interface">http://v8.1c.ru/data</span>. Данный
+тип имеет одно-единственное значение, которое представляется пустой строкой.</p>
+
+<p class="Lang-subheader">Пример:</p>
+
+<a class="copy_source" href="#_top" onClick="return false">Копировать в буфер обмена</a>
+<pre class="src_res">
+&lt;!-– Не задано явно имя корневого элемента --&gt;
+&lt;v8:Null/&gt;
+&lt;!-– Явно задано имя корневого элемента XML --&gt;
+&lt;Selected/&gt;
+&lt;!-– Явно указан тип данных XML --&gt;
+&lt;Data xsi:type=&quot;v8:Null&quot;/&gt;
+</pre>
+
+<p class="Lang">УникальныйИдентификатор</p>
+
+<p class="Lang-subheader">Описание:</p>
+
+<p class="MsoNormalCxSpFirst">Типу <span class="Term">УникальныйИдентификатор</span> соответствует тип данных
+XML <span class="Term">UUID</span>
+из пространства имен <span class="Interface">http://v8.1c.ru/data</span>.</p>
+
+<p class="MsoNormalCxSpLast">Значения данного типа представляются в XML в соответствии
+с общепринятой практикой и стандартами (<span class="Interface">ISO-11578</span>,
+<span class="Interface">DCE 1.1: Remote Procedure Call – Universal Unique
+Identifier</span>).</p>
+
+<p class="Lang-subheader">Пример:</p>
+
+<a class="copy_source" href="#_top" onClick="return false">Копировать в буфер обмена</a>
+<pre class="src_res">
+&lt;!-– Не задано явно имя корневого элемента --&gt;
+&lt;v8:UUID&gt;3294be0f-c039-41a9-bd65-596da0dcfe68&lt;/v8:UUID&gt;
+&lt;!-– Явно задано имя корневого элемента XML --&gt;
+&lt;Id&gt;da035e32-3f7a-4d87-accf7db8cb4b&lt;/Id&gt;
+&lt;!-– Явно указан тип данных XML -&gt;
+&lt;Data xsi:type=&quot;v8:UUID&quot;&gt;08839b0b-5ec3-4a53-a9f5-173312316919&lt;/Data&gt;
+</pre>
+
+<p class="Lang">ХранилищеЗначения</p>
+
+<p class="Lang-subheader">Описание:</p>
+
+<p class="MsoNormalCxSpFirst">Типу <span class="Term">ХранилищеЗначения</span> соответствует тип данных XML
+<span class="Term">ValueStorage</span>
+из пространства имен <span class="Interface">http://v8.1c.ru/data</span>.</p>
+
+<p class="MsoNormalCxSpLast">Значения данного типа представляются в XML как данные
+<span class="Term">ХранилищеЗначения</span>,
+сохраненные в файл, а затем закодированные с использованием алгоритма <span class="Term">Base64</span>.</p>
+
+<p class="Lang-subheader">Пример:</p>
+
+<a class="copy_source" href="#_top" onClick="return false">Копировать в буфер обмена</a>
+<pre class="src_res">
+&lt;!-– Не задано явно имя корневого элемента --&gt;
+&lt;v8:ValueStorage&gt;AQEOAAAAAAAAAO+7v3siUyIsIjHQoSJ9&lt;/v8:ValueStorage&gt;
+&lt;!-– Явно задано имя корневого элемента XML --&gt;
+&lt;Data&gt;AQEOAAAAAAAAAO+7v3siUyIsIjHQoSJ9&lt;/Data&gt;
+&lt;!-– Явно указан тип данных XML --&gt;
+&lt;Data xsi:type=&quot;v8:ValueStorage&quot;&gt;AQEOAAAAAAAAAO+7v3siUyIsIjHQoSJ9&lt;/Data&gt;
+</pre>
+
+<p class="Lang">Ссылки на объекты базы данных</p>
+
+<p class="Lang-subheader">Описание:</p>
+
+<p class="MsoNormalCxSpFirst">Каждому из типов ссылок на объекты базы данных соответствует
+свой собственный тип данных XML. Имя типа данных XML для ссылок на объекты базы
+данных соответствует англоязычному имени типа значения ссылки системы «1С:Предприятие».</p>
+
+<p class="MsoNormalCxSpMiddle">Так, например, для справочника <span class="Term">Валюты</span>
+англоязычное имя типа ссылки будет выглядеть как <span class="Term">CatalogRef.Валюты</span>.
+Так же будет выглядеть и имя типа данных XML.</p>
+
+<p class="MsoNormalCxSpMiddle">Типы данных XML для ссылок на объекты базы данных
+не относятся ни к какому пространству имен.</p>
+
+<p class="MsoNormalCxSpLast">Значения ссылок представляются в XML как значения
+типа <span class="Term">УникальныйИдентификатор</span>,
+полученные из ссылок.</p>
+
+<p class="Lang-subheader">Пример:</p>
+
+<a class="copy_source" href="#_top" onClick="return false">Копировать в буфер обмена</a>
+<pre class="src_res">
+&lt;!-– Не задано явно имя корневого элемента --&gt;
+&lt;CatalogRef.Банки&gt;911b5b8b-11f5-4993-9673-2c9a7a8995d5&lt;/CatalogRef.Банки &gt;
+&lt;!-– Явно задано имя корневого элемента XML --&gt;
+&lt;Ref&gt;911b5b8b-11f5-4993-9673-2c9a7a8995d5&lt;/Ref&gt;
+&lt;!-– Явно указан тип данных XML --&gt;
+&lt;Data xsi:type=&quot;CatalogRef.Банки&quot;&gt;
+                    911b5b8b-11f5-4993-9673-2c9a7a8995d5&lt;/Data&gt;
+</pre>
+
+<p class="Lang">Ссылки на перечисления, определяемые в
+метаданных</p>
+
+<p class="Lang-subheader">Описание:</p>
+
+<p class="MsoNormalCxSpFirst">Каждому из типов ссылок на значения перечислений,
+определенных в конфигурации, соответствует свой собственный тип данных XML. Имя
+типа данных XML для ссылок на значения перечисления соответствует англоязычному
+имени типа системы «1С:Предприятие».</p>
+
+<p class="MsoNormalCxSpMiddle">Так, например, для перечисления <span class="Term">ВидыАдресов</span> англоязычное
+имя типа ссылки на значение будет выглядеть как <span class="Term">EnumRef.ВидыАдресов</span>.
+Так же будет выглядеть и имя типа данных XML.</p>
+
+<p class="MsoNormalCxSpLast">Типы данных XML для ссылок на значения перечислений
+не относятся ни к какому пространству имен. В XML ссылки на значения
+перечислений представляются в виде имени соответствующего значения перечисления.</p>
+
+<p class="Lang-subheader">Пример:</p>
+
+<a class="copy_source" href="#_top" onClick="return false">Копировать в буфер обмена</a>
+<pre class="src_res">
+&lt;!-– Не задано явно имя корневого элемента --&gt;
+&lt;EnumRef.ВидыАдресов&gt;Юридический&lt;/EnumRef.ВидыАдресов&gt;
+&lt;!-– Явно задано имя корневого элемента XML --&gt;
+&lt;Ref&gt;Юридический&lt;/Ref&gt;
+&lt;!-– Явно указан тип данных XML --&gt;
+&lt;Data xsi:type=&quot;EnumRef.ВидыАдресов&quot;&gt;Физический&lt;/Data&gt;
+</pre>
+
+<a id="TI000000728" class="bookmark" name="issogl4_15.2.2.1.2_представление_значений_сложных_типов_в_xml"><h5>15.2.2.1.2. Представление значений сложных типов в XML</h5></a>
+
+<p class="MsoNormal">К сложным типам, значения которых могут быть представлены в XML,
+относятся следующие типы системы «1С:Предприятие»:</p>
+
+<p class="MsoListBulletCxSpFirst">&#9679; 
+<span class="Term">Тип</span>;</p>
+
+<p class="MsoListBulletCxSpMiddle">&#9679; 
+<span class="Term">ОписаниеТипов</span>;</p>
+
+<p class="MsoListBulletCxSpMiddle">&#9679; 
+<span class="Term">КонстантаМенеджерЗначения.&lt;Имя константы&gt;</span>;</p>
+
+<p class="MsoListBulletCxSpMiddle">&#9679; 
+все объекты базы данных;</p>
+
+<p class="MsoListBulletCxSpMiddle">&#9679; 
+наборы записей регистров, последовательностей, перерасчетов;</p>
+
+<p class="MsoListBulletCxSpLast">&#9679; 
+<span class="Term">УдалениеОбъекта</span>.</p>
+
+<p class="Lang">Тип</p>
+
+<p class="Lang-subheader">Описание:</p>
+
+<p class="MsoNormalCxSpFirst">Типу <span class="Term">Тип</span> соответствует тип данных XML Type из пространства
+имен <span class="Interface">http://v8.1c.ru/data</span>. Элемент XML, представляющий
+значение данного типа, содержит текст, в котором записано имя типа XML,
+соответствующего типу данных системы «1С:Предприятие».</p>
+
+<p class="MsoNormalCxSpLast">На первый взгляд тип <span class="Term">Тип</span> относится не к
+сложным, а к простым типам данных, так как элемент, представляющий значение данного
+типа, не содержит вложенных элементов. Однако это не так. Вложенных элементов
+действительно нет. Но при этом текст элемента, содержащий имя типа данных XML,
+содержит префикс пространства имен типа, который должен быть определен в данном
+элементе или одном из родительских элементов, что делает текст элемента не
+вполне самодостаточным. Поэтому данный тип не отнесен к простым типам.</p>
+
+<p class="Lang-subheader">Пример:</p>
+
+<a class="copy_source" href="#_top" onClick="return false">Копировать в буфер обмена</a>
+<pre class="src_res">
+&lt;!-– Не задано явно имя корневого элемента --&gt;
+&lt;v8:Type&gt;v8:ValueStorage&lt;/v8:Type&gt;
+&lt;!-– Явно задано имя корневого элемента XML --&gt;
+&lt;Tp&gt;xsd:string&lt;/Tp&gt;
+&lt;!-– Явно указан тип данных XML --&gt;
+&lt;Data xsi:type=&quot;v8:Type&quot;&gt;v8:ValueStorage&lt;Data&gt;
+</pre>
+
+<p class="Lang">ОписаниеТипов</p>
+
+<p class="Lang-subheader">Описание:</p>
+
+<p class="MsoNormalCxSpFirst">Типу <span class="Term">ОписаниеТипов</span> соответствует тип данных XML <span class="Term">TypeDescription</span>
+из пространства имен <span class="Interface">http://v8.1c.ru/data</span>. Корневой
+элемент, представляющий значение типа <span class="Term">ОписаниеТипов</span>, включает в себя ряд вложенных
+элементов, каждый из которых содержит некоторую составляющую часть описания
+типов.</p>
+
+<p class="MsoNormalCxSpLast">Вложенный элемент <span class="Term">Types</span> из
+пространства имен <span class="Interface">http://v8.1c.ru/data</span> содержит
+представления отдельных типов, входящих в описание типов. Элемент с именем <span class="Term">NumberQualifiers</span>
+из пространства имен <span class="Interface">http://v8.1c.ru/data</span> содержит
+квалификаторы числового значения. А элементы с именами <span class="Term">StringQualifiers</span> и
+<span class="Term">DateQualifiers</span>
+из того же пространства имен содержат квалификаторы строки и даты соответственно.</p>
+
+<p class="Lang-subheader">Пример:</p>
+
+<a class="copy_source" href="#_top" onClick="return false">Копировать в буфер обмена</a>
+<pre class="src_res">
+&lt;v8:TypeDescription&gt;
+    &lt;v8:Types&gt;
+        &lt;v8:Type&gt;v8:UUID&lt;/v8:Type&gt;
+        &lt;v8:Type&gt;CatalogRef.Банки&lt;/v8:Type&gt;
+        &lt;v8:Type&gt;xsd:boolean&lt;/v8:Type&gt;
+        &lt;v8:Type&gt;xsd:decimal&lt;/v8:Type&gt;
+    &lt;/v8:Types&gt;
+    &lt;v8:NumberQualifiers&gt;
+        &lt;v8:Digits&gt;10&lt;/v8:Digits&gt;
+        &lt;v8:FractionDigits&gt;2&lt;/v8:FractionDigits&gt;
+        &lt;v8:AllowedSign&gt;Any&lt;/v8:AllowedSign&gt;
+    &lt;/v8:NumberQualifiers&gt;
+    &lt;v8:StringQualifiers&gt;
+        &lt;v8:Length&gt;30&lt;/v8:Length&gt;
+        &lt;v8:AllowedLength&gt;Variable&lt;/v8:AllowedLength&gt;
+    &lt;/v8:StringQualifiers&gt;
+    &lt;v8:DateQualifiers&gt;
+        &lt;v8:DateFractions&gt;Date&lt;/v8:DateFractions&gt;
+    &lt;/v8:DateQualifiers&gt;
+&lt;/v8:TypeDescription&gt;
+</pre>
+
+<p class="Lang">КонстантаМенеджерЗначения.&lt;Имя константы&gt;</p>
+
+<p class="Lang-subheader">Описание:</p>
+
+<p class="MsoNormal">Каждому из типов <span class="Term">КонстантаМенеджерЗначения.&lt;Имя константы&gt;</span>
+соответствует тип данных XML <span class="Term">ConstantValueManager.&lt;Имя константы&gt;</span>,
+не относящийся ни к какому пространству имен.</p>
+
+<p class="Lang-subheader">Пример:</p>
+
+<a class="copy_source" href="#_top" onClick="return false">Копировать в буфер обмена</a>
+<pre class="src_res">
+&lt;ConstantValueManager.НазваниеОрганизации&gt;
+&lt;Value&gt;ООО &quot;Мебиус&quot;&lt;/Value&gt;
+&lt;/ConstantValueManager.НазваниеОрганизации&gt;
+</pre>
+
+<p class="Lang">Объекты базы данных</p>
+
+<p class="Lang-subheader">Описание:</p>
+
+<p class="MsoNormalCxSpFirst">Объекты базы данных представляются в XML как совокупность
+значений реквизитов и табличных частей. Имя типа данных XML, соответствующего
+объекту базы данных, определяется как англоязычное имя типа значения системы «1С:Предприятие».
+Типы данных XML для объектов базы данных не относятся ни к какому пространству
+имен. Состав элементов XML, вложенных в корневой элемент, определяется типом
+объекта, а также составом реквизитов и табличных частей.</p>
+
+<p class="MsoNormalCxSpMiddle">Каждый из реквизитов представляется элементом XML,
+имя которого соответствует имени реквизита. Если тип значения реквизита не
+может быть однозначно определен из метаданных, то элемент XML, представляющий
+реквизит, содержит атрибут <span class="Interface">xsi:type</span>, в котором
+указан тип значения XML.</p>
+
+<p class="MsoNormalCxSpMiddle">Каждая из табличных частей представляется
+элементом XML, имя которого совпадает с именем табличной части.</p>
+
+<p class="MsoNormalCxSpLast">Каждая из строк табличной части представляется элементом
+XML с именем <span class="Term">Row</span>.
+Реквизиты табличной части представлены элементами XML, вложенными в элемент <span class="Term">Row</span>.</p>
+
+<p class="Lang-subheader">Пример:</p>
+
+<p class="MsoNormal">Представление в XML объекта типа <span class="Term">Документ.ЗаказПокупателя</span>:</p>
+
+<a class="copy_source" href="#_top" onClick="return false">Копировать в буфер обмена</a>
+<pre class="src_res">
+&lt;DocumentObject.ЗаказПокупателя&gt;
+&lt;Ref&gt;8d106783-9726-11d7-9334-0050ba8480bd&lt;/Ref&gt;
+&lt;DeletionMark&gt;false&lt;/DeletionMark&gt;
+&lt;Date&gt;2008-04-15T12:00:00&lt;/Date&gt;
+&lt;Number&gt;00000006&lt;/Number&gt;
+&lt;Posted&gt;true&lt;/Posted&gt;
+&lt;ПодразделениеКомпании&gt;
+317f130d-5a08-11d7-9324-0050ba8480bd&lt;/ПодразделениеКомпании&gt;
+&lt;СтруктурнаяЕдиница xsi:type=&quot;CatalogRef.КассыКомпании&quot;&gt;
+317f12f4-5a08-11d7-9324-0050ba8480bd&lt;/СтруктурнаяЕдиница&gt;
+&lt;Контрагент&gt;12952ac7-5a08-11d7-9324-0050ba8480bd&lt;/Контрагент&gt;
+&lt;ЮрФизЛицоКонтрагента xsi:type=&quot;CatalogRef.ЮридическиеЛица&quot;&gt;
+0aadfe81-5a08-11d7-9324-0050ba8480bd&lt;/ЮрФизЛицоКонтрагента&gt;
+&lt;ВалютаДокумента&gt;
+029156b4-5a08-11d7-9324-0050ba8480bd&lt;/ВалютаДокумента&gt;
+&lt;КурсДокумента&gt;1&lt;/КурсДокумента&gt;
+&lt;УчитыватьНДС&gt;true&lt;/УчитыватьНДС&gt;
+&lt;УчитыватьНП&gt;false&lt;/УчитыватьНП&gt;
+&lt;СуммаВключаетНДС&gt;false&lt;/СуммаВключаетНДС&gt;
+&lt;СуммаВключаетНП&gt;false&lt;/СуммаВключаетНП&gt;
+&lt;Комментарий/&gt;
+&lt;СуммаДокумента&gt;44077.14&lt;/СуммаДокумента&gt;
+&lt;ВидОперации&gt;СчетНаОплату&lt;/ВидОперации&gt;
+&lt;ДоговорВзаиморасчетов&gt;
+b0401f23-6e84-11d7-932c-0050ba8480bd&lt;/ДоговорВзаиморасчетов&gt;
+&lt;СкладКомпании&gt;
+317f1317-5a08-11d7-9324-0050ba8480bd&lt;/СкладКомпании&gt;
+&lt;ТипЦен&gt;317f1311-5a08-11d7-9324-0050ba8480bd&lt;/ТипЦен&gt;
+&lt;ДатаОплаты&gt;2008-04-15T00:00:00&lt;/ДатаОплаты&gt;
+&lt;АвтоРезервирование&gt;false&lt;/АвтоРезервирование&gt;
+&lt;АвтоРазмещение&gt;false&lt;/АвтоРазмещение&gt;
+&lt;КурсВзаиморасчетов&gt;33.4209&lt;/КурсВзаиморасчетов&gt;
+&lt;ТипСкидкиНаценки&gt;
+00000000-0000-0000-0000-000000000000&lt;/ТипСкидкиНаценки&gt;
+&lt;Организация&gt;317f1308-5a08-11d7-9324-0050ba8480bd&lt;/Организация&gt;
+&lt;ДатаОтгрузки&gt;2008-04-15T00:00:00&lt;/ДатаОтгрузки&gt;
+&lt;Ответственный&gt;
+4ff40e0b-5ac5-11d7-9325-0050ba8480bd&lt;/Ответственный&gt;
+&lt;КратностьДокумента&gt;1&lt;/КратностьДокумента&gt;
+&lt;КратностьВзаиморасчетов&gt;1&lt;/КратностьВзаиморасчетов&gt;
+&lt;Товары&gt;
+&lt;Row&gt;
+&lt;Номенклатура&gt;
+297c6534-5a08-11d7-9324-0050ba8480bd&lt;/Номенклатура&gt;
+&lt;ЕдиницаИзмерения&gt;
+297c6535-5a08-11d7-9324-0050ba8480bd
+&lt;/ЕдиницаИзмерения&gt;
+&lt;Цена&gt;4537.56&lt;/Цена&gt;
+&lt;Сумма&gt;13612.68&lt;/Сумма&gt;
+&lt;СтавкаНДС&gt;НДС20&lt;/СтавкаНДС&gt;
+&lt;СуммаНДС&gt;2722.54&lt;/СуммаНДС&gt;
+&lt;СтавкаНП&gt;1ac73736-5a08-11d7-9324-0050ba8480bd&lt;/СтавкаНП&gt;
+&lt;СуммаНП&gt;0&lt;/СуммаНП&gt;
+&lt;ХарактеристикаНоменклатуры&gt;
+00000000-0000-0000-0000-000000000000
+&lt;/ХарактеристикаНоменклатуры&gt;
+&lt;Размещение xsi:nil=&quot;true&quot;/&gt;
+&lt;Коэффициент&gt;1&lt;/Коэффициент&gt;
+&lt;Количество&gt;3&lt;/Количество&gt;
+&lt;ПроцентСкидкиНаценки&gt;0&lt;/ПроцентСкидкиНаценки&gt;
+&lt;/Row&gt;
+&lt;Row&gt;
+&lt;Номенклатура&gt;
+317f12d8-5a08-11d7-9324-0050ba8480bd&lt;/Номенклатура&gt;
+&lt;ЕдиницаИзмерения&gt;
+317f12d9-5a08-11d7-9324-0050ba8480bd
+&lt;/ЕдиницаИзмерения&gt;
+&lt;Цена&gt;4915.55&lt;/Цена&gt;
+&lt;Сумма&gt;19662.2&lt;/Сумма&gt;
+&lt;СтавкаНДС&gt;НДС20&lt;/СтавкаНДС&gt;
+&lt;СуммаНДС&gt;3932.44&lt;/СуммаНДС&gt;
+&lt;СтавкаНП&gt;1ac73736-5a08-11d7-9324-0050ba8480bd&lt;/СтавкаНП&gt;
+&lt;СуммаНП&gt;0&lt;/СуммаНП&gt;
+&lt;ХарактеристикаНоменклатуры&gt;
+00000000-0000-0000-0000-000000000000
+&lt;/ХарактеристикаНоменклатуры&gt;
+&lt;Размещение xsi:nil=&quot;true&quot;/&gt;
+&lt;Коэффициент&gt;1&lt;/Коэффициент&gt;
+&lt;Количество&gt;4&lt;/Количество&gt;
+&lt;ПроцентСкидкиНаценки&gt;0&lt;/ПроцентСкидкиНаценки&gt;
+&lt;/Row&gt;
+&lt;/Товары&gt;
+&lt;ВозвратнаяТара/&gt;
+&lt;/DocumentObject.ЗаказПокупателя&gt;
+</pre>
+
+<p class="Note"><span class="Note">Примечание.</span> В используемом
+примере, а также в других примерах данной главы присутствуют длинные строки (например,
+<span class="Interface">&lt;ЕдиницаИзмерения&gt;317f12d9-5a08-11d7-9324-0050ba8480bd&lt;/ЕдиницаИзмерения&gt;)</span>.
+В связи с ограничением, накладываемым форматом книги, такие строки приводятся с
+переносом на следующую строку (или строки) текста. Реально такие строки записываются
+в модуле в одну строку.</p>
+
+<p class="Lang">Набор записей</p>
+
+<p class="Lang-subheader">Описание:</p>
+
+<p class="MsoNormal">Представление в XML набора записей включает отбор, по
+которому получен набор записей, и сами записи, входящие в отбор. Значения
+отбора представлены во вложенном элементе XML с именем <span class="Term">Filter</span>, не
+относящимся ни к какому пространству имен. А все записи, составляющие набор
+записей, представлены во вложенном элементе с именем <span class="Term">Records</span>, также не
+относящимся ни к какому пространству имен. Записи представлены элементами XML с
+именем <span class="Term">Record</span>,
+вложенными в элемент <span class="Term">Records</span>.
+Имя элемента <span class="Term">Record</span>
+также не относится ни к какому пространству имен.</p>
+
+<p class="Lang-subheader">Пример:</p>
+
+<p class="MsoNormal">Представление в XML набора записей регистра накопления <span class="Term">ОстаткиТоваровКомпании</span>:</p>
+
+<a class="copy_source" href="#_top" onClick="return false">Копировать в буфер обмена</a>
+<pre class="src_res">
+&lt;AccumulationRegisterRecordSet.ОстаткиТоваровКомпании&gt;
+&lt;Filter&gt;
+&lt;Recorder xsi:type=&quot;DocumentRef.РеализацияТоваров&quot;&gt;
+1725f36e-6f35-11d7-932d-0050ba8480bd&lt;/Recorder&gt;
+&lt;/Filter&gt;
+&lt;Records&gt;
+&lt;Record&gt;
+&lt;Recorder xsi:type=&quot;DocumentRef.РеализацияТоваров&quot;&gt;
+1725f36e-6f35-11d7-932d-0050ba8480bd&lt;/Recorder&gt;
+&lt;Period&gt;2008-04-13T17:45:39&lt;/Period&gt;
+&lt;MovementType&gt;Expense&lt;/MovementType&gt;
+&lt;Active&gt;true&lt;/Active&gt;
+&lt;Номенклатура&gt;
+297c6556-5a08-11d7-9324-0050ba8480bd&lt;/Номенклатура&gt;
+&lt;СкладКомпании&gt;
+317f1317-5a08-11d7-9324-0050ba8480bd&lt;/СкладКомпании&gt;
+&lt;Заказ xsi:nil=&quot;true&quot;/&gt;
+&lt;ЦенаВРознице&gt;0&lt;/ЦенаВРознице&gt;
+&lt;ХарактеристикаНоменклатуры&gt;
+00000000-0000-0000-0000-000000000000
+&lt;/ХарактеристикаНоменклатуры&gt;
+&lt;Количество&gt;2&lt;/Количество&gt;
+&lt;ПодразделениеКомпании&gt;
+317f130d-5a08-11d7-9324-0050ba8480bd
+&lt;/ПодразделениеКомпании&gt;
+&lt;/Record&gt;
+&lt;Record&gt;
+&lt;Recorder xsi:type=&quot;DocumentRef.РеализацияТоваров&quot;&gt;
+1725f36e-6f35-11d7-932d-0050ba8480bd&lt;/Recorder&gt;
+&lt;Period&gt;2008-04-13T17:45:39&lt;/Period&gt;
+&lt;MovementType&gt;Expense&lt;/MovementType&gt;
+&lt;Active&gt;true&lt;/Active&gt;
+&lt;Номенклатура&gt;
+297c6558-5a08-11d7-9324-0050ba8480bd&lt;/Номенклатура&gt;
+&lt;СкладКомпании&gt;
+317f1317-5a08-11d7-9324-0050ba8480bd&lt;/СкладКомпании&gt;
+&lt;Заказ xsi:nil=&quot;true&quot;/&gt;
+&lt;ЦенаВРознице&gt;0&lt;/ЦенаВРознице&gt;
+&lt;ХарактеристикаНоменклатуры&gt;
+ac47d77e-5ec7-11d7-9329-0050ba8480bd
+&lt;/ХарактеристикаНоменклатуры&gt;
+&lt;Количество&gt;2&lt;/Количество&gt;
+&lt;ПодразделениеКомпании&gt;
+317f130d-5a08-11d7-9324-0050ba8480bd
+&lt;/ПодразделениеКомпании&gt;
+&lt;/Record&gt;
+&lt;/Records&gt;
+&lt;/AccumulationRegisterRecordSet.ОстаткиТоваровКомпании&gt;
+</pre>
+
+<p class="Lang">УдалениеОбъекта</p>
+
+<p class="Lang-subheader">Описание:</p>
+
+<p class="MsoNormal">Типу <span class="Term">УдалениеОбъекта</span> соответствует тип данных XML <span class="Term">ObjectDeletion</span>
+из пространства имен <span class="Interface">http://v8.1c.ru/data</span>. Корневой
+элемент XML-представления значения типа <span class="Term">УдалениеОбъекта</span>
+содержит один вложенный элемент с именем <span class="Term">Ref</span> из пространства
+имен <span class="Interface">http://v8.1c.ru/data</span>, в котором находится
+представление ссылки на объект базы данных.</p>
+
+<p class="Lang-subheader">Пример:</p>
+
+<p class="MsoNormal">Представление в XML объекта типа <span class="Term">УдалениеОбъекта</span>:</p>
+
+<a class="copy_source" href="#_top" onClick="return false">Копировать в буфер обмена</a>
+<pre class="src_res">
+&lt;v8:ObjectDeletion xmlns=&quot;http://v8.1c.ru/data&quot;&gt;
+&lt;v8:Ref xsi:type=&quot;CatalogRef.Банки&quot;&gt;
+60c5cec3-7f6f-4ec3-9620-e757fe3614ca&lt;/v8:Ref&gt;
+&lt;/v8:ObjectDeletion&gt;
+</pre>
+
+<a id="TI000000729" class="bookmark" name="issogl3_15.2.2.2_доступ_к_средствам_xml-сериализации_из_встроенного_языка"><h4>15.2.2.2. Доступ к средствам XML-сериализации из встроенного языка</h4></a>
+
+<p class="MsoNormalCxSpFirst">Для работы с XML-представлениями значений простых типов
+предназначены два метода глобального контекста – <span class="Term">XMLСтрока()</span> и <span class="Term">XMLЗначение()</span>.</p>
+
+<p class="MsoNormalCxSpMiddle">Метод <span class="Term">XMLСтрока()</span> имеет единственный параметр –
+значение, для которого нужно получить XML-представление. Это значение должно
+относиться к типу, являющемуся простым с точки зрения XML-сериализации. В
+противном случае будет вызвано исключение. При нормальном завершении функция возвращает
+строку, которая может быть использована как текст элемента XML, представляющего
+значение простого типа.</p>
+
+<p class="MsoNormalCxSpLast">Метод <span class="Term">XMLЗначение()</span> выполняет противоположную задачу.
+У этого метода два параметра:</p>
+
+<p class="MsoListBulletCxSpFirst">&#9679; 
+тип значения, которое нужно получить из строки;</p>
+
+<p class="MsoListBulletCxSpLast">&#9679; 
+сама строка.</p>
+
+<p class="MsoNormalCxSpFirst">Для преобразования типа данных системы «1С:Предприятие»
+в тип данных XML и наоборот предназначены методы <span class="Term">XMLТип()</span> и <span class="Term">ИзXMLТипа()</span>.
+Метод <span class="Term">XMLТип()</span>
+имеет один параметр – тип, для которого нужно получить соответствующий тип
+данных XML. Если соответствующий тип данных XML определен, то метод возвращает
+значение типа <span class="Term">ТипДанныхXML</span>.
+Если же соответствующего типа данных XML нет, то метод возвращает значение <span class="Term">Неопределено</span>.</p>
+
+<p class="MsoNormalCxSpMiddle">Метод <span class="Term">ИзXMLТипа()</span> имеет два варианта вызова. В первом
+варианте метод имеет единственный параметр типа <span class="Term">ТипДанныхXML</span>. Во
+втором варианте параметра два: имя типа XML и пространство имен. В обоих
+случаях метод возвращает соответствующий типу данных XML тип данных системы «1С:Предприятие»,
+если таковой имеется, или <span class="Term">Неопределено</span> в противном случае.</p>
+
+<p class="MsoNormalCxSpMiddle">Для записи и чтения различных значений в/из XML
+предназначены методы глобального контекста <span class="Term">ЗаписатьXML()</span> и <span class="Term">ПрочитатьXML()</span>.</p>
+
+<p class="MsoNormalCxSpMiddle">Метод <span class="Term">ЗаписатьXML()</span> имеет два обязательных параметра.
+Первый параметр – это объект типа <span class="Term">ЗаписьXML</span>, через который осуществляется запись
+XML; а второй – значение, которое должно быть записано в XML. Необязательные
+параметры образуют три различных варианта вызова метода.</p>
+
+<p class="MsoNormalCxSpMiddle">В простейшем случае параметра три, и в качестве
+третьего параметра указывается значение перечисления <span class="Term">НазначениеТипаXML</span>,
+определяющее необходимость явного указания типа данных XML в атрибуте <span class="Interface">xsi:type</span> корневого элемента XML.</p>
+
+<p class="MsoNormalCxSpMiddle">У следующего варианта вызова в качестве третьего
+параметра используется строковое значение, указывается имя корневого элемента XML.
+При этом подразумевается, что пространство имен не определено. Четвертый параметр –
+значение типа <span class="Term">НазначениеТипаXML</span>,
+определяющее необходимость явного указания типа данных XML.</p>
+
+<p class="MsoNormalCxSpLast">И, наконец, у последнего варианта вызова после параметра,
+указывающего имя корневого элемента XML, появляется еще один параметр – строковое
+значение, обозначающее пространство имен, к которому относится корневой
+элемент. Последний параметр по-прежнему имеет тип <span class="Term">НазначениеТипаXML</span>.</p>
+
+<a class="copy_source" href="#_top" onClick="return false">Копировать в буфер обмена</a>
+<pre class="src_dev">...
+<span class="keyword">Знач</span> <span class="operator">=</span> <span class="string">&quot;Строка такая&quot;</span><span class="operator">;</span>
+ЗаписатьXML<span class="operator">(</span>Зп<span class="operator">,</span> <span class="keyword">Знач</span><span class="operator">)</span><span class="operator">;</span>
+ЗаписатьXML<span class="operator">(</span>Зп<span class="operator">,</span> <span class="keyword">Знач</span><span class="operator">,</span> <span class="string">&quot;Root&quot;</span><span class="operator">,</span> НазначениеТипаXML<span class="operator">.</span>Явное<span class="operator">)</span><span class="operator">;</span>
+ЗаписатьXML<span class="operator">(</span>Зп<span class="operator">,</span> <span class="keyword">Знач</span><span class="operator">,</span> <span class="string">&quot;Root&quot;</span><span class="operator">,</span> <span class="string">&quot;urn:some-namespace&quot;</span><span class="operator">)</span><span class="operator">;</span>
+...</pre>
+
+<p class="MsoNormal">В результате выполнения приведенного выше фрагмента будет
+получен следующий XML-фрагмент.</p>
+
+<a class="copy_source" href="#_top" onClick="return false">Копировать в буфер обмена</a>
+<pre class="src_res">
+...
+&lt;string&gt;Строка такая&lt;/string&gt;
+&lt;Root xsi:type=&quot;xsd:string&quot;&gt;Строка такая&lt;/Root&gt;
+&lt;d1p1:Root xmlns:d1p1=&quot;urn:some-namespace&quot;&gt;Строка такая&lt;/d1p1:Root&gt;
+...
+</pre>
+
+<p class="MsoNormalCxSpFirst">Если в качестве значения, помещаемого в XML, будет
+передано значение типа, который не может быть представлен в XML, то будет
+вызвано исключение.</p>
+
+<p class="MsoNormalCxSpMiddle">Метод <span class="Term">ПрочитатьXML()</span> предназначен для чтения значений
+из XML. Данный метод имеет один обязательный параметр – объект <span class="Term">ЧтениеXML</span>,
+из которого должно быть прочитано значение. В качестве второго параметра может
+быть указан тип значения, которое должно быть прочитано из XML. Если тип
+значения явно указан в XML, то в качестве второго параметра может быть указано
+значение <span class="Term">Неопределенно</span>,
+или же он может быть вообще опущен. В этом случае метод <span class="Term">ПрочитатьXML()</span>
+пытается определить тип читаемого значения по содержимому атрибута <span class="Interface">xsi:type</span>, а если атрибут <span class="Interface">xsi:type</span>
+отсутствует, то по имени элемента. Если не удалось установить тип или значение
+указанного типа не может быть прочитано из XML, то вызывается исключение. При
+удачном завершении метод <span class="Term">ПрочитатьXML()</span> возвращает считанное значение.</p>
+
+<p class="MsoNormalCxSpMiddle">Следует обратить внимание на то, как считываются менеджеры
+значений констант, объекты базы данных и наборы записей. После успешного
+выполнения чтения метод <span class="Term">ПрочитатьXML()</span> возвращает считанное из XML
+значение, но это значение еще не записано в базу данных. Если, например, считан
+элемент справочника, то для того, чтобы считанный элемент справочника оказался
+записанным в базу данных, необходимо обратиться к его методу <span class="Term">Записать()</span>, как и
+при «обычной» записи измененного состояния объекта. Это же относится и к другим
+объектам базы данных, менеджерам записи констант и наборам записей.</p>
+
+<p class="MsoNormalCxSpMiddle">При чтении объекта базы данных из XML в базе
+данных производится поиск объекта с таким же значением ссылки. Если такой
+объект найден, то считывание из XML выглядит так, как будто объект был прочитан
+из базы данных, после чего значения его реквизитов, табличных частей и т. п.
+перезаписываются полученными из XML значениями. Если же объект по ссылке не
+найден, то считывание из XML выглядит как создание нового объекта, установка
+ему значения ссылки и заполнение его содержимого значениями, прочитанными из XML.</p>
+
+<p class="MsoNormalCxSpMiddle">Метод <span class="Term">ВозможностьЧтенияXML()</span> определяет, возможно ли
+считывание значения из объекта <span class="Term">ЧтениеXML</span>, находящегося в текущей позиции
+документа XML. Объект <span class="Term">ЧтениеXML</span>
+передается данному методу в качестве параметра. Если метод возвращает <span class="Term">Истина</span>,
+то чтение возможно; если <span class="Term">Ложь</span> – значение не может быть считано.</p>
+
+<p class="MsoNormalCxSpLast">Метод <span class="Term">ПолучитьXMLТип()</span> позволяет получить из объекта
+<span class="Term">ЧтениеXML</span>
+тип данных XML, соответствующий текущей позиции документа XML. Данный метод
+также имеет один параметр – <span class="Term">ЧтениеXML</span>.</p>
+
+<a id="TI000000730" class="bookmark" name="issogl2_15.2.3_планы_обмена"><h3>15.2.3. Планы обмена</h3></a>
+
+<p class="MsoNormalCxSpFirst">Планы обмена являются центром, вокруг которого группируются
+прочие механизмы, связанные с обменом данными. В одной конфигурации может быть
+определено произвольное количество планов обмена. Каждый из планов обмена определяет
+набор данных, которыми предполагается обмениваться в рамках данного плана
+обмена. Вместе с набором данных могут определяться и специфические форматы
+представления этих данных.</p>
+
+<p class="MsoNormalCxSpMiddle">Предполагается, что форматы данных основаны на XML,
+но благодаря гибкости языка XML и наличию развитых средств работы с XML в
+системе «1С:Предприятие» остается достаточно большое пространство для
+творчества в области способов представления данных.</p>
+
+<p class="MsoNormalCxSpLast">В планах обмена можно выделить две значимые составляющие:</p>
+
+<p class="MsoListBulletCxSpFirst">&#9679; 
+инфраструктура сообщений,</p>
+
+<p class="MsoListBulletCxSpLast">&#9679; 
+служба регистрации изменений.</p>
+
+<p class="MsoNormalCxSpFirst">Элементами данных плана обмена являются узлы плана
+обмена, подобно тому, как элементами данных справочника являются элементы
+справочника. Каждый из узлов плана обмена обозначает участника обмена данными
+по данному плану обмена. Один из узлов соответствует данной информационной
+базе, а остальные – другим участникам, с которыми данная информационная
+база может обмениваться данными.</p>
+
+<p class="MsoNormalCxSpMiddle">Данные переносятся между узлами с помощью сообщений.
+Средства работы с сообщениями образуют <span class="Bold">инфраструктуру сообщений</span>.
+Каждое сообщение относится к определенному плану обмена, имеет определенный <span class="Bold">узел-отправитель</span> и определенный <span class="Bold">узел-получатель</span>.
+Сообщение не может быть отправлено неизвестному узлу и не может быть принято от
+неизвестного узла. Каждое сообщение имеет свой собственный целочисленный номер.</p>
+
+<p class="MsoNormalCxSpMiddle"><span class="Bold">Служба регистрации</span>
+изменений предназначена для регистрации изменений данных, производимых системой
+«1С:Предприятие», чтобы при обмене данными иметь возможность передавать не все
+данные, а только измененные.</p>
+
+<p class="MsoNormalCxSpLast">Таким образом, планы обмена определяют набор механизмов,
+предназначенных для организации обмена данными. Рассмотрим эти механизмы
+подробнее.</p>
+
+<a name="_ref310422566"></a><a id="TI000000731" class="bookmark" name="issogl3_15.2.3.1_узлы_планов_обмена"><h4>15.2.3.1. Узлы планов обмена</h4></a>
+
+<p class="MsoNormalCxSpFirst">При создании нового плана обмена в нем
+автоматически создается один узел – этот узел или узел плана обмена, соответствующий
+данной информационной базе. Остальные узлы, то есть узлы, с которыми данный
+узел может обмениваться данными, в рамках плана обмена автоматически не
+создаются.</p>
+
+<p class="MsoNormalCxSpLast">Для каждого узла должен быть определен уникальный
+код, так как при обмене данными узел идентифицируется по коду. Коды узлов
+задаются таким образом, чтобы обменивающиеся стороны «узнали» друг друга.</p>
+
+<p class="Note"><span class="Note">Примечание.</span> План обмена не может
+быть без кода и наименования. Другими словами, для стандартных реквизитов плана
+обмена <span class="Term">Код</span>
+и <span class="Term">Наименование</span>
+нельзя установить длину, равной 0.</p>
+
+<p class="MsoNormalCxSpFirst">Предположим, требуется организовать обмен данными
+между двумя информационными базами по плану обмена с именем <span class="Term">УдаленныеСклады</span>.
+Одна из этих информационных баз выполняет функции центрального офиса, а
+другая – удаленного склада.</p>
+
+<p class="MsoNormalCxSpMiddle">В этом случае было бы целесообразно в качестве
+значения кода этого узла плана обмена <span class="Term">УдаленныеСклады</span> в первой информационной базе
+задать значение <span class="Term">Офис</span>
+(если, конечно, позволяет длина кода), а во второй – <span class="Term">Склад1</span>. Таким образом,
+эти узлы будут поименованы. Но этого недостаточно, ведь нужно еще задать узлы,
+с которыми будет производиться обмен данными. Для этого в первой информационной
+базе в плане обмена <span class="Term">УдаленныеСклады</span>
+следует создать узел с кодом <span class="Term">Склад1</span>, а во второй информационной базе –
+узел с кодом <span class="Term">Офис</span>.</p>
+
+<p class="MsoNormalCxSpLast">Таким образом, первая информационная база будет
+«знать», что в рамках плана обмена <span class="Term">УдаленныеСклады</span> ее саму «зовут» <span class="Term">Офис</span>
+и она будет вести обмен с узлом по имени <span class="Term">Склад1</span>; а
+вторая – что ее «зовут» <span class="Term">Склад1</span>, а обмениваться данными она будет с
+узлом <span class="Term">Офис</span>.</p>
+
+<a name="_ref480390178"></a><a id="TI000000732" class="bookmark" name="issogl3_15.2.3.2_инфраструктура_сообщений"><h4>15.2.3.2. Инфраструктура сообщений</h4></a>
+
+<p class="MsoNormalCxSpFirst">Важнейшей составляющей инфраструктуры сообщений являются
+сами сообщения. Как уже отмечалось, сообщения передаются в рамках плана обмена
+от одного узла другому. То есть каждое сообщение точно ассоциировано с планом
+обмена, имеет одного отправителя и одного получателя.</p>
+
+<p class="MsoNormalCxSpLast">Рассмотрим, что такое сообщение. Сообщение оформляется
+как документ XML, имеющий определенную структуру. В качестве примера приведем
+следующее сообщение:</p>
+
+<a class="copy_source" href="#_top" onClick="return false">Копировать в буфер обмена</a>
+<pre class="src_res">
+&lt;v8msg:Message xmlns:v8msg=&quot;http://v8.1c.ru/messages&quot;&gt;
+    &lt;v8msg:Header&gt;
+        &lt;v8msg:ExchangePlan&gt;УдаленныеСклады&lt;/v8msg:ExchangePlan&gt;
+        &lt;v8msg:To&gt;Склад1&lt;/v8msg:To&gt;
+        &lt;v8msg:From&gt;Офис&lt;/v8msg:From&gt;
+        &lt;v8msg:MessageNo&gt;20&lt;/v8msg:MessageNo&gt;
+        &lt;v8msg:ReceivedNo&gt;15&lt;/v8msg:ReceivedNo&gt;
+    &lt;/v8msg:Header&gt;
+    &lt;v8msg:Body&gt;
+        &lt;!– Тело сообщения --&gt;
+    &lt;/v8msg:Body&gt;
+&lt;/v8msg:Message&gt;
+</pre>
+
+<p class="MsoNormalCxSpFirst">Все сообщение находится внутри элемента XML с именем
+<span class="Term">Message</span>,
+относящимся к пространству имен <span class="Interface">http://v8.1c.ru/messages</span>.
+Сообщение делится на заголовок и тело сообщения. Соответственно, элемент <span class="Term">Message</span>
+содержит два вложенных элемента с именами <span class="Term">Header</span> и <span class="Term">Body</span>.
+Оба относятся к пространству имен <a href="http://v8.1c.ru/messages" target="_blank">http://v8.1c.ru/messages</a>.</p>
+
+<p class="MsoNormalCxSpLast">Элемент <span class="Term">Header</span> содержит заголовок сообщения. Структура
+заголовка жестко задана. Информация заголовка представлена в нескольких
+элементах XML, вложенных в элемент <span class="Term">Header</span>. Все элементы, вложенные в элемент <span class="Term">Header</span>,
+относятся к пространству имен <span class="Interface">http://v8.1c.ru/messages</span>:</p>
+
+<p class="MsoListBulletCxSpFirst">&#9679; 
+<span class="Term">ExchangePlan</span> содержит имя плана обмена, к которому
+относится сообщение.</p>
+
+<p class="MsoListBulletCxSpMiddle">&#9679; 
+<span class="Term">To</span> содержит код узла, для которого
+предназначено сообщение.</p>
+
+<p class="MsoListBulletCxSpMiddle">&#9679; 
+<span class="Term">From</span> содержит код узла-отправителя.</p>
+
+<p class="MsoListBulletCxSpMiddle">&#9679; 
+<span class="Term">MessageNo</span> содержит номер данного сообщения. Номер
+сообщения является положительным целым числом и присваивается
+узлом-отправителем. Номер каждого последующего сообщения равен номеру предыдущего
+отправленного сообщения плюс 1.</p>
+
+<p class="MsoListBulletCxSpLast">&#9679; 
+<span class="Term">ReceivedNo</span> содержит максимальный номер сообщения,
+которое узел-отправитель данного сообщения принял от узла-получателя данного
+сообщения. Данное значение включено в состав заголовка сообщения для подтверждения
+приема сообщений.</p>
+
+<p class="MsoNormal">Тело сообщения содержится в элементе XML с именем <span class="Term">Body</span>,
+относящимся к пространству имен <span class="Interface">http://v8.1c.ru/messages</span>.
+Данный элемент может иметь произвольное содержимое, определяемое прикладными потребностями.
+Инфраструктурой сообщений содержимое тела сообщения никак не регламентируется.</p>
+
+<a name="_ref74548086"></a><a id="TI000000733" class="bookmark" name="issogl3_15.2.3.3_служба_регистрации_изменений"><h4>15.2.3.3. Служба регистрации изменений</h4></a>
+
+<p class="MsoNormalCxSpFirst">Суть регистрации изменений состоит в том, чтобы
+иметь перечень измененных элементов данных. Эти элементы данных должны быть
+переданы в очередном сообщении тому или иному узлу, с которым производится
+обмен данными. При каждом изменении данных должно быть зарегистрировано, что
+имеются изменения и их предстоит передать во все узлы, с которыми поддерживается
+обмен этими данными. При получении подтверждения приема сообщения, в котором
+были отправлены изменения, записи регистрации изменений должны быть удалены.</p>
+
+<p class="MsoNormalCxSpLast">Регистрация изменений может выполняться для следующих
+элементов данных:</p>
+
+<p class="MsoListBulletCxSpFirst">&#9679; 
+<span class="Term">КонстантаМенеджерЗначения.&lt;Имя константы&gt;</span>;</p>
+
+<p class="MsoListBulletCxSpLast">&#9679; 
+Объекты базы данных:</p>
+
+<p class="MsoListBullet2CxSpFirst">&#9679; 
+<span class="Term">СправочникОбъект.&lt;Имя справочника&gt;</span>;</p>
+
+<p class="MsoListBullet2CxSpMiddle">&#9679; 
+<span class="Term">ДокументОбъект.&lt;Имя документа&gt;</span>;</p>
+
+<p class="MsoListBullet2CxSpMiddle">&#9679; 
+<span class="Term">ПланСчетовОбъект.&lt;Имя плана счетов&gt;</span>;</p>
+
+<p class="MsoListBullet2CxSpMiddle">&#9679; 
+<span class="Term">ПланВидовХарактеристикОбъект.&lt;Имя плана видов
+характеристик&gt;</span>;</p>
+
+<p class="MsoListBullet2CxSpMiddle">&#9679; 
+<span class="Term">ПланВидовРасчетаОбъект.&lt;Имя плана видов расчета&gt;</span>;</p>
+
+<p class="MsoListBullet2CxSpMiddle">&#9679; 
+<span class="Term">БизнесПроцессОбъект.&lt;Имя бизнес-процесса&gt;</span>;</p>
+
+<p class="MsoListBullet2CxSpLast">&#9679; 
+<span class="Term">ЗадачаОбъект.&lt;Имя задачи&gt;</span>.</p>
+
+<p class="MsoListBullet">&#9679; 
+Наборы записей:</p>
+
+<p class="MsoListBullet2CxSpFirst">&#9679; 
+<span class="Term">РегистрСведенийНаборЗаписей.&lt;Имя регистра сведений&gt;</span>;</p>
+
+<p class="MsoListBullet2CxSpMiddle">&#9679; 
+<span class="Term">РегистрБухгалтерииНаборЗаписей.&lt;Имя регистра
+бухгалтерии&gt;</span>;</p>
+
+<p class="MsoListBullet2CxSpMiddle">&#9679; 
+<span class="Term">РегистрНакопленияНаборЗаписей.&lt;Имя регистра
+накопления&gt;</span>;</p>
+
+<p class="MsoListBullet2CxSpMiddle">&#9679; 
+<span class="Term">ПоследовательностьНаборЗаписей.&lt;Имя
+последовательности&gt;</span>;</p>
+
+<p class="MsoListBullet2CxSpMiddle">&#9679; 
+<span class="Term">РегистрРасчетаНаборЗаписей.&lt;Имя регистра расчета&gt;</span>.</p>
+
+<p class="MsoListBullet2CxSpLast">&#9679; 
+<span class="Term">ПерерасчетНаборЗаписей.&lt;Имя перерасчета&gt;</span>.</p>
+
+<p class="MsoNormal">Для каждого из приведенных элементов данных ведется своя
+таблица регистрации изменений. Таблицы имеют разную структуру, в зависимости от
+того, для каких элементов данных регистрируются изменения, но все-таки
+структуры таблиц подобны. В структуре можно выделить три составляющих:</p>
+
+<p class="MsoListBulletCxSpFirst">&#9679; 
+ключ элемента данных, для которого
+регистрируются изменения;</p>
+
+<p class="MsoListBulletCxSpMiddle">&#9679; 
+ссылка на узел, в который изменение должно быть
+передано;</p>
+
+<p class="MsoListBulletCxSpLast">&#9679; 
+номер сообщения, в котором изменение передано в
+первый раз.</p>
+
+<p class="MsoNormal">Структуры таблиц регистрации изменений для разных данных
+отличаются ключом, так как ключи у разных данных разные:</p>
+
+<p class="MsoListBulletCxSpFirst">&#9679; 
+для константы ключом является идентификатор константы;</p>
+
+<p class="MsoListBulletCxSpMiddle">&#9679; 
+для объектов базы данных в качестве ключа используется
+ссылка на объект;</p>
+
+<p class="MsoListBulletCxSpMiddle">&#9679; 
+для наборов записей, для которых определен регистратор,
+в качестве ключа используется ссылка на объект-регистратор;</p>
+
+<p class="MsoListBulletCxSpLast">&#9679; 
+для набора записей регистра сведений, если регистратор
+не определен, в качестве ключа используется совокупность измерений, входящих в
+основной отбор; а если регистр сведений является периодическим и включен основной
+отбор по периоду, то в ключ входит еще и период.</p>
+
+<p class="MsoNormalCxSpFirst">Изменение элемента данных должно быть
+зарегистрировано для всех узлов, в которые изменение должно быть передано.
+Таким образом, в результате изменения элемента данных в таблице регистрации
+изменений должно появиться N записей, где N – количество узлов, для
+которых регистрируются изменения. В каждой из этих записей указано одно и то же
+значение ключа элемента данных и различные значения ссылки на узел.</p>
+
+<p class="MsoNormalCxSpMiddle">Непосредственно после выполнения регистрации изменения
+номер сообщения имеет значение <span class="Term">NULL</span>. При первой отправке изменения в данное
+поле помещается номер сообщения, в котором изменение отправлено.</p>
+
+<p class="MsoNormalCxSpMiddle">При конфигурировании плана обмена определяется так
+называемый состав плана обмена. В состав плана обмена включаются объекты
+метаданных. Вхождение объекта метаданных в состав плана обмена показывает, что
+изменения данных, соответствующих объекту метаданных, могут регистрироваться
+для узлов данного плана обмена. Если объект метаданных не входит в состав ни
+одного плана обмена, то для данного объекта не создается таблица регистрации
+изменений и регистрация изменений данных не выполняется.</p>
+
+<p class="MsoNormalCxSpLast">При определении вхождения объекта метаданных в состав
+плана обмена указывается свойство <span class="Interface">Авторегистрация</span>.
+Авторегистрацию можно разрешить или запретить. Если авторегистрация разрешена,
+то при изменении данных регистрация будет выполнена автоматически. Если
+запрещена, то регистрацию изменения можно выполнить вручную.</p>
+
+<a name="_ref371438991"></a><a id="TI000000734" class="bookmark" name="issogl3_15.2.3.4_доступ_к_механизмам_планов_обмена_средствами_встроенного_языка"><h4>15.2.3.4. Доступ к механизмам планов обмена средствами встроенного языка</h4></a>
+
+<p class="MsoNormalCxSpFirst">Для работы
+с планами обмена из встроенного языка предусмотрен ряд объектов.</p>
+
+<p class="MsoNormalCxSpMiddle">Объект <span class="Term">ПланыОбменаМенеджер</span> помимо традиционной для
+такого рода менеджеров функциональности содержит методы для работы со службой
+регистрации изменений <span class="Term">ЗарегистрироватьИзменения()</span>,
+<span class="Term">УдалитьРегистрациюИзменений()</span>,
+<span class="Term">ИзменениеЗарегистрировано()</span>,
+<span class="Term">ВыбратьИзменения()</span>,
+а также методы для создания объектов, читающих и записывающих сообщения: <span class="Term">СоздатьЧтениеСообщения()</span>, <span class="Term">СоздатьЗаписьСообщения()</span>.</p>
+
+<p class="MsoNormalCxSpMiddle">Для
+объекта <span class="Term">ПланОбменаМенеджер.&lt;Имя плана
+обмена&gt;</span> наиболее важной особенностью является наличие метода <span class="Term">ЭтотУзел()</span>, возвращающего ссылку на узел
+данного плана обмена, соответствующий данной информационной базе (далее
+используется термин «этот узел»). Для определения узла плана обмена,
+соответствующего данной информационной базы, также служит стандартный реквизит <span class="Term">ЭтотУзел</span>. Значение этого реквизита (<span class="Term">ЭтотУзел</span>) можно изменять. Основной вариант
+применения этой операции – восстановление корректного состояния
+информационной базы после того, как произошло восстановление данных из файла
+XML. В этом случае необходимо назначить в восстановленной базе в качестве «этого
+узла» тот элемент плана обмена, который был установлен в базе-источнике. Это
+особенно актуально в том случае, когда ссылки на «этот узел» плана обмена были
+запомнены в каких-либо объектах информационной базы. Рассмотрим процесс замены «этого
+узла» более подробно.</p>
+
+<p class="MsoNormalCxSpLast">Обычной
+записью элемента плана обмена с установленным (или сброшенным) свойством <span class="Term">ЭтотУзел</span> выполнить данную операцию невозможно
+(при наличии в системе элемента плана обмена с установленным свойством <span class="Term">ЭтотУзел</span>) – система выдаст исключение.
+Для того чтобы выполнить эту операцию, необходимо выполнить следующие действия:</p>
+
+<p class="MsoListNumberCxSpFirst">1.  Для
+элемента, который планируется установить новым элементом «этот узел», следует
+установить свойство <span class="Term">ЭтотУзел</span>
+в режиме <span class="Term">ОбменДанными.Загрузка = Истина</span>
+(см. <a href="#_ref371436520">здесь</a>).</p>
+
+<p class="MsoListNumberCxSpMiddle">2.  Для
+элемента, который ранее был элементом «этот узел», следует сбросить свойство <span class="Term">ЭтотУзел</span> (обычным образом).</p>
+
+<p class="MsoListNumberCxSpLast">3.  Рекомендуется
+эти действия (установку нового и отключение старого узла) выполнять в
+транзакции.</p>
+
+<p class="Lang-subheader">Пример
+смены элемента «этот узел»:</p>
+
+<a class="copy_source" href="#_top" onClick="return false">Копировать в буфер обмена</a>
+<pre class="src_dev">НачатьТранзакцию<span class="operator">(</span><span class="operator">)</span><span class="operator">;</span>
+ТекущийЭтотУзел <span class="operator">=</span> ПланыОбмена<span class="operator">.</span>ОбменДанными<span class="operator">.</span>ЭтотУзел<span class="operator">(</span><span class="operator">)</span><span class="operator">;</span>
+НовыйОбъект <span class="operator">=</span> НовыйЭтотУзел<span class="operator">.</span>ПолучитьОбъект<span class="operator">(</span><span class="operator">)</span><span class="operator">;</span>
+НовыйОбъект<span class="operator">.</span>ОбменДанными<span class="operator">.</span>Загрузка <span class="operator">=</span> <span class="keyword">Истина</span><span class="operator">;</span>
+НовыйОбъект<span class="operator">.</span>ЭтотУзел <span class="operator">=</span> <span class="keyword">Истина</span><span class="operator">;</span>
+НовыйОбъект<span class="operator">.</span>Записать<span class="operator">(</span><span class="operator">)</span><span class="operator">;</span>
+ТекущийОбъект <span class="operator">=</span> ТекущийЭтотУзел<span class="operator">.</span>ПолучитьОбъект<span class="operator">(</span><span class="operator">)</span><span class="operator">;</span>
+ТекущийОбъект<span class="operator">.</span>ЭтотУзел <span class="operator">=</span> <span class="keyword">Ложь</span><span class="operator">;</span>
+ТекущийОбъект<span class="operator">.</span>Записать<span class="operator">(</span><span class="operator">)</span><span class="operator">;</span>
+ЗафиксироватьТранзакцию<span class="operator">(</span><span class="operator">)</span><span class="operator">;</span></pre>
+
+<p class="MsoNormal">При смене <span class="Term">ЭтотУзел</span> следует иметь ввиду несколько
+особенностей поведения системы:</p>
+
+<p class="MsoListNumberCxSpFirst">1.  Если
+завершить работу системы в ситуации, когда у плана обмена отсутствует элемент «этот
+узел», то при старте система автоматически создаст новый элемент плана обмена с
+установленным свойством <span class="Term">ЭтотУзел</span>.</p>
+
+<p class="MsoListNumberCxSpLast">2.  Если
+в системе создана два элемента со значением свойства <span class="Term">ЭтотУзел</span> равным значением <span class="Term">Истина</span>, то поведение системы в этом случае
+становится неопределенным.</p>
+
+<p class="MsoNormal"><span class="Term">ПланОбменаОбъект.&lt;Имя плана
+обмена&gt;</span> соответствует узлу плана обмена. Особого внимания
+заслуживают свойства <span class="Term">НомерОтправленного</span>
+и <span class="Term">НомерПринятого</span>.
+Свойство <span class="Term">НомерОтправленного</span>
+содержит номер последнего сообщения, отправленного из данной информационной
+базы в адрес узла, которому соответствует объект <span class="Term">ПланОбменаОбъект.&lt;Имя
+плана обмена&gt;</span>. Свойство <span class="Term">НомерПринятого</span>
+содержит максимальный из номеров сообщений, принятых данной информационной базой
+от узла, которому соответствует объект <span class="Term">ПланОбменаОбъект.&lt;Имя
+плана обмена&gt;</span>.</p>
+
+<a name="_ref371436520"></a><a id="TI000000735" class="bookmark" name="issogl4_15.2.3.4.1_регистрация_изменений"><h5>15.2.3.4.1. Регистрация изменений</h5></a>
+
+<p class="MsoNormalCxSpFirst">Как уже отмечалось, регистрация изменений может выполняться
+автоматически при записи или удалении элемента данных. Рассмотрим, как это
+происходит. У каждого из объектов, чьи изменения могут быть зарегистрированы
+планом обмена, имеется свойство <span class="Term">ОбменДанными</span> с типом <span class="Term">ПараметрыОбменаДанными</span>.
+Данное свойство может быть использовано только для чтения и предназначено для
+управления различными параметрами при обмене данными.</p>
+
+<p class="MsoNormalCxSpMiddle">У объекта <span class="Term">ПараметрыОбменаДанными</span> есть свойство <span class="Term">Получатели</span>,
+имеющее тип <span class="Term">НаборУзлов</span>.
+В данном свойстве хранится перечень узлов, для которых будет выполняться регистрация
+изменений при записи или удалении данных. Список получателей заполняется автоматически
+перед тем, как будет вызван обработчик <span class="Term">ПередЗаписью()</span> при выполнении записи данных
+или <span class="Term">ПередУдалением()</span>
+при выполнении удаления. Однако автоматическое заполнение будет выполнено
+только в том случае, если свойство <span class="Term">Автозаполнение</span> объекта <span class="Term">НаборУзлов</span> имеет
+значение <span class="Term">Истина</span>
+(<span class="Term">Истина</span>
+является значением по умолчанию для свойства <span class="Term">Автозаполнение</span>).
+При автоматическом заполнении в список получателей попадают ссылки на все узлы
+всех планов обмена, в состав которых входит соответствующий объект метаданных,
+при условии, что значением свойства <span class="Interface">Авторегистрация</span>
+является <span class="Interface">Разрешить</span>. Само собой разумеется, что
+узлы, соответствующие данной информационной базе, при этом в список получателей
+не попадут. При выполнении автоматического заполнения список получателей
+предварительно очищается.</p>
+
+<p class="MsoNormalCxSpMiddle">В обработчике <span class="Term">ПередЗаписью()</span>
+(и/или <span class="Term">ПередУдалением()</span>)
+в список получателей можно внести изменения: добавить или удалить ссылки на
+узлы. Однако следует помнить, что список получателей может содержать только
+ссылки на узлы, относящиеся к планам обмена, в состав которых входит соответствующий
+объект метаданных.</p>
+
+<p class="MsoNormalCxSpLast">В приведенном ниже примере обработчик <span class="Term">ПередЗаписью()</span>
+исключает из списка получателей узел с кодом <span class="Term">Особый</span> плана обмена
+<span class="Term">УдаленныеСклады</span>.</p>
+
+<a class="copy_source" href="#_top" onClick="return false">Копировать в буфер обмена</a>
+<pre class="src_dev"><span class="keyword">Процедура</span> ПередЗаписью<span class="operator">(</span><span class="operator">)</span>
+    Узел <span class="operator">=</span> ПланыОбмена<span class="operator">.</span>УдаленныеСклады<span class="operator">.</span>НайтиПоКоду<span class="operator">(</span><span class="string">&quot;Особый&quot;</span><span class="operator">)</span><span class="operator">;</span>
+    ОбменДанными<span class="operator">.</span>Получатели<span class="operator">.</span>Удалить<span class="operator">(</span>Узел<span class="operator">)</span><span class="operator">;</span>
+<span class="keyword">КонецПроцедуры</span></pre>
+
+<p class="MsoNormal">Присвоив свойству <span class="Term">Автозаполнение</span> значение <span class="Term">Ложь</span>, можно
+добиться того, что автоматическое заполнение списка получателей выполняться не
+будет. В этом случае действия со списком получателей можно производить не только
+в обработчике <span class="Term">ПередЗаписью()</span>,
+но и в любом фрагменте кода, как показано в примере.</p>
+
+<a class="copy_source" href="#_top" onClick="return false">Копировать в буфер обмена</a>
+<pre class="src_dev">Объект <span class="operator">=</span> Ссылка<span class="operator">.</span>ПолучитьОбъект<span class="operator">(</span><span class="operator">)</span><span class="operator">;</span>
+Узел <span class="operator">=</span> ПланыОбмена<span class="operator">.</span>УдаленныеСклады<span class="operator">.</span>НайтиПоКоду<span class="operator">(</span><span class="string">&quot;Склад1&quot;</span><span class="operator">)</span><span class="operator">;</span>
+Объект<span class="operator">.</span>ОбменДанными<span class="operator">.</span>Получатели<span class="operator">.</span>Автозаполнение <span class="operator">=</span> <span class="keyword">Ложь</span><span class="operator">;</span>
+Объект<span class="operator">.</span>ОбменДанными<span class="operator">.</span>Получатели<span class="operator">.</span>Добавить<span class="operator">(</span>Узел<span class="operator">)</span><span class="operator">;</span>
+Объект<span class="operator">.</span>Записать<span class="operator">(</span><span class="operator">)</span><span class="operator">;</span></pre>
+
+<p class="MsoNormalCxSpFirst">Ряд методов для регистрации изменений содержит объект
+<span class="Term">ПланыОбменаМенеджер</span>.
+Прежде всего, это метод <span class="Term">ЗарегистрироватьИзменения()</span>. Данный метод
+позволяет выполнять регистрацию изменений одиночных элементов данных или целых
+групп для одного или нескольких узлов. Первый параметр данного метода – ссылка
+на узел плана обмена или массив ссылок на узлы, для которых выполняется регистрация
+изменений. Если первый параметр представляет собой одиночную ссылку на узел, то
+второй параметр может быть опущен. При этом выполняется регистрация изменений
+всех элементов данных, которые на данный момент присутствуют в базе данных и
+изменения которых могут быть зарегистрированы для данного узла.</p>
+
+<p class="MsoNormalCxSpLast">Это может быть полезно для организации начальной передачи
+данных вновь созданному узлу.</p>
+
+<a class="copy_source" href="#_top" onClick="return false">Копировать в буфер обмена</a>
+<pre class="src_dev">Узел <span class="operator">=</span> ПланыОбмена<span class="operator">.</span>УдаленныеСклады<span class="operator">.</span>НайтиПоКоду<span class="operator">(</span><span class="string">&quot;Новый&quot;</span><span class="operator">)</span><span class="operator">;</span>
+ПланыОбмена<span class="operator">.</span>ЗарегистрироватьИзменения<span class="operator">(</span>Узел<span class="operator">)</span><span class="operator">;</span></pre>
+
+<p class="MsoNormalCxSpFirst">Если же первый параметр представляет собой массив
+ссылок на узлы, то второй параметр обязательно должен быть указан. Впрочем,
+второй параметр может присутствовать и в том случае, если первый параметр –
+одиночная ссылка на узел. В зависимости от способа задания второго параметра
+можно зарегистрировать изменения одного элемента данных или же всех данных,
+относящихся к одному объекту метаданных.</p>
+
+<p class="MsoNormalCxSpMiddle">Для регистрации изменений одного элемента в
+качестве второго параметра может быть указан сам элемент данных, ссылка на
+объект базы данных или объект типа <span class="Term">УдалениеОбъекта</span>.</p>
+
+<p class="MsoNormalCxSpMiddle">Если указан элемент данных, то регистрируется его
+изменение. Если указана ссылка на объект базы данных, то регистрируется
+изменение этого объекта.</p>
+
+<p class="MsoNormalCxSpLast">Если второй параметр имеет тип <span class="Term">УдалениеОбъекта</span>,
+то регистрируется изменение объекта базы данных, ссылку на который содержит <span class="Term">УдалениеОбъекта</span>.</p>
+
+<a class="copy_source" href="#_top" onClick="return false">Копировать в буфер обмена</a>
+<pre class="src_dev">Узлы <span class="operator">=</span> <span class="keyword">Новый</span> Массив<span class="operator">(</span><span class="number">2</span><span class="operator">)</span><span class="operator">;</span>
+Узлы<span class="operator">[</span><span class="number">0</span><span class="operator">]</span> <span class="operator">=</span> ПланыОбмена<span class="operator">.</span>УдаленныеСклады<span class="operator">.</span>НайтиПоКоду<span class="operator">(</span><span class="string">&quot;Склад1&quot;</span><span class="operator">)</span><span class="operator">;</span>
+Узлы<span class="operator">[</span><span class="number">1</span><span class="operator">]</span> <span class="operator">=</span> ПланыОбмена<span class="operator">.</span>УдаленныеСклады<span class="operator">.</span>НайтиПоКоду<span class="operator">(</span><span class="string">&quot;Склад2&quot;</span><span class="operator">)</span><span class="operator">;</span>
+Данные <span class="operator">=</span> Справочники<span class="operator">.</span>Номенклатура<span class="operator">.</span>НайтиПоКоду<span class="operator">(</span><span class="string">&quot;ТП00127&quot;</span><span class="operator">)</span><span class="operator">;</span>
+ПланыОбмена<span class="operator">.</span>ЗарегистрироватьИзменения<span class="operator">(</span>Узлы<span class="operator">,</span> Данные<span class="operator">)</span><span class="operator">;</span></pre>
+
+<p class="MsoNormal">Для регистрации изменений всех данных, относящихся к объекту
+метаданных, в качестве второго параметра должен быть указан соответствующий
+объект метаданных.</p>
+
+<a class="copy_source" href="#_top" onClick="return false">Копировать в буфер обмена</a>
+<pre class="src_dev">Узлы <span class="operator">=</span> <span class="keyword">Новый</span> Массив<span class="operator">(</span><span class="number">2</span><span class="operator">)</span><span class="operator">;</span>
+Узлы<span class="operator">[</span><span class="number">0</span><span class="operator">]</span> <span class="operator">=</span> ПланыОбмена<span class="operator">.</span>УдаленныеСклады<span class="operator">.</span>НайтиПоКоду<span class="operator">(</span><span class="string">&quot;Склад1&quot;</span><span class="operator">)</span><span class="operator">;</span>
+Узлы<span class="operator">[</span><span class="number">1</span><span class="operator">]</span> <span class="operator">=</span> ПланыОбмена<span class="operator">.</span>УдаленныеСклады<span class="operator">.</span>НайтиПоКоду<span class="operator">(</span><span class="string">&quot;Склад2&quot;</span><span class="operator">)</span><span class="operator">;</span>
+ПланыОбмена<span class="operator">.</span>ЗарегистрироватьИзменения<span class="operator">(</span>Узлы<span class="operator">,</span> Метаданные<span class="operator">.</span>Справочники<span class="operator">.</span>Номенклатура<span class="operator">)</span><span class="operator">;</span></pre>
+
+<p class="MsoNormal">Для удаления записей регистрации изменений у объекта <span class="Term">ПланыОбменаМенеджер</span>
+имеется метод <span class="Term">УдалитьРегистрациюИзменений()</span>.
+С его помощью можно выполнить удаление записей регистрации изменений для всех
+данных, которые зарегистрированы для узла.</p>
+
+<a class="copy_source" href="#_top" onClick="return false">Копировать в буфер обмена</a>
+<pre class="src_dev">Узел <span class="operator">=</span> ПланыОбмена<span class="operator">.</span>УдаленныеСклады<span class="operator">.</span>НайтиПоКоду<span class="operator">(</span><span class="string">&quot;Склад1&quot;</span><span class="operator">)</span><span class="operator">;</span>
+ПланыОбмена<span class="operator">.</span>УдалитьРегистрациюИзменений<span class="operator">(</span>Узел<span class="operator">)</span><span class="operator">;</span></pre>
+
+<p class="MsoNormal">Можно удалить записи регистрации изменений конкретного элемента
+данных для одного или нескольких узлов.</p>
+
+<a class="copy_source" href="#_top" onClick="return false">Копировать в буфер обмена</a>
+<pre class="src_dev">Узлы <span class="operator">=</span> <span class="keyword">Новый</span> Массив<span class="operator">(</span><span class="number">2</span><span class="operator">)</span><span class="operator">;</span>
+Узлы<span class="operator">[</span><span class="number">0</span><span class="operator">]</span> <span class="operator">=</span> ПланыОбмена<span class="operator">.</span>УдаленныеСклады<span class="operator">.</span>НайтиПоКоду<span class="operator">(</span><span class="string">&quot;Склад1&quot;</span><span class="operator">)</span><span class="operator">;</span>
+Узлы<span class="operator">[</span><span class="number">1</span><span class="operator">]</span> <span class="operator">=</span> ПланыОбмена<span class="operator">.</span>УдаленныеСклады<span class="operator">.</span>НайтиПоКоду<span class="operator">(</span><span class="string">&quot;Склад2&quot;</span><span class="operator">)</span><span class="operator">;</span>
+Данные <span class="operator">=</span> Справочники<span class="operator">.</span>Номенклатура<span class="operator">.</span>НайтиПоКоду<span class="operator">(</span><span class="string">&quot;ТП00127&quot;</span><span class="operator">)</span><span class="operator">;</span>
+ПланыОбмена<span class="operator">.</span>УдалитьРегистрациюИзменений<span class="operator">(</span>Узлы<span class="operator">,</span> Данные<span class="operator">)</span><span class="operator">;</span></pre>
+
+<p class="MsoNormal">Также можно удалить записи регистрации изменений всех
+данных, относящихся к объекту метаданных для одного или нескольких узлов.</p>
+
+<a class="copy_source" href="#_top" onClick="return false">Копировать в буфер обмена</a>
+<pre class="src_dev">Узлы <span class="operator">=</span> <span class="keyword">Новый</span> Массив<span class="operator">(</span><span class="number">2</span><span class="operator">)</span><span class="operator">;</span>
+Узлы<span class="operator">[</span><span class="number">0</span><span class="operator">]</span> <span class="operator">=</span> ПланыОбмена<span class="operator">.</span>УдаленныеСклады<span class="operator">.</span>НайтиПоКоду<span class="operator">(</span><span class="string">&quot;Склад1&quot;</span><span class="operator">)</span><span class="operator">;</span>
+Узлы<span class="operator">[</span><span class="number">1</span><span class="operator">]</span> <span class="operator">=</span> ПланыОбмена<span class="operator">.</span>УдаленныеСклады<span class="operator">.</span>НайтиПоКоду<span class="operator">(</span><span class="string">&quot;Склад2&quot;</span><span class="operator">)</span><span class="operator">;</span>
+ПланыОбмена<span class="operator">.</span>УдалитьРегистрациюИзменений<span class="operator">(</span>Узлы<span class="operator">,</span> Метаданные<span class="operator">.</span>Справочники<span class="operator">.</span>Номенклатура<span class="operator">)</span><span class="operator">;</span></pre>
+
+<p class="MsoNormalCxSpFirst">Кроме того, если в качестве первого параметра
+указан одиночный узел, то в качестве второго параметра может быть указан номер
+сообщения. В этом случае метод <span class="Term">УдалитьРегистрациюИзменений()</span> удаляет из всех
+таблиц регистрации изменений все записи, относящиеся к указанному узлу, у которых
+номер сообщения меньше или равен значению второго параметра (но не <span class="Term">NULL</span>).
+Данная форма метода предназначена для удаления записей регистрации изменений,
+по которым получено подтверждение приема изменений от узла, указанного в первом
+параметре.</p>
+
+<p class="MsoNormalCxSpLast">Для проверки, зарегистрировано ли изменение элемента
+данных для того или иного узла, служит метод <span class="Term">ИзменениеЗарегистрировано()</span>.
+Первый параметр данного метода – ссылка на узел, а второй параметр – элемент
+<span class="Term">Данные</span>,
+ссылка на объект базы данных или <span class="Term">УдалениеОбъекта</span>.</p>
+
+<a id="TI000000736" class="bookmark" name="issogl4_15.2.3.4.2_запись_сообщений_обмена_данными"><h5>15.2.3.4.2. Запись сообщений обмена данными</h5></a>
+
+<p class="MsoNormalCxSpFirst">Для записи сообщений предназначен объект <span class="Term">ЗаписьСообщенияОбмена</span>.</p>
+
+<p class="MsoNormalCxSpMiddle">Объект <span class="Term">ЗаписьСообщенияОбмена</span> создается при обращении
+к методу <span class="Term">СоздатьЗаписьСообщения()</span>
+объекта <span class="Term">ПланыОбменаМенеджер</span>.</p>
+
+<p class="MsoNormalCxSpLast">Объект <span class="Term">ЗаписьСообщенияОбмена</span> имеет три метода:</p>
+
+<p class="MsoListBulletCxSpFirst">&#9679; 
+<span class="Term">НачатьЗапись()</span>,</p>
+
+<p class="MsoListBulletCxSpMiddle">&#9679; 
+<span class="Term">ЗакончитьЗапись()</span>,</p>
+
+<p class="MsoListBulletCxSpLast">&#9679; 
+<span class="Term">ПрерватьЗапись()</span>.</p>
+
+<p class="MsoNormalCxSpFirst">У метода <span class="Term">НачатьЗапись()</span> два параметра: объект типа <span class="Term">ЗаписьXML</span>,
+через который будет записываться сообщение, и ссылка на узел, которому
+адресовано сообщение. Метод <span class="Term">НачатьЗапись()</span> вычисляет номер сообщения путем
+прибавления 1 к номеру предыдущего сообщения; производит запись начала элемента
+XML, содержащего все сообщение, заголовка сообщения целиком, а также начала
+элемента XML, содержащего тело сообщения. После этого можно приступать к записи
+содержимого тела сообщения.</p>
+
+<p class="MsoNormalCxSpMiddle">Для нормального завершения записи сообщения предназначен
+метод <span class="Term">ЗакончитьЗапись()</span>.
+При обращении к этому методу производится запись конца элемента XML, содержащего
+тело сообщения, и конца элемента XML, содержащего все сообщение. После успешной
+записи элементов XML, завершающих сообщение, сообщение считается отправленным,
+и его номер запоминается как номер последнего отправленного сообщения от
+данного узла узлу-получателю.</p>
+
+<p class="MsoNormalCxSpMiddle">Если есть необходимость прервать запись сообщения
+и не считать его отправленным, то следует обратиться к методу <span class="Term">ПрерватьЗапись()</span>.</p>
+
+<p class="MsoNormalCxSpLast">Ниже приведен типовой фрагмент кода, выполняющий запись
+сообщения обмена данными.</p>
+
+<a class="copy_source" href="#_top" onClick="return false">Копировать в буфер обмена</a>
+<pre class="src_dev">ЗаписьXML <span class="operator">=</span> <span class="keyword">Новый</span> ЗаписьXML<span class="operator">(</span><span class="operator">)</span><span class="operator">;</span>
+ЗаписьXML<span class="operator">.</span>ОткрытьФайл<span class="operator">(</span>ИмяФайлаСообщения<span class="operator">)</span><span class="operator">;</span>
+Узел <span class="operator">=</span> ПланыОбмена<span class="operator">.</span>УдаленныеСклады<span class="operator">.</span>НайтиПоКоду<span class="operator">(</span>КодУзла<span class="operator">)</span><span class="operator">;</span>
+ЗаписьСообщения <span class="operator">=</span> ПланыОбмена<span class="operator">.</span>СоздатьЗаписьСообщения<span class="operator">(</span><span class="operator">)</span><span class="operator">;</span>
+ЗаписьСообщения<span class="operator">.</span>НачатьЗапись<span class="operator">(</span>ЗаписьXML<span class="operator">,</span> Узел<span class="operator">)</span><span class="operator">;</span>
+<span class="comment">// Запись тела сообщения</span>
+ЗаписьСообщения<span class="operator">.</span>ЗакончитьЗапись<span class="operator">(</span><span class="operator">)</span><span class="operator">;</span></pre>
+
+<p class="MsoNormalCxSpFirst">Тело сообщения может содержать любые данные, представленные
+в XML, в зависимости от того, какой формат принят для того или иного плана
+обмена. Здесь же будет рассмотрен случай, когда сообщение содержит данные,
+изменения которых зарегистрированы службой регистрации изменений. Для
+реализации этого следует выбрать зарегистрированные изменения, обойти их и
+поместить XML-представления измененных данных в сообщение.</p>
+
+<p class="MsoNormalCxSpMiddle">Для выборки изменений предназначен метод <span class="Term">ВыбратьИзменения()</span>
+объекта <span class="Term">ПланыОбменаМенеджер</span>.
+Данный метод имеет два параметра: ссылка на узел, для которого выбираются
+изменения, и номер сообщения, в которое изменения должны быть помещены. Метод <span class="Term">ВыбратьИзменения()</span>
+возвращает объект типа <span class="Term">ВыборкаДанных</span>,
+содержащий ключи данных, изменения которых были зарегистрированы для узла,
+переданного в качестве первого параметра. Кроме того, метод <span class="Term">ВыбратьИзменения()</span>
+помещает номер сообщения, переданный в качестве второго параметра, в
+соответствующие поля отобранных записей таблиц регистрации изменений, если в
+этих полях содержалось значение <span class="Term">NULL</span>.</p>
+
+<p class="MsoNormalCxSpMiddle">Если изменение уже было выбрано при предыдущем обращении,
+то номер сообщения в соответствующей записи таблицы регистрации изменений не
+модифицируется; а если изменение еще не выбиралось, то при выборке запоминается
+номер первого сообщения, для которого изменения были выбраны.</p>
+
+<p class="MsoNormalCxSpMiddle">Для обхода выбранных изменений объект <span class="Term">ВыборкаДанных</span>
+имеет методы <span class="Term">Следующий()</span>
+и <span class="Term">Получить()</span>.
+При обращении к методу <span class="Term">Следующий()</span>
+происходит переход к следующему ключу в выборке. При первом обращении к методу <span class="Term">Следующий()</span>
+происходит переход к первому ключу. При обращении к методу <span class="Term">Получить()</span>
+происходит выборка из базы данных элемента данных, соответствующего текущему
+ключу выборки. Здесь следует сделать отдельное замечание относительно удаленных
+объектов базы данных. Если регистрация изменения объекта базы данных была
+выполнена в результате его удаления, то метод <span class="Term">Получить()</span> вернет
+не объект базы данных, а объект типа <span class="Term">УдалениеОбъекта</span>.</p>
+
+<p class="MsoNormalCxSpMiddle">Помещение XML-представления элементов данных в сообщение
+выполняется при помощи метода <span class="Term">ЗаписатьXML()</span> глобального контекста.</p>
+
+<p class="MsoNormalCxSpLast">Ниже приведен фрагмент кода, в котором выполняется
+формирование сообщения и в тело которого помещаются зарегистрированные
+изменения данных.</p>
+
+<a class="copy_source" href="#_top" onClick="return false">Копировать в буфер обмена</a>
+<pre class="src_dev">ЗаписьXML <span class="operator">=</span> <span class="keyword">Новый</span> ЗаписьXML<span class="operator">(</span><span class="operator">)</span><span class="operator">;</span>
+ЗаписьXML<span class="operator">.</span>ОткрытьФайл<span class="operator">(</span>ИмяФайлаСообщения<span class="operator">)</span><span class="operator">;</span>
+Узел <span class="operator">=</span> ПланыОбмена<span class="operator">.</span>УдаленныеСклады<span class="operator">.</span>НайтиПоКоду<span class="operator">(</span>КодУзла<span class="operator">)</span><span class="operator">;</span>
+ЗаписьСообщения <span class="operator">=</span> ПланыОбмена<span class="operator">.</span>СоздатьЗаписьСообщения<span class="operator">(</span><span class="operator">)</span><span class="operator">;</span>
+ЗаписьСообщения<span class="operator">.</span>НачатьЗапись<span class="operator">(</span>ЗаписьXML<span class="operator">,</span> Узел<span class="operator">)</span><span class="operator">;</span>
+Выборка <span class="operator">=</span> ПланыОбмена<span class="operator">.</span>ВыбратьИзменения<span class="operator">(</span>Узел<span class="operator">,</span> ЗаписьСообщения<span class="operator">.</span>НомерСообщения<span class="operator">)</span><span class="operator">;</span>
+<span class="keyword">Пока</span> Выборка<span class="operator">.</span>Следующий<span class="operator">(</span><span class="operator">)</span> <span class="keyword">Цикл</span>
+    Данные <span class="operator">=</span> Выборка<span class="operator">.</span>Получить<span class="operator">(</span><span class="operator">)</span><span class="operator">;</span>
+    ЗаписатьXML<span class="operator">(</span>ЗаписьXML<span class="operator">,</span> Данные<span class="operator">)</span><span class="operator">;</span>
+<span class="keyword">КонецЦикла</span><span class="operator">;</span>
+ЗаписьСообщения<span class="operator">.</span>ЗакончитьЗапись<span class="operator">(</span><span class="operator">)</span><span class="operator">;</span></pre>
+
+<a id="TI000000737" class="bookmark" name="issogl4_15.2.3.4.3_чтение_сообщений_обмена_данными"><h5>15.2.3.4.3. Чтение сообщений обмена данными</h5></a>
+
+<p class="MsoNormalCxSpFirst">Для чтения сообщений обмена данными предназначен объект
+<span class="Term">ЧтениеСообщенияОбмена</span>.</p>
+
+<p class="MsoNormalCxSpMiddle">Объект создается при обращении к методу <span class="Term">СоздатьЧтениеСообщения()</span>
+объекта <span class="Term">ПланыОбменаМенеджер</span>.</p>
+
+<p class="MsoNormalCxSpLast">Объект <span class="Term">ЧтениеСообщенияОбмена</span> имеет три метода:</p>
+
+<p class="MsoListBulletCxSpFirst">&#9679; 
+<span class="Term">НачатьЧтение()</span>,</p>
+
+<p class="MsoListBulletCxSpMiddle">&#9679; 
+<span class="Term">ЗакончитьЧтение()</span>,</p>
+
+<p class="MsoListBulletCxSpLast">&#9679; 
+<span class="Term">ПрерватьЧтение()</span>.</p>
+
+<p class="MsoNormalCxSpFirst">У метода <span class="Term">НачатьЧтение()</span> два параметра: объект типа <span class="Term">ЧтениеXML</span>,
+через который производится чтение сообщения, и значение перечисления <span class="Term">ДопустимыйНомерСообщения</span>.</p>
+
+<p class="MsoNormalCxSpLast">Метод <span class="Term">НачатьЧтение()</span> считывает начало элемента XML,
+содержащего все сообщение, читает заголовок сообщения и проверяет его
+приемлемость:</p>
+
+<p class="MsoListBulletCxSpFirst">&#9679; 
+определен ли план обмена, к которому относится сообщение;</p>
+
+<p class="MsoListBulletCxSpMiddle">&#9679; 
+правильно ли заданы отправитель и получатель сообщения;</p>
+
+<p class="MsoListBulletCxSpLast">&#9679; 
+допустимый ли номер имеет сообщение.</p>
+
+<p class="MsoNormalCxSpFirst">Допустимость номера сообщения определяется с учетом
+значения второго параметра. Если второй параметр имеет значение <span class="Term">ДопустимыйНомерСообщения.Любой</span>,
+то читаемое сообщение может иметь любой номер. Если значение второго параметра <span class="Term">ДопустимыйНомерСообщения.Следующий</span>,
+то номер сообщения должен быть в точности на 1 больше максимального из номеров
+ранее принятых сообщений. А если второй параметр принимает значение <span class="Term">ДопустимыйНомерСообщения.Больший</span>,
+то номер сообщения просто должен быть больше максимального из номеров ранее
+принятых сообщений. Значением по умолчанию для второго параметра является <span class="Term">ДопустимыйНомерСообщения.Больший</span>.</p>
+
+<p class="MsoNormalCxSpMiddle">После этого считывается начало элемента XML, содержащего
+тело сообщения. Если сообщение не является допустимым или при чтении произошла
+ошибка, то вызывается исключение. Если же все нормально, то можно приступать к
+чтению тела сообщения.</p>
+
+<p class="MsoNormalCxSpMiddle">Для нормального завершения чтения сообщения используется
+метод <span class="Term">ЗакончитьЧтение()</span>.
+Данный метод считывает конец элемента XML, содержащего тело элемента, и конец
+элемента XML, содержащего все сообщения. Если все хорошо, то сообщение
+считается принятым, и номер сообщения, если он больше максимального из номеров
+ранее принятых сообщений, запоминается как максимальный номер принятого
+сообщения.</p>
+
+<p class="MsoNormalCxSpMiddle">Метод <span class="Term">ПрерватьЧтение()</span> позволяет прервать чтение сообщения
+в любой момент.</p>
+
+<p class="MsoNormalCxSpLast">Ниже приведен типовой фрагмент кода, в котором показано
+использование объекта <span class="Term">ЧтениеСообщенияОбмена</span>.</p>
+
+<a class="copy_source" href="#_top" onClick="return false">Копировать в буфер обмена</a>
+<pre class="src_dev">ЧтениеXML <span class="operator">=</span> <span class="keyword">Новый</span> ЧтениеXML<span class="operator">(</span><span class="operator">)</span><span class="operator">;</span>
+ЧтениеXML<span class="operator">.</span>ОткрытьФайл<span class="operator">(</span>ИмяФайлаСообщения<span class="operator">)</span><span class="operator">;</span>
+ЧтениеСообщения <span class="operator">=</span> ПланыОбмена<span class="operator">.</span>СоздатьЧтениеСообщения<span class="operator">(</span><span class="operator">)</span><span class="operator">;</span>
+ЧтениеСообщения<span class="operator">.</span>НачатьЧтение<span class="operator">(</span>ЧтениеXML<span class="operator">,</span> ДопустимыйНомерСообщения<span class="operator">.</span>Больший<span class="operator">)</span><span class="operator">;</span>
+<span class="comment">// Чтение тела сообщения</span>
+ЧтениеСообщения<span class="operator">.</span>ЗакончитьЧтение<span class="operator">(</span><span class="operator">)</span><span class="operator">;</span></pre>
+
+<p class="MsoNormal">Как уже отмечалось, тело сообщения может в принципе содержать
+любую информацию, но здесь будет рассмотрен случай считывания из тела сообщения
+измененных данных. Фрагмент кода, в котором производится чтение сообщения,
+содержащего измененные данные, выглядит следующим образом.</p>
+
+<a class="copy_source" href="#_top" onClick="return false">Копировать в буфер обмена</a>
+<pre class="src_dev">ЧтениеXML <span class="operator">=</span> <span class="keyword">Новый</span> ЧтениеXML<span class="operator">(</span><span class="operator">)</span><span class="operator">;</span>
+ЧтениеXML<span class="operator">.</span>ОткрытьФайл<span class="operator">(</span>ИмяФайлаСообщения<span class="operator">)</span><span class="operator">;</span>
+ЧтениеСообщения <span class="operator">=</span> ПланыОбмена<span class="operator">.</span>СоздатьЧтениеСообщения<span class="operator">(</span><span class="operator">)</span><span class="operator">;</span>
+ЧтениеСообщения<span class="operator">.</span>НачатьЧтение<span class="operator">(</span>ЧтениеXML<span class="operator">)</span><span class="operator">;</span>
+ПланыОбмена<span class="operator">.</span>УдалитьРегистрациюИзменений<span class="operator">(</span>ЧтениеСообщения<span class="operator">.</span>Отправитель<span class="operator">,</span> ЧтениеСообщения<span class="operator">.</span>НомерСообщения<span class="operator">)</span><span class="operator">;</span>
+<span class="keyword">Пока</span> ВозможностьЧтенияXML<span class="operator">(</span>ЧтениеXML<span class="operator">)</span> <span class="keyword">Цикл</span>
+    Данные <span class="operator">=</span> ПрочитатьXML<span class="operator">(</span>ЧтениеXML<span class="operator">)</span><span class="operator">;</span>
+    Данные<span class="operator">.</span>ОбменДанными<span class="operator">.</span>Отправитель <span class="operator">=</span> ЧтениеСообщения<span class="operator">.</span>Отправитель<span class="operator">;</span>
+    Данные<span class="operator">.</span>ОбменДанными<span class="operator">.</span>Загрузка <span class="operator">=</span> <span class="keyword">Истина</span><span class="operator">;</span>
+    Данные<span class="operator">.</span>Записать<span class="operator">(</span><span class="operator">)</span><span class="operator">;</span>
+<span class="keyword">КонецЦикла</span><span class="operator">;</span>
+ЧтениеСообщения<span class="operator">.</span>ЗакончитьЧтение<span class="operator">(</span><span class="operator">)</span><span class="operator">;</span></pre>
+
+<p class="MsoNormal">Обращение к методу <span class="Term">УдалитьРегистрациюИзменений()</span> объекта <span class="Term">МенеджерПлановОбмена</span>
+предназначено для удаления записей регистрации, по которым произведено
+подтверждение приема. Далее из тела сообщения с помощью метода <span class="Term">ПрочитатьXML()</span>
+считываются данные, пока имеется возможность считывания. Перед записью данных в
+базу данных производится изменение двух свойств объекта <span class="Term">ПараметрыОбменаДанными</span>,
+который принадлежит объекту, представляющему считанные из XML данные. В
+свойстве <span class="Term">Отправитель</span>
+указывается узел-отправитель данных, чтобы не производить регистрацию изменений
+для отправки в узел, откуда эти данные только что были получены. Установка
+свойству <span class="Term">Загрузка</span>
+значения <span class="Term">Истина</span>
+означает, что запись производится в рамках загрузки данных, а не обычной записи.
+В этом случае при записи не будут производиться некоторые проверки.</p>
+
+<a id="TI000000738" class="bookmark" name="issogl4_15.2.3.4.4_гарантированная_доставка_сообщений"><h5>15.2.3.4.4. Гарантированная доставка сообщений</h5></a>
+
+<p class="MsoNormalCxSpFirst">В рассмотренных примерах чтения и записи сообщений
+обмена данными предполагалось, что отправленные сообщения могут быть потеряны
+по тем или иным причинам. Поэтому при записи сообщений в них помещались все
+зарегистрированные изменения, в том числе и те, которые уже были отправлены, но
+по ним еще не получено подтверждение приема.</p>
+
+<p class="MsoNormalCxSpLast">При приеме допустимым считается сообщение с номером
+большим, чем максимальный из номеров принятых сообщений. Удаление регистрации
+изменений производится только для номеров сообщений, прием которых подтвержден.</p>
+
+<a class="copy_source" href="#_top" onClick="return false">Копировать в буфер обмена</a>
+<pre class="src_dev">ЧтениеСообщения<span class="operator">.</span>НачатьЧтение<span class="operator">(</span>ЧтениеXML<span class="operator">)</span><span class="operator">;</span>
+ПланыОбмена<span class="operator">.</span>УдалитьРегистрациюИзменений<span class="operator">(</span>ЧтениеСообщения<span class="operator">.</span>Отправитель<span class="operator">,</span> ЧтениеСообщения<span class="operator">.</span>НомерПринятого<span class="operator">)</span><span class="operator">;</span></pre>
+
+<p class="MsoNormalCxSpFirst">Такая логика считается типовой при реализации
+обмена данными. Однако можно реализовать и вариант, при котором доставка
+сообщений считается гарантированной. В этом случае удаление регистрации
+изменений должно производиться непосредственно после удачного завершения записи
+сообщения, чтобы отправка уже отправленных изменений не повторялась. А
+приниматься может только то сообщение, номер которого на 1 больше максимального
+из номеров ранее принятых сообщений.</p>
+
+<p class="MsoNormalCxSpLast">В этом случае ранее приведенный фрагмент кода, в котором
+выполняется запись сообщения, будет выглядеть следующим образом.</p>
+
+<a class="copy_source" href="#_top" onClick="return false">Копировать в буфер обмена</a>
+<pre class="src_dev">ЗаписьXML <span class="operator">=</span> <span class="keyword">Новый</span> ЗаписьXML<span class="operator">(</span><span class="operator">)</span><span class="operator">;</span>
+ЗаписьXML<span class="operator">.</span>ОткрытьФайл<span class="operator">(</span>ИмяФайлаСообщения<span class="operator">)</span><span class="operator">;</span>
+Узел <span class="operator">=</span> ПланыОбмена<span class="operator">.</span>УдаленныеСклады<span class="operator">.</span>НайтиПоКоду<span class="operator">(</span>КодУзла<span class="operator">)</span><span class="operator">;</span>
+ЗаписьСообщения <span class="operator">=</span> ПланыОбмена<span class="operator">.</span>СоздатьЗаписьСообщения<span class="operator">(</span><span class="operator">)</span><span class="operator">;</span>
+ЗаписьСообщения<span class="operator">.</span>НачатьЗапись<span class="operator">(</span>ЗаписьXML<span class="operator">,</span> Узел<span class="operator">)</span><span class="operator">;</span>
+Выборка <span class="operator">=</span> ПланыОбмена<span class="operator">.</span>ВыбратьИзменения<span class="operator">(</span>Узел<span class="operator">,</span> ЗаписьСообщения<span class="operator">.</span>НомерСообщения<span class="operator">)</span><span class="operator">;</span>
+<span class="keyword">Пока</span> Выборка<span class="operator">.</span>Следующий<span class="operator">(</span><span class="operator">)</span> <span class="keyword">Цикл</span>
+    Данные <span class="operator">=</span> Выборка<span class="operator">.</span>Получить<span class="operator">(</span><span class="operator">)</span><span class="operator">;</span>
+    ЗаписатьXML<span class="operator">(</span>ЗаписьXML<span class="operator">,</span> Данные<span class="operator">)</span><span class="operator">;</span>
+<span class="keyword">КонецЦикла</span><span class="operator">;</span>
+НомерСообщения <span class="operator">=</span> ЗаписьСообщения<span class="operator">.</span>НомерСообщения<span class="operator">;</span>
+ЗаписьСообщения<span class="operator">.</span>ЗакончитьЗапись<span class="operator">(</span><span class="operator">)</span><span class="operator">;</span>
+ПланыОбмена<span class="operator">.</span>УдалитьРегистрациюИзменений<span class="operator">(</span>Узел<span class="operator">,</span> НомерСообщения<span class="operator">)</span><span class="operator">;</span></pre>
+
+<p class="MsoNormal">Фрагмент кода, в котором происходит прием сообщения, будет
+выглядеть следующим образом:</p>
+
+<a class="copy_source" href="#_top" onClick="return false">Копировать в буфер обмена</a>
+<pre class="src_dev">ЧтениеXML <span class="operator">=</span> <span class="keyword">Новый</span> ЧтениеXML<span class="operator">(</span><span class="operator">)</span><span class="operator">;</span>
+ЧтениеXML<span class="operator">.</span>ОткрытьФайл<span class="operator">(</span>ИмяФайлаСообщения<span class="operator">)</span><span class="operator">;</span>
+ЧтениеСообщения <span class="operator">=</span> ПланыОбмена<span class="operator">.</span>СоздатьЧтениеСообщения<span class="operator">(</span><span class="operator">)</span><span class="operator">;</span>
+ЧтениеСообщения<span class="operator">.</span>НачатьЧтение<span class="operator">(</span>ЧтениеXML<span class="operator">,</span> ДопустимыйНомерСообщения<span class="operator">.</span>Следующий<span class="operator">)</span><span class="operator">;</span>
+<span class="keyword">Пока</span> ВозможностьЧтенияXML<span class="operator">(</span>ЧтениеXML<span class="operator">)</span> <span class="keyword">Цикл</span>
+    Данные <span class="operator">=</span> ПрочитатьXML<span class="operator">(</span>ЧтениеXML<span class="operator">)</span><span class="operator">;</span>
+    Данные<span class="operator">.</span>ОбменДанными<span class="operator">.</span>Отправитель <span class="operator">=</span> ЧтениеСообщения<span class="operator">.</span>Отправитель<span class="operator">;</span>
+    Данные<span class="operator">.</span>ОбменДанными<span class="operator">.</span>Загрузка <span class="operator">=</span> <span class="keyword">Истина</span><span class="operator">;</span>
+    Данные<span class="operator">.</span>Записать<span class="operator">(</span><span class="operator">)</span><span class="operator">;</span>
+<span class="keyword">КонецЦикла</span><span class="operator">;</span>
+ЧтениеСообщения<span class="operator">.</span>ЗакончитьЧтение<span class="operator">(</span><span class="operator">)</span><span class="operator">;</span></pre>
+
+<p class="MsoNormal">Следует учитывать, что организация гарантированной доставки
+может быть достаточно сложной, и в большинстве случаев предпочтительно повторно
+посылать изменения до получения подтверждения их приема.</p>
+
+<a id="TI000000739" class="bookmark" name="issogl4_15.2.3.4.5_разрешение_коллизий"><h5>15.2.3.4.5. Разрешение коллизий</h5></a>
+
+<p class="MsoNormalCxSpFirst">В приведенных выше примерах чтения и записи сообщений
+не учитывалось, что при обмене данными один и тот же элемент данных может быть
+изменен одновременно в двух обменивающихся данными узлах. В этом случае непонятно,
+какое из изменений должно быть в конечном счете принято. Такая ситуация
+называется <span class="Bold">коллизией</span>.</p>
+
+<p class="MsoNormalCxSpMiddle">Одним из способов разрешения коллизий может быть
+определение, какой из узлов является главным, а какой – подчиненным. При
+этом должно быть принято изменение, сделанное в главном узле; а изменение, сделанное
+в подчиненном узле, должно быть отвергнуто.</p>
+
+<p class="MsoNormalCxSpMiddle">Для реализации этого при приеме сообщения перед записью
+данных необходимо установить, зарегистрировано ли изменение этих данных, и, в
+зависимости от роли узла в данной паре получатель-отправитель, принять решение:
+записывать или не записывать данные.</p>
+
+<p class="MsoNormalCxSpLast">Ниже приведен пример реализации стратегии «главный –
+подчиненный» при чтении сообщения. Предполагается, что для хранения роли узла в
+плане обмена был определен реквизит <span class="Term">Главный</span>, имеющий тип <span class="Term">Булево</span>.</p>
+
+<a class="copy_source" href="#_top" onClick="return false">Копировать в буфер обмена</a>
+<pre class="src_dev">ЧтениеXML <span class="operator">=</span> <span class="keyword">Новый</span> ЧтениеXML<span class="operator">(</span><span class="operator">)</span><span class="operator">;</span>
+ЧтениеXML<span class="operator">.</span>ОткрытьФайл<span class="operator">(</span>ИмяФайлаСообщения<span class="operator">)</span><span class="operator">;</span>
+ЧтениеСообщения <span class="operator">=</span> ПланыОбмена<span class="operator">.</span>СоздатьЧтениеСообщения<span class="operator">(</span><span class="operator">)</span><span class="operator">;</span>
+ЧтениеСообщения<span class="operator">.</span>НачатьЧтение<span class="operator">(</span>ЧтениеXML<span class="operator">)</span><span class="operator">;</span>
+ПланыОбмена<span class="operator">.</span>УдалитьРегистрациюИзменений<span class="operator">(</span>ЧтениеСообщения<span class="operator">.</span>Отправитель<span class="operator">,</span> ЧтениеСообщения<span class="operator">.</span>НомерСообщения<span class="operator">)</span><span class="operator">;</span>
+Отправитель <span class="operator">=</span> ЧтениеСообщения<span class="operator">.</span>Отправитель<span class="operator">;</span>
+Главный <span class="operator">=</span> Отправитель<span class="operator">.</span>Главный<span class="operator">;</span>
+<span class="keyword">Пока</span> ВозможностьЧтенияXML<span class="operator">(</span>ЧтениеXML<span class="operator">)</span> <span class="keyword">Цикл</span>
+    Данные <span class="operator">=</span> ПрочитатьXML<span class="operator">(</span>ЧтениеXML<span class="operator">)</span><span class="operator">;</span>
+    <span class="keyword">Если</span> Главный <span class="keyword">Или</span> <span class="keyword">Не</span> ПланыОбмена<span class="operator">.</span>ИзменениеЗарегистрировано<span class="operator">(</span>Отправитель<span class="operator">,</span> Данные<span class="operator">)</span> <span class="keyword">Тогда</span>
+        Данные<span class="operator">.</span>ОбменДанными<span class="operator">.</span>Отправитель <span class="operator">=</span> ЧтениеСообщения<span class="operator">.</span>Отправитель<span class="operator">;</span>
+        Данные<span class="operator">.</span>ОбменДанными<span class="operator">.</span>Загрузка <span class="operator">=</span> <span class="keyword">Истина</span><span class="operator">;</span>
+        Данные<span class="operator">.</span>Записать<span class="operator">(</span><span class="operator">)</span><span class="operator">;</span>
+    <span class="keyword">КонецЕсли</span><span class="operator">;</span>
+<span class="keyword">КонецЦикла</span><span class="operator">;</span>
+ЧтениеСообщения<span class="operator">.</span>ЗакончитьЧтение<span class="operator">(</span><span class="operator">)</span><span class="operator">;</span></pre>
+
+<a id="TI000000740" class="bookmark" name="issogl4_15.2.3.4.6_задание_соответствий_пространств_имен"><h5>15.2.3.4.6. Задание соответствий пространств имен</h5></a>
+
+<p class="MsoNormalCxSpFirst">При записи сообщения, после выполнения метода <span class="Term">НачатьЗапись()</span>
+объекта <span class="Term">ЗаписьСообщенияОбмена</span>,
+не определено никаких соответствий пространств имен. В то же время ряд
+пространств имен может многократно использоваться при записи отдельных
+элементов данных. В этом случае определения соответствий одних и тех же
+пространств имен будут многократно встречаться в теле сообщения. Поэтому целесообразно
+после начала записи сообщения, но до начала записи тела сообщения поместить
+несколько строк кода, в которых будут определяться соответствия для наиболее
+часто используемых пространств имен.</p>
+
+<p class="MsoNormalCxSpLast">Например, как это сделано в приведенном ниже фрагменте
+записи сообщения.</p>
+
+<a class="copy_source" href="#_top" onClick="return false">Копировать в буфер обмена</a>
+<pre class="src_dev">ЗаписьXML <span class="operator">=</span> <span class="keyword">Новый</span> ЗаписьXML<span class="operator">(</span><span class="operator">)</span><span class="operator">;</span>
+ЗаписьXML<span class="operator">.</span>ОткрытьФайл<span class="operator">(</span>ИмяФайлаСообщения<span class="operator">)</span><span class="operator">;</span>
+Узел <span class="operator">=</span> ПланыОбмена<span class="operator">.</span>УдаленныеСклады<span class="operator">.</span>НайтиПоКоду<span class="operator">(</span>КодУзла<span class="operator">)</span><span class="operator">;</span>
+ЗаписьСообщения <span class="operator">=</span> ПланыОбмена<span class="operator">.</span>СоздатьЗаписьСообщения<span class="operator">(</span><span class="operator">)</span><span class="operator">;</span>
+ЗаписьСообщения<span class="operator">.</span>НачатьЗапись<span class="operator">(</span>ЗаписьXML<span class="operator">,</span> Узел<span class="operator">)</span><span class="operator">;</span>
+ЗаписьXML<span class="operator">.</span>ЗаписатьСоответствиеПространстваИмен<span class="operator">(</span><span class="string">&quot;xsd&quot;</span><span class="operator">,</span> <span class="string">&quot;http://www.w3.org/2001/XMLSchema&quot;</span><span class="operator">)</span><span class="operator">;</span>
+ЗаписьXML<span class="operator">.</span>ЗаписатьСоответствиеПространстваИмен<span class="operator">(</span><span class="string">&quot;xsi&quot;</span><span class="operator">,</span> <span class="string">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span><span class="operator">)</span><span class="operator">;</span>
+ЗаписьXML<span class="operator">.</span>ЗаписатьСоответствиеПространстваИмен<span class="operator">(</span><span class="string">&quot;v8&quot;</span><span class="operator">,</span> <span class="string">&quot;http://v8.1c.ru/data&quot;</span><span class="operator">)</span><span class="operator">;</span>
+Выборка <span class="operator">=</span> ПланыОбмена<span class="operator">.</span>ВыбратьИзменения<span class="operator">(</span>Узел<span class="operator">,</span> ЗаписьСообщения<span class="operator">.</span>НомерСообщения<span class="operator">)</span><span class="operator">;</span>
+<span class="keyword">Пока</span> Выборка<span class="operator">.</span>Следующий<span class="operator">(</span><span class="operator">)</span> <span class="keyword">Цикл</span>
+    Данные <span class="operator">=</span> Выборка<span class="operator">.</span>Получить<span class="operator">(</span><span class="operator">)</span><span class="operator">;</span>
+    ЗаписатьXML<span class="operator">(</span>ЗаписьXML<span class="operator">,</span> Данные<span class="operator">)</span><span class="operator">;</span>
+<span class="keyword">КонецЦикла</span><span class="operator">;</span>
+НомерСообщения <span class="operator">=</span> ЗаписьСообщения<span class="operator">.</span>НомерСообщения<span class="operator">;</span>
+ЗаписьСообщения<span class="operator">.</span>ЗакончитьЗапись<span class="operator">(</span><span class="operator">)</span><span class="operator">;</span>
+ПланыОбмена<span class="operator">.</span>УдалитьРегистрациюИзменений<span class="operator">(</span>Узел<span class="operator">,</span> НомерСообщения<span class="operator">)</span><span class="operator">;</span></pre>
+
+<p class="MsoNormal">В ряде случаев такой прием поможет ощутимо уменьшить размер
+документа XML, в котором находится сообщение обмена данными.</p>
+
+<a name="_ref346711531"></a><a name="_ref224446082"></a><a id="TI000000741" class="bookmark" name="issogl1_15.3_распределенные_информационные_базы"><h2>15.3. Распределенные информационные базы</h2></a>
+
+<a id="TI000000742" class="bookmark" name="issogl2_15.3.1_общие_принципы"><h3>15.3.1. Общие принципы</h3></a>
+
+<p class="Regularbeforepicture">Распределенная информационная база – это
+совокупность информационных баз системы «1С:Предприятие» (узлов распределенной
+информационной базы), в которых поддерживается синхронизация конфигурации и
+данных. Распределенная информационная база имеет иерархическую структуру. У каждого
+узла распределенной информационной базы может быть один <span class="Bold">главный</span>
+и произвольное число <span class="Bold">подчиненных</span> узлов. <span class="Interface">Самый главный узел</span>, или узел, у которого нет главного
+узла, называется <span class="Bold">корневым</span> узлом распределенной информационной
+базы (база <span class="Interface">Главная база данных</span> на <a href="#_ref212367895">рис.444</a>). Каждый из узлов может обмениваться данными только
+со своими «соседями», то есть со своими главными и подчиненными узлами.</p>
+
+<p class="Picture"><IMG src="_img/img00452.gif?_=1496848987" WIDTH="800" ALT HEIGHT="411"></p>
+
+<p class="MsoCaption"><a name="_ref212367895">Рис. </a>444. Иерархическая распределенная
+информационная база</p>
+
+<p class="MsoNormalCxSpFirst">Изменения конфигурации допускаются только в корневом
+узле распределенной информационной базы с последующим ее распространением по
+иерархии от корневого узла к его подчиненным и т. д. Таким образом,
+механизм управления распределенными информационными базами обеспечивает наличие
+во всех узлах распределенной информационной базы одной и той же конфигурации.</p>
+
+<p class="MsoNormalCxSpMiddle">Изменение данных допускается в любом узле распределенной
+информационной базы. Синхронизация данных достигается путем распространения
+изменений данных, произведенных в одном узле, во все структуры распределенной
+информационной базы.</p>
+
+<p class="MsoNormalCxSpMiddle">При организации работы последовательности документов
+в распределенной информационной базе нужно учитывать, что участие документа в
+последовательности имеет смысл только в одном узле распределенной информационной
+базы. Это может быть либо узел, в котором документ был создан, либо другой
+узел, но узел должен быть один. Нарушение данного принципа может привести к
+различным проблемам в процессе работы с системой, например, невозможности
+восстановления последовательности документов.</p>
+
+<p class="MsoNormalCxSpLast">Если в рамках всей распределенной информационной
+базы поддерживается полная идентичность конфигурации, то полная идентичность
+данных необязательна. Состав данных, изменения которых передаются в рамках
+распределенной информационной базы, может регулироваться как «по вертикали»
+(путем определения множества объектов метаданных, данные которых участвуют в
+обмене), так и «по горизонтали» (путем задания условий на передачу и прием
+изменений на уровне отдельных элементов данных).</p>
+
+<a id="TI000000743" class="bookmark" name="issogl2_15.3.2_планы_обмена"><h3>15.3.2. Планы обмена</h3></a>
+
+<p class="MsoNormalCxSpFirst">Планы обмена занимают центральное место и в управлении
+распределенными информационными базами. Но для того, чтобы тот или иной план
+обмена оказался пригоден для организации распределенной информационной базы, у
+него при конфигурировании должно быть установлено свойство <span class="Interface">Распределенная информационная база</span>.</p>
+
+<p class="MsoNormalCxSpMiddle">Данные в распределенной информационной базе переносятся
+с помощью сообщений, предоставляемых инфраструктурой сообщений. В отличие от
+универсальных механизмов обмена данными, содержимое сообщений, передаваемых
+между узлами распределенной информационной базы, не может быть произвольным, а
+является регламентированным протоколом обмена, принятым для распределенной
+информационной базы.</p>
+
+<p class="MsoNormalCxSpMiddle">Номенклатура данных, изменениями которых будет производиться
+обмен в рамках распределенной информационной базы, определяется составом плана
+обмена. Вхождение объекта метаданных в состав плана обмена показывает, что
+изменения данных, соответствующих объекту метаданных, могут регистрироваться
+для узлов данного плана обмена. Но в отличие от универсальных механизмов обмена
+данными, номенклатура данных, обмен которыми может производиться в рамках
+распределенной информационной базы, строго ограничена составом соответствующего
+плана обмена.</p>
+
+<p class="MsoNormalCxSpMiddle">Для регистрации изменений данных в распределенной
+информационной базе задействована служба регистрации изменений. Элементы данных
+помещаются в сообщение с использованием механизмов XML-сериализации. Помимо
+изменений данных, между узлами распределенной информационной базы передаются
+изменения конфигурации, а также некоторая дополнительная служебная информация.
+Регистрация изменений конфигурации и их передача в распределенной
+информационной базе осуществляются полностью автоматически и недоступны для
+пользователя и разработчика конфигураций.</p>
+
+<p class="MsoNormalCxSpLast">В отличие от универсальных механизмов обмена данными,
+формирование и прием сообщения обмена данными в распределенной информационной
+базе производятся «в одно действие», то есть все содержимое сообщения формируется
+путем вызова одного метода встроенного языка. Аналогично и считывание
+содержимого сообщения производится путем вызова одного метода. Для того чтобы
+управлять составом данных, помещаемых в сообщение, а также считываемых из
+сообщения и помещаемых в базу данных, на уровне отдельных элементов данных в
+модуле плана обмена могут быть определены обработчики событий:</p>
+
+<p class="MsoListBulletCxSpFirst">&#9679; 
+<span class="Term">ПриОтправкеДанныхПодчиненному</span>,</p>
+
+<p class="MsoListBulletCxSpMiddle">&#9679; 
+<span class="Term">ПриОтправкеДанныхГлавному</span>,</p>
+
+<p class="MsoListBulletCxSpMiddle">&#9679; 
+<span class="Term">ПриПолученииДанныхОтПодчиненного</span>,</p>
+
+<p class="MsoListBulletCxSpLast">&#9679; 
+<span class="Term">ПриПолученииДанныхОтГлавного</span>.</p>
+
+<p class="MsoNormal">Таким образом, в распределенной информационной базе
+практически полностью задействованы универсальные механизмы обмена данными, но
+имеются и некоторые дополнительные возможности, недоступные вне распределенной
+информационной базы.</p>
+
+<a id="TI000000744" class="bookmark" name="issogl3_15.3.2.1_главный_и_подчиненный_узлы"><h4>15.3.2.1. Главный и подчиненный узлы</h4></a>
+
+<p class="MsoNormal">Как было сказано выше, у каждого из узлов распределенной
+информационной базы может быть один главный и произвольное число подчиненных
+узлов (см. <a href="#_ref212367895">рис.444</a>). Для своего главного узла узел является подчиненным
+и, соответственно, для своих подчиненных – главным. Узел, у которого нет
+главного узла, является корневым узлом распределенной информационной базы.</p>
+
+<p class="Note"><span class="Note">ВНИМАНИЕ!</span> Корневой узел
+распределенной информационной базы – это единственное место, где разрешено
+вносить изменения в конфигурацию информационной базы.</p>
+
+<p class="MsoNormalCxSpFirst">Распределенная информационная база может быть построена
+на основе нескольких планов обмена, с установленным свойством <span class="Interface">Распределенная информационная база</span>. Взаимодействие в
+каждой паре узлов «главный – подчиненный» производится в соответствии с
+одним из определенных в конфигурации планов обмена. Никаких ограничений на
+использование того или иного плана обмена в том или ином узле распределенной
+информационной базы не накладывается.</p>
+
+<p class="MsoNormalCxSpLast">Каждый из узлов распределенной информационной базы,
+как и в случае использования универсальных механизмов обмена данными, «знает»
+только своих «соседей», то есть свой главный и свои подчиненные узлы. Таким образом,
+полная схема распределенной информационной базы при наличии более чем двух
+уровней неизвестна никакому из узлов.</p>
+
+<a id="TI000000745" class="bookmark" name="issogl3_15.3.2.2_разрешение_коллизий"><h4>15.3.2.2. Разрешение коллизий</h4></a>
+
+<p class="MsoNormalCxSpFirst">На основе отношения «главный – подчиненный» в
+распределенной информационной базе организована типовая процедура разрешения
+коллизий, автоматически выполняемая при приеме сообщения. Считается, что изменение
+элемента данных, произведенное в главном узле, имеет высший приоритет по
+отношению к изменению, произведенному в подчиненном узле. Таким образом, если
+сообщение, пришедшее от подчиненного узла, содержит элемент данных, изменения
+которого зарегистрированы для этого подчиненного узла, то никаких действий
+предпринято не будет, то есть этот элемент данных не будет помещен в базу
+данных и запись регистрации изменений не будет удалена.</p>
+
+<p class="MsoNormalCxSpLast">Если сообщение, пришедшее от главного узла, содержит
+элемент данных, изменения которого зарегистрированы для главного узла, то
+элемент данных будет записан в базу данных, а запись регистрации изменения
+будет удалена.</p>
+
+<a id="TI000000746" class="bookmark" name="issogl3_15.3.2.3_начальный_образ_узла_распределенной_информационной_базы"><h4>15.3.2.3. Начальный образ узла распределенной информационной базы</h4></a>
+
+<p class="MsoNormalCxSpFirst">Обычно при работе с распределенной информационной
+базой подчиненный узел порождается из главного. То есть для подчиненного узла,
+определенного в плане обмена, на основании конфигурации и данных, содержащихся
+в главном узле, создается новая информационная база, соответствующая подчиненному
+узлу. Такая информационная база называется начальным образом узла
+распределенной информационной базы.</p>
+
+<p class="MsoNormalCxSpLast">При создании начального образа выполняются следующие
+действия:</p>
+
+<p class="MsoListBulletCxSpFirst">&#9679; 
+Из главного узла в начальный образ без изменений
+переносится конфигурация.</p>
+
+<p class="MsoListBulletCxSpMiddle">&#9679; 
+В начальном образе в плане обмена, в
+соответствии с которым создается начальный образ, создаются объекты-узлы, проинициализированные
+таким образом, чтобы не требовалось дополнительной настройки для начала обмена
+данными между главным и подчиненным узлами.</p>
+
+<p class="MsoListBulletCxSpLast">&#9679; 
+Из главного узла в начальный образ переносятся
+данные в соответствии с правилами, определяемыми планом обмена (составом плана
+обмена и результатами выполнения обработчика события <span class="Term">ПриОтправкеДанныхПодчиненному</span>).</p>
+
+<p class="MsoNormal">Процедура создания начального образа может повторяться для
+одного и того же узла неоднократно. Это может иметь смысл для тех случаев,
+когда информационная база подчиненного узла была потеряна безвозвратно. При
+создании начального образа все записи регистрации изменений для узла, для
+которого создается начальный образ, удаляются, так как считается, что история
+данного подчиненного узла начинается сначала.</p>
+
+<a name="_ref74549384"></a><a id="TI000000747" class="bookmark" name="issogl3_15.3.2.4_сообщение_обмена_данными_в_распределенной_информационной_базе"><h4>15.3.2.4. Сообщение обмена данными в распределенной информационной базе</h4></a>
+
+<p class="MsoNormalCxSpFirst">Для передачи изменений данных и конфигурации в распределенной
+информационной базе используются сообщения обмена данными, предоставляемые
+инфраструктурой сообщений. Если в случае применения универсальных механизмов
+обмена данными разработчик конфигурации сам определяет, что и как помещается в
+тело сообщения, то в случае распределенной информационной базы структура и
+состав данных, помещаемых в тело сообщения, четко определены.</p>
+
+<p class="MsoNormalCxSpLast">Рассмотрим структуру сообщения обмена данными, используемого
+в распределенной информационной базе. В качестве примера приведем следующее
+сообщение:</p>
+
+<a class="copy_source" href="#_top" onClick="return false">Копировать в буфер обмена</a>
+<pre class="src_res">
+&lt;v8msg:Message xmlns:v8msg=&quot;http://v8.1c.ru/messages&quot;&gt;
+    &lt;v8msg:Header&gt;
+        &lt;v8msg:ExchangePlan&gt;УдаленныеСклады&lt;/v8msg:ExchangePlan&gt;
+        &lt;v8msg:To&gt;Склад1&lt;/v8msg:To&gt;
+        &lt;v8msg:From&gt;Офис&lt;/v8msg:From&gt;
+        &lt;v8msg:MessageNo&gt;20&lt;/v8msg:MessageNo&gt;
+        &lt;v8msg:ReceivedNo&gt;15&lt;/v8msg:ReceivedNo&gt;
+    &lt;/v8msg:Header&gt;
+    &lt;v8msg:Body&gt;
+        &lt;v8de:Changes xmlns:v8de=&quot;http://v8.1c.ru/dataexchange&quot;&gt;
+            &lt;v8de:Signature&gt;
+                    7b4d5320-f69c-4a7b-9273-ff56607fc8ab&lt;/v8de:Signature&gt;
+            &lt;v8de:Config xmlns:v8md=&quot;http://v8.1c.ru/metadata&quot;&gt;
+                &lt;!– Измененные объекты конфигурации --&gt;
+            &lt;v8de:Digest1&gt;88d3f3a6ba3f4df03c7ec00f154837fc&lt;/v8de:Digest1&gt;
+            &lt;v8de:Digest2&gt;00cf636b02a488103a64c7a2cf81069e&lt;/v8de:Digest2&gt;
+            &lt;/v8de:Config&gt;
+            &lt;v8de:Nodes&gt;
+                &lt;v8de:Node&gt;
+                    &lt;!– Данные главного узла --&gt;
+                &lt;/v8de:Node&gt;
+                &lt;v8de:Node&gt;
+                    &lt;!– Данные подчиненного узла --&gt;
+                &lt;/v8de:Node&gt;
+            &lt;/v8de:Nodes&gt;
+            &lt;v8de:Data&gt;
+                &lt;!– Измененные элементы данных --&gt;
+            &lt;/v8de:Data&gt;
+        &lt;/v8de:Changes&gt;
+    &lt;/v8msg:Body&gt;
+&lt;/v8msg:Message&gt;
+</pre>
+
+<p class="MsoNormal">Как видно из примера, все особенности сообщения обмена
+данными, используемого в распределенной информационной базе, сосредоточены в
+теле сообщения. Тело сообщения (элемент <span class="Term">Body</span>, относящийся
+к пространству имен <span class="Interface">http://v8.1c.ru/messages</span>)
+содержит один-единственный элемент XML – <span class="Term">Changes</span>,
+относящийся к пространству имен <span class="Interface">http://v8.1c.ru/dataexchange</span>.
+Внутри этого элемента сосредоточены все данные, передаваемые при обмене данными
+в распределенной информационной базе:</p>
+
+<p class="MsoListBullet">&#9679; 
+<span class="Term">Changes</span> может содержать четыре вложенных элемента,
+относящихся к тому же пространству имен:</p>
+
+<p class="MsoListBullet2CxSpFirst">&#9679; 
+<span class="Term">Signature</span> содержит «подпись» плана обмена, в
+соответствии с которым получено сообщение.</p>
+
+<p class="MsoListBullet2CxSpMiddle">&#9679; 
+<span class="Term">Config</span> содержит изменения конфигурации, а
+также данные, идентифицирующие состояние конфигурации.</p>
+
+<p class="MsoListBullet2CxSpLast">&#9679; 
+Необязательные элементы <span class="Term">Metadata</span>,
+вложенные в <span class="Term">Config</span>,
+содержат изменения отдельных объектов конфигурации. Если изменения конфигурации
+не передаются в сообщении, то элементы <span class="Term">Metadata</span> отсутствуют. Такие элементы могут
+присутствовать только в сообщениях, передаваемых от главного узла подчиненному.
+Элементы <span class="Term">Digest1</span>
+и <span class="Term">Digest2</span>
+содержат цифровые подписи передаваемых в данном сообщении изменений
+конфигурации и всей конфигурации за вычетом изменений. Элементы <span class="Term">Digest1</span>
+и <span class="Term">Digest2</span>
+присутствуют во всех сообщениях, передаваемых от главного узла подчиненному и
+наоборот.</p>
+
+<p class="MsoListBulletCxSpFirst">&#9679; 
+<span class="Term">Nodes</span> может присутствовать только в
+сообщениях, передаваемых от главного узла подчиненному. Этот элемент содержит
+два вложенных элемента <span class="Term">Node</span>,
+первый из которых содержит данные главного узла (отправителя), а второй – подчиненного
+(получателя).</p>
+
+<p class="MsoListBulletCxSpLast">&#9679; 
+И, наконец, элемент <span class="Term">Data</span> содержит
+измененные элементы данных, передаваемые в сообщении. Элементы данных помещаются
+в сообщение с помощью XML-сериализации.</p>
+
+<a id="TI000000748" class="bookmark" name="issogl3_15.3.2.5_конфигурирование_плана_обмена_для_работы_с_распределенной_информационной_базой"><h4>15.3.2.5. Конфигурирование плана обмена для работы с распределенной информационной базой</h4></a>
+
+<p class="MsoNormalCxSpFirst">Как было отмечено выше, для того чтобы план обмена
+мог быть использован для организации распределенной информационной базы, у него
+должно быть установлено свойство <span class="Interface">Распределенная
+информационная база</span>.</p>
+
+<p class="MsoNormalCxSpMiddle">При конфигурировании плана обмена, используемого
+для организации распределенной информационной базы, необходимо определить
+состав плана обмена, так как именно состав определяет номенклатуру данных, по которым
+будет вестись регистрация изменений и которые могут передаваться при обмене
+данными в распределенной информационной базе.</p>
+
+<p class="MsoNormalCxSpLast">Следует отметить, что если в конфигурации уже работающей
+распределенной информационной базы в состав обмена будет включен еще какой-либо
+объект метаданных, то это не повлечет автоматически никаких действий по
+регистрации изменений элементов данных, соответствующих этому объекту
+метаданных. Таким образом, если при включении в состав плана обмена нового
+объекта есть необходимость передать уже существующие данные другим узлам, об
+этом следует позаботиться отдельно.</p>
+
+<a name="_ref74549489"></a><a id="TI000000749" class="bookmark" name="issogl3_15.3.2.6_обработчики_событий_плана_обмена"><h4>15.3.2.6. Обработчики событий плана обмена</h4></a>
+
+<p class="MsoNormalCxSpFirst">При необходимости у объекта <span class="Term">ПланыОбменаОбъект.&lt;Имя плана
+обмена&gt;</span> могут быть определены обработчики событий <span class="Term">ПриОтправкеДанныхПодчиненному</span>,
+<span class="Term">ПриОтправкеДанныхГлавному</span>,
+<span class="Term">ПриПолученииДанныхОтПодчиненного</span>,
+<span class="Term">ПриПолученииДанныхОтГлавного</span>,
+позволяющие управлять помещением в сообщение и считыванием из сообщения отдельных
+элементов данных.</p>
+
+<p class="MsoNormalCxSpMiddle">Обработчик события <span class="Term">ПриОтправкеДанныхПодчиненному</span>
+вызывается при помещении элемента данных в сообщение, отправляемое подчиненному
+узлу распределенной информационной базы. Первый параметр содержит сам элемент
+данных; значением второго параметра при вызове обработчика является <span class="Term">ОтправкаЭлементаДанных.Авто</span>,
+но это значение может быть изменено обработчиком. Если значением второго
+параметра в результате выполнения обработчика останется <span class="Term">ОтправкаЭлементаДанных.Авто</span>,
+то это соответствует поведению по умолчанию (элемент данных будет помещен в сообщение).
+Если второму параметру в обработчике будет присвоено значение <span class="Term">ОтправкаЭлементаДанных.Удалить</span>,
+то в сообщение будет помещен объект, соответствующий удалению элемента данных.
+Для объектов базы данных – это объект типа <span class="Term">УдалениеОбъекта</span>,
+проинициализированный ссылкой на удаляемый объект базы данных; а для наборов
+записей – это пустой набор записей. Только для менеджера записи константы
+поведение, соответствующее значению <span class="Term">ОтправкаЭлементаДанных.Удалить</span>, не отличается
+от поведения, соответствующего значению <span class="Term">ОтправкаЭлементаДанных.Авто</span>.
+Если же второму параметру будет присвоено значение <span class="Term">ОтправкаЭлементаДанных.Игнорировать</span>,
+то в сообщение не будет помещено ничего соответствующего элементу данных,
+переданному в первом параметре.</p>
+
+<p class="MsoNormalCxSpMiddle">Обработчик события <span class="Term">ПриОтправкеДанныхГлавному</span>
+отличается от предыдущего только тем, что вызывается при помещении элемента
+данных в сообщение, отправляемое главному узлу.</p>
+
+<p class="MsoNormalCxSpMiddle">Обработчик <span class="Term">ПриПолученииДанныхОтПодчиненного</span>
+вызывается после считывания элемента данных из сообщения и перед записью
+элемента в базу данных. Первый параметр содержит элемент данных, считанный из
+сообщения. Второй параметр при вызове обработчика имеет значение <span class="Term">ПолучениеЭлементаДанных.Авто</span>,
+что соответствует поведению по умолчанию. То есть если в данном узле не было
+зарегистрировано изменений элемента данных для узла-отправителя, то элемент
+будет записан в базу данных. Если же изменения зарегистрированы, то элемент в
+базу данных записан не будет. Значение второго параметра может быть изменено
+обработчиком. Если второй параметр получит значение <span class="Term">ПолучениеЭлементаДанных.Принять</span>,
+то элемент данных будет записан в базу данных независимо от того, были ли
+зарегистрированы его изменения для узла-отправителя. Если изменения были
+зарегистрированы, то соответствующая запись регистрации изменений удаляется.
+Если же второй параметр получит значение <span class="Term">ПолучениеЭлементаДанных.Игнорировать</span>,
+то никаких действий предпринято не будет (элемент не будет записан в базу
+данных и не будет произведено никаких действий с записями регистрации
+изменений). Третий параметр позволяет управлять регистрацией изменений элемента
+данных для узла-отправителя. При вызове обработчика данный параметр имеет
+значение <span class="Term">Ложь</span>.
+Если это значение не будет изменено обработчиком, то никаких дополнительных
+действий произведено не будет. Если в обработчике события присвоить параметру
+значение <span class="Term">Истина</span>,
+то при отсутствии зарегистрированных изменений элемента данных для
+узла-отправителя такая регистрация будет выполнена.</p>
+
+<p class="MsoNormalCxSpLast">Обработчик события <span class="Term">ПриПолученииДанныхОтГлавного</span>
+имеет тот же набор параметров, что и предыдущий обработчик, и отличается от
+него тем, что вызывается при чтении сообщения, принимаемого от главного узла распределенной
+информационной базы. Соответственно, несколько отличаются действия, выполняемые
+при получении элемента данных. Значения второго параметра <span class="Term">ПолучениеЭлементаДанных.Авто</span>
+и <span class="Term">ПолучениеЭлементаДанных.Принять</span>,
+присвоенные обработчиком, производят одинаковый эффект, так как согласно
+принятой стратегии разрешения коллизий в подчиненном узле считанный из
+сообщения элемент данных должен быть записан в базу данных независимо от того,
+зарегистрированы его изменения или нет. В остальном значения параметров и смысл
+предпринимаемых действий аналогичны описанным выше.</p>
+
+<a id="TI000000750" class="bookmark" name="issogl2_15.3.3_работа_с_распределенной_информационной_базой"><h3>15.3.3. Работа с распределенной информационной базой</h3></a>
+
+<p class="MsoNormal">В работе с распределенной информационной базой можно
+выделить следующие основные действия:</p>
+
+<p class="MsoListBulletCxSpFirst">&#9679; 
+создание начального образа подчиненного узла распределенной
+информационной базы;</p>
+
+<p class="MsoListBulletCxSpMiddle">&#9679; 
+запись сообщения обмена данными для отправки в
+другой узел распределенной информационной базы;</p>
+
+<p class="MsoListBulletCxSpLast">&#9679; 
+чтение сообщения обмена данными, отправленного
+из другого узла распределенной информационной базы.</p>
+
+<p class="MsoNormalCxSpFirst">Если для доступа к возможностям, предоставляемым
+универсальными механизмами обмена данными, без встроенного языка не обойтись,
+то перечисленные действия могут быть выполнены как из встроенного языка, так и
+интерактивно с помощью команд меню <span class="Interface">Еще</span> (<span class="Interface">Все действия</span>) формы списка плана обмена или иными
+средствами, определенными при конфигурировании.</p>
+
+<p class="MsoNormalCxSpLast">Кроме того, для каждого из узлов распределенной информационной
+базы может быть установлен и, соответственно, получен его главный узел. Эта
+операция не может быть отнесена к основным операциям, производимым в распределенной
+информационной базе, поэтому интерактивное действие как аналог этой операции не
+предусмотрено.</p>
+
+<a id="TI000000751" class="bookmark" name="issogl3_15.3.3.1_работа_с_распределенной_информационной_базой_из_встроенного_языка"><h4>15.3.3.1. Работа с распределенной информационной базой из встроенного языка</h4></a>
+
+<a id="TI000000752" class="bookmark" name="issogl4_15.3.3.1.1_создание_начального_образа_подчиненного_узла_распределенной_информационной_базы"><h5>15.3.3.1.1. Создание начального образа подчиненного узла распределенной информационной базы</h5></a>
+
+<p class="MsoNormalCxSpFirst">Для создания начального образа подчиненного узла распределенной
+информационной базы объект <span class="Term">ПланыОбменаМенеджер</span> содержит метод <span class="Term">СоздатьНачальныйОбраз()</span>.</p>
+
+<p class="MsoNormalCxSpMiddle">В качестве первого параметра данному методу должно
+быть передано значение типа <span class="Term">ПланыОбменаСсылка.&lt;Имя плана обмена&gt;</span>,
+представляющее собой ссылку на подчиненный узел распределенной информационной
+базы, или значение типа <span class="Term">ПланыОбменаОбъект.&lt;Имя плана обмена&gt;</span>,
+представляющее такой узел.</p>
+
+<p class="MsoNormalCxSpMiddle">Второй параметр должен содержать строку
+соединения, идентифицирующую информационную базу, в которую будет помещен
+начальный образ подчиненного узла. Информационная база, используемая для
+создания начального образа, должна быть пустой или не должна существовать вовсе.</p>
+
+<p class="MsoNormalCxSpMiddle">Как было отмечено выше, конфигурация информационной
+базы переносится в начальный образ без изменений. Данные, соответствующие
+объектам метаданных, не входящим в состав плана обмена, не будут помещены в начальный
+образ. Кроме того, при переносе элементов данных в начальный образ для каждого
+элемента данных вызывается обработчик события <span class="Term">ПриОтправкеДанныхПодчиненному</span>.
+Соответственно, в начальный образ могут попасть только те данные, которые
+должны туда попасть в соответствии с правилами, установленными планом обмена.</p>
+
+<p class="MsoNormalCxSpMiddle">В плане обмена, в соответствии с которым создается
+начальный образ, в информационной базе начального образа будут созданы и
+проинициализированы два узла, соответственно для главного и «этого» узлов.
+Таким образом, сразу после создания начального образа информационная база
+подчиненного узла готова к обмену данными со своим главным узлом.</p>
+
+<p class="MsoNormalCxSpLast">Все операции по переносу данных в начальный образ
+выполняются в рамках одной транзакции базы данных главного узла. Это необходимо
+для обеспечения согласованности данных, помещаемых в начальный образ. Однако
+при интенсивном изменении данных в информационной базе главного узла другими
+пользователями возможны конфликты между транзакцией, в рамках которой
+выполняется создание начального образа, и транзакциями других пользователей. В
+таких случаях перед созданием начального образа целесообразно установить монопольный
+режим для информационной базы главного узла.</p>
+
+<p class="Note"><span class="Note">Примечание.</span> Работа информационной
+базы в монопольном режиме не переводит базу данных MS SQL в однопользовательский
+режим (single user).</p>
+
+<a id="TI000000753" class="bookmark" name="issogl4_15.3.3.1.2_запись_сообщения_обмена_данными_распределенной_информационной_базы"><h5>15.3.3.1.2. Запись сообщения обмена данными распределенной информационной базы</h5></a>
+
+<p class="MsoNormalCxSpFirst">Как было показано, сообщение обмена данными распределенной
+информационной базы отличается от сообщения обмена данными в общем виде вполне
+конкретным наполнением тела сообщения. Таким же образом отличается и процедура
+записи сообщения обмена данными распределенной информационной базы от записи
+сообщения в общем виде.</p>
+
+<p class="MsoNormalCxSpMiddle">Для записи тела сообщения обмена данными распределенной
+информационной базы менеджер планов обмена содержит метод <span class="Term">ЗаписатьИзменения()</span>.
+В качестве первого параметра данному методу передается объект типа <span class="Term">ЗаписьСообщенияОбмена</span>,
+через который осуществляется запись сообщения. У данного объекта уже должен
+быть вызван метод <span class="Term">НачатьЗапись()</span>,
+но еще не должен быть вызван метод <span class="Term">ЗакончитьЗапись()</span>.</p>
+
+<p class="MsoNormalCxSpMiddle">Необязательный второй параметр указывает максимальное
+число элементов данных, которые будут помещаться в сообщение в рамках одной
+транзакции. Если в качестве значения параметра указано 0 (значение по
+умолчанию), то все формирование сообщения будет выполнено в одной транзакции. В
+таком режиме обеспечивается наилучшая согласованность данных, помещаемых в
+сообщение, но возможны конфликты с транзакциями, выполняемыми другими
+пользователями. При меньшем числе элементов, обрабатываемых в одной транзакции,
+вероятность конфликтов транзакций меньше, но больше вероятность помещения в
+сообщение несогласованных данных. Поэтому рекомендуется без острой необходимости
+не использовать для второго параметра значения, отличные от значения по
+умолчанию.</p>
+
+<p class="MsoNormalCxSpMiddle">Метод <span class="Term">ЗаписатьИзменения()</span> записывает элемент XML <span class="Term">Changes</span>
+в тело сообщения обмена данными, помещая туда всю требуемую информацию, как это
+было показано выше. При этом в соответствующие фрагменты сообщения помещаются
+объекты конфигурации и элементы данных, изменения которых были зарегистрированы
+для узла-получателя сообщения. Фактическое помещение элемента данных в сообщение
+определяется результатом выполнения обработчика события <span class="Term">ПриОтправкеДанныхГлавному</span>
+(<span class="Term">ПриОтправкеДанныхПодчиненному</span>),
+вызываемому у объекта типа <span class="Term">ПланыОбменаОбъект.&lt;Имя плана обмена&gt;</span>,
+представляющего узел-получатель сообщения.</p>
+
+<p class="MsoNormalCxSpLast">Ниже приведен типовой фрагмент кода, выполняющий запись
+сообщения обмена данными распределенной информационной базы.</p>
+
+<a class="copy_source" href="#_top" onClick="return false">Копировать в буфер обмена</a>
+<pre class="src_dev">ЗаписьXML <span class="operator">=</span> <span class="keyword">Новый</span> ЗаписьXML<span class="operator">(</span><span class="operator">)</span><span class="operator">;</span>
+ЗаписьXML<span class="operator">.</span>ОткрытьФайл<span class="operator">(</span>ИмяФайлаСообщения<span class="operator">)</span><span class="operator">;</span>
+Узел <span class="operator">=</span> ПланыОбмена<span class="operator">.</span>УдаленныеСклады<span class="operator">.</span>НайтиПоКоду<span class="operator">(</span>КодУзла<span class="operator">)</span><span class="operator">;</span>
+ЗаписьСообщения <span class="operator">=</span> ПланыОбмена<span class="operator">.</span>СоздатьЗаписьСообщения<span class="operator">(</span><span class="operator">)</span><span class="operator">;</span>
+ЗаписьСообщения<span class="operator">.</span>НачатьЗапись<span class="operator">(</span>ЗаписьXML<span class="operator">,</span> Узел<span class="operator">)</span><span class="operator">;</span>
+ПланыОбмена<span class="operator">.</span>ЗаписатьИзменения<span class="operator">(</span>ЗаписьСообщения<span class="operator">)</span><span class="operator">;</span>
+ЗаписьСообщения<span class="operator">.</span>ЗакончитьЗапись<span class="operator">(</span><span class="operator">)</span><span class="operator">;</span></pre>
+
+<a id="TI000000754" class="bookmark" name="issogl4_15.3.3.1.3_чтение_сообщения_обмена_данными_распределенной_информационной_базы"><h5>15.3.3.1.3. Чтение сообщения обмена данными распределенной информационной базы</h5></a>
+
+<p class="MsoNormalCxSpFirst">Для чтения тела сообщения обмена данными распределенной
+информационной базы менеджер планов обмена содержит метод <span class="Term">ПрочитатьИзменения()</span>.</p>
+
+<p class="MsoNormalCxSpLast">В качестве первого параметра методу передается
+объект типа <span class="Term">ЧтениеСообщенияОбмена</span>,
+через который осуществляется чтение сообщения в целом. У этого объекта уже
+должен быть вызван метод <span class="Term">НачатьЧтение()</span>, но еще не вызван метод <span class="Term">ЗакончитьЧтение()</span>.</p>
+
+<p class="Note"><span class="Note">Совет.</span> Настоятельно рекомендуется,
+чтобы при обращении к методу <span class="Term">НачатьЧтение()</span> объекта <span class="Term">ЧтениеСообщенияОбмена</span>
+значение второго параметра не указывалось или же указывалось значение по
+умолчанию – <span class="Term">ДопустимыйНомерСообщения.Больший</span>.</p>
+
+<p class="MsoNormalCxSpFirst">Это связано с тем, что вся логика обмена данными в
+распределенной информационной базе построена с учетом того, что отдельные
+сообщения обмена данными могут быть утеряны, но при этом не допускается
+повторный прием одного и того же сообщения.</p>
+
+<p class="MsoNormalCxSpMiddle">В качестве значения необязательного второго
+параметра может быть указано максимальное число элементов данных, считываемых
+из сообщения и помещаемых в базу данных в рамках одной транзакции. Значение
+параметра по умолчанию 0 означает, что все чтение сообщения будет
+выполняться в одной транзакции. Если все чтение сообщения выполняется в одной
+транзакции, то в случае возникновения ошибок не может оказаться так, что часть
+элементов данных была считана из сообщения и помещена в базу данных, а
+часть – нет. Но при таком режиме может случиться, что число изменений базы
+данных, которое нужно выполнить в рамках одной транзакции, окажется слишком
+большим. Кроме того, повышается вероятность конфликтов между транзакцией, в
+которой происходит чтение сообщения, и транзакциями, выполняемыми другими
+пользователями. Для того чтобы избежать неприятностей такого рода, введена
+возможность ограничения числа элементов данных, обрабатываемых в одной транзакции.
+Но если нет острой нужды, рекомендуется использовать режим по умолчанию, то
+есть производить считывание всех элементов данных в одной транзакции.</p>
+
+<p class="MsoNormalCxSpLast">Последовательность действий, выполняемая методом <span class="Term">ПрочитатьИзменения()</span>,
+выглядит примерно следующим образом:</p>
+
+<p class="MsoListBulletCxSpFirst">&#9679; 
+Считывается и проверяется «подпись» плана
+обмена, чтобы с максимальной достоверностью убедиться, что сообщение прибыло от
+ожидаемого плана обмена ожидаемой конфигурации.</p>
+
+<p class="MsoListBulletCxSpMiddle">&#9679; 
+Из сообщения считываются изменения конфигурации.
+При считывании проводится проверка цифровых подписей конфигурации, чтобы
+исключить возможность того, что в узле-отправителе и текущем узле
+распределенной информационной базы находятся несовместимые конфигурации. Для
+каждого из считанных измененных объектов конфигурации проверяется, является ли
+этот объект конфигурации фактически измененным. Напомним, что измененные
+объекты конфигурации могут содержаться только в сообщениях, передаваемых от
+главного узла подчиненному.</p>
+
+<p class="MsoListBulletCxSpMiddle">&#9679; 
+Удаляются записи регистрации изменений объектов
+конфигурации и элементов данных, отправленных в сообщениях, для которых
+получено подтверждение приема. Напомним, что максимальный номер, принятый узлом-отправителем
+сообщений, содержится в заголовке сообщения и доступен через свойство <span class="Term">НомерПринятого</span>
+объекта <span class="Term">ЧтениеСообщенияОбмена</span>.</p>
+
+<p class="MsoListBulletCxSpMiddle">&#9679; 
+Если в результате проверки цифровых подписей
+конфигурации удалось установить, что конфигурация в текущем узле распределенной
+информационной базы отличается от конфигурации узла-отправителя, то возможны
+два варианта дальнейших действий:</p>
+
+<p class="MsoListBulletCxSpLast">&#9679; 
+Если текущий узел является главным по</p>
+
+<p class="MsoListBullet2">&#9679; 
+Если же текущий узел является подчиненным по
+отношению к узлу-отправителю, то перед продолжением приема сообщения необходимо
+обновить конфигурацию базы данных, приведя ее в соответствие с конфигурацией
+узла-отправителя. При обновлении конфигурации базы данных в нее будут
+перенесены ранее принятые, сохраненные и измененные объекты конфигурации. Далее
+в обоих случаях вызывается исключение с соответствующим текстом сообщения об
+ошибке. И если в первом случае сообщение не может быть прочитано, то во втором
+случае после обновления конфигурации базы данных, которое может быть выполнено
+в режиме <span class="Interface">Конфигуратор</span>, то же самое сообщение может
+быть успешно прочитано и принято.</p>
+
+<p class="MsoListBulletCxSpFirst">&#9679; 
+Если производится прием сообщения обмена данными,
+отправленного из главного узла распределенной информационной базы, то данные
+текущего узла и узла-отправителя приводятся в соответствие с данными об этих
+узлах, содержащимися в сообщении обмена данными. Если сообщение обмена данными
+получено от подчиненного узла, то там таких данных быть не должно (подробнее см. <a href="#_ref74549384">здесь</a>).</p>
+
+<p class="MsoListBulletCxSpLast">&#9679; 
+Производится считывание из сообщения и запись в
+базу данных элементов данных. При этом в сообщении могут содержаться только
+элементы данных, соответствующие объектам метаданных, входящих в состав плана
+обмена, к которому относится данное сообщение. Для каждого прочитанного из
+сообщения элемента данных у объекта типа <span class="Term">ПланыОбменаОбъект.&lt;Имя плана
+обмена&gt;</span> вызывается обработчик события <span class="Term">ПриПолученииДанныхОтГлавного</span>
+(<span class="Term">ПриПолученииДанныхОтПодчиненного</span>).
+Дальнейшие действия по каждому из элементов данных определяются результатами
+действий обработчика (подробнее см. <a href="#_ref74549489">здесь</a>).</p>
+
+<a name="_ref393802612"></a><a id="TI000000755" class="bookmark" name="issogl4_15.3.3.1.4_получение_и_установка_главного_узла_распределенной_информационной_базы"><h5>15.3.3.1.4. Получение и установка главного узла распределенной информационной базы</h5></a>
+
+<p class="MsoNormalCxSpFirst">Для
+корневого узла распределенной информационной базы характерно, что у него нет
+главного узла. У всех остальных главный узел есть. В типовом сценарии работы с
+распределенной информационной базой нужды в принудительной установке главного
+узла не возникает. Но в некоторых случаях такая возможность может все-таки
+пригодиться. Например, может возникнуть потребность выделить какое-либо из поддеревьев
+распределенной информационной базы в самостоятельную информационную базу или
+переподчинить какой-либо из узлов распределенной информационной базы.</p>
+
+<p class="MsoNormalCxSpMiddle">Для
+установки главного узла распределенной информационной базы предназначен метод <span class="Term">УстановитьГлавныйУзел()</span> объекта <span class="Term">ПланыОбменаМенеджер</span>. Метод имеет один параметр.
+Если в качестве параметра данному методу передано значение типа <span class="Term">ПланыОбменаОбъект.&lt;Имя плана обмена&gt;</span> или
+<span class="Term">ПланыОбменаСсылка.&lt;Имя плана
+обмена&gt;</span>, то у плана обмена, к которому относится ссылка или
+объект, должно быть установлено свойство <span class="Interface">Распределенная информационная база</span>. В этом случае
+для данной информационной базы будет установлен главный узел. Если в качестве
+значения параметра передано <span class="Term">Неопределено</span>,
+то назначение главного узла отменятся.</p>
+
+<p class="MsoNormalCxSpMiddle">Для
+успешного выполнения данного метода требуется, чтобы у информационной базы не
+было других активных пользователей, в том числе и в режиме Конфигуратор.</p>
+
+<p class="MsoNormalCxSpLast">Для
+получения главного узла предназначен метод <span class="Term">ГлавныйУзел()</span>
+объекта <span class="Term">ПланыОбменаМенеджер</span>.
+Если текущая информационная база не является узлом распределенной информационной
+базы или главный узел для нее не определен (она сама является корневым узлом),
+метод возвращает <span class="Term">Неопределено</span>.
+Если же главный узел для информационной базы определен, то метод возвращает значение
+типа <span class="Term">ПланыОбменаСсылка.&lt;Имя плана
+обмена&gt;</span>.</p>
+
+<p class="Note"><span class="Note">Примечание.</span>
+Для отмены назначения главного узла информационной базы можно применить
+параметр /<span class="Interface">ResetMasterNode</span> командной строки пакетного запуска конфигуратора.</p>
+
+<p class="MsoNormal">В том случае, если
+в распределенной информационной базе используются предопределенные данные, то
+операции с главным узлом следует выполнять особым образом:</p>
+
+<p class="MsoListBullet">&#9679; 
+Отключение информационной базы от распределенной
+информационной базы:</p>
+
+<p class="MsoListNumber2CxSpFirst">1. 
+Для информационных баз, которые использовались в
+«1С:Предприятии» версий от 8.3.3 до 8.3.5 (независимо от установленного режима
+совместимости), для всех объектов конфигурации, для которых в конфигураторе
+созданы предопределенные элементы и свойство <span class="Interface">Обновление предопределенных данных</span>
+установлено в значение <span class="Interface">Авто</span>, необходимо вызвать метод <span class="Term">УстановитьИнициализациюПредопределенныхДанных(Истина)</span>;</p>
+
+<p class="MsoListNumber2CxSpLast">2.  Отключить
+информационную базу от главного узла с помощью вызова метода <span class="Term">УстановитьГлавныйУзел(Неопределено)</span>
+или с помощью параметра <span class="Interface">/ResetMasterNode</span>
+командной строки пакетного запуска конфигуратора.</p>
+
+<p class="MsoListBullet">&#9679; 
+Восстановление конфигурации в узле
+распределенной информационной базы:</p>
+
+<p class="MsoListNumber2CxSpFirst">1.  Установить
+режим обновления предопределенных данных информационной базы в значение ОбновлениеПредопределенныхДанных.<span class="Term">НеОбновлятьАвтоматически</span>. Это можно сделать
+с помощью метода языка УстановитьОбновлениеПредопределенныхДанныхИнформационнойБазы()
+или с помощью параметра <span class="Interface">/SetPredefinedDataUpdate
+-DoNotUpdateAutomatically</span> командной строки пакетного запуска
+конфигуратора.</p>
+
+<p class="MsoListNumber2CxSpMiddle">2. 
+Получить ссылку на главный узел информационной
+базы с помощью метода <span class="Term">ГлавныйУзел()</span>
+и запомнить полученную ссылку.</p>
+
+<p class="MsoListNumber2CxSpMiddle">3. 
+Отключить информационную базу от главного узла с
+помощью вызова метода <span class="Term">УстановитьГлавныйУзел(Неопределено)</span>
+или с помощью параметра <span class="Interface">/ResetMasterNode</span> командной строки пакетного запуска конфигуратора.</p>
+
+<p class="MsoListNumber2CxSpMiddle">4. 
+Выполнить действия по восстановлению
+конфигурации и другие операции по восстановлению работоспособности узла.</p>
+
+<p class="MsoListNumber2CxSpMiddle">5. 
+Восстановить ссылку на главный узел с помощью
+метода <span class="Term">УстановитьГлавныйУзел()</span>
+с указанием в качестве параметра ссылки на узел, который ранее был установлен в
+качестве главного узла (получен на шаге 2).</p>
+
+<p class="MsoListNumber2CxSpLast">6. 
+Установить режим обновления предопределенных
+данных информационной базы в значение <span class="Term">ОбновлениеПредопределенныхДанных.Авто</span>.
+Это можно сделать с помощью метода языка <span class="Term">УстановитьОбновлениеПредопределенныхДанныхИнформационнойБазы()</span>
+или с помощью параметра <span class="Interface">/SetPredefinedDataUpdate -Auto</span>
+командной строки пакетного запуска конфигуратора.</p>
+
+<a id="TI000000756" class="bookmark" name="issogl3_15.3.3.2_интерактивная_работа_с_распределенной_информационной_базой"><h4>15.3.3.2. Интерактивная работа с распределенной информационной базой</h4></a>
+
+<p class="Regularbeforepicture">Как было отмечено выше, ряд наиболее часто выполняемых
+действий с распределенной информационной базой может быть произведен
+интерактивно через меню <span class="Interface">Еще</span> (<span class="Interface">Все действия</span>) формы списка плана обмена (или пиктограммы
+командной панели формы списка). Соответствующие команды вставляются в меню при
+автоматическом заполнении.</p>
+
+<p class="Picture"><IMG src="_img/img00453.gif?_=1496848987" WIDTH="733" ALT HEIGHT="191"></p>
+
+<p class="MsoCaption">Рис. 445.
+Список планов обмена</p>
+
+<p class="MsoNormalCxSpFirst">Для выполнения каждой из этих команд следует выделить
+в списке узел плана обмена, для которого предполагается выполнить команду, а затем
+выбрать соответствующий пункт меню <span class="Interface">Еще</span> (<span class="Interface">Все действия</span>).</p>
+
+<p class="MsoNormalCxSpMiddle">Команда <span class="Interface">Еще – Создать
+начальный образ…</span> (<span class="Interface">Все действия – Создать
+начальный образ…</span>) предназначена для создания начального образа
+подчиненного узла распределенной информационной базы. После обращения к данному
+пункту меню на экране появляется диалог, в котором предлагается выбрать тип
+расположения информационной базы и ее параметры (в случае создания образа в
+клиент-серверном варианте). После нажатия кнопки <span class="Interface">Создать
+начальный образ</span> в этом диалоге начинается создание начального образа.
+Сама процедура создания начального образа при интерактивном выполнении ничем не
+отличается от процедуры, выполняемой при обращении к методу <span class="Term">СоздатьНачальныйОбраз()</span>
+объекта <span class="Term">ПланыОбменаМенеджер</span>.</p>
+
+<p class="MsoNormalCxSpMiddle">Команда <span class="Interface">Еще – Записать
+изменения…</span> (<span class="Interface">Все действия – Записать
+изменения…</span>) предназначена для записи в файл сообщения обмена данными.
+После обращения к этому пункту меню на экране появляется диалог. В нем
+необходимо задать число элементов данных, обрабатываемых в одной транзакции.
+Затем нажать кнопку <span class="Interface">Записать и сохранить в файл</span>.
+Откроется диалог выбора файла обмена. После выбора следует нажать кнопку <span class="Interface">Открыть</span>, начнется выгрузка данных.</p>
+
+<p class="MsoNormalCxSpMiddle">Команда Еще – Прочитать изменения… (<span class="Interface">Все действия – Прочитать
+изменения…</span>) предназначена для чтения из файла сообщения обмена
+данными. После обращения к данному пункту меню на экране появляется диалог. В
+нем необходимо задать число элементов данных, обрабатываемых в одной транзакции.
+Затем нажать кнопку <span class="Interface">Выбрать файл и прочитать изменения</span>.
+Откроется диалог выбора файла обмена. После выбора следует нажать кнопку <span class="Interface">Открыть</span>, начнется загрузка данных.</p>
+
+<p class="MsoNormalCxSpLast">Все операции по загрузке/выгрузке данных (включая
+создание начального образа информационной базы) выполняются на стороне сервера «1С:Предприятия».</p>
+
+<a id="TI000000757" class="bookmark" name="issogl2_15.3.4_сценарии_обмена_данными_в_распределенной_информационной_базе"><h3>15.3.4. Сценарии обмена данными в распределенной информационной базе</h3></a>
+
+<p class="MsoNormal">Обработчики событий <span class="Term">ПриОтправкеДанныхПодчиненному</span>, <span class="Term">ПриОтправкеДанныхГлавному</span>,
+<span class="Term">ПриПолученииДанныхОтПодчиненного</span>,
+<span class="Term">ПриПолученииДанныхОтГлавного</span>
+позволяют достаточно гибко управлять обменом данными в распределенной
+информационной базе. С использованием этих обработчиков может быть построено
+большое разнообразие сценариев обмена данными. В этом разделе в качестве
+примера будет рассмотрена организация нескольких сценариев.</p>
+
+<a id="TI000000758" class="bookmark" name="issogl3_15.3.4.1_поведение_по_умолчанию"><h4>15.3.4.1. Поведение по умолчанию</h4></a>
+
+<p class="MsoNormal">Данный сценарий является наиболее простым и соответствует
+поведению распределенной информационной базы по умолчанию. Для этого сценария
+характерно следующее:</p>
+
+<p class="MsoListBulletCxSpFirst">&#9679; 
+каждое изменение элемента данных, произведенное
+в любом из узлов распределенной информационной базы, стремится распространиться
+по всем узлам;</p>
+
+<p class="MsoListBulletCxSpLast">&#9679; 
+разрешение коллизий производится на основании
+отношения узлов «главный – подчиненный».</p>
+
+<p class="MsoNormal">Для реализации такого сценария все обработчики не должны
+изменять значения переданных им параметров, или же обработчики могут быть не
+определены вовсе.</p>
+
+<a id="TI000000759" class="bookmark" name="issogl3_15.3.4.2_распределение_данных_по_подчиненным_узлам"><h4>15.3.4.2. Распределение данных по подчиненным узлам</h4></a>
+
+<p class="MsoNormal">Данный сценарий подразумевает, что для некоторых элементов
+данных, для которых он реализуется, выполняется следующее:</p>
+
+<p class="MsoListBulletCxSpFirst">&#9679; 
+вся совокупность элементов данных присутствует в
+главном узле;</p>
+
+<p class="MsoListBulletCxSpMiddle">&#9679; 
+присутствие того или иного элемента данных в том
+или ином подчиненном узле определяется на основе сравнения значений некоторых
+реквизитов элемента данных с реквизитами подчиненного узла плана обмена;</p>
+
+<p class="MsoListBulletCxSpLast">&#9679; 
+разрешение коллизий производится на основании
+отношения узлов «главный – подчиненный».</p>
+
+<p class="MsoNormalCxSpFirst">Для реализации данного сценария нужно обеспечить,
+чтобы при записи сообщения обмена данными в главном узле в сообщение не
+попадали элементы данных, которые не должны присутствовать в подчиненном узле.</p>
+
+<p class="MsoNormalCxSpMiddle">Кроме того, если значения реквизитов элемента
+данных могут быть изменены в подчиненном узле, то необходимо обеспечить, чтобы
+при получении сообщения обмена данными в главном узле производилась регистрация
+изменений для тех объектов, которых в соответствии со значениями их реквизитов
+в подчиненном узле быть не должно.</p>
+
+<p class="MsoNormalCxSpMiddle">Для более детального рассмотрения примера предположим,
+что в качестве типа элементов данных, для которых реализуется сценарий,
+выступает документ <span class="Term">РасходнаяНакладная</span>.
+У данного документа имеется реквизит <span class="Term">Склад</span> типа <span class="Term">СправочникСсылка.Склады</span>.
+Обмен данными организован в соответствии с планом обмена <span class="Term">Склады</span>. У этого
+плана обмена также определен реквизит <span class="Term">Склад</span> типа <span class="Term">СправочникСсылка.Склады</span>.
+В соответствии с этим планом обмена организована распределенная информационная
+база, в которой корневым узлом является центральный офис, а его подчиненными
+узлами – склады. У каждого из подчиненных узлов плана обмена значение реквизита
+<span class="Term">Склад</span>
+установлено так, чтобы обозначать, какому складу соответствует этот узел. Все
+документы <span class="Term">РасходнаяНакладная</span>
+должны присутствовать в корневом узле, а условием присутствия документов в
+подчиненных узлах является равенство значений реквизитов <span class="Term">Склад</span> в документе
+и узле плана обмена.</p>
+
+<p class="MsoNormalCxSpLast">В этом случае для того, чтобы документы <span class="Term">РасходнаяНакладная</span>
+не попадали в те подчиненные узлы, куда они попадать не должны, обработчик
+события <span class="Term">ПриОтправкеДанныхПодчиненному</span>
+должен иметь следующий вид:</p>
+
+<a class="copy_source" href="#_top" onClick="return false">Копировать в буфер обмена</a>
+<pre class="src_dev"><span class="keyword">Процедура</span> ПриОтправкеДанныхПодчиненному<span class="operator">(</span>ЭлементДанных<span class="operator">,</span> ОтправкаЭлемента<span class="operator">)</span>
+    ТипДанных <span class="operator">=</span> ТипЗнч<span class="operator">(</span>ЭлементДанных<span class="operator">)</span><span class="operator">;</span>
+    <span class="keyword">Если</span> ТипДанных <span class="operator">=</span> Тип<span class="operator">(</span><span class="string">&quot;ДокументОбъект.РасходнаяНакладная&quot;</span><span class="operator">)</span> <span class="keyword">Тогда</span>
+        <span class="keyword">Если</span> ЭлементДанных<span class="operator">.</span>Склад <span class="operator">&lt;</span><span class="operator">&gt;</span> Склад <span class="keyword">Тогда</span>
+            ОтправкаЭлемента <span class="operator">=</span> ОтправкаЭлементаДанных<span class="operator">.</span>Удалить<span class="operator">;</span>
+        <span class="keyword">КонецЕсли</span><span class="operator">;</span>
+    <span class="keyword">КонецЕсли</span><span class="operator">;</span>
+<span class="keyword">КонецПроцедуры</span></pre>
+
+<p class="MsoNormalCxSpFirst">В приведенном примере обработчика анализируется тип
+элемента данных, и если он равен <span class="Term">ДокументОбъект.РасходнаяНакладная</span>, то значение
+реквизита <span class="Term">Склад</span>
+документа сравнивается со значением реквизита <span class="Term">Склад</span> узла плана
+обмена. Если значения реквизитов равны, то значение параметра <span class="Term">ОтправкаЭлемента</span>
+можно не изменять (при вызове параметр имеет значение <span class="Term">ОтправкаЭлементаДанных.Авто</span>).
+При этом в сообщение будет помещено XML-представление документа. Если же значения
+реквизитов не равны, то параметру <span class="Term">ОтправкаЭлемента</span> присваивается значение <span class="Term">ОтправкаЭлементаДанных.Удалить</span>.
+В этом случае в сообщение будет помещено XML-представление объекта <span class="Term">УдалениеОбъекта</span>,
+проинициализированного ссылкой на соответствующий документ <span class="Term">РасходнаяНакладная</span>.</p>
+
+<p class="MsoNormalCxSpMiddle">Может показаться странным, что в случае
+неравенства значений реквизитов <span class="Term">Склад</span> параметру <span class="Term">ОтправкаЭлемента</span>
+присваивается значение <span class="Term">ОтправкаЭлементаДанных.Удалить</span>,
+а не <span class="Term">ОтправкаЭлементаДанных.Игнорировать</span>,
+так как в случае значения <span class="Term">ОтправкаЭлементаДанных.Удалить</span> XML-представление
+объекта <span class="Term">УдалениеОбъекта</span>
+будет помещаться в сообщения, отправляемые всем подчиненным узлам, кроме того
+узла, в который будет отправлен сам документ. Таким образом, в значительной
+части случаев объект <span class="Term">УдалениеОбъекта</span>
+будет отправлен тем узлам, где никогда не было документа, который требуется удалить.</p>
+
+<p class="MsoNormalCxSpMiddle">Это действительно так, но в данном примере
+рассмотрен наиболее общий случай. Если же, например, известно, что значение реквизита
+<span class="Term">Склад</span>
+документа <span class="Term">РасходнаяНакладная</span>
+может быть установлено только при создании документа и в дальнейшем не может
+быть изменено, то параметру <span class="Term">ОтправкаЭлемента</span> в данном обработчике действительно
+могло бы быть присвоено значение <span class="Term">ОтправкаЭлементаДанных.Игнорировать</span>.</p>
+
+<p class="MsoNormalCxSpLast">Если же значение реквизита <span class="Term">Склад</span> документа <span class="Term">РасходнаяНакладная</span>
+может быть изменено в подчиненном узле, то в плане обмена необходимо определить
+обработчик события <span class="Term">ПриПолученииДанныхОтПодчиненного</span>
+следующего вида:</p>
+
+<a class="copy_source" href="#_top" onClick="return false">Копировать в буфер обмена</a>
+<pre class="src_dev"><span class="keyword">Процедура</span> ПриПолученииДанныхОтПодчиненного<span class="operator">(</span>ЭлементДанных<span class="operator">,</span> ПолучениеЭлемента<span class="operator">,</span> ОтправкаНазад<span class="operator">)</span>
+    ТипДанных <span class="operator">=</span> ТипЗнч<span class="operator">(</span>ЭлементДанных<span class="operator">)</span><span class="operator">;</span>
+    <span class="keyword">Если</span> ТипДанных <span class="operator">=</span> Тип<span class="operator">(</span><span class="string">&quot;ДокументОбъект.РасходнаяНакладная&quot;</span><span class="operator">)</span> <span class="keyword">Тогда</span>
+        <span class="keyword">Если</span> ЭлементДанных<span class="operator">.</span>Склад <span class="operator">&lt;</span><span class="operator">&gt;</span> Склад <span class="keyword">Тогда</span>
+            ОтправкаНазад <span class="operator">=</span> <span class="keyword">Истина</span><span class="operator">;</span>
+        <span class="keyword">КонецЕсли</span><span class="operator">;</span>
+    <span class="keyword">КонецЕсли</span><span class="operator">;</span>
+<span class="keyword">КонецПроцедуры</span></pre>
+
+<p class="MsoNormalCxSpFirst">В приведенном примере обработчика анализируется тип
+элемента данных, и если он равен <span class="Term">ДокументОбъект.РасходнаяНакладная</span>, то значение
+реквизита <span class="Term">Склад</span>
+документа сравнивается со значением реквизита <span class="Term">Склад</span> узла плана
+обмена. Если значения реквизитов равны, то значения параметров <span class="Term">ПолучениеЭлемента</span>
+и <span class="Term">ОтправкаНазад</span>
+можно не изменять, обеспечив этим поведение по умолчанию при приеме элемента
+данных. Если же значения реквизитов не равны, то параметру <span class="Term">ОтправкаНазад</span>
+присваивается значение <span class="Term">Истина</span>.
+Тем самым гарантируется, что изменения документа будут зарегистрированы и при
+отправке сообщения подчиненному узлу будет отправлен объект <span class="Term">УдалениеОбъекта</span>, если,
+конечно, реквизит <span class="Term">Склад</span>
+документа не будет изменен в главном узле так, что он окажется равен значению реквизита
+<span class="Term">Склад</span>
+соответствующего узла плана обмена.</p>
+
+<p class="MsoNormalCxSpLast">Если же значение реквизита <span class="Term">Склад</span> документа <span class="Term">РасходнаяНакладная</span>
+не может быть изменено после создания документа, то обработчик <span class="Term">ПриПолученииДанныхОтПодчиненного</span>
+можно не определять.</p>
+
+<a id="TI000000760" class="bookmark" name="issogl3_15.3.4.3_нестандартное_разрешение_коллизий"><h4>15.3.4.3. Нестандартное разрешение коллизий</h4></a>
+
+<p class="MsoNormal">Данный сценарий подразумевает, что для некоторых элементов
+данных, для которых он реализуется, выполняется следующее:</p>
+
+<p class="MsoListBulletCxSpFirst">&#9679; 
+каждое изменение элемента данных, произведенное
+в любом из узлов распределенной информационной базы, стремится распространиться
+по всем узлам;</p>
+
+<p class="MsoListBulletCxSpLast">&#9679; 
+разрешение коллизий производится на основании
+отношения узлов «главный – подчиненный», но более высокий приоритет имеет
+подчиненный узел.</p>
+
+<p class="MsoNormalCxSpFirst">Для рассмотрения данного случая воспользуемся приведенным
+выше примером с документом <span class="Term">РасходнаяНакладная</span> и планом обмена <span class="Term">Склады</span>.</p>
+
+<p class="MsoNormalCxSpLast">В данном случае требуется определить обработчики событий
+<span class="Term">ПриПолученииДанныхОтПодчиненного</span>
+и <span class="Term">ПриПолученииДанныхОтГлавного</span>.
+Обработчик <span class="Term">ПриПолученииДанныхОтПодчиненного</span>
+будет иметь следующий вид:</p>
+
+<a class="copy_source" href="#_top" onClick="return false">Копировать в буфер обмена</a>
+<pre class="src_dev"><span class="keyword">Процедура</span> ПриПолученииДанныхОтПодчиненного<span class="operator">(</span>ЭлементДанных<span class="operator">,</span> ПолучениеЭлемента<span class="operator">,</span> ОтправкаНазад<span class="operator">)</span>
+    ТипДанных <span class="operator">=</span> ТипЗнч<span class="operator">(</span>ЭлементДанных<span class="operator">)</span><span class="operator">;</span>
+    <span class="keyword">Если</span> ТипДанных <span class="operator">=</span> Тип<span class="operator">(</span><span class="string">&quot;ДокументОбъект.РасходнаяНакладная&quot;</span><span class="operator">)</span> <span class="keyword">Тогда</span>
+        ПолучениеЭлемента <span class="operator">=</span> ПолучениеЭлементаДанных<span class="operator">.</span>Принять<span class="operator">;</span>
+    <span class="keyword">КонецЕсли</span><span class="operator">;</span>
+<span class="keyword">КонецПроцедуры</span></pre>
+
+<p class="MsoNormalCxSpFirst">Приведенный обработчик весьма прост: проверяется
+тип элемента данных, и если элемент данных относится к интересующему нас типу,
+то параметру <span class="Term">ПолучениеЭлемента</span>
+присваивается значение <span class="Term">ПолучениеЭлементаДанных.Принять</span>,
+что приводит к безусловному приему элемента данных, независимо от того,
+зарегистрированы его изменения или нет.</p>
+
+<p class="MsoNormalCxSpLast">Обработчик события <span class="Term">ПриПолученииДанныхОтГлавного</span>
+выглядит следующим образом:</p>
+
+<a class="copy_source" href="#_top" onClick="return false">Копировать в буфер обмена</a>
+<pre class="src_dev"><span class="keyword">Процедура</span> ПриПолученииДанныхОтГлавного<span class="operator">(</span>ЭлементДанных<span class="operator">,</span> ПолучениеЭлемента<span class="operator">,</span> ОтправкаНазад<span class="operator">)</span>
+    ТипДанных <span class="operator">=</span> ТипЗнч<span class="operator">(</span>ЭлементДанных<span class="operator">)</span><span class="operator">;</span>
+    <span class="keyword">Если</span> ТипДанных <span class="operator">=</span> Тип<span class="operator">(</span><span class="string">&quot;ДокументОбъект.РасходнаяНакладная&quot;</span><span class="operator">)</span> <span class="keyword">Тогда</span>
+        <span class="keyword">Если</span> ПланыОбмена<span class="operator">.</span>ИзменениеЗарегистрировано<span class="operator">(</span>Ссылка<span class="operator">,</span>ЭлементДанных<span class="operator">)</span> <span class="keyword">Тогда</span>
+            ПолучениеЭлемента <span class="operator">=</span> ПолучениеЭлементаДанных<span class="operator">.</span>Игнорировать<span class="operator">;</span>
+        <span class="keyword">КонецЕсли</span><span class="operator">;</span>
+    <span class="keyword">КонецЕсли</span><span class="operator">;</span>
+<span class="keyword">КонецПроцедуры</span></pre>
+
+<p class="MsoNormal">Этот обработчик несколько сложнее. Если элемент данных
+относится к интересующему нас типу, то производится проверка: зарегистрированы
+ли изменения элемента данных для узла-отправителя сообщения. Если изменения
+зарегистрированы, то параметру <span class="Term">ПолучениеЭлемента</span> присваивается значение <span class="Term">ПолучениеЭлементаДанных.Игнорировать</span>.
+В результате прочитанный элемент данных не записывается в базу данных, а
+регистрация изменений сохраняется, что позволит поместить элемент данных в
+сообщение, отправляемое главному узлу.</p>
+
+<a id="TI000000761" class="bookmark" name="issogl3_15.3.4.4_другие_сценарии"><h4>15.3.4.4. Другие сценарии</h4></a>
+
+<p class="MsoNormalCxSpFirst">Рассмотренные сценарии являются только некоторыми
+из возможных сценариев организации обмена данными в распределенной
+информационной базе. На базе описанных выше обработчиков можно реализовать
+большое разнообразие различных сценариев. Какие-то из них могут быть комбинацией
+рассмотренных выше, а какие-то – принципиально другими.</p>
+
+<p class="MsoNormalCxSpMiddle"> </p>
+
+<br>		<script type="text/javascript">listenCopy('zeroclipboard.swf');</script>
+	</body>
+</html>

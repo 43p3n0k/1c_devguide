@@ -1,0 +1,455 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=Windows-1251">
+		<title>&#1043;&#1083;&#1072;&#1074;&#1072; 34. &#1042;&#1085;&#1077;&#1096;&#1085;&#1080;&#1077; &#1082;&#1086;&#1084;&#1087;&#1086;&#1085;&#1077;&#1085;&#1090;&#1099;</title>
+		<LINK REL="stylesheet" href="/db/content/v8310doc/src/руководство разработчика/style.css?_=1496848987">
+		<script charset="windows-1251" src="/db/content/v8310doc/src/руководство разработчика/script.js?_=1496848987" TYPE="text/javascript"></script>		<!--[if !IE]>--><script charset="windows-1251" src="/db/content/v8310doc/src/руководство разработчика/zeroclipboard.js?_=1496848987" TYPE="text/javascript"></script><!--<![endif]-->
+	<meta name="robots" content="noarchive">
+<meta name="googlebot" content="noarchive">
+<link href="/db/content/v8310doc/src/руководство разработчика/глава 34. внешние компоненты.htm" rel="canonical">
+<link href="/static/its.content.css?_=1490872753" type="text/css" rel="stylesheet">
+<script charset="windows-1251" type="text/javascript" src="/static/its.content.js?_=1489758009"></script>
+<!--[if lt IE 9]><script charset="windows-1251" type="text/javascript" src="/static/html5shiv.js?_=1484636606"></script><![endif]-->
+
+</head>
+	<body class="v8310doc">
+<a name="_ref404185574"></a><a name="_ref356473054"></a><a name="_ref350940506"></a><a name="_ref350940505"></a><a name="_ref237783618"></a><a id="TI000001194" class="bookmark"><h1>Глава 34.  Внешние компоненты</h1></a>
+
+<a name="_ref452043082"></a><a id="TI000001866" class="bookmark" name="issogl1_34.1_общая_информация"><h2>34.1. Общая информация</h2></a>
+
+<p class="MsoNormalCxSpFirst">«1С:Предприятие» является расширяемой системой. Для
+расширения функциональных возможностей используются внешние компоненты.</p>
+
+<p class="MsoNormalCxSpLast">В системе используются две технологии создания
+внешних компонент:</p>
+
+<p class="MsoListBulletCxSpFirst">&#9679; 
+с использованием Native API,</p>
+
+<p class="MsoListBulletCxSpLast">&#9679; 
+с использованием технологии COM.</p>
+
+<p class="MsoNormal">Это позволяет создавать внешние компоненты для:</p>
+
+<p class="MsoListNumberCxSpFirst">1. 
+ОС семейства Windows и ОС семейства Linux.</p>
+
+<p class="MsoListNumberCxSpMiddle">2. 
+Веб-клиента, работающего в веб-браузерах Microsoft Internet Explorer, Mozilla Firefox, Google Chrome и Safari.</p>
+
+<p class="MsoListNumberCxSpLast">3. 
+Мобильного приложения, работающего под
+управлением мобильных ОС iOS,
+Android и Windows.</p>
+
+<p class="MsoNormalCxSpFirst">Внешние компоненты, предназначенные для работы в
+среде веб-клиента или мобильного приложения, должны быть упакованы в zip-архив особой структуры.
+Такой файл можно использовать также на сервере «1С:Предприятия» и в других
+клиентах.</p>
+
+<p class="MsoNormalCxSpLast">При работе с компонентами, написанными с
+использованием Native
+API, следует придерживаться следующей схемы работы:</p>
+
+<p class="MsoListBulletCxSpFirst">&#9679; 
+В интерфейсе реализуется команда, которая
+вызывает установку внешней компоненты на компьютер пользователя (метод
+глобального контекста <span class="Term">УстановитьВнешнююКомпоненту()</span>).
+Данная операция обязательная для работы в тонком и веб-клиентах.</p>
+
+<p class="MsoListBulletCxSpMiddle">&#9679; 
+Компонента подключается с помощью метода <span class="Term">ПодключитьВнешнююКомпоненту()</span>.
+При этом следует помнить, что попытка подключить неустановленную компоненту
+приведет к ошибке.</p>
+
+<p class="MsoListBulletCxSpLast">&#9679; 
+Подключенная компонента используется согласно
+предоставленному программному интерфейсу.</p>
+
+<p class="Note"><span class="Note">совет.</span> Не следует объединять в
+один программный код установку и подключение внешней компоненты. Установка
+считается однократным событием, и повторная установка вызовет интерактивное
+исключение.</p>
+
+<p class="MsoNormalCxSpFirst">Если используется компонента, упакованная в zip-архив, то для указания
+параметров внешней компоненты (имя устанавливаемого файла, тип, архитектура,
+используемый веб-браузера) служит специальный файл-манифест, формируемый
+разработчиком компоненты.</p>
+
+<p class="MsoNormalCxSpLast">Получаемые из конфигурации или информационной базы
+внешние компоненты сохраняются после получения и используются при последующем
+подключении без повторного получения (компонента, используемая на сервере,
+сохраняется только на время работы рабочего процесса сервера).</p>
+
+<p class="Note">Примечание.
+Подключение внешних компонент, выполненных по технологии СОМ, с помощью методов
+<span class="Term">ЗагрузитьВнешнююКомпоненту()</span>,
+ПодключитьВнешнююКомпоненту<span class="Term">()</span>, а также регистрация объектов компоненты выполняются
+«для пользователя». Если регистрация «для пользователя» завершилась неудачно,
+то предпринимается попытка выполнить регистрацию «для компьютера».</p>
+
+<p class="MsoNormal">Если внешняя компонента подключается с помощью метода ПодключитьВнешнююКомпоненту(),
+то формирование параметра в операторе <span class="Term">Новый()</span> (имени
+создаваемого типа) выполняется из следующих частей:</p>
+
+<p class="MsoListBulletCxSpFirst">&#9679; 
+Текст <span class="Term">Addin.</span>;</p>
+
+<p class="MsoListBulletCxSpMiddle">&#9679; 
+Имя, указанное в качестве параметра <span class="Term">Имя</span>
+метода ПодключитьВнешнююКомпоненту();</p>
+
+<p class="MsoListBulletCxSpLast">&#9679; 
+Имя объекта, реализованного во внешней
+компоненте.</p>
+
+<p class="MsoNormalCxSpFirst">Если во внешней компоненте реализован объект
+<span class="Term">Таймер</span>
+и подключение внешней компоненты выполняется следующим образом: <span class="Term">ПодключитьВнешнююКомпоненту(НавСсылка,
+&quot;MyName&quot;);</span>, то для создания объекта из внешней
+компоненты, следует указать следующий идентификатор: <span class="Term">Новый(&quot;Addin.MyName.Таймер&quot;)</span>.</p>
+
+<p class="MsoNormalCxSpLast">Подробная информация по разработке внешних
+компонент приводится на <span class="Interface">Портале 1С:ИТС</span>
+(<a href="/db/metod8dev/content/3221/hdoc" target="_top">http://its.1c.ru/db/metod8dev#content:3221:hdoc</a>).</p>
+
+<a id="TI000001195" class="bookmark" name="issogl1_34.2_особенности_работы_в_тонком_и_толстом_клиентах"><h2>34.2. Особенности работы в тонком и толстом клиентах</h2></a>
+
+<p class="MsoNormalCxSpFirst">При работе в толстом и тонком клиентах можно
+использовать как внешние компоненты, разработанные по технологии COM, так и
+внешние компоненты, разработанные по технологии Native API (как отдельными файлами на
+диске, так и в zip-архивах особого вида).</p>
+
+<p class="MsoNormalCxSpMiddle">Для обновления компоненты достаточно повторно
+выполнить операцию установки внешней компоненты с помощью метода <span class="Term">УстановитьВнешнююКомпоненту()</span>.</p>
+
+<p class="MsoNormalCxSpLast">В момент установки внешние компоненты
+устанавливаются в каталог %APPDATA%\1C<span class="Interface">\1Cv8\ExtCompT</span>. Каталог установки внешних компонент не
+считается кешем и не очищается при вызове «1С:Предприятия» с ключом командной
+строки <span class="Interface">ClearCache</span>. Использование метода <span class="Term">УстановитьВнешнююКомпоненту()</span>
+для тонкого клиента является обязательным.</p>
+
+<a name="_ref360107234"></a><a name="_ref360107233"></a><a name="_ref350948447"></a><a name="_ref350948446"></a><a id="TI000001196" class="bookmark" name="issogl1_34.3_особенности_работы_в_веб-клиенте"><h2>34.3. Особенности работы в веб-клиенте</h2></a>
+
+<p class="MsoNormalCxSpFirst">При работе в веб-клиенте можно использовать
+компоненты, разработанные по технологии Native API или COM и упакованные в zip-архив особого вида. Компоненты,
+разработанные по технологии COM, можно использовать только в том случае, если
+веб-клиент работает в ОС семейства Windows. При установке файла внешней компоненты будет запрошено
+разрешение пользователя на установку расширения.</p>
+
+<p class="MsoNormalCxSpMiddle">Особенности настройки веб-браузеров для работы с
+внешними компонентами см. <a href="/db/v8310doc/bookmark/adm/TI000000250" target="_top">здесь</a>.</p>
+
+<p class="MsoNormalCxSpLast">Каждая внешняя компонента устанавливается в виде
+отдельного расширения веб-браузера. Такое расширение представляет собой
+установочный пакет, подготовленный специальным образом для конкретного вида
+браузеров. Внешние компоненты устанавливаются:</p>
+
+<p class="MsoListBulletCxSpFirst">&#9679; 
+для веб-браузера Microsoft Internet Explorer – в каталог <span class="Interface">%</span><span class="Interface">ALLUSERSPROFILE%\</span><span class="Interface">Application Data\1</span><span class="Interface">C\1</span><span class="Interface">CEWebExt</span> (<span class="Interface">%</span><span class="Interface">ALLUSERSPROFILE%\1</span><span class="Interface">C\1</span><span class="Interface">CEWebExt</span> для ОС Windows Vista и выше);</p>
+
+<p class="MsoListBulletCxSpMiddle">&#9679; 
+для веб-браузера Mozilla Firefox – в
+каталог профиля текущего пользователя веб-браузера (создается веб-браузером);</p>
+
+<p class="MsoListBulletCxSpMiddle">&#9679; 
+для веб-браузера Google Chrome – в каталог
+профиля текущего пользователя веб-браузера (создается веб-браузером);</p>
+
+<p class="MsoListBulletCxSpLast">&#9679; 
+для веб-браузера Safari – определяется
+разработчиком внешней компоненты.</p>
+
+<p class="MsoNormal">Возможно удаление
+внешних компонент:</p>
+
+<p class="MsoListBulletCxSpFirst">&#9679; 
+для веб-браузера Microsoft Internet Explorer – через механизм установки/удаления программ панели
+управления;</p>
+
+<p class="MsoListBulletCxSpMiddle">&#9679; 
+для веб-браузера Mozilla Firefox – через механизм
+работы с дополнениями веб-браузера;</p>
+
+<p class="MsoListBulletCxSpMiddle">&#9679; 
+для веб-браузера Google Chrome – через
+механизм работы с плагинами веб-браузера (переход по ссылке <span class="Interface">chrome://plugins</span>);</p>
+
+<p class="MsoListBulletCxSpLast">&#9679; 
+для веб-браузера Safari – стандартным
+способом.</p>
+
+<p class="Note"><span class="Note">ВНИМАНИЕ!</span> Подключение внешних
+компонент из файла на диске для веб-клиента в целях безопасности не
+поддерживается.</p>
+
+<p class="MsoNormalCxSpFirst">Также следует помнить, что работа с COM-объектами
+доступна только в веб-браузере Microsoft Internet Explorer
+и ОС Windows. Также
+отсутствует поддержка типа <span class="Term">COMSafeArray</span> и возможность совершать вызовы
+методов COM-объектов, которые работают со значениями данного типа.</p>
+
+<p class="MsoNormalCxSpLast">Для обновления компоненты необходимо выполнить одну
+из следующих операций:</p>
+
+<p class="MsoListBulletCxSpFirst">&#9679; 
+удалить компоненту, как указано выше, и заново
+выполнить установку с помощью метода <span class="Term">УстановитьВнешнююКомпоненту()</span>;</p>
+
+<p class="MsoListBulletCxSpLast">&#9679; 
+изменить имя объекта компоненты в исходном
+тексте компоненты и в файле манифеста (при этом имя файла с компонентой может
+не меняться) и заново выполнить установку с помощью метода <span class="Term">УстановитьВнешнююКомпоненту()</span>.</p>
+
+<p class="MsoNormal"></a><a name="_toc237693211">При использовании внешних компонент в
+конфигурации следует придерживаться определенных правил и рекомендаций. Выполнение
+этих правил необходимо для того, чтобы внешние компоненты устанавливались без
+проблем на всех поддерживаемых веб-браузерах.</p>
+
+<p class="MsoListBullet">&#9679; 
+Исключить использование конструкций вида:</p>
+
+<a class="copy_source" href="#_top" onClick="return false">Копировать в буфер обмена</a>
+<pre class="src_dev"><span class="keyword">Если</span> <span class="keyword">Не</span> ПодключитьВнешнююКомпоненту<span class="operator">(</span><span class="operator">)</span> <span class="keyword">Тогда</span>
+    УстановитьВнешнююКомпоненту<span class="operator">(</span><span class="operator">)</span>
+<span class="keyword">КонецЕсли</span><span class="operator">;</span></pre>
+
+<p class="MsoListBulletCxSpFirst">&#9679; 
+Установка внешней компоненты или расширений
+платформы (расширение работы с файлами, расширение работы с криптографией) должна
+быть интерактивной. Пользователь прикладного решения должен самостоятельно
+принять решение об установке. В диалоге установки должно быть сказано, для чего
+нужна компонента и что не будет работать, если ее не устанавливать.</p>
+
+<p class="MsoListBulletCxSpLast">&#9679; 
+Рекомендуется интегрировать установку внешней компоненты
+в процесс выполнения прикладного действия. Например:</p>
+
+<p class="MsoListNumber2CxSpFirst">1.  Пользователь
+воспользовался командой <span class="Interface">Отправить отчет</span>.</p>
+
+<p class="MsoListNumber2CxSpMiddle">2.  Для
+этого прикладному решению необходимо, чтобы была установлена какая-либо внешняя
+компонента.</p>
+
+<p class="MsoListNumber2CxSpMiddle">3.  Прикладное
+решение проверяет, установлена или нет внешняя компонента.</p>
+
+<p class="MsoListNumber2CxSpMiddle">4.  Если
+внешняя компонента не установлена, пользователю отображается диалоговое окно,
+содержащую информацию о том, что для отправки отчета нужно установить
+компоненту и две кнопки: для установки внешней компоненты и для продолжения
+отправки отчета.</p>
+
+<p class="MsoListNumber2CxSpLast">5.  Затем
+пользователь последовательно выполняет два интерактивных действия:</p>
+
+<p class="MsoListNumber3CxSpFirst">1.  Установку
+внешней компоненты;</p>
+
+<p class="MsoListNumber3CxSpLast">2.  Продолжение
+отправки отчета.</p>
+
+<p class="MsoListBullet">&#9679; 
+В прикладном решении должны быть реализованы
+инструменты для установки пользователем внешних компонент и расширений платформы
+в любой момент работы. Действия по установке внешних компонент и расширений
+платформы не обязательно должны выполняться в процессе выполнения какого-либо
+действия.</p>
+
+<a id="TI000001197" class="bookmark" name="issogl1_34.4_особенности_работы_на_сервере"><h2>34.4. Особенности работы на сервере</h2></a>
+
+<p class="MsoNormalCxSpFirst">При работе на сервере «1С:Предприятия» допустимо
+использовать только компоненты, разработанные по технологии Native API, которые могут быть как
+отдельными файлами, так и упакованными в специальные zip-архивы.</p>
+
+<p class="MsoNormalCxSpMiddle">Для подключения внешней компоненты используется
+метод <span class="Term">ПодключитьВнешнююКомпоненту()</span>
+(без использования метода <span class="Term">УстановитьВнешнююКомпоненту()</span>, который
+недоступен на сервере).</p>
+
+<p class="MsoNormalCxSpMiddle">При работе на сервере желательно выполнять
+подключение внешней компоненты непосредственно перед ее использованием. Кроме
+того, компоненты, используемые на сервере, должны поддерживать все архитектуры
+и платформы. Это связано с тем, что в общем случае серверный код может
+исполняться на разных рабочих процессах (в разные моменты времени), которые могут
+исполняться на разных компьютерах. При этом компьютеры могут быть как разной
+архитектуры, так и функционировать под управлением различных операционных
+систем.</p>
+
+<p class="MsoNormalCxSpLast">Файл внешней компоненты сохраняется рабочим
+процессом до своего перезапуска, поэтому повторное подключение внешней
+компоненты (до перезапуска рабочего процесса или переключения исполнения на
+другой рабочий процесс) происходит быстрее, чем первое подключение.</p>
+
+<a name="_ref403661285"></a><a name="_ref452041650"></a><a id="TI000001867" class="bookmark" name="issogl1_34.5_особенности_использования_в_мобильном_приложении"><h2>34.5. Особенности использования в мобильном приложении</h2></a>
+
+<p class="MsoNormalCxSpFirst">В
+мобильном приложении допускается использовать только компоненты, разработанные
+по технологии Native API, которые могут быть как отдельными файлами, так и
+упакованными в zip-архивы особого вида.</p>
+
+<p class="MsoNormalCxSpLast">Более
+подробно особенности использования внешних компонент в мобильном приложении см. <A href="/db/content/v8310doc/src/руководство разработчика/глава 25. разработка решений для мобильной платформы.htm?_=1496848987#_ref452045177">здесь</a>.</p>
+
+<a name="_ref405477405"></a><a name="_ref405477404"></a><a id="TI000001509" class="bookmark" name="issogl1_34.6_асинхронная_работа_с_внешней_компонентой"><h2>34.6. Асинхронная работа с внешней компонентой</h2></a>
+
+<p class="MsoNormal">Использование внешних компонент в
+асинхронном режиме имеет ряд особенностей:</p>
+
+<p class="MsoListNumberCxSpFirst">1. 
+Подключение внешней компоненты выполняется с
+помощью асинхронного метода <span class="Term">НачатьПодключениеВнешнейКомпоненты()</span>.</p>
+
+<p class="MsoListNumberCxSpMiddle">2. 
+Для обращения к свойствам внешней компоненты
+следует использовать асинхронные методы <span class="Term">НачатьУстановку&lt;ИмяСвойства&gt;()</span>
+и <span class="Term">НачатьПолучение&lt;ИмяСвойства&gt;()</span>.</p>
+
+<p class="MsoListNumberCxSpLast">3. 
+Вместо обращения к методу компоненты следует
+использовать асинхронные методы <span class="Term">НачатьВызов&lt;ИмяМетода&gt;()</span>.</p>
+
+<p class="MsoNormalCxSpFirst">Методы <span class="Term">Начать…()</span>
+автоматически добавляются платформой к существующим свойствам и методам внешней
+компоненты. Саму внешнюю компоненту не требуется отдельно перерабатывать для
+поддержки работы в асинхронном режиме, однако необходимо выполнить
+перекомпиляцию существующей внешней компоненты для поддержки асинхронной работы.</p>
+
+<p class="MsoNormalCxSpMiddle">Для метода <span class="Term">НачатьВызов…()</span>
+первым параметров следует указывать описание оповещения, а остальные параметры
+соответствуют набору параметров оригинального метода внешней компоненты.</p>
+
+<p class="MsoNormalCxSpLast">При использовании веб-браузеров Google
+Chrome и Mozilla Firefox поддерживается
+только асинхронное подключение и использование внешних компонент, в том время
+как для других веб-браузеров допустимо использование как синхронного, так и асинхронного
+способа работы. Это определяется свойством конфигурации <span class="Interface">Режим использования синхронных вызовов расширений платформы и
+внешних компонент</span> (см. <A href="/db/content/v8310doc/src/руководство разработчика/глава 5. объекты конфигурации.htm?_=1496848987#_ref370288523">здесь</a>).</p>
+
+<a id="TI000001198" class="bookmark" name="issogl1_34.7_примеры_работы_с_внешней_компонентой"><h2>34.7. Примеры работы с внешней компонентой</h2></a>
+
+<a id="TI000001199" class="bookmark" name="issogl2_34.7.1_технология_native_api"><h3>34.7.1. Технология Native API</h3></a>
+
+<p class="MsoNormalCxSpFirst">Внешние компоненты, выполненные по технологии Native API,
+можно подключать не только в клиентских приложениях, но и на сервере приложений
+«1С:Предприятия».</p>
+
+<p class="MsoNormalCxSpLast">При работе компоненты на сервере вызов <span class="Term">ПодключитьВнешнююКомпоненту()</span>
+необходимо выполнять каждый раз перед созданием экземпляра внешней компоненты, т. к.
+в общем случае неизвестно, на каком сервере будет исполняться вызов (это может
+быть Windows, Linux, 32-разрядная или 64-разрядная
+ОС).</p>
+
+<a id="TI000001200" class="bookmark" name="issogl3_34.7.1.1_установка_внешней_компоненты_на_клиента"><h4>34.7.1.1. Установка внешней компоненты на клиента</h4></a>
+
+<a class="copy_source" href="#_top" onClick="return false">Копировать в буфер обмена</a>
+<pre class="src_dev">УстановитьВнешнююКомпоненту<span class="operator">(</span><span class="string">&quot;ОбщийМакет.ДрайверСканераШтрихкодов&quot;</span><span class="operator">)</span><span class="operator">;</span></pre>
+
+<a id="TI000001201" class="bookmark" name="issogl3_34.7.1.2_загрузка_из_файла_на_диске"><h4>34.7.1.2. Загрузка из файла на диске</h4></a>
+
+<p class="MsoNormal">Файл внешней компоненты должен находиться на компьютере
+пользователя и быть доступен в пути поиска (переменная окружения <span class="Term">PATH</span>)
+операционной системы.</p>
+
+<a class="copy_source" href="#_top" onClick="return false">Копировать в буфер обмена</a>
+<pre class="src_dev">СисИнфо <span class="operator">=</span> <span class="keyword">Новый</span> СистемнаяИнформация<span class="operator">;</span>
+<span class="keyword">Если</span> СисИнфо<span class="operator">.</span>ТипПлатформы <span class="operator">=</span> ТипПлатформы<span class="operator">.</span>Windows_x86 <span class="keyword">Тогда</span>
+    ПодключитьВнешнююКомпоненту<span class="operator">(</span><span class="string">&quot;AddInCPP.dll&quot;</span><span class="operator">,</span> <span class="string">&quot;MyName&quot;</span><span class="operator">,</span> ТипВнешнейКомпоненты<span class="operator">.</span>Native<span class="operator">)</span><span class="operator">;</span>
+<span class="keyword">ИначеЕсли</span> СисИнфо<span class="operator">.</span>ТипПлатформы <span class="operator">=</span> ТипПлатформы<span class="operator">.</span>Windows_x86_64 <span class="keyword">Тогда</span>
+    ПодключитьВнешнююКомпоненту<span class="operator">(</span><span class="string">&quot;AddInCPP64.dll&quot;</span><span class="operator">,</span> <span class="string">&quot;MyName&quot;</span><span class="operator">,</span> ТипВнешнейКомпоненты<span class="operator">.</span>Native<span class="operator">)</span><span class="operator">;</span>
+<span class="keyword">ИначеЕсли</span> СисИнфо<span class="operator">.</span>ТипПлатформы <span class="operator">=</span> ТипПлатформы<span class="operator">.</span>Linux_x86 <span class="keyword">Тогда</span>
+    ПодключитьВнешнююКомпоненту<span class="operator">(</span><span class="string">&quot;libAddInCPP.so&quot;</span><span class="operator">,</span> <span class="string">&quot;MyName&quot;</span><span class="operator">,</span> ТипВнешнейКомпоненты<span class="operator">.</span>Native<span class="operator">)</span><span class="operator">;</span>
+<span class="keyword">Иначе</span>
+    ПодключитьВнешнююКомпоненту<span class="operator">(</span><span class="string">&quot;libAddInCPP64.so&quot;</span><span class="operator">,</span> <span class="string">&quot;MyName&quot;</span><span class="operator">,</span> ТипВнешнейКомпоненты<span class="operator">.</span>Native<span class="operator">)</span><span class="operator">;</span>
+<span class="keyword">КонецЕсли</span><span class="operator">;</span>
+ОбъектКомпоненты <span class="operator">=</span> <span class="keyword">Новый</span><span class="operator">(</span><span class="string">&quot;AddIn.MyName.ComponentExtension&quot;</span><span class="operator">)</span><span class="operator">;</span></pre>
+
+<p class="Note"><span class="Note">Примечание.</span> Следует обратить
+внимание на формирование параметра в команде <span class="Term">Новый</span>.</p>
+
+<a id="TI000001202" class="bookmark" name="issogl3_34.7.1.3_загрузка_компоненты_из_макета"><h4>34.7.1.3. Загрузка компоненты из макета</h4></a>
+
+<a class="copy_source" href="#_top" onClick="return false">Копировать в буфер обмена</a>
+<pre class="src_dev">СисИнфо <span class="operator">=</span> <span class="keyword">Новый</span> СистемнаяИнформация<span class="operator">;</span>
+<span class="keyword">Если</span> СисИнфо<span class="operator">.</span>ТипПлатформы <span class="operator">=</span> ТипПлатформы<span class="operator">.</span>Windows_x86 <span class="keyword">Тогда</span>
+    ПодключитьВнешнююКомпоненту<span class="operator">(</span><span class="string">&quot;Обработка.Компонента.Макет.AddInWindows32&quot;</span><span class="operator">,</span> <span class="string">&quot;MyName&quot;</span><span class="operator">,</span> ТипВнешнейКомпоненты<span class="operator">.</span>Native<span class="operator">)</span><span class="operator">;</span>
+<span class="keyword">ИначеЕсли</span> СисИнфо<span class="operator">.</span>ТипПлатформы <span class="operator">=</span> ТипПлатформы<span class="operator">.</span>Windows_x86_64 <span class="keyword">Тогда</span>
+    ПодключитьВнешнююКомпоненту<span class="operator">(</span><span class="string">&quot;Обработка.Компонента.Макет.AddInWindows64&quot;</span><span class="operator">,</span> <span class="string">&quot;MyName&quot;</span><span class="operator">,</span> ТипВнешнейКомпоненты<span class="operator">.</span>Native<span class="operator">)</span><span class="operator">;</span>
+<span class="keyword">ИначеЕсли</span> СисИнфо<span class="operator">.</span>ТипПлатформы <span class="operator">=</span> ТипПлатформы<span class="operator">.</span>Linux_x86 <span class="keyword">Тогда</span>
+    ПодключитьВнешнююКомпоненту<span class="operator">(</span><span class="string">&quot;Обработка.Компонента.Макет.AddInLinux32&quot;</span><span class="operator">,</span> <span class="string">&quot;MyName&quot;</span><span class="operator">,</span> ТипВнешнейКомпоненты<span class="operator">.</span>Native<span class="operator">)</span><span class="operator">;</span>
+<span class="keyword">Иначе</span> 
+    ПодключитьВнешнююКомпоненту<span class="operator">(</span><span class="string">&quot;Обработка.Компонента.Макет.AddInLinux64&quot;</span><span class="operator">,</span> <span class="string">&quot;MyName&quot;</span><span class="operator">,</span> ТипВнешнейКомпоненты<span class="operator">.</span>Native<span class="operator">)</span><span class="operator">;</span>
+<span class="keyword">КонецЕсли</span><span class="operator">;</span>
+ОбъектКомпоненты <span class="operator">=</span> <span class="keyword">Новый</span><span class="operator">(</span><span class="string">&quot;AddIn.MyName.ComponentExtension&quot;</span><span class="operator">)</span><span class="operator">;</span></pre>
+
+<p class="Note"><span class="Note">Примечание.</span> Следует обратить
+внимание на формирование параметра в команде <span class="Term">Новый</span>.</p>
+
+<a id="TI000001203" class="bookmark" name="issogl3_34.7.1.4_загрузка_из_информационной_базы"><h4>34.7.1.4. Загрузка из информационной базы</h4></a>
+
+<p class="MsoNormal">В информационной базе должен быть справочник <span class="Term">ВнешниеКомпоненты</span>
+и реквизиты для указанных названий с типом <span class="Term">ХранилищеЗначения</span>
+с файлами внешних компонент.</p>
+
+<a class="copy_source" href="#_top" onClick="return false">Копировать в буфер обмена</a>
+<pre class="src_dev"><span class="keyword">Перем</span> Ссылка<span class="operator">;</span>
+СисИнфо <span class="operator">=</span> <span class="keyword">Новый</span> СистемнаяИнформация<span class="operator">;</span>
+<span class="keyword">Если</span> СисИнфо<span class="operator">.</span>ТипПлатформы <span class="operator">=</span> ТипПлатформы<span class="operator">.</span>Windows_x86 <span class="keyword">Тогда</span>
+    Ссылка <span class="operator">=</span> ПолучитьНавигационнуюСсылку<span class="operator">(</span>Справочники<span class="operator">.</span>ВнешниеКомпоненты<span class="operator">.</span>НайтиПоКоду<span class="operator">(</span><span class="string">&quot;000000001&quot;</span><span class="operator">)</span><span class="operator">,</span> <span class="string">&quot;КомпонентаWindows32&quot;</span><span class="operator">)</span><span class="operator">;</span>
+<span class="keyword">ИначеЕсли</span> СисИнфо<span class="operator">.</span>ТипПлатформы <span class="operator">=</span> ТипПлатформы<span class="operator">.</span>Windows_x86_64 <span class="keyword">Тогда</span>
+    Ссылка <span class="operator">=</span> ПолучитьНавигационнуюСсылку<span class="operator">(</span>Справочники<span class="operator">.</span>ВнешниеКомпоненты<span class="operator">.</span>НайтиПоКоду<span class="operator">(</span><span class="string">&quot;000000001&quot;</span><span class="operator">)</span><span class="operator">,</span> <span class="string">&quot;КомпонентаWindows64&quot;</span><span class="operator">)</span><span class="operator">;</span>
+<span class="keyword">ИначеЕсли</span> СисИнфо<span class="operator">.</span>ТипПлатформы <span class="operator">=</span> ТипПлатформы<span class="operator">.</span>Linux_x86 <span class="keyword">Тогда</span>
+    Ссылка <span class="operator">=</span> ПолучитьНавигационнуюСсылку<span class="operator">(</span>Справочники<span class="operator">.</span>ВнешниеКомпоненты<span class="operator">.</span>НайтиПоКоду<span class="operator">(</span><span class="string">&quot;000000001&quot;</span><span class="operator">)</span><span class="operator">,</span> <span class="string">&quot;КомпонентаLinux32&quot;</span><span class="operator">)</span><span class="operator">;</span>
+<span class="keyword">Иначе</span> 
+    Ссылка <span class="operator">=</span> ПолучитьНавигационнуюСсылку<span class="operator">(</span>Справочники<span class="operator">.</span>ВнешниеКомпоненты<span class="operator">.</span>НайтиПоКоду<span class="operator">(</span><span class="string">&quot;000000001&quot;</span><span class="operator">)</span><span class="operator">,</span> <span class="string">&quot;КомпонентаLinux64&quot;</span><span class="operator">)</span><span class="operator">;</span>
+<span class="keyword">КонецЕсли</span><span class="operator">;</span>
+ПодключитьВнешнююКомпоненту<span class="operator">(</span>Ссылка<span class="operator">,</span> <span class="string">&quot;MyName&quot;</span><span class="operator">,</span> ТипВнешнейКомпоненты<span class="operator">.</span>Native<span class="operator">)</span><span class="operator">;</span>
+ОбъектКомпоненты <span class="operator">=</span> <span class="keyword">Новый</span><span class="operator">(</span><span class="string">&quot;AddIn.MyName.ComponentExtension&quot;</span><span class="operator">)</span><span class="operator">;</span></pre>
+
+<p class="Note"><span class="Note">Примечание.</span> Следует обратить
+внимание на формирование параметра в команде <span class="Term">Новый</span>.</p>
+
+<p class="MsoNormal">В рассмотренных примерах работы с внешними компонентами по
+технологии Native API
+также можно подключать внешние компоненты, реализованные с использованием
+технологии COM только для ОС Windows.</p>
+
+<a id="TI000001204" class="bookmark" name="issogl3_34.7.1.5_подключить_компоненту_из_zip-архива"><h4>34.7.1.5. Подключить компоненту из zip-архива</h4></a>
+
+<p class="MsoNormal">В конфигурации должен быть общий макет с именем <span class="Term">ДрайверСканераШтрихКодов</span>
+с типом <span class="Term">ДвоичныеДанные</span>.
+В макете находится zip-архив особой структуры, в котором содержатся внешние
+компоненты для всех поддерживаемых операционных систем, браузеров и архитектур
+процессоров.</p>
+
+<a class="copy_source" href="#_top" onClick="return false">Копировать в буфер обмена</a>
+<pre class="src_dev">ПодключитьВнешнююКомпоненту<span class="operator">(</span><span class="string">&quot;ОбщийМакет.ДрайверСканераШтрихкодов&quot;</span><span class="operator">,</span> <span class="string">&quot;Сканер&quot;</span><span class="operator">)</span><span class="operator">;</span>
+Компонента <span class="operator">=</span> <span class="keyword">Новый</span><span class="operator">(</span><span class="string">&quot;AddIn.Сканер.BarcodeReader&quot;</span><span class="operator">)</span><span class="operator">;</span></pre>
+
+<p class="Note"><span class="Note">Примечание.</span> Следует обратить
+внимание на формирование параметра в команде <span class="Term">Новый</span>.</p>
+
+<a id="TI000001205" class="bookmark" name="issogl2_34.7.2_com-технология"><h3>34.7.2. COM-технология</h3></a>
+
+<a id="TI000001206" class="bookmark" name="issogl3_34.7.2.1_загрузить_внешнюю_компоненту"><h4>34.7.2.1. Загрузить внешнюю компоненту</h4></a>
+
+<a class="copy_source" href="#_top" onClick="return false">Копировать в буфер обмена</a>
+<pre class="src_dev">ЗагрузитьВнешнююКомпоненту<span class="operator">(</span><span class="string">&quot;MyComponent.dll&quot;</span><span class="operator">)</span><span class="operator">;</span>
+Компонента <span class="operator">=</span> <span class="keyword">Новый</span><span class="operator">(</span><span class="string">&quot;AddIn.ComponentExtension&quot;</span><span class="operator">)</span><span class="operator">;</span></pre>
+
+<a id="TI000001207" class="bookmark" name="issogl3_34.7.2.2_подключить_внешнюю_компоненту"><h4>34.7.2.2. Подключить внешнюю компоненту</h4></a>
+
+<a class="copy_source" href="#_top" onClick="return false">Копировать в буфер обмена</a>
+<pre class="src_dev">ПодключитьВнешнююКомпоненту<span class="operator">(</span><span class="string">&quot;AddIn.MyObject&quot;</span><span class="operator">)</span><span class="operator">;</span>
+Компонента <span class="operator">=</span> <span class="keyword">Новый</span><span class="operator">(</span><span class="string">&quot;AddIn.ComponentExtension&quot;</span><span class="operator">)</span><span class="operator">;</span></pre>
+
+<p class="Note"><span class="Note">Примечание</span>. Команда <span class="Term">ЗагрузитьВнешнююКомпоненту()</span>
+используется для совместимости с предыдущими версиями «1С:Предприятия».</p>
+
+<p class="MsoNormalCxSpFirst"> </p>
+
+<br>		<script type="text/javascript">listenCopy('zeroclipboard.swf');</script>
+	</body>
+</html>

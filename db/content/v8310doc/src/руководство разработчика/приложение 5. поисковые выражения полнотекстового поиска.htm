@@ -1,0 +1,323 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=Windows-1251">
+		<title>&#1055;&#1088;&#1080;&#1083;&#1086;&#1078;&#1077;&#1085;&#1080;&#1077; 5. &#1055;&#1086;&#1080;&#1089;&#1082;&#1086;&#1074;&#1099;&#1077; &#1074;&#1099;&#1088;&#1072;&#1078;&#1077;&#1085;&#1080;&#1103; &#1087;&#1086;&#1083;&#1085;&#1086;&#1090;&#1077;&#1082;&#1089;&#1090;&#1086;&#1074;&#1086;&#1075;&#1086; &#1087;&#1086;&#1080;&#1089;&#1082;&#1072;</title>
+		<LINK REL="stylesheet" href="/db/content/v8310doc/src/руководство разработчика/style.css?_=1496848987">
+		<script charset="windows-1251" src="/db/content/v8310doc/src/руководство разработчика/script.js?_=1496848987" TYPE="text/javascript"></script>
+	<meta name="robots" content="noarchive">
+<meta name="googlebot" content="noarchive">
+<link href="/db/content/v8310doc/src/руководство разработчика/приложение 5. поисковые выражения полнотекстового поиска.htm" rel="canonical">
+<link href="/static/its.content.css?_=1490872753" type="text/css" rel="stylesheet">
+<script charset="windows-1251" type="text/javascript" src="/static/its.content.js?_=1489758009"></script>
+<!--[if lt IE 9]><script charset="windows-1251" type="text/javascript" src="/static/html5shiv.js?_=1484636606"></script><![endif]-->
+
+</head>
+	<body class="v8310doc">
+<a name="_ref213647049"></a><a name="_ref215407043"></a><a name="_ref352162589"></a><a name="_ref300244230"></a><a id="TI000001240" class="bookmark"><h1>Приложение 5.  Поисковые выражения полнотекстового поиска</h1></a>
+
+<p class="MsoNormal">Поиск может
+осуществляться по нескольким словам, с использованием поисковых операторов и
+поиском по точной фразе. По умолчанию поиск с учетом синонимов и нечеткий поиск
+не производятся. Для выполнения поисков этих видов следует использовать
+соответствующие операторы.</p>
+
+<p class="Regularbeforetable">В строке
+ввода допускается использовать следующие поисковые операторы (как для поиска в
+справке и синтакс-помощнике, так и для объекта встроенного языка <span class="Term">ПолнотекстовыйПоиск</span>):</p>
+
+<table class="MsoNormalTable" border="0" cellspacing="0" cellpadding="0">
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpFirst"><b>Оператор</b></p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><b>Пример<br>
+  выражения</b></p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><b>Пояснение</b></p>
+  </td>
+  
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Term">Пробел</span></p>
+  <p class="MsoNormalCxSpMiddle"><span class="Term">И</span></p>
+  <p class="MsoNormalCxSpMiddle"><span class="Term">AND</span></p>
+  <p class="MsoNormalCxSpMiddle"><span class="Term">&amp;</span></p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Бизнес Успех</p>
+  <p class="MsoNormalCxSpMiddle">Бизнес <span class="Term">И</span>
+  Успех</p>
+  <p class="MsoNormalCxSpMiddle">Бизнес <span class="Term">AND</span>
+  Успех</p>
+  <p class="MsoNormalCxSpMiddle">Бизнес <span class="Term">&amp;</span>
+  Успех</p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Должно быть и слово «Бизнес», и слово «Успех»</p>
+  </td>
+  
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Term">ИЛИ</span></p>
+  <p class="MsoNormalCxSpMiddle"><span class="Term">OR</span></p>
+  <p class="MsoNormalCxSpMiddle"><span class="Term">|</span></p>
+  <p class="MsoNormalCxSpMiddle"><span class="Term">,</span></p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Бизнес <span class="Term">ИЛИ</span>
+  Успех</p>
+  <p class="MsoNormalCxSpMiddle">Бизнес <span class="Term">OR</span>
+  Успех</p>
+  <p class="MsoNormalCxSpMiddle">Бизнес <span class="Term">|</span>
+  Успех</p>
+  <p class="MsoNormalCxSpMiddle">Бизнес <span class="Term">,</span>
+  Успех</p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Должно быть хотя бы одно из слов «Бизнес»
+  или «Успех»</p>
+  </td>
+  
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Term">НЕ</span></p>
+  <p class="MsoNormalCxSpMiddle"><span class="Term">NOT</span></p>
+  <p class="MsoNormalCxSpMiddle"><span class="Term">~</span></p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Бизнес <span class="Term">НЕ</span>
+  Успех</p>
+  <p class="MsoNormalCxSpMiddle">Бизнес <span class="Term">NOT</span>
+  Успех</p>
+  <p class="MsoNormalCxSpMiddle">Бизнес <span class="Term">~</span>
+  Успех</p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Должно быть слово «Бизнес», но не должно
+  быть слова «Успех»</p>
+  </td>
+  
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Term">РЯДОМ/[±]n</span></p>
+  <p class="MsoNormalCxSpMiddle"><span class="Term">NEAR/[±]n</span></p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Italic">Пример 1:</span></p>
+  <p class="MsoNormalCxSpMiddle">фен <span class="Term">РЯДОМ/3</span>
+  воздух</p>
+  <p class="MsoNormalCxSpMiddle"><span class="Italic">Пример 2:</span></p>
+  <p class="MsoNormalCxSpMiddle">фен <span class="Term">РЯДОМ/+3</span>
+  воздух</p>
+  <p class="MsoNormalCxSpMiddle"><span class="Italic">Пример 3:</span></p>
+  <p class="MsoNormalCxSpMiddle">фен <span class="Term">РЯДОМ/-3</span>
+  воздух</p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Поиск данных, содержащих в одном реквизите
+  указанные слова с учетом морфологии на расстоянии n слов между словами.</p>
+  <p class="MsoNormalCxSpMiddle">Знак указывает, в каком направлении от
+  первого слова будет искаться второе слово («<span class="Interface">+</span>» – после первого; «<span class="Interface">-</span>» – до
+  первого слова).</p>
+  <p class="MsoNormalCxSpMiddle">Если знак не указан, то будут найдены
+  данные, содержащие указанные слова на дистанции n слов друг от друга. Порядок
+  слов не имеет значения.</p>
+  <p class="MsoNormalCxSpMiddle">В примере 1 будут найдены данные, в
+  которых слово «воздух» находится не более трех слов до или после слова «фен».</p>
+  <p class="MsoNormalCxSpMiddle">В примере 2 будут найдены данные, в
+  которых слово «воздух» находится не более трех слов после слова «фен».</p>
+  <p class="MsoNormalCxSpMiddle">В примере 3 будут найдены данные, в
+  которых слово «воздух» находится не более трех слов перед словом «фен»</p>
+  </td>
+  
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Term">РЯДОМ</span></p>
+  <p class="MsoNormalCxSpMiddle"><span class="Term">NEAR</span></p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Библиотека <span class="Term">РЯДОМ</span>
+  имени <span class="Term">РЯДОМ</span>
+  Достоевского</p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Краткая форма. Запрос найдет данные, в которых
+  слова встречаются в одном реквизите не дальше чем на 8 слов друг от друга в
+  любую сторону</p>
+  </td>
+  
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Term">&quot;&quot;</span></p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">«администратор сети»</p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Поиск точной фразы (эквивалентно «администратор
+  <span class="Term">РЯДОМ/+1</span> сети»)</p>
+  </td>
+  
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Term">()</span></p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Term">(</span>технология <span class="Term">|</span>
+  изготовление<span class="Term">)</span> <span class="Term">&amp;</span> <span class="Term">(</span>сыра
+  <span class="Term">|</span> творога<span class="Term">)</span></p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Группировка слов (сколько угодно уровней
+  вложенности)</p>
+  </td>
+  
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Term">*</span></p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">арх<span class="Term">*</span>я</p>
+  <p class="MsoNormalCxSpMiddle">арх<span class="Term">*</span>
+  <span class="Term">&amp;</span>
+  документооб<span class="Term">*</span></p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Поиск с использованием группового символа –
+  поддерживается «<span class="Term">*</span>»
+  в произвольном месте слова и в произвольном количестве. То есть запрос «арх*я»
+  найдет «архивация», «археология»</p>
+  </td>
+  
+ </tr>
+</table>
+
+<p class="MsoNormalCxSpLast">Написание
+операторов <span class="Term">И</span> (<span class="Term">AND</span>), <span class="Term">ИЛИ</span>
+(<span class="Term">OR</span>), <span class="Term">НЕ</span> (<span class="Term">NOT</span>),
+<span class="Term">РЯДОМ</span> (<span class="Term">NEAR</span>) допускается только в верхнем регистре. Операторы
+не используются как унарные (в начале строки поиска). Например, нельзя сделать
+выбор всех глав, в которых отсутствует указанный текст. Все символы в поле
+поиска, кроме символов поисковых операторов, букв и цифр, игнорируются.</p>
+
+<p class="Regularbeforetable">При
+использовании объекта встроенного языка <span class="Term">ПолнотекстовыйПоиск</span>
+необходимо учитывать следующее:</p>
+
+<table class="MsoNormalTable" border="0" cellspacing="0" cellpadding="0">
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpFirst"><b>Оператор</b></p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><b>Пример<br>
+  выражения</b></p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><b>Пояснение</b></p>
+  </td>
+  
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Term">*</span></p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">арх<span class="Term">*</span></p>
+  <p class="MsoNormalCxSpMiddle">арх<span class="Term">*</span>
+  <span class="Term">&amp;</span> документооб<span class="Term">*</span></p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Поиск с использованием группового символа –
+  поддерживается только один символ «*», и он должен быть в конце слова. То
+  есть запрос «арх*» найдет «архив», «археология»</p>
+  </td>
+  
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Term">#</span></p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Term">#</span>Система</p>
+  <p class="MsoNormalCxSpMiddle">Система<span class="Term">#2</span></p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Нечеткий поиск слов с заданным количеством
+  отличий от указанного в строке поиска.</p>
+  <p class="MsoNormalCxSpMiddle">Запрос «#Система» (эквивалентно запросу «Система#1»)
+  найдет «систама», «сивтема».</p>
+  <p class="MsoNormalCxSpMiddle">Запрос «Система#2» найдет «ситтама», «сеттема».</p>
+  <p class="MsoNormalCxSpMiddle">Только для полнотекстового поиска в данных!</p>
+  </td>
+  
+ </tr>
+ <tr>
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Term">!</span></p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle"><span class="Term">!</span>красный кафель</p>
+  </td>
+  
+  <td valign="top">
+  <p class="MsoNormalCxSpMiddle">Поиск с учетом синонимов русского, английского
+  и украинского языков. Оператор «!» ставится перед соответствующим словом.
+  Пример: поиск «!красный кафель», найдет еще и «алый кафель», и «коралловый
+  кафель»</p>
+  </td>
+  
+ </tr>
+</table>
+
+<p class="MsoNormalCxSpMiddle">Написание
+операторов <span class="Term">И</span> (<span class="Term">AND</span>), <span class="Term">ИЛИ</span>
+(<span class="Term">OR</span>), <span class="Term">НЕ</span> (<span class="Term">NOT</span>),
+<span class="Term">РЯДОМ</span> (<span class="Term">NEAR</span>) допускается только в верхнем регистре. Операторы
+не используются как унарные (в начале строки поиска). Например, нельзя сделать
+выбор всех глав, в которых отсутствует указанный текст.</p>
+
+<p class="MsoNormalCxSpMiddle">Для поиска спецсимволов, используемых в тексте, их следует заключать
+в кавычки. Например: <span class="Interface">&quot;РЯДОМ&quot;</span>.</p>
+
+<p class="MsoNormalCxSpMiddle"> </p>
+
+<br>
+	</body>
+</html>

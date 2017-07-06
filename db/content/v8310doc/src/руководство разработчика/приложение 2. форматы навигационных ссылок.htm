@@ -1,0 +1,466 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=Windows-1251">
+		<title>&#1055;&#1088;&#1080;&#1083;&#1086;&#1078;&#1077;&#1085;&#1080;&#1077; 2. &#1060;&#1086;&#1088;&#1084;&#1072;&#1090;&#1099; &#1085;&#1072;&#1074;&#1080;&#1075;&#1072;&#1094;&#1080;&#1086;&#1085;&#1085;&#1099;&#1093; &#1089;&#1089;&#1099;&#1083;&#1086;&#1082;</title>
+		<LINK REL="stylesheet" href="/db/content/v8310doc/src/руководство разработчика/style.css?_=1496848987">
+		<script charset="windows-1251" src="/db/content/v8310doc/src/руководство разработчика/script.js?_=1496848987" TYPE="text/javascript"></script>		<!--[if !IE]>--><script charset="windows-1251" src="/db/content/v8310doc/src/руководство разработчика/zeroclipboard.js?_=1496848987" TYPE="text/javascript"></script><!--<![endif]-->
+	<meta name="robots" content="noarchive">
+<meta name="googlebot" content="noarchive">
+<link href="/db/content/v8310doc/src/руководство разработчика/приложение 2. форматы навигационных ссылок.htm" rel="canonical">
+<link href="/static/its.content.css?_=1490872753" type="text/css" rel="stylesheet">
+<script charset="windows-1251" type="text/javascript" src="/static/its.content.js?_=1489758009"></script>
+<!--[if lt IE 9]><script charset="windows-1251" type="text/javascript" src="/static/html5shiv.js?_=1484636606"></script><![endif]-->
+
+</head>
+	<body class="v8310doc">
+<a name="_ref469654672"></a><a name="_ref273959400"></a><a name="_ref273010066"></a><a id="TI000001216" class="bookmark"><h1>Приложение 2.  Форматы навигационных ссылок</h1></a>
+
+<p class="MsoNormal">В данном приложении описаны форматы ссылок, которые
+используются в «1С:Предприятии». Ссылки бывают внешние и внутренние. Внешние
+ссылки предназначены для применения вне «1С:Предприятия», внутренние ссылки предназначены
+для внутреннего использования (в том числе для помещения в список избранного и
+истории работы).</p>
+
+<a id="TI000001217" class="bookmark" name="issogl1_2.1_общее_описание_формата_ссылки"><h2>2.1. Общее описание формата ссылки</h2></a>
+
+<p class="MsoNormal">Ссылка состоит из двух частей:</p>
+
+<p class="MsoListBulletCxSpFirst">&#9679; 
+Адрес хоста информационной базы – описывает
+расположение информационной базы относительно клиентского приложения. Для
+получения этой части ссылки предназначен метод <span class="Term">ПолучитьНавигационнуюСсылкуИнформационнойБазы()</span>.</p>
+
+<p class="MsoListBulletCxSpLast">&#9679; 
+Внутренняя ссылка – описывает расположение запрашиваемой
+информации внутри информационной базы.</p>
+
+<p class="MsoNormal"><span class="Bold">Внутренние ссылки</span> бывают нескольких
+видов:</p>
+
+<p class="MsoListBulletCxSpFirst">&#9679; 
+объект информационной базы,</p>
+
+<p class="MsoListBulletCxSpMiddle">&#9679; 
+реквизит объекта информационной базы,</p>
+
+<p class="MsoListBulletCxSpMiddle">&#9679; 
+реквизит табличной части объекта информационной
+базы,</p>
+
+<p class="MsoListBulletCxSpMiddle">&#9679; 
+реквизит записи регистра информационной базы,</p>
+
+<p class="MsoListBulletCxSpMiddle">&#9679; 
+запись регистра информационной базы,</p>
+
+<p class="MsoListBulletCxSpMiddle">&#9679; 
+отчет,</p>
+
+<p class="MsoListBulletCxSpMiddle">&#9679; 
+обработка,</p>
+
+<p class="MsoListBulletCxSpMiddle">&#9679; 
+раздел,</p>
+
+<p class="MsoListBulletCxSpMiddle">&#9679; 
+команда раздела,</p>
+
+<p class="MsoListBulletCxSpLast">&#9679; 
+временное хранилище.</p>
+
+<p class="MsoNormal"><span class="Bold">Внешняя ссылка</span> образуется
+добавлением к адресу хоста внутренней ссылки. Если по ссылке открывается форма
+или осуществляется навигация в главном окне, то внешняя ссылка образуется по
+следующему правилу:</p>
+
+<a class="copy_source" href="#_top" onClick="return false">Копировать в буфер обмена</a>
+<pre class="src_res">&lt;адрес хоста ИБ&gt;#&lt;внутренняя ссылка&gt;</pre>
+
+<p class="MsoNormalCxSpFirst">Такими ссылками являются ссылки на объект информационной
+базы, отчет, обработку, раздел, команду раздела.</p>
+
+<p class="MsoNormalCxSpLast">Если ссылка обозначает просто ресурс, то внешняя
+ссылка формируется следующим образом:</p>
+
+<a class="copy_source" href="#_top" onClick="return false">Копировать в буфер обмена</a>
+<pre class="src_res">&lt;адрес хоста ИБ&gt;/&lt;внутренняя ссылка&gt;</pre>
+
+<p class="MsoNormal">Такими ссылками являются ссылки на реквизит объекта информационной
+базы или записи регистра сведений или временное хранилище.</p>
+
+<p class="Note"></a><a name="_toc203456488"><span class="Note">совет.</span> Если с информационной
+базой работают из разных клиентов, не рекомендуется запоминать внешние ссылки
+на объекты информационной базы, так как это может привести к
+неработоспособности ссылки, созданной на одном клиенте, в другом клиенте.
+Например, внешняя ссылка, созданная в веб-клиенте, может оказаться
+неработоспособной в тонком клиенте, подключенном «напрямую» к серверу «1С:Предприятия».
+Рекомендуется запоминать внутренние ссылки.</p>
+
+<p class="MsoNormal">Если
+в метод <span class="Term">ПерейтиПоНавигационнойСсылке</span><span class="Term">()</span> или в диалог перехода по навигационной
+ссылке передается внешняя ссылка, у которой есть в пути сигнатура <span class="Term">e1cib</span>, а начало ссылки не совпадает с навигационной ссылкой информационной
+базы,
+то вначале
+осуществляется выделение из переданной ссылки внутренней и выполняется попытка перехода по выделенной части. Если попытка не удается, то осуществляется переход по полной
+ссылке.</p>
+
+<a id="TI000001218" class="bookmark" name="issogl1_2.2_формат_адреса_хоста"><h2>2.2. Формат адреса хоста</h2></a>
+
+<p class="MsoNormal">В зависимости от вида информационной базы
+строка, описывающая адрес хоста, может иметь разный вид.</p>
+
+<p class="Lang">Файловый вариант информационной базы</p>
+
+<p class="MsoNormal">Если путь к файлу базы данных задан в
+формате UNC, то адрес хоста выглядит следующим образом:</p>
+
+<a class="copy_source" href="#_top" onClick="return false">Копировать в буфер обмена</a>
+<pre class="src_res">e1c:/file/&lt;UNC-путь&gt;</pre>
+
+<p class="Lang-subheader">Пример:</p>
+
+<a class="copy_source" href="#_top" onClick="return false">Копировать в буфер обмена</a>
+<pre class="src_res">
+// Путь к файловой информационной базе
+\\dbsrvr\bases\mybase
+// Адрес хоста
+e1c:/file/dbsrvr/bases/mybase
+</pre>
+
+<p class="MsoNormal">Если путь к файлу указан с указанием буквы
+диска, то адрес хоста выглядит следующим образом:</p>
+
+<a class="copy_source" href="#_top" onClick="return false">Копировать в буфер обмена</a>
+<pre class="src_res">e1c:/filev/&lt;Буква диска&gt;/&lt;Путь к базе&gt;</pre>
+
+<p class="Lang-subheader">Пример:</p>
+
+<a class="copy_source" href="#_top" onClick="return false">Копировать в буфер обмена</a>
+<pre class="src_res">
+// Путь к файловой информационной базе
+s:\bases\mybase
+// Адрес хоста
+e1c:/filev/s/bases/mybase
+</pre>
+
+<p class="Lang">Клиент-серверный вариант информационной базы</p>
+
+<p class="MsoNormal">Для клиент-серверного варианта
+информационной базы ссылка выглядит следующим образом:</p>
+
+<a class="copy_source" href="#_top" onClick="return false">Копировать в буфер обмена</a>
+<pre class="src_res">e1c://server/&lt;имя сервера&gt;/&lt;имя информационной базы&gt;</pre>
+
+<p class="Lang-subheader">Пример:</p>
+
+<a class="copy_source" href="#_top" onClick="return false">Копировать в буфер обмена</a>
+<pre class="src_res">
+// Строка соединения с информационной базой
+srvsr=&quot;srv1C&quot;;ref=&quot;mybase&quot;
+// Адрес хоста
+e1c://server/srv1C/mybase
+</pre>
+
+<p class="Lang">При работе через веб-сервер (тонкий клиент
+или веб-клиент)</p>
+
+<p class="MsoNormal">Для варианта информационной базы, работа с
+которой идет через веб-сервер, ссылка выглядит следующим образом:</p>
+
+<a class="copy_source" href="#_top" onClick="return false">Копировать в буфер обмена</a>
+<pre class="src_res">
+httр://&lt;адрес хоста&gt;/&lt;путь к информационной базе&gt;
+httрs://&lt;адрес хоста&gt;/&lt;путь к информационной базе&gt;
+</pre>
+
+<p class="Lang-subheader">Пример:</p>
+
+<a class="copy_source" href="#_top" onClick="return false">Копировать в буфер обмена</a>
+<pre class="src_res">
+// Строка соединения с информационной базой
+http://localhost/mybase
+// Адрес хоста
+http://localhost/mybase
+</pre>
+
+<a id="TI000001219" class="bookmark" name="issogl1_2.3_внутренние_ссылки"><h2>2.3. Внутренние ссылки</h2></a>
+
+<p class="MsoNormal">Общий формат внутренней ссылки выглядит
+следующим образом:</p>
+
+<a class="copy_source" href="#_top" onClick="return false">Копировать в буфер обмена</a>
+<pre class="src_res">e1cib/&lt;тип&gt;/&lt;путь&gt;[?&lt;параметр&gt;=&lt;значение параметра&gt;[&amp;&lt;параметр&gt;=&lt;значение параметра&gt;]]</pre>
+
+<p class="MsoNormal">Более подробное описание форматов ссылок, в
+зависимости от типа, приведено далее.</p>
+
+<a id="TI000001220" class="bookmark" name="issogl2_2.3.1_ссылка_на_объект_информационной_базы"><h3>2.3.1. Ссылка на объект информационной базы</h3></a>
+
+<p class="Lang-subheader">Формат:</p>
+
+<a class="copy_source" href="#_top" onClick="return false">Копировать в буфер обмена</a>
+<pre class="src_res">e1cib/data/&lt;путь к метаданным&gt;?ref=&lt;идентификатор ссылки&gt;</pre>
+
+<p class="MsoNormal">Где:</p>
+
+<p class="MsoListBulletCxSpFirst">&#9679; 
+<span class="Bold">путь к метаданным</span> –
+тип объекта, на который указывает ссылка, например <span class="Term">Документ.РасходТовара</span>;</p>
+
+<p class="MsoListBulletCxSpLast">&#9679; 
+<span class="Bold">идентификатор ссылки</span> –
+уникальный идентификатор объекта в информационной базе.</p>
+
+<a id="TI000001221" class="bookmark" name="issogl2_2.3.2_ссылка_на_реквизит_объекта_информационной_базы"><h3>2.3.2. Ссылка на реквизит объекта информационной базы</h3></a>
+
+<p class="Lang-subheader">Формат:</p>
+
+<a class="copy_source" href="#_top" onClick="return false">Копировать в буфер обмена</a>
+<pre class="src_res">e1cib/data/&lt;путь к метаданным&gt;.&lt;имя реквизита&gt;?ref=&lt;идентификатор ссылки&gt;</pre>
+
+<p class="MsoNormal">Где:</p>
+
+<p class="MsoListBulletCxSpFirst">&#9679; 
+<span class="Bold">путь к метаданным</span> –
+тип объекта, на который указывает ссылка, например <span class="Term">Документ.РасходТовара</span>;</p>
+
+<p class="MsoListBulletCxSpMiddle">&#9679; 
+<span class="Bold">имя реквизита</span> – имя
+реквизита объекта информационной базы;</p>
+
+<p class="MsoListBulletCxSpLast">&#9679; 
+<span class="Bold">идентификатор ссылки</span> –
+уникальный идентификатор объекта в информационной базе.</p>
+
+<a id="TI000001222" class="bookmark" name="issogl2_2.3.3_ссылка_на_реквизит_табличной_части_объекта_информационной_базы"><h3>2.3.3. Ссылка на реквизит табличной части объекта информационной базы</h3></a>
+
+<p class="Lang-subheader">Формат:</p>
+
+<a class="copy_source" href="#_top" onClick="return false">Копировать в буфер обмена</a>
+<pre class="src_res">e1cib/data/&lt;путь к метаданным&gt;.&lt;имя табличной части&gt;.&lt;имя реквизита&gt;?ref=&lt;идентификатор ссылки&gt;&amp;index=&lt;индекс строки табличной части&gt;</pre>
+
+<p class="MsoNormal">Где:</p>
+
+<p class="MsoListBulletCxSpFirst">&#9679; 
+<span class="Bold">путь к метаданным</span> –
+тип объекта, на который указывает ссылка, например <span class="Term">Документ.РасходТовара</span>;</p>
+
+<p class="MsoListBulletCxSpMiddle">&#9679; 
+<span class="Bold">имя табличной части</span> –
+имя табличной части объекта метаданных, например <span class="Term">Товары</span>;</p>
+
+<p class="MsoListBulletCxSpMiddle">&#9679; 
+<span class="Bold">имя реквизита</span> – имя
+реквизита табличной части объекта информационной базы;</p>
+
+<p class="MsoListBulletCxSpMiddle">&#9679; 
+<span class="Bold">идентификатор ссылки</span> –
+уникальный идентификатор объекта в информационной базе;</p>
+
+<p class="MsoListBulletCxSpLast">&#9679; 
+<span class="Bold">индекс строки табличной части</span> –
+индекс строки табличной части.</p>
+
+<a name="_ref310422687"></a><a name="_ref310422686"></a><a id="TI000001223" class="bookmark" name="issogl2_2.3.4_ссылка_на_запись_регистра_информационной_базы"><h3>2.3.4. Ссылка на запись регистра информационной базы</h3></a>
+
+<p class="Lang-subheader">Формат:</p>
+
+<a class="copy_source" href="#_top" onClick="return false">Копировать в буфер обмена</a>
+<pre class="src_res">e1cib/data/&lt;путь к метаданным&gt;?&lt;имя ключевого поля&gt;=&lt;значение&gt;[&amp;&lt;имя ключевого поля&gt;=&lt;значение&gt;]</pre>
+
+<p class="MsoNormal">Где:</p>
+
+<p class="MsoListBulletCxSpFirst">&#9679; 
+<span class="Bold">путь к метаданным</span> –
+тип объекта, на который указывает ссылка, например <span class="Term">РегистрСведений.ОстаткиТоваров</span>;</p>
+
+<p class="MsoListBulletCxSpMiddle">&#9679; 
+<span class="Bold">имя ключевого поля</span> –
+имя измерения регистра (для периодических регистров добавляется измерение <span class="Term">Период</span>);</p>
+
+<p class="MsoListBulletCxSpLast">&#9679; 
+<span class="Bold">значение</span> – внутреннее
+представление значения отбора. Значение отбора кодируется в соответствии с
+разделом <span class="Interface">2.2. URL Character
+Encoding Issues</span> стандарта <span class="Interface">RFC 1738</span> (<a href="http://tools.ietf.org/html/rfc1738" target="_blank">http://tools.ietf.org/html/rfc1738</a>) –
+с помощью символа «%» и двух шестнадцатеричных символов.</p>
+
+<a name="_ref310422692"></a><a name="_ref310422691"></a><a id="TI000001224" class="bookmark" name="issogl2_2.3.5_ссылка_на_реквизит_записи_регистра_информационной_базы"><h3>2.3.5. Ссылка на реквизит записи регистра информационной базы</h3></a>
+
+<p class="Lang-subheader">Формат:</p>
+
+<a class="copy_source" href="#_top" onClick="return false">Копировать в буфер обмена</a>
+<pre class="src_res">e1cib/data/&lt;путь к метаданным&gt;.&lt;имя реквизита&gt;?&lt;имя ключевого поля&gt;=&lt;значение&gt;[&amp;&lt;имя ключевого поля&gt;=&lt;значение&gt;]</pre>
+
+<p class="MsoNormal">Где:</p>
+
+<p class="MsoListBulletCxSpFirst">&#9679; 
+<span class="Bold">путь к метаданным</span> –
+тип объекта, на который указывает ссылка, например <span class="Term">РегистрСведений.ОстаткиТоваров</span>;</p>
+
+<p class="MsoListBulletCxSpMiddle">&#9679; 
+<span class="Bold">имя реквизита</span> – имя
+реквизита записи;</p>
+
+<p class="MsoListBulletCxSpMiddle">&#9679; 
+<span class="Bold">имя ключевого поля</span> –
+имя измерения регистра (для периодических регистров добавляется измерение <span class="Term">Период</span>);</p>
+
+<p class="MsoListBulletCxSpLast">&#9679; 
+<span class="Bold">значение</span> – внутреннее
+представление значения отбора. Значение отбора кодируется в соответствии с
+разделом <span class="Interface">2.2. URL Character
+Encoding Issues</span> стандарта <span class="Interface">RFC 1738</span> (<a href="http://tools.ietf.org/html/rfc1738" target="_blank">http://tools.ietf.org/html/rfc1738</a>) –
+с помощью символа «%» и двух шестнадцатеричных символов.</p>
+
+<a id="TI000001225" class="bookmark" name="issogl2_2.3.6_ссылка_на_отчет"><h3>2.3.6. Ссылка на отчет</h3></a>
+
+<p class="Lang-subheader">Формат:</p>
+
+<a class="copy_source" href="#_top" onClick="return false">Копировать в буфер обмена</a>
+<pre class="src_res">e1cib/app/&lt;путь к метаданным&gt;</pre>
+
+<p class="MsoNormal">Где:</p>
+
+<p class="MsoListBullet">&#9679; 
+<span class="Bold">путь к метаданным</span> –
+тип объекта, на который указывает ссылка, например <span class="Term">Отчет.ОстаткиТоваров</span>.</p>
+
+<a id="TI000001226" class="bookmark" name="issogl2_2.3.7_ссылка_на_обработку"><h3>2.3.7. Ссылка на обработку</h3></a>
+
+<p class="Lang-subheader">Формат:</p>
+
+<a class="copy_source" href="#_top" onClick="return false">Копировать в буфер обмена</a>
+<pre class="src_res">e1cib/app/&lt;путь к метаданным&gt;</pre>
+
+<p class="MsoNormal">Где:</p>
+
+<p class="MsoListBullet">&#9679; 
+<span class="Bold">путь к метаданным</span> –
+тип объекта, на который указывает ссылка, например <span class="Term">Обработка.ФормированиеЗаказа</span>.</p>
+
+<a id="TI000001227" class="bookmark" name="issogl2_2.3.8_ссылка_на_раздел"><h3>2.3.8. Ссылка на раздел</h3></a>
+
+<p class="Lang-subheader">Формат:</p>
+
+<a class="copy_source" href="#_top" onClick="return false">Копировать в буфер обмена</a>
+<pre class="src_res">e1cib/navigationpoint/&lt;имя раздела&gt;</pre>
+
+<p class="MsoNormal">Где:</p>
+
+<p class="MsoListBullet">&#9679; 
+<span class="Bold">имя раздела</span> – имя
+подсистемы первого уровня, на который указывает ссылка, например <span class="Term">ПродажиТоваров</span>.</p>
+
+<a name="_ref322364918"></a><a id="TI000001228" class="bookmark" name="issogl2_2.3.9_ссылка_на_точку_навигации_образованную_стандартной_командой"><h3>2.3.9. Ссылка на точку навигации, образованную стандартной командой</h3></a>
+
+<p class="Lang-subheader">Формат:</p>
+
+<a class="copy_source" href="#_top" onClick="return false">Копировать в буфер обмена</a>
+<pre class="src_res">e1cib/navigationpoint/&lt;имя раздела&gt;/&lt;имя команды&gt;</pre>
+
+<p class="MsoNormal">Где:</p>
+
+<p class="MsoListBulletCxSpFirst">&#9679; 
+<span class="Bold">имя раздела</span> – имя
+подсистемы первого уровня, на который указывает ссылка, например <span class="Term">ПродажиТоваров</span>;</p>
+
+<p class="MsoListBulletCxSpLast">&#9679; 
+<span class="Bold">имя команды</span> – имя команды,
+например <span class="Term">Справочник.Товары.ОткрытьСписок</span>.</p>
+
+<a id="TI000001229" class="bookmark" name="issogl2_2.3.10_ссылка_на_временное_хранилище"><h3>2.3.10. Ссылка на временное хранилище</h3></a>
+
+<p class="Lang-subheader">Формат:</p>
+
+<a class="copy_source" href="#_top" onClick="return false">Копировать в буфер обмена</a>
+<pre class="src_res">e1cib/tempstorage/&lt;идентификатор временного значения&gt;</pre>
+
+<p class="MsoNormal">Где:</p>
+
+<p class="MsoListBullet">&#9679; 
+<span class="Bold">идентификатор временного
+значения</span> – идентификатор временного значения.</p>
+
+<a name="_ref310422436"></a><a name="_ref310422435"></a><a id="TI000001230" class="bookmark" name="issogl2_2.3.11_ссылка_на_запись_таблицы_внешнего_источника_данных"><h3>2.3.11. Ссылка на запись таблицы внешнего источника данных</h3></a>
+
+<p class="Lang-subheader">Формат:</p>
+
+<a class="copy_source" href="#_top" onClick="return false">Копировать в буфер обмена</a>
+<pre class="src_res">e1cib/data/&lt;путь к метаданным&gt;?&lt;имя ключевого поля&gt;=&lt;значение&gt;[&amp;&lt;имя ключевого поля&gt;=&lt;значение&gt;]</pre>
+
+<p class="MsoNormal">Где:</p>
+
+<p class="MsoListBulletCxSpFirst">&#9679; 
+<span class="Bold">путь к метаданным</span> –
+описывает таблицу внешнего источника данных, например <span class="Term">ВнешнийИсточникДанных.Чеки.Таблица.CheckHeaders</span>.</p>
+
+<p class="MsoListBulletCxSpMiddle">&#9679; 
+<span class="Bold">имя ключевого поля</span> –
+имя поля ключа таблицы внешнего источника данных.</p>
+
+<p class="MsoListBulletCxSpLast">&#9679; 
+<span class="Bold">значение</span> – внутреннее
+представление значения отбора. Значение отбора кодируется в соответствии с
+разделом <span class="Interface">2.2. </span><span class="Interface">URL </span><span class="Interface">Character </span><span class="Interface">Encoding </span><span class="Interface">Issues</span> стандарта <span class="Interface">RFC 1738</span> (<a href="http://tools.ietf.org/html/rfc1738" target="_blank">http://tools.ietf.org/html/rfc1738</a>) –
+с помощью символа «%» и двух шестнадцатеричных символов.</p>
+
+<a name="_ref214346801"></a><a name="_ref322364877"></a><a id="TI000001231" class="bookmark" name="issogl2_2.3.12_ссылки_на_команды_глобального_командного_интерфейса"><h3>2.3.12. Ссылки на команды глобального командного интерфейса</h3></a>
+
+<p class="Lang-subheader">Формат:</p>
+
+<a class="copy_source" href="#_top" onClick="return false">Копировать в буфер обмена</a>
+<pre class="src_res">e1cib/command/&lt;имя команды&gt;</pre>
+
+<p class="MsoNormal">Где:</p>
+
+<p class="MsoListBullet">&#9679; 
+<span class="Bold">имя команды</span> – имя
+команды:</p>
+
+<p class="MsoListBullet2CxSpFirst">&#9679; 
+стандартная команда – <span class="Term">Справочник.Товары.Создать</span>;</p>
+
+<p class="MsoListBullet2CxSpMiddle">&#9679; 
+общая команда – <span class="Term">ОбщаяКоманда.ПоискОбъектов</span>;</p>
+
+<p class="MsoListBullet2CxSpLast">&#9679; 
+команда – <span class="Term">Справочник.Товары.Команда.ПечатьШтрихКода</span>.</p>
+
+<a name="_ref322364894"></a><a id="TI000001232" class="bookmark" name="issogl2_2.3.13_ссылки_на_списки"><h3>2.3.13. Ссылки на списки</h3></a>
+
+<p class="Lang-subheader">Формат:</p>
+
+<a class="copy_source" href="#_top" onClick="return false">Копировать в буфер обмена</a>
+<pre class="src_res">e1cib/list/&lt;имя списка&gt;</pre>
+
+<p class="MsoNormal">Где:</p>
+
+<p class="MsoListBullet">&#9679; 
+<span class="Bold">имя списка</span> – имя
+открываемого списка, например <span class="Term">Справочник.Товар</span>, <span class="Term">Документы.РасходТоваров</span>.</p>
+
+<a name="_ref353274140"></a><a id="TI000001233" class="bookmark" name="issogl2_2.3.14_ссылка_на_начальную_страницу"><h3>2.3.14. Ссылка на начальную страницу</h3></a>
+
+<p class="Lang-subheader">Формат:</p>
+
+<a class="copy_source" href="#_top" onClick="return false">Копировать в буфер обмена</a>
+<pre class="src_res">e1cib/navigationpoint/desktop</pre>
+
+<p class="MsoNormal">В режиме совместимости с версией 8.3.2 и
+младше.</p>
+
+<p class="Lang-subheader">Формат:</p>
+
+<a class="copy_source" href="#_top" onClick="return false">Копировать в буфер обмена</a>
+<pre class="src_res">e1cib/navigationpoint/startpage</pre>
+
+<p class="MsoNormalCxSpFirst">В режиме совместимости старше, чем версия
+8.3.2.</p>
+
+<p class="MsoNormalCxSpMiddle"> </p>
+
+<br>		<script type="text/javascript">listenCopy('zeroclipboard.swf');</script>
+	</body>
+</html>
