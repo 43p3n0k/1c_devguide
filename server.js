@@ -8,12 +8,13 @@ const JSDOM = jsdom['JSDOM'];
 fixHeader = function (dom) {
     var arr = [
         //'http://ajax.microsoft.com/ajax/jquery/jquery-1.4.3.min.js',
-        './../../../../../treeview_files/jquery-1.4.3.js',
+        '/treeview_files/jquery-1.4.3.js',
         'alter-navigation.js'
     ];
     for(var i=0; i<arr.length; i++) {
         var script = dom.window.document.createElement('script');
         script.type = "text/javascript";
+        script.charset = "UTF-8";
         script.src = arr[i];
         dom.window.document.getElementsByTagName('head')[0].appendChild(script);
     }
@@ -28,11 +29,11 @@ server.on('request', function(req,res){
     //console.log(URI);
     if(URI!="/"){
         URI=URI.split('?')[0];
-        //console.log(URI);
+        console.log(URI);
         fs.readFile("."+URI,function(err, html){
             if(err){
                 res.statusCode = 404;
-                res.end('Page not found' + URI);
+                res.end(URI);
                 return;
             }
             //res.writeHeader(200, {"Content-Type": "text/html"});
