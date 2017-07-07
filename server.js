@@ -58,8 +58,8 @@ server.on('request', function(req,res){
                     res.writeHeader(200, {"Content-Type": "text/css; charset=UTF-8"});
                 if(~URI.indexOf('.js'))
                     res.writeHeader(200, {"Content-Type": "text/javascript; charset=UTF-8"});
-                if(~URI.indexOf('.htm'))
-                    res.writeHeader(200, {"Content-Type": "text/html"});
+                //if(~URI.indexOf('.htm'))
+                //    res.writeHeader(200, {"Content-Type": "text/html"});
                 res.write(html);
                 res.end();
             }
