@@ -1,6 +1,6 @@
 var http = require('http');
 var fs = require('fs');
-var server = new http.Server();
+var server = http.Server();
 var url = require('url');
 const jsdom = require("jsdom");
 const JSDOM = jsdom['JSDOM'];
