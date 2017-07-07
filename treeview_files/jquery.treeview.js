@@ -138,7 +138,7 @@
 				$("a:eq(2)", control).click( handler() );
 			}			
 			
-			function expandID(id){				
+			function expandID(id,duration){
 				var node = $('#' + id);
 				node.parents('.expandable').addClass('_open');
 				toggler.call( 
@@ -153,10 +153,10 @@
                 node.find("a:first").addClass('selected');
 				//node.find("a:first").click();
 				//$('#' + id + ' a')[0].click();
-				
+				if(!duration)duration=900;
 				$('html, body').animate({
 					scrollTop: node.offset().top
-				}, 900);
+				}, duration);
 			}				
 			$.extend($.fn, {expandID: expandID});
 		

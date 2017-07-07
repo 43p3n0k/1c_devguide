@@ -21,7 +21,7 @@ fixHeader = function (dom) {
     return dom;
 };
 
-var port = process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || 8080,
+var port = process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || 80,
     ip   = process.env.IP   || process.env.OPENSHIFT_NODEJS_IP || '0.0.0.0';
 server.listen(port, ip);
 server.on('request', function(req,res){
@@ -54,7 +54,12 @@ server.on('request', function(req,res){
                 });
                 /**/
             }else {
-                //console.log('direct' + URI);
+                if(~URI.indexOf('.css'))
+                    res.writeHeader(200, {"Content-Type": "text/css; charset=UTF-8"});
+                if(~URI.indexOf('.js'))
+                    res.writeHeader(200, {"Content-Type": "text/javascript; charset=UTF-8"});
+                if(~URI.indexOf('.js'))
+                    res.writeHeader(200, {"Content-Type": "text/html"});
                 res.write(html);
                 res.end();
             }

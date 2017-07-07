@@ -109,6 +109,10 @@
 		
 		if(end === -1){
 			if((target.href).indexOf('#') === -1){
+			    if(~target.href.indexOf('/db/')&&!~target.href.indexOf('/руководство разработчика/')){
+                    var idx = target.href.indexOf('/db/');
+                    window.open('http://its.1c.ru'+target.href.substr(idx));return;
+                }
 				window.open(target.href);return;
             }
 			anchor = (target.href).split('#')[1];
@@ -129,32 +133,29 @@
 	};
 
     function wheel() {
-        var elem=0;
         var id;
-        var posTop = (window.pageYOffset !== undefined) ? window.pageYOffset : (document.documentElement || document.body.parentNode || document.body).scrollTop;
+        var posTop = 
+            window.pageYOffset ?
+                window.pageYOffset :
+                (document.documentElement || document.body.parentNode || document.body).scrollTop;
         //var posTop = (document.documentElement || document.body).scrollTop;
-		for(var i=0; i<bookmarks.length; i++){
+		for(var i=bookmarks.length-1; i>-1; i--){
             var distance = document.getElementById(bookmarks[i]).offsetTop;
-            if(distance===posTop){
+            if(distance<=posTop){
                 id = toc + bookmarks[i].toLowerCase();
-                parent.treeframe.$("#browser").expandID(id);
+                parent.treeframe.$("#browser").expandID(id,450);
                 return;
-			}else if(distance>posTop) {
-                id = toc + bookmarks[elem].toLowerCase();
-                parent.treeframe.$("#browser").expandID(id);
-                return;
-            }
-            elem = i;
+			}
 		}
-		if(bookmarks.length>0){
-			id = toc + bookmarks[bookmarks.length-1].toLowerCase();
-            parent.treeframe.$("#browser").expandID(id);
+		if(bookmarks.length){
+			id = toc + bookmarks[0].toLowerCase();
+            parent.treeframe.$("#browser").expandID(id,450);
         }
     }
 
     var timerId;
     window.onscroll = function() {
     	if(timerId)clearTimeout(timerId);
-        timerId = setTimeout(wheel, 950);
+        timerId = setTimeout(wheel, 150);
     };
 });
