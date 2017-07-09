@@ -134,14 +134,13 @@
 
     function wheel() {
         var id;
-        var posTop = 
+		var posTop = 
             window.pageYOffset ?
                 window.pageYOffset :
                 (document.documentElement || document.body.parentNode || document.body).scrollTop;
-        //var posTop = (document.documentElement || document.body).scrollTop;
 		for(var i=bookmarks.length-1; i>-1; i--){
             var distance = document.getElementById(bookmarks[i]).offsetTop;
-            if(distance<=posTop){
+            if(distance<=posTop+1){
                 id = toc + bookmarks[i].toLowerCase();
                 parent.treeframe.$("#browser").expandID(id,450);
                 return;
