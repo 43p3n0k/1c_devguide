@@ -25,7 +25,7 @@ var port = process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || 8080,
     ip   = process.env.IP   || process.env.OPENSHIFT_NODEJS_IP || '0.0.0.0';
 server.listen(port, ip);
 server.on('request', function(req,res){
-    var URI = decodeURI(req['url']);
+    var URI = decodeURI(req.url);
     //console.log(URI);
     if(URI!="/"){
         URI=URI.split('?')[0];
