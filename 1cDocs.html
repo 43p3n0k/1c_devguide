@@ -5,20 +5,20 @@
 	<TITLE>Руководство разработчика 1С</TITLE>
 	
 	<style type="text/css">
-		iframe { margin:6px; border-radius: 8px 8px 8px 8px; background-color: #fff; box-shadow: 0px 0px 15px rgba(0,0,0,0.7) }
+		iframe { margin:6px; padding: 15px 15px 15px 15px; border-radius: 8px 8px 8px 8px; background-color: #fff; box-shadow: 0px 0px 15px rgba(0,0,0,0.7) }
 		body { background-color: #bca }
 	</style>
 
 	<script src="/treeview_files/jquery-1.4.3.min.js" type="text/javascript"></script>
 	<script type="text/javascript">
 		function setsize() {
-			var gap = 30;
+			var gap = 90;
 			var width = Math.floor($(window).width()-10);
 			var wt = (Math.floor(width*0.33))-gap;
 			var wb = width - wt - gap;
 			$("[name=treeframe]").attr('width',wt);
 			$("[name=basefrm]").attr('width',wb);
-			$('iframe').attr('height',$(window).height()-gap);
+			$('iframe').attr('height',$(window).height()-60);
 		}
 		window.onresize = setsize;
 		$(document).ready(function(){
