@@ -3,28 +3,21 @@ var fs = require('fs');
 var server = http.Server();
 var url = require('url');
 const jsdom = require("jsdom");
-const JSDOM = jsdom['JSDOM'];
+//const JSDOM = jsdom['JSDOM'];
+const utils = require("./modules/utils");
+const fixHeader = utils.fixHeader;
 
-function fixHeader(dom) {
-    var arr = [
-        //'http://ajax.microsoft.com/ajax/jquery/jquery-1.4.3.min.js',
-        '/treeview_files/jquery-1.4.3.min.js',
-        'alter-navigation.js'
-    ];
-    for(var i=0; i<arr.length; i++) {
-        var script = dom.window.document.createElement('script');
-        script.type = "text/javascript";
-        //script.charset = "UTF-8";
-        script.src = arr[i];
-        dom.window.document.getElementsByTagName('head')[0].appendChild(script);
-    }
-    return dom;
-}
+
 
 var port = process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || 8080,
     ip   = process.env.IP   || process.env.OPENSHIFT_NODEJS_IP || '0.0.0.0';
 server.listen(port, ip);
 server.on('request', function(req,res){
+    /*
+    var urlParts = url.parse(req.url, true),
+        urlParams = urlParts.query,
+        urlPathname = urlParts.pathname;
+    /**/
     var URI = decodeURI(req.url);
     //console.log(URI);
     if(URI!="/"){

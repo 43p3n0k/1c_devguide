@@ -3,20 +3,22 @@
 <head>
 	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
 	<TITLE>Руководство разработчика 1С</TITLE>
-
+	
 	<style type="text/css">
-		iframe { border-style:dotted; border-width:thin; margin:2px; }
+		iframe { margin:6px; border-radius: 8px 8px 8px 8px; background-color: #fff; box-shadow: 0px 0px 15px rgba(0,0,0,0.7) }
+		body { background-color: #bca }
 	</style>
 
 	<script src="/treeview_files/jquery-1.4.3.min.js" type="text/javascript"></script>
 	<script type="text/javascript">
 		function setsize() {
-			var width = Math.floor($(window).width());
-			var wt = Math.floor(width/3.3);
-			var wb = width - wt - 10;
-			$("[name=treeframe]").attr('width',wt-10);
-			$("[name=basefrm]").attr('width',wb-10);
-			$('iframe').attr('height',$(window).height()-20);
+			var gap = 30;
+			var width = Math.floor($(window).width()-10);
+			var wt = (Math.floor(width*0.33))-gap;
+			var wb = width - wt - gap;
+			$("[name=treeframe]").attr('width',wt);
+			$("[name=basefrm]").attr('width',wb);
+			$('iframe').attr('height',$(window).height()-gap);
 		}
 		window.onresize = setsize;
 		$(document).ready(function(){
@@ -26,6 +28,6 @@
 </head>
 <body>
 	<iframe src="treeview.html" align="left" scrolling="auto" frameborder="0" name="treeframe">the browser does not support iframe</iframe>
-	<iframe src="./db/content/v8310doc/src/руководство разработчика/руководство разработчика.htm" align ="left" scrolling="auto" frameborder="0" name="basefrm">the browser does not support iframe</iframe>
+	<iframe src="./db/content/v8310doc/src/руководство разработчика/руководство разработчика.htm" align="left" scrolling="auto" frameborder="0" name="basefrm">the browser does not support iframe</iframe>
 </body>
 </html>
